@@ -1,8 +1,8 @@
 ---
 published: true
 ---
-System Design: Deploy Large Scale Solution: Introduction to Kubernetes
 
+## Background:
 Kubernetes provides an option to manage containerized workload. Earlier in traditional deployment era, all the applications were used to run on the same physical server, thus all applicataions were using the same set of libraries, and in case there were some issue with the dependencies or one application can hog the system resources thus restricting rest of the apllication from serving requests. Virtualized deployment provided a solution to this, by spreading applications through out multiple VMs. Containrization of applications provides another layer of optimization, where the need to use differe OS is diminished, thus using the same Operating System for all the containerized applications. The containerized application contains only the packages code and dependencies.
 
 <Picture from https://kubernetes.io/docs/concepts/overview/ Going back in time>
