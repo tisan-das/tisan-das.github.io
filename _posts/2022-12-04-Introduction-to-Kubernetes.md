@@ -2,76 +2,95 @@
 published: true
 ---
 
+Kubernetes provides an option to manage containerized workloads. In this document, we will study the components of Kubernetes to get an overview of it, and how it enables us to serve a large number of requests.
+
 ## Background:
-Kubernetes provides an option to manage containerized workload. Earlier in traditional deployment era, all the applications were used to run on the same physical server, thus all applicataions were using the same set of libraries, and in case there were some issue with the dependencies or one application can hog the system resources thus restricting rest of the apllication from serving requests. Virtualized deployment provided a solution to this, by spreading applications through out multiple VMs. Containrization of applications provides another layer of optimization, where the need to use differe OS is diminished, thus using the same Operating System for all the containerized applications. The containerized application contains only the packages code and dependencies.
+Earlier in the traditional deployment era, all the applications were used to run on the same physical server, thus all applications were using the same set of libraries, and in case there was some issue with the dependencies or one application can hog the system resources thus restricting rest of the application from serving requests. Virtualized deployment provided a solution to this, by spreading applications throughout multiple VMs. Containerization of applications provides another layer of optimization, where the need to use different OS is diminished, thus using the same Operating System for all the containerized applications. The containerized application contains only the package's code and dependencies.
 
-<Picture from https://kubernetes.io/docs/concepts/overview/ Going back in time>
-
-
-Kubernetes components:
-Kubernetes cluster consists of Control plane and worker nodes. Worker nodes host the PODs, unit of containerization and consists of one or multiple containers. The control plane manages the worker nodes, and can run in multiple nodes for fault-tolerance and high availablity.
-
-Each container executes a container image that contains the application binary along with the libarries and runtime needed to excute the application.
-
-<Image from kubernetes workshop >
-
-Two ways to interact with kubernetes:
-        1. Imperative object configuration by specifying configuration details directly through kubectl command
-        2. Declarative object configuration by specifying configuration in YAML or JSON file
+![image info](../images/kubernetes-intro/deployment_history.png)
 
 
-Label Selectors: Labels are key-value pair attached to resources, and multiple resources can have same key-value pair, which also helps grouping similar resources by use of selectors
+## Kubernetes Components
+Kubernetes cluster consists of a **Control plane** and **worker nodes**. Worker nodes host the PODs, unit of containerization, and consist of one or multiple containers. The control plane manages the worker nodes and can run in multiple nodes for fault tolerance and high availability.
+
+Each container executes a container image that contains the application binary along with the libraries and runtime needed to execute the application.
+
+![](../images/kubernetes-intro/components.png)
+
+Two ways to interact with Kubernetes:
+  1. Imperative object configuration by specifying configuration details directly through the kubectl command
+  2. Declarative object configuration by specifying configuration in YAML or JSON file
+
+
+### Label Selectors: 
+Labels are key-value pairs attached to resources, and multiple resources can have the same key-value pair, which also helps group similar resources by use of selectors
+
 Two types of selectors:
-    1. Equality based selector:
-            apiVersion: v1
-            kind: Pod
-            metadata:
-              name: cuda-test
-            spec:
-              containers:
-                - name: cuda-test
-                  image: "registry.k8s.io/cuda-vector-add:v0.1"
-                  resources:
-                    limits:
-                      nvidia.com/gpu: 1
-              nodeSelector:
-                accelerator: nvidia-tesla-p100
+  1. Equality based selector:
+        ```yaml
+          apiVersion: v1
+          kind: Pod
+          metadata:
+            name: cuda-test
+          spec:
+            containers:
+              - name: cuda-test
+                image: "registry.k8s.io/cuda-vector-add:v0.1"
+                resources:
+                  limits:
+                    nvidia.com/gpu: 1
+            nodeSelector:
+              accelerator: nvidia-tesla-p100
+        ```
 
-    2. Set based selector:
-          selector:
-            matchLabels:
-              component: redis
-            matchExpressions:
-              - {key: tier, operator: In, values: [cache]}
-              - {key: environment, operator: NotIn, values: [dev]}
-    Question: Does the selectors work with and or or by default?
+  2. Set based selector:
+      ```yaml
+        selector:
+          matchLabels:
+            component: redis
+          matchExpressions:
+            - {key: tier, operator: In, values: [cache]}
+            - {key: environment, operator: NotIn, values: [dev]}
+      ```
 
-Namespaces: Provides a mechanism, a scope for name of the resources, to isolate a group of resources within the same cluster. Resource names should be unique in a particular namespace. Namespaces cannot be nested inside one another and each Kubernetes resource can only be in one namespace.
 
+##### Question: Does the selectors work with and or or by default?
+
+
+### Namespaces: 
+Provides a mechanism, a scope for the name of the resources, to isolate a group of resources within the same cluster. Resource names should be unique in a particular namespace. Namespaces cannot be nested inside one another and each Kubernetes resource can only be in one namespace.
+
+  ```bash
     kubectl get ns
     kubectl create ns <insert-namespace-name-here>
     kubectl config set-context --current --namespace=<insert-namespace-name-here>
     kubectl get pods --namespace=<insert-namespace-name-here>
+  ```
 
 
 
-Container: imagePullPolicy: IfNotPresent/Always/Never
+### Container: 
+imagePullPolicy: IfNotPresent/Always/Never
 
-        apiVersion: v1
-        kind: Pod
-        metadata:
-        name: foo
-        namespace: awesomeapps
-        spec:
-        containers:
-            - name: foo
-            image: janedoe/awesomeapp:v1
-        imagePullSecrets:
-            - name: myregistryke
+```yaml
+  apiVersion: v1
+  kind: Pod
+  metadata:
+  name: foo
+  namespace: awesomeapps
+  spec:
+  containers:
+      - name: foo
+      image: janedoe/awesomeapp:v1
+  imagePullSecrets:
+      - name: myregistryke
+```
 
-To make sure the Pod always uses the same version of a container image, you can specify the image's digest; replace <image-name>:<tag> with <image-name>@<digest> (for example, image@sha256:45b23dee08af5e43a7fea6c4cf9c25ccf269ee113168c19722f87876677c5cb2).
+**To make sure the Pod always uses the same version of a container image, you can specify the image's digest; replace <image-name>:<tag> with <image-name>@<digest> (for example, image@sha256:45b23dee08af5e43a7fea6c4cf9c25ccf269ee113168c19722f87876677c5cb2).**
 
-A Pod (as in a pod of whales or pea pod) is a group of one or more containers, with shared storage and network resources, and a specification for how to run the containers. A Pod's contents are always co-located and co-scheduled, and run in a shared context.
+### POD:
+A Pod (as in a pod of whales or pea pod) is a group of one or more containers, with shared storage and network resources, and a specification for how to run the containers. A Pod's contents are always co-located and co-scheduled and run in a shared context.
+      ```yaml
         apiVersion: v1
         kind: Pod
         metadata:
@@ -82,18 +101,17 @@ A Pod (as in a pod of whales or pea pod) is a group of one or more containers, w
             image: nginx:1.14.2
             ports:
             - containerPort: 80
+      ```
 
-Rather than creating pods individually, it's better to use controller. Controller handles the replication and rollout mechanisms. For example in case a node goes down, replication rule will ensure required number of PODs are up.
+Rather than creating pods individually, it's better to use a controller. The controller handles the replication and rollout mechanisms. For example, in case a node goes down, the replication rule will ensure the required number of PODs is up. For example, you might have a container that acts as a web server for files in a shared volume, and a separate "sidecar" container that updates those files from a remote source, as in the following diagram:
 
-For example, you might have a container that acts as a web server for files in a shared volume, and a separate "sidecar" container that updates those files from a remote source, as in the following diagram:
+![](../images/kubernetes-intro/multi_container_pod.png)
 
-<Diagram from https://kubernetes.io/docs/concepts/workloads/pods/>
+##### Question: How containers inside POD can comminucate with each other?
 
-Question: How containers inside POD can comminucate with each other?
+### Container States: Waiting/Running/Terminated
 
-Container States: Waiting, Running, Terminated
-
-Container probes: 
+### Container probes: 
     Mechanisms:
         1. exec: Executes specified command in the container, and is successful only if the return code is 0
         2. grpc:
@@ -104,9 +122,10 @@ Container probes:
         1. livenessProbe: determines whether container is running
         2. readinessProbe: determines whether container is ready to accespt incoming requests
         3. startupProbe: indicates application is ready, all other probes wait for startupProbe to get completed
-    Question: What happens of each type of probe is failed?
 
-Init Container:
+##### Question: What happens of each type of probe is failed with practical example?
+
+### Init Container:
     Init containers are exactly like regular containers, except:
       - Init containers always run to completion.
       - Each init container must complete successfully before the next one starts.
