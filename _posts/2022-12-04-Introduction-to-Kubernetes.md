@@ -86,22 +86,21 @@ imagePullPolicy: IfNotPresent/Always/Never
       - name: myregistryke
 ```
 
-###### To make sure the Pod always uses the same version of a container image, you can specify the image's digest; replace ```<image-name>:<tag> with <image-name>@<digest>``` (for example, image@sha256:45b23dee08af5e43a7fea6c4cf9c25ccf269ee113168c19722f87876677c5cb2).
+###### To make sure the Pod always uses the same version of a container image, you can specify the image's digest; replace <image-name>:<tag> with <image-name>@<digest> (for example, image@sha256:45b23dee08af5e43a7fea6c4cf9c25ccf269ee113168c19722f87876677c5cb2).
 
 ### POD:
 A Pod (as in a pod of whales or pea pod) is a group of one or more containers, with shared storage and network resources, and a specification for how to run the containers. A Pod's contents are always co-located and co-scheduled and run in a shared context.
-
 ```yaml
-apiVersion: v1
-kind: Pod
-metadata:
-name: nginx
-spec:
-containers:
-- name: nginx
-  image: nginx:1.14.2
-  ports:
-  - containerPort: 80
+  apiVersion: v1
+  kind: Pod
+  metadata:
+  name: nginx
+  spec:
+  containers:
+  - name: nginx
+      image: nginx:1.14.2
+      ports:
+      - containerPort: 80
 ```
 
 Rather than creating pods individually, it's better to use a controller. The controller handles the replication and rollout mechanisms. For example, in case a node goes down, the replication rule will ensure the required number of PODs is up. For example, you might have a container that acts as a web server for files in a shared volume, and a separate "sidecar" container that updates those files from a remote source, as in the following diagram:
@@ -113,31 +112,26 @@ Rather than creating pods individually, it's better to use a controller. The con
 ### Container States: Waiting/Running/Terminated
 
 ### Container probes: 
-Mechanisms:
-  1. exec: Executes specified command in the container, and is successful only if the return code is 0
-  2. grpc:
-  3. httpGet: GET request to the specified URL and port returns http status code on the range of 2xx and 3xx
-  4. tcpSocket: checks a TCP connection against specified port 
+    Mechanisms:
+        1. exec: Executes specified command in the container, and is successful only if the return code is 0
+        2. grpc:
+        3. httpGet: GET request to the specified URL and port returns HTTP status code on the range of 2xx and 3xx
+        4. tcpSocket: checks a TCP connection against a specified port 
+    Probe Outcome: Success/ Failure/ Unknown
+    Types of probes:
+        1. livenessProbe: determines whether the container is running
+        2. readinessProbe: determines whether the container is ready to accept incoming requests
+        3. startupProbe: indicates the application is ready, all other probes wait for startupProbe to get completed
 
-Probe Outcome: Success/ Failure/ Unknown
-
-Types of probes:
-1. livenessProbe: determines whether container is running
-2. readinessProbe: determines whether container is ready to accespt incoming requests
-3. startupProbe: indicates application is ready, all other probes wait for startupProbe to get completed
-
-##### Question: What happens of each type of probe is failed with practical example?
+###### Question: What happens of each type of probe is failed with practical example?
 
 ### Init Container:
 Init containers are exactly like regular containers, except:
-- Init containers always run to completion.
-- Each init container must complete successfully before the next one starts.
-
-If a Pod's init container fails, the kubelet repeatedly restarts that init container until it succeeds. However, if the Pod has a restartPolicy of Never, and an init container fails during startup of that Pod, Kubernetes treats the overall Pod as failed.
-
+  - Init containers always run to completion.
+  - Each init container must complete successfully before the next one starts.
+If a Pod's init container fails, the kubelet repeatedly restarts that init container until it succeeds. However, if the Pod has a restartPolicy set to Never, and an init container fails during the startup of that Pod, Kubernetes treats the overall Pod as failed.
 Also, init containers do not support lifecycle, livenessProbe, readinessProbe, or startupProbe because they must run to completion before the Pod can be ready. If you specify multiple init containers for a Pod, kubelet runs each init container sequentially. Each init container must succeed before the next can run. When all of the init containers have run to completion, kubelet initializes the application containers for the Pod and runs them as usual.
-
-```
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -153,11 +147,10 @@ spec:
   - name: init-myservice
     image: busybox:1.28
     command: ['sh', '-c', "until nslookup myservice.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for myservice; sleep 2; done"]
-   - name: init-mydb
-     image: busybox:1.28
-     command: ['sh', '-c', "until nslookup mydb.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for mydb; sleep 2; done"]
+  - name: init-mydb
+    image: busybox:1.28
+    command: ['sh', '-c', "until nslookup mydb.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for mydb; sleep 2; done"]
 ```
-
 ```bash
 kubectl apply -f myapp.yaml
 kubectl get -f myapp.yaml
@@ -165,36 +158,6 @@ kubectl describe -f myapp.yaml
 ```
 
 ##### Question: How pods and namespaces are related? How selectors work on namespaces?
-
-
-### Annotations: 
-This is used to add metadata to the resource like labels, however unlike labels annotations are not used to idenitify and select resources.
-```json
-"metadata": {
-    "annotations": {
-        "key1" : "value1",
-        "key2" : "value2"
-    }
-}
-```
-Note: The keys and the values in the map must be strings. 
-###### Question: Can labels have non-string value?
-
-```yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: annotations-demo
-  annotations:
-    imageregistry: "https://hub.docker.com/"
-spec:
-  containers:
-  - name: nginx
-    image: nginx:1.14.2
-    ports:
-    - containerPort: 80
-```
-##### Question: Can one pod definition have both labels and annotations?
 
 
 ### ReplicaSet: 
