@@ -129,10 +129,10 @@ Types of probes:
 ##### Question: What happens of each type of probe is failed with practical example?
 
 ### Init Container:
-    Init containers are exactly like regular containers, except:
-      - Init containers always run to completion.
-      - Each init container must complete successfully before the next one starts.
-    If a Pod's init container fails, the kubelet repeatedly restarts that init container until it succeeds. However, if the Pod has a restartPolicy of Never, and an init container fails during startup of that Pod, Kubernetes treats the overall Pod as failed.
+Init containers are exactly like regular containers, except:
+- Init containers always run to completion.
+- Each init container must complete successfully before the next one starts.
+If a Pod's init container fails, the kubelet repeatedly restarts that init container until it succeeds. However, if the Pod has a restartPolicy of Never, and an init container fails during startup of that Pod, Kubernetes treats the overall Pod as failed.
 
     Also, init containers do not support lifecycle, livenessProbe, readinessProbe, or startupProbe because they must run to completion before the Pod can be ready. If you specify multiple init containers for a Pod, kubelet runs each init container sequentially. Each init container must succeed before the next can run. When all of the init containers have run to completion, kubelet initializes the application containers for the Pod and runs them as usual.
 
