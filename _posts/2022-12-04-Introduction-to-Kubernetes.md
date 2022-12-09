@@ -138,24 +138,24 @@ If a Pod's init container fails, the kubelet repeatedly restarts that init conta
 Also, init containers do not support lifecycle, livenessProbe, readinessProbe, or startupProbe because they must run to completion before the Pod can be ready. If you specify multiple init containers for a Pod, kubelet runs each init container sequentially. Each init container must succeed before the next can run. When all of the init containers have run to completion, kubelet initializes the application containers for the Pod and runs them as usual.
 
 ```
-        apiVersion: v1
-        kind: Pod
-        metadata:
-          name: myapp-pod
-          labels:
-            app.kubernetes.io/name: MyApp
-        spec:
-          containers:
-          - name: myapp-container
-            image: busybox:1.28
-            command: ['sh', '-c', 'echo The app is running! && sleep 3600']
-          initContainers:
-          - name: init-myservice
-            image: busybox:1.28
-            command: ['sh', '-c', "until nslookup myservice.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for myservice; sleep 2; done"]
-          - name: init-mydb
-            image: busybox:1.28
-            command: ['sh', '-c', "until nslookup mydb.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for mydb; sleep 2; done"]
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    app.kubernetes.io/name: MyApp
+spec:
+  containers:
+  - name: myapp-container
+    image: busybox:1.28
+    command: ['sh', '-c', 'echo The app is running! && sleep 3600']
+  initContainers:
+  - name: init-myservice
+    image: busybox:1.28
+    command: ['sh', '-c', "until nslookup myservice.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for myservice; sleep 2; done"]
+   - name: init-mydb
+     image: busybox:1.28
+     command: ['sh', '-c', "until nslookup mydb.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for mydb; sleep 2; done"]
 ```
 
 ```bash
