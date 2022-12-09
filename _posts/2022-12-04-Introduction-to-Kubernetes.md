@@ -86,7 +86,7 @@ imagePullPolicy: IfNotPresent/Always/Never
       - name: myregistryke
 ```
 
-##### To make sure the Pod always uses the same version of a container image, you can specify the image's digest; replace <image-name>:<tag> with <image-name>@<digest> (for example, image@sha256:45b23dee08af5e43a7fea6c4cf9c25ccf269ee113168c19722f87876677c5cb2).
+##### To make sure the Pod always uses the same version of a container image, you can specify the image's digest; replace ```<image-name>:<tag> with <image-name>@<digest>``` (for example, image@sha256:45b23dee08af5e43a7fea6c4cf9c25ccf269ee113168c19722f87876677c5cb2).
 
 ### POD:
 A Pod (as in a pod of whales or pea pod) is a group of one or more containers, with shared storage and network resources, and a specification for how to run the containers. A Pod's contents are always co-located and co-scheduled and run in a shared context.
