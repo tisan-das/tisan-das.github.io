@@ -90,18 +90,19 @@ imagePullPolicy: IfNotPresent/Always/Never
 
 ### POD:
 A Pod (as in a pod of whales or pea pod) is a group of one or more containers, with shared storage and network resources, and a specification for how to run the containers. A Pod's contents are always co-located and co-scheduled and run in a shared context.
-      ```yaml
-        apiVersion: v1
-        kind: Pod
-        metadata:
-        name: nginx
-        spec:
-        containers:
-        - name: nginx
-            image: nginx:1.14.2
-            ports:
-            - containerPort: 80
-      ```
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+name: nginx
+spec:
+containers:
+- name: nginx
+  image: nginx:1.14.2
+  ports:
+  - containerPort: 80
+```
 
 Rather than creating pods individually, it's better to use a controller. The controller handles the replication and rollout mechanisms. For example, in case a node goes down, the replication rule will ensure the required number of PODs is up. For example, you might have a container that acts as a web server for files in a shared volume, and a separate "sidecar" container that updates those files from a remote source, as in the following diagram:
 
