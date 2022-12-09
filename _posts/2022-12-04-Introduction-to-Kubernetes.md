@@ -122,9 +122,9 @@ Mechanisms:
 Probe Outcome: Success/ Failure/ Unknown
 
 Types of probes:
-    1. livenessProbe: determines whether container is running
-    2. readinessProbe: determines whether container is ready to accespt incoming requests
-    3. startupProbe: indicates application is ready, all other probes wait for startupProbe to get completed
+1. livenessProbe: determines whether container is running
+2. readinessProbe: determines whether container is ready to accespt incoming requests
+3. startupProbe: indicates application is ready, all other probes wait for startupProbe to get completed
 
 ##### Question: What happens of each type of probe is failed with practical example?
 
