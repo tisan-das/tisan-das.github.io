@@ -167,30 +167,34 @@ kubectl describe -f myapp.yaml
 ##### Question: How pods and namespaces are related? How selectors work on namespaces?
 
 
-Annotations: Is used to add metadata to the resource like labels, however unlike labels annotations are not used to idenitify and select resources.
-      "metadata": {
-        "annotations": {
-          "key1" : "value1",
-          "key2" : "value2"
-        }
-      }
-    Note: The keys and the values in the map must be strings. 
-    Question: Can labels have non-string value?
+### Annotations: 
+This ss used to add metadata to the resource like labels, however unlike labels annotations are not used to idenitify and select resources.
+```json
+"metadata": {
+    "annotations": {
+        "key1" : "value1",
+        "key2" : "value2"
+    }
+}
+```
+Note: The keys and the values in the map must be strings. 
+##### Question: Can labels have non-string value?
 
-      apiVersion: v1
-      kind: Pod
-      metadata:
-        name: annotations-demo
-        annotations:
-          imageregistry: "https://hub.docker.com/"
-      spec:
-        containers:
-        - name: nginx
-          image: nginx:1.14.2
-          ports:
-          - containerPort: 80
-
-    Question: Can one pod definition have both labels and annotations?
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: annotations-demo
+  annotations:
+    imageregistry: "https://hub.docker.com/"
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
+```
+Question: Can one pod definition have both labels and annotations?
 
 
 ReplicaSet: Ensures that a stable number of PODs are always running, gurantees availablity
