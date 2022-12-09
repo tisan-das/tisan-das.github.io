@@ -168,7 +168,7 @@ kubectl describe -f myapp.yaml
 
 
 ### Annotations: 
-This ss used to add metadata to the resource like labels, however unlike labels annotations are not used to idenitify and select resources.
+This is used to add metadata to the resource like labels, however unlike labels annotations are not used to idenitify and select resources.
 ```json
 "metadata": {
     "annotations": {
@@ -178,7 +178,7 @@ This ss used to add metadata to the resource like labels, however unlike labels 
 }
 ```
 Note: The keys and the values in the map must be strings. 
-##### Question: Can labels have non-string value?
+###### Question: Can labels have non-string value?
 
 ```yaml
 apiVersion: v1
@@ -194,10 +194,12 @@ spec:
     ports:
     - containerPort: 80
 ```
-Question: Can one pod definition have both labels and annotations?
+##### Question: Can one pod definition have both labels and annotations?
 
 
-ReplicaSet: Ensures that a stable number of PODs are always running, gurantees availablity
+### ReplicaSet: 
+Ensures that a stable number of PODs are always running, gurantees availablity
+
     apiVersion: apps/v1
     kind: ReplicaSet
     metadata:
