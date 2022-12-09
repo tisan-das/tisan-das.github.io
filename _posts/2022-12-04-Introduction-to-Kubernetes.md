@@ -118,6 +118,7 @@ Mechanisms:
   2. grpc:
   3. httpGet: GET request to the specified URL and port returns http status code on the range of 2xx and 3xx
   4. tcpSocket: checks a TCP connection against specified port 
+
 Probe Outcome: Success/ Failure/ Unknown
   Types of probes:
     1. livenessProbe: determines whether container is running
