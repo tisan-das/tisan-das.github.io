@@ -113,16 +113,16 @@ Rather than creating pods individually, it's better to use a controller. The con
 ### Container States: Waiting/Running/Terminated
 
 ### Container probes: 
-    Mechanisms:
-        1. exec: Executes specified command in the container, and is successful only if the return code is 0
-        2. grpc:
-        3. httpGet: GET request to the specified URL and port returns http status code on the range of 2xx and 3xx
-        4. tcpSocket: checks a TCP connection against specified port 
-    Probe Outcome: Success/ Failure/ Unknown
-    Types of probes:
-        1. livenessProbe: determines whether container is running
-        2. readinessProbe: determines whether container is ready to accespt incoming requests
-        3. startupProbe: indicates application is ready, all other probes wait for startupProbe to get completed
+Mechanisms:
+  1. exec: Executes specified command in the container, and is successful only if the return code is 0
+  2. grpc:
+  3. httpGet: GET request to the specified URL and port returns http status code on the range of 2xx and 3xx
+  4. tcpSocket: checks a TCP connection against specified port 
+Probe Outcome: Success/ Failure/ Unknown
+  Types of probes:
+    1. livenessProbe: determines whether container is running
+    2. readinessProbe: determines whether container is ready to accespt incoming requests
+    3. startupProbe: indicates application is ready, all other probes wait for startupProbe to get completed
 
 ##### Question: What happens of each type of probe is failed with practical example?
 
