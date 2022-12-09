@@ -164,7 +164,7 @@ kubectl get -f myapp.yaml
 kubectl describe -f myapp.yaml
 ```
 
-Question: How pods and namespaces are related? How selectors work on namespaces?
+##### Question: How pods and namespaces are related? How selectors work on namespaces?
 
 
 Annotations: Is used to add metadata to the resource like labels, however unlike labels annotations are not used to idenitify and select resources.
