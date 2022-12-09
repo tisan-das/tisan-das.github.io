@@ -120,6 +120,7 @@ Mechanisms:
   4. tcpSocket: checks a TCP connection against specified port 
 
 Probe Outcome: Success/ Failure/ Unknown
+
 Types of probes:
     1. livenessProbe: determines whether container is running
     2. readinessProbe: determines whether container is ready to accespt incoming requests
