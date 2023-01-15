@@ -54,6 +54,8 @@ STOPSIGNAL SIGQUIT
 ```
 Note: ADD is an interesting docker template instruction, which is having more functionality compared to copy, it can be used to fetch remote files, to extract compressed files automatically. More on the docker template instructions can be found here at https://docs.docker.com/engine/reference/builder/
 
+Note: Docker provides supports for ignoring files and directories to be included as part of docker image creation through .dockerignore file
+
 ```sh
 docker image build -t tisan/nginx:latest .
 ```
@@ -71,7 +73,13 @@ docker image tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
 
 #### Container:
 
-#### Volumes:
+#### Persistence Storage:
+Even though docker containers are preferred to be stateless, however there's certain scenarios, where a container might need to access some external data stored on disk drive, or else might need to store some persisting data. Docker provides support for these scenarios as well.
+
+##### Bind mounts:
+
+
+More on the Docker volumes can be found at https://docs.docker.com/storage/volumes/
 
 #### Network:
 
