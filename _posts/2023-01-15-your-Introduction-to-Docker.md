@@ -52,11 +52,11 @@ EXPOSE 80
 
 STOPSIGNAL SIGQUIT
 ```
+Note: ADD is an interesting docker template instruction, which is having more functionality compared to copy, it can be used to fetch remote files, to extract compressed files automatically. More on the docker template instructions can be found here at https://docs.docker.com/engine/reference/builder/
 
 ```sh
 docker image build -t tisan/nginx:latest .
 ```
-
 
 Some useful commands to manage container images:
 ```sh
