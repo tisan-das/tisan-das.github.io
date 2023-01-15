@@ -77,6 +77,7 @@ docker image tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
 Even though docker containers are preferred to be stateless, however there's certain scenarios, where a container might need to access some external data stored on disk drive, or else might need to store some persisting data. Docker provides support for these scenarios as well.
 
 ##### Bind mounts:
+##### Volumes:
 
 
 More on the Docker volumes can be found at https://docs.docker.com/storage/volumes/
