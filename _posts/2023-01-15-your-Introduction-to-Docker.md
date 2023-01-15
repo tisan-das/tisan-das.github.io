@@ -75,10 +75,48 @@ docker image tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
 
 #### Persistence Storage:
 Even though docker containers are preferred to be stateless, however there's certain scenarios, where a container might need to access some external data stored on disk drive, or else might need to store some persisting data. Docker provides support for these scenarios as well.
+[Image of the mounts]
 
 ##### Bind mounts:
-##### Volumes:
+In this kind of mount, a directory under the host node is mounted into the container. The filesystem is managed from the host-OS directly, and not by the docker container. 
 
+``` sh
+ docker run -d --name broken-container \
+  --mount type=bind,src=/tmp,dst=/usr \
+  nginx:latest
+  
+  docker run -d -it --name devtest \
+  --mount type=bind,src="$(pwd)"/target,dst=/app,readonly \
+  nginx:latest
+  
+  docker run -d -it --name devtest \
+  --mount type=bind,src="$(pwd)"/target,dst=/app \
+  --mount type=bind,src="$(pwd)"/target,dst=/app2,readonly,bind-propagation=rslave \
+  nginx:latest
+  
+```
+Please note that, as these volumes are managed by the OS itself, these volumes are not listed and can't be managed by the volumen management commands
+
+##### Volumes:
+Volumes are another kind of persistent storage that is managed by Docker itself, unlike bind mounts.
+Volumes can be easily backedup, managed either on remote hosts and cloud services, can be encrypted as well.
+
+```sh
+docker run -d \
+  --name devtest \
+  --mount src=myvol2,dst=/app \
+  nginx:latest
+```
+
+```sh
+docker volume create my-vol
+docker volume ls
+docker volume inspect my-vol
+docker volume rm my-vol
+```
+Note: Inorder to check which container is associated with which volume ```docker inspect <container>``` command can be used. 
+
+Note: Besides creating and attaching volumes at runtime, volume mount point can be added in the Dockerfile template as well using the VOLUME instruction.
 
 More on the Docker volumes can be found at https://docs.docker.com/storage/volumes/
 
