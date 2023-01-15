@@ -12,16 +12,67 @@ On the other hand container usees OS provided features to isolate the run-times 
 
 [Image for comparision]
 
+
 [Docker Portion]
+
+#### Docker clinet:
+
+Docker CLI is having a specific set of commands called management commands. Each such command referes to specific resource that the docker daemon manages.
+[Docker CLI Image]
+
 Note: Majority of the docker client commands are legacy, just there for backward compatibility, and generally discouraged for new learners. These commands can be hidden by using environemnt variable:
 ```sh
 export DOCKER_HIDE_LEGACY_COMMANDS=true
 ```
 
-#### Container Images:
-Image
-  
+#### Docker Images:
+Docker images are packages that contains all the dependencies along with the application itself. It works as template to containers. Docker images are stored on the repository. The images can be pushed with the push command or can be pulled from the repostiroty using pull command. It's be noted that inorder to push the image, the image is needed to be tagged properly first. Docker repositories are more populary called as registry. There are couple of docker registries available, including the public ones supported by Docker Inc like Docker Hub, Docker Store etc, also there're some third-party Docker registry providers as well, like [quay.io].
+
+Following section provides a small example of creating a docker image from template:
+
+```Dockerfile
+FROM debian:buster-slim
+
+ARG NGINX_PKG_TYPE=full
+ENV NGINX_PKG=nginx-${NGINX_PKG_TYPE:-full}
+
+RUN apt-get update \
+      && apt-get install -y $NGINX_PKG \
+      && rm -rf /var/lib/apt/lists/* \
+      && rm /var/log/nginx/access.log \
+      && rm /var/log/nginx/error.log \
+      && ln -s /dev/stdout /var/log/nginx/access.log \
+      && ln -s /dev/stderr /var/log/nginx/error.log
+
+COPY ./html/ /var/www/html/
+
+CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
+
+EXPOSE 80
+
+STOPSIGNAL SIGQUIT
+```
+
+```sh
+docker image build -t tisan/nginx:latest .
+```
 
 
+Some useful commands to manage container images:
+```sh
+docker image ls
+docker image prune
+docker image pull [OPTIONS] NAME[:TAG|@DIGEST]
+docker image push [OPTIONS] NAME[:TAG]
+docker image rm [OPTIONS] IMAGE [IMAGE...]
+docker image tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
+```
+
+
+#### Container:
+
+#### Volumes:
+
+#### Network:
 
 Enter text in [Markdown](http://daringfireball.net/projects/markdown/). Use the toolbar above, or click the **?** button for formatting help.
