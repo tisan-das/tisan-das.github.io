@@ -6,29 +6,29 @@ Docker provides an platform to build and deploy application on an isolated envir
 
 
 #### Comparision with Virtualization:
-Virtualization is also a competitive technology compared to containers. However virutlization provides an abstraction on hardware level, it slices the resources like compute, memory, file-system, and then install a guest OS with the slices resources. Hence each VM has got it's own boot process. 
+![Comparision Image](../images/docker-intro/containers-vs-virtual-machines.jpg)
+Virtualization is also a competitive technology compared to containers. However virtualization provides an abstraction on the hardware level, it slices the resources like compute, memory, and filesystem, and then installs a guest OS with the slices resources. Hence each VM has got its boot process. 
 
-On the other hand container usees OS provided features to isolate the run-times on the process level, making it much more light-weight to run a container. More on this would be explored as part of another blog post in near future.
-
-[Image for comparision]
+On the other hand container usees OS provided features to isolate the run-times on the process level, making it more light-weight to run a container. More on this would be explored as part of another blog post in near future.
 
 
-[Docker Portion]
+![Docker Architecture](../images/docker-intro/architecture.png)
 
 #### Docker client:
 
 Docker CLI is having a specific set of commands called management commands. Each such command referes to specific resource that the docker daemon manages.
-[Docker CLI Image]
+![](../images/docker-intro/docker.png)
+![](../images/docker-intro/docker_commands.png)
 
-Note: Majority of the docker client commands are legacy, just there for backward compatibility, and generally discouraged for new learners. These commands can be hidden by using environemnt variable:
+Note: The majority of the docker client commands are legacy, just there for backward compatibility, and generally discouraged for new learners. These commands can be hidden by using the environemnt variable:
 ```sh
 export DOCKER_HIDE_LEGACY_COMMANDS=true
 ```
 
 #### Docker Images:
-Docker images are packages that contains all the dependencies along with the application itself. It works as template to containers. Docker images are stored on the repository. The images can be pushed with the push command or can be pulled from the repostiroty using pull command. It's be noted that inorder to push the image, the image is needed to be tagged properly first. Docker repositories are more populary called as registry. There are couple of docker registries available, including the public ones supported by Docker Inc like Docker Hub, Docker Store etc, also there're some third-party Docker registry providers as well, like [quay.io].
+Docker images are packages that contains all the dependencies along with the application itself. It works as template to containers. Docker images are stored on the repository. The images can be pushed with the push command or can be pulled from the repostiroty using pull command. It's be noted that inorder to push the image, the image is needed to be tagged properly first. Docker repositories are more populary called as registry. There are couple of docker registries available, including the public ones supported by Docker Inc like Docker Hub, Docker Store etc, also there're some third-party Docker registry providers as well, like quay.io.
 
-Following section provides a small example of creating a docker image from template:
+The following section provides a small example of creating a docker image from a template:
 
 ```Dockerfile
 FROM debian:buster-slim
@@ -54,7 +54,7 @@ STOPSIGNAL SIGQUIT
 ```
 Note: ADD is an interesting docker template instruction, which is having more functionality compared to copy, it can be used to fetch remote files, to extract compressed files automatically. More on the docker template instructions can be found here at https://docs.docker.com/engine/reference/builder/
 
-Note: Docker provides supports for ignoring files and directories to be included as part of docker image creation through .dockerignore file
+Note: Docker provides support for ignoring files and directories to be included as part of docker image creation through the .dockerignore file
 
 ```sh
 docker image build -t tisan/nginx:latest .
@@ -72,27 +72,32 @@ docker image tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
 
 
 #### Container:
-Docker container is the unit of application deployment and execution runtime, which contains all the dependencies along with the executable, which ensures the application can be run on isolated environment reliably.
+Docker container is the unit of application deployment and execution runtime, which contains all the dependencies along with the executable, which ensures the application can be run in isolated environment reliably.
 
 ```sh
 docker container ls
 docker container run -d -p 80:80 nginx
 docker container rm $(docker image ls -aq)
+docker container stop 569
 ```
 -- exec command
 -- How sigkill works?
--- environment variables
+
+Environment variables
 ```sh
 docker container run -it -e "PS1=val1" nginx
 docker container run --env-file app.env alpine:latest
 docker container run -d -e "POSTGRES_USER=myuser" -e "POSTGRES_PASSWORD=mypass" posrgres:9.6.6-alpine
 ```
 
+Docker issues SIGKILL to stop the running container, and after 10 secs if the container still not stopped, SIGTERM command is used to stop it. Please check the following taken from docker wiki:
+Unlike the shell form, the exec form does not invoke a command shell. This means that normal shell processing does not happen. For example, CMD [ "echo", "$HOME" ] will not do variable substitution on $HOME. If you want shell processing then either use the shell form or execute a shell directly, for example: CMD [ "sh", "-c", "echo $HOME" ]. When using the exec form and executing a shell directly, as in the case for the shell form, it is the shell that is doing the environment variable expansion, not docker.
+
 #### Persistence Storage:
 Even though docker containers are preferred to be stateless, however there's certain scenarios, where a container might need to access some external data stored on disk drive, or else might need to store some persisting data. Docker provides support for these scenarios as well.
-[Image of the mounts]
+![Image of the mounts](../images/docker-intro/types-of-mounts-volume.png)
 
-##### Bind mounts:
+##### 1. Bind mounts:
 In this kind of mount, a directory under the host node is mounted into the container. The filesystem is managed from the host-OS directly, and not by the docker container. 
 
 ``` sh
@@ -110,9 +115,9 @@ In this kind of mount, a directory under the host node is mounted into the conta
   nginx:latest
   
 ```
-Please note that, as these volumes are managed by the OS itself, these volumes are not listed and can't be managed by the volumen management commands
+Please note that, as these volumes are managed by the OS itself, these volumes are not listed and can't be managed by the volume management commands
 
-##### Volumes:
+##### 2.Volumes:
 Volumes are another kind of persistent storage that is managed by Docker itself, unlike bind mounts.
 Volumes can be easily backedup, managed either on remote hosts and cloud services, can be encrypted as well.
 
@@ -156,7 +161,7 @@ docker container run -d --network mynet nginx
 docker network rm mynet
 ```
 
-Docker network also provides an support for network alias on the context of a particular network, which is resolved at run-time. It's to be noted that this automatic name resolution feature is only available through the User Defined Networks. This particular functionality can be used as load-balancing service. Example:
+Docker network also provides support for network alias in the context of a particular network, which is resolved at run-time. It's to be noted that this automatic name resolution feature is only available through the User Defined Networks. This particular functionality can be used as a load-balancing service. Example:
 
 Step 01: Running 3 docker containers with the alias webserver under mynet bridge network:
 ```sh
