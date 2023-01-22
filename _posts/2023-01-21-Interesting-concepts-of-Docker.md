@@ -174,6 +174,77 @@ Also the PID column of stats output shows the processes and kernel threads creat
 
 #### Concept 05: Temporary volumes:
 
+
+
+```sh
+$ docker run -d \
+  -it \
+  --name tmptest \
+  --mount type=tmpfs,destination=/app --read-only \
+  nginx:latest
+```
+tmpfs-size:	Size of the tmpfs mount in bytes. Unlimited by default.
+
+Example: Default Writable storage layer persists data until it's deleted
+```sh
+controlplane $ docker image pull alpine:latest
+latest: Pulling from library/alpine
+8921db27df28: Pull complete 
+Digest: sha256:f271e74b17ced29b915d351685fd4644785c6d1559dd1f2d4189a5e851ef753a
+Status: Downloaded newer image for alpine:latest
+docker.io/library/alpine:latest
+controlplane $ docker container run -it alpine:latest
+/ # vi /var/tisan
+/ # cat /var/tisan 
+This is a sample file!
+/ # exit
+controlplane $ docker container ls
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+controlplane $ docker container ls -a
+CONTAINER ID   IMAGE           COMMAND     CREATED          STATUS                     PORTS     NAMES
+283a5fccd2c3   alpine:latest   "/bin/sh"   29 seconds ago   Exited (0) 5 seconds ago             adoring_albattani
+controlplane $ docker container start 283
+283
+controlplane $ docker container ls -a
+CONTAINER ID   IMAGE           COMMAND     CREATED          STATUS         PORTS     NAMES
+283a5fccd2c3   alpine:latest   "/bin/sh"   40 seconds ago   Up 3 seconds             adoring_albattani
+controlplane $ docker container attach 283
+/ # ls -l /var/tisan
+-rw-r--r--    1 root     root            23 Jan 22 11:51 /var/tisan
+/ # cat /var/tisan
+This is a sample file!
+/ # exit
+controlplane $ 
+```
+
+Example: tmpfs storage layer persists data until it's stopped
+```sh
+controlplane $ docker container run --mount type=tmpfs,dst=/var -it alpine:latest sh
+/ # vi /var/tisan
+/ # ls -l /var/tisan 
+-rw-r--r--    1 root     root            23 Jan 22 12:04 /var/tisan
+/ # cat /var/tisan 
+This is a sample file!
+/ # exit
+controlplane $ docker container ls
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+controlplane $ docker container ls -a
+CONTAINER ID   IMAGE           COMMAND   CREATED          STATUS                     PORTS     NAMES
+5293d15d9b3d   alpine:latest   "sh"      31 seconds ago   Exited (0) 8 seconds ago             adoring_albattani
+controlplane $ docker container start 529
+529
+controlplane $ docker container ls   
+CONTAINER ID   IMAGE           COMMAND   CREATED          STATUS         PORTS     NAMES
+5293d15d9b3d   alpine:latest   "sh"      44 seconds ago   Up 5 seconds             adoring_albattani
+controlplane $ docker container attach 529
+/ # ls -l /var
+total 0
+/ # exit
+controlplane $
+```
+
+As tmpfs storage is placed in-memory, it's more performance efficient as compared to the default writeable storage, as there's no disk writing is involved with this.
+
 #### Concept 06: Security: To be updated
 
 
