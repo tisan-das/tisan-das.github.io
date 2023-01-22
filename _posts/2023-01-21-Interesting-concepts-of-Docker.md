@@ -2,16 +2,29 @@
 published: true
 ---
 
-This blogpost is written to jolt down several concepts of Docker, which are generally not needed for day-to-day activities for majority of the tasks, however these concepts provides an overview on the working principles of Docker.
+This blog post is written to jot down several concepts of Docker, which are generally not needed for day-to-day activities for the majority of the tasks, however, these concepts provide an overview of the working principles of Docker.
 
 #### Concept 01: Docker Image is built with layers
-Dockerfile provides a template, a set of instructions, to create an image. Each instruction that changes the file-system, the resultant file-system with the change is stored as a layer. It's to be noted that only RUN, ADD, COPY instructions are the one which makes changes to the file-system. The instructions that are not updating the filesystem are stored as metadata and are generally can be inspected as part of config portion of the image.
+Dockerfile provides a template, a set of instructions, to create an image. For each instruction that changes the file system, the resultant file system with the change is stored as a layer. It's to be noted that only RUN, ADD, and COPY instructions are the one that makes changes to the file system. 
+![](../images/docker-concept/ContainerLayer.png)
 
--- Snippets to be inserted here
+Docker image contains the SHA of the layers:
+![](../images/docker-concept/ImageInspect_FS.png)
 
-Note: Remote images do also contain intermeidate steps, however those intermediate layers aren't generally pulled from the repository.
+The instructions that are not updating the filesystem are stored as metadata and are generally can be inspected as part of the config portion of the image.
+![](../images/docker-concept/ImageInspect_Config.png)
 
-Docker ImageIDs are nothing but SHA-256 of the image-configuration along with metadata.
+
+
+Note: Remote images do also contain intermediate steps, however, those intermediate layers aren't generally pulled from the repository.
+
+Docker ImageIDs are nothing but SHA-256 of the image configuration along with metadata.
+
+Pulling image pulls all the file-system layers used while creating the image:
+![](../images/docker-concept/ImagePull.png)
+
+
+
 
 ##### Chaining Instruction:
 Chaining multiple instructions into one leads less number of intermediate layer generation
@@ -23,21 +36,22 @@ RUN addgroup --gid 10001 --system nonroot \
 
 #### Concept 02: Docker images are built using containers
 
-While building images, docker looks into the cache to check whether the resultant file-system laryer is already present. In case it's available, Docker directly uses the layer unless ```--no-cache``` option is specified. Otherwise, the image layer is built using container
+While building images, docker looks into the cache to check whether the resultant file-system layer is already present. In case it's available, Docker directly uses the layer unless ```--no-cache``` option is specified. Otherwise, the image layer is built using a container.
 
---- Snippets and explanantion 
+![](../images/docker-concept/BuildContainer.png)
+
 
 ##### Dangling Image:
 
-Dangling images are those images which doesn't have a tag and are not getting used by any of the child images. 
-This is generally observed, when the same image is built multiple times, on the same system. Now due to some changes, earlier intermeidate layers generated are ignored, and new image layers are built. In those case the earlier intermediate layers get dangled. The same can also be observed for non-intermediate images as well.
+Dangling images are those images that don't have a tag and are not getting used by any of the child images. 
+This is generally observed, when the same image is built multiple times, on the same system. Now due to some changes, earlier intermediate layers generated are ignored, and new image layers are built. In those cases the earlier intermediate layers get dangled. The same can be observed for non-intermediate images as well.
 
 ```sh
 docker image prune
 docker image prune -a
 ```
 
-Following is one example of dangling images, which are removed by ```prune``` command.
+Following is one example of dangling images, which are removed by ```prune``` command:
 
 ```sh
 controlplane $ docker image ls 
@@ -153,7 +167,7 @@ ARG buildno=1
 # ...
 ```
 
-Warning: It is not recommended to use build-time variables for passing secrets like GitHub keys, user credentials etc. Build-time variable values are visible to any user of the image with the docker history command. Refer to the RUN --mount=type=secret section to learn about secure ways to use secrets when building images.
+Warning: It is not recommended to use build-time variables for passing secrets like GitHub keys, user credentials, etc. Build-time variable values are visible to any user of the image with the docker history command. Refer to the RUN --mount=type=secret section to learn about secure ways to use secrets when building images.
 
 An ARG instruction can optionally include a default value. If an ARG instruction has a default value and if there is no value passed at build-time, the builder uses the default.
 
@@ -163,14 +177,14 @@ An ARG instruction can optionally include a default value. If an ARG instruction
 docker container stats 
 ```
 
-The stats comannd shows the host resource uses by individual container. It's to be noted that one container can consumer all the system resources, thus restricting other containers from executing or resulting into throwing Out-Of-Memory errors. In order to restrict the resources utilization, following commands can become handy:
+The stats command shows the host resource uses by an individual container. It's to be noted that one container can consume all the system resources, thus restricting other containers from executing or resulting in throwing Out-Of-Memory errors. To restrict the resources utilization, the following commands can become handy:
 ```sh
 docker container run --memory 256M --cpus 0.25 -d nginx:latest
 docker container run --memory-reservation 256M --cpu-shares 10 -d nginx:latest
 ```
 
-The quanta of CPU is defined by the host OS. Depending upon CPU, it can either be core or physical CPU, or hyperthread. 
-Also the PID column of stats output shows the processes and kernel threads created inside the container. So in case the PID count and ps command output doesn't match, it means certain processes has resulted into creating multiple threads. 
+The quanta of the CPU is defined by the host OS. Depending upon the host operating system, it can either be a core or physical CPU, or hyper thread. 
+Also, the PID column of the stats output shows the processes and kernel threads created inside the container. So in case the PID count and ps command output doesn't match, it means certain processes have resulted into creating multiple threads. 
 
 #### Concept 05: Temporary volumes:
 
@@ -243,10 +257,8 @@ total 0
 controlplane $
 ```
 
-As tmpfs storage is placed in-memory, it's more performance efficient as compared to the default writeable storage, as there's no disk writing is involved with this.
+As tmpfs storage is placed in-memory, it's more performance efficient as compared to the default writeable storage, as there's no disk writing involved with this.
 
 #### Concept 06: Security: To be updated
 
 
-
-Enter text in [Markdown](http://daringfireball.net/projects/markdown/). Use the toolbar above, or click the **?** button for formatting help.
