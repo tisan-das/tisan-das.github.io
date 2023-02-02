@@ -19,6 +19,39 @@ The goal of microservice architecture is to make each team:
 #### Monolith to microservices:
 One starting point to convert a codebase from monolithic to microservice based is to consider the cohesivity. Club the functionalities that do related works and create a microservice out of that. Start small, with few modules and continue to separate them. Eventually it will result into architecture like following:
 
+## Challengest in Adopting & Implementng Microservices:
+
+1. Managing: As the number of microservices is increased, the complexity of managing also increases significantly, so introducing new microservice should be well planned
+
+2. Monitoring & Logging: 
+- Each and every component of all the services should be monitored
+- Debugging a root cause spanning across all the services, should be easy
+- Distributed tracing becomes super critical: Eg:-Zipkin
+- Blindspot can be catastrophic
+
+3. Service Discover:
+With hundreds of microservices spanning across thousands of servers, how can we find whome to talk to to get it done? Service discovery can be used in this case:
+	i. Central Service Registry
+    ii. Load-Balancer based discovery
+    iii. Service Mesh
+    
+   All the above mentioned approaches have their own advantages and disadvantages. We would explore them as part of a separate blog post.
+
+4. Authentication & Authorization: Secrets can't be made openly accessible, not even the ones used for inter-service communication. Authentication and authorization needs to be setup for inter-service communication. A central interal service that issues JWT token is generally used.
+
+5. Configuration Management: Each service has it's own set of sercrets and configs. There needs to be a way to store and access configurations centrally. Every service having their own way for this is a waste of time, and should be standardized.
+
+6. Fault-tolerance: There's many way for the service to fail. Outages are inevitable, however the important part is to ensure the outage isn't bringing down the whole service with itself. The microservices are supposed to be modeled around loose coupling and asynchronous dependency
+
+7. Internal & External testing:
+- hard to test in completely isolated environment
+- hard to simulate the distributed failures
+
+8. Dependency management is a nightmare:
+	i. Service dependency: Synchronous dependency may trigger cascading failures
+    ii. Library/Module dependency: Without proper versioning or backward compatibility, rolling out changes becomes painfully slow
+    iii. Data dependency: Services relying on data coming from other service hampers user-experience
+
 
 
 
