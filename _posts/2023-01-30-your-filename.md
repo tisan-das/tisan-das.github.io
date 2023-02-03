@@ -53,6 +53,45 @@ With hundreds of microservices spanning across thousands of servers, how can we 
     iii. Data dependency: Services relying on data coming from other service hampers user-experience
 
 
+## Standardizing Microservices:
+There should be a standard way to create "good" microservice. Three verticles to standardize:
+i. Monitoring: 
+	How to trace cross-service view of a request passing through different components of a system. This is also known as distributed tracing. There's couple of industry provided like Zipkin and AWS X-Ray tracing. As part of this, need to keep track of the following:
+    - how every server is doing? => CPU, memory, disk consumption
+    - how every service is doing? => health check
+    
+    - Insert Image
+    Collect metrics: CPU, RAM, Disk, N/w
+    Collect logs: Application, Process, User log, SSH, OS
+    Collect app metrics: 2xx, 3xx, 4xx, response time, number of requests, # of servers
+    Possible tech: Prometheus, Graphine, NewReplic, Datadog
+    
+ii. Interfaces:
+     - How would two service talk to each other? => HTTP/REST/gRPC
+     - How would end user talk to a service?
+     Also within a protocol, need to standadize:
+     	- how to define routes?
+        - how to name the endpoints?
+        - how to paginate documents?
+     APIs:
+     	- how to version the APIs?
+        - connection timeout: neither too small, nor too large
+        - retry strategy: Exponential backoff
+        - payload type: JSON/XML/TXT
+
+iii. Tolerance: What if one service bombards other? One bad service can take down the entire infrastructure. Hence each service should shield itself. Strategies to achieve this:
+- Ration the number of requests from each service
+- Limit the number of outgoing calls from a service
+- Have an ability to cutoff incoming resources from a service
+- Have an ability fo cutoff outgoing resources to a service
+
+Image of profile
+
+
+
+
+
+    
 
 
 Enter text in [Markdown](http://daringfireball.net/projects/markdown/). Use the toolbar above, or click the **?** button for formatting help.
