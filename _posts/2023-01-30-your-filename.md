@@ -88,8 +88,22 @@ iii. Tolerance: What if one service bombards other? One bad service can take dow
 Image of profile
 
 
+## Preparing for Integration: Does and Dont's:
+1. Forward & Backward compatibility: Make changes such that other services don't need to change at all. Keyplaces to keep a close eye:
+	- DB Migrations
+    - API Namespaces
+    - Message from asynchronous communications
+    
+2. Never change the type of column or attributes: Instread prefer creating a new column with new type, which would avoid forced changes
 
+3. Dead simple consumption: Microservices are built to interact with other microservice, It should be way somple for other services to talk to your service, otherwise it wouldn't matter how optimized the service is if it's having a poor interface: 
+	- Simple API
+    - Simple data format
+    - Common Protocols 
 
+4. Make API techonology agnostic, and simple
+5. Hide Internal Implementation details:
+   All the communication should happen over public APIs. This would allow us to upgrade internal implementation logic.
 
     
 
