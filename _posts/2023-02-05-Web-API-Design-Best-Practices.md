@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 ---
 In this blog post, we are going learn about the RESTful API design, a principle widely adopted by microservices to design interface so much that it became the de-facto standard. Here we will learn basics about REST, standard practices and how to utilize REST to create an intituive interface that clients can comsume in a meaningful way.
 
@@ -67,7 +67,7 @@ HTTP Status Codes:
 	i. 204 (No Content): Deletion completed, no further response is sent
     ii. 404 (Not Found): Requested resource doesn't exists
 
-Image of HTTP verbs
+![](../images/REST-intro/httpVerbs.png)
 
 
 
@@ -146,4 +146,5 @@ As the service evolves, it's accepted that the APIs would also evolve. However f
 ### References:
 https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design
 
-Enter text in [Markdown](http://daringfireball.net/projects/markdown/). Use the toolbar above, or click the **?** button for formatting help.
+[API Design Best Practices](https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design)
+
