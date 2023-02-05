@@ -18,6 +18,75 @@ The primary principles behind REST are as follows:
 4. REST APIs are stateless in nature. Server is expected to handle any incoming request in any order. The client isn't expected to store any information.
 
 ### Organize API Design around resources:
+The APIs are recommended to be focused on the resources. Resource URIs should be based on the noun (resource) and not verb (operations on the resource)
+```http
+https://adventure-works.com/orders // Good
+
+https://adventure-works.com/create-order // Avoid
+```
+
+Entities are often grouped together into collections (orders, customers). A collection is a separate resource from the item within the collection, and should have its own URI. For example, the following URI might represent the collection of orders:
+```http
+https://adventure-works.com/orders
+```
+
+Adopt a consistent naming convention in URIs. In general, it helps to use plural nouns for URIs that reference collections. It's a good practice to organize URIs for collections and items into a hierarchy. For example, /customers is the path to the customers collection, and /customers/5 is the path to the customer with ID equal to 5. This approach helps to keep the web API intuitive. Also, many web API frameworks can route requests based on parameterized URI paths, so you could define a route for the path /customers/{id}.
+
+Avoid requiring resource URIs more complex than collection/item/collection.
+
+### Define API operations in terms of HTTP methods
+HTTP method naming provides the meaning to the operations performed by the APIs. Following are the most used HTTP methods:
+
+1. POST: Creates a new resource. Details of the resource is provided as part of the payload. It either creates a resources and returns the ID of the resource or submits a request to process request and returns the tracking ID. 
+HTTP Status Codes:
+	i. 200 (OK): Request is accepted, however new resource is not created
+    ii. 201 (Created): New resource is created, location header contains the URI of the resource
+    iii. 204 (No Content): Request is accepted, no new resource is created and no response body
+    
+
+2. GET: Retrieves the representation of the resource based on ID 
+HTTP Status Codes:
+	i. 200 (OK): Successful 
+    ii. 404 (Not Found): Requested resource isn't found
+    iii. 204 (No Content): Request is fulfilled, however without any response body
+    
+3. PUT: creates or replaces atrributes of the resource. Details of the object is provided as part of the payload. The payload body contains the whole representation of the resource. In case the resource exists, only necessary attributes are updated, otherwise a new object is created. Just like POST method, it can also submit the request for further processing and return a tracking ID.
+HTTP Status Codes:
+	i. 201 (Created): New resource is created
+    ii. 200 (OK): No new resource is created
+    iii. 204 (No Content): Request is accepted, no new resource created, and no response body
+    iv. 409 (Conflict): 
+
+4. PATCH: Performs partial update over a resource. Details to be updated is provided as part of the payload. The payload body contains only the partial representation of the resource, the attributes only needed to be updated. Thus it provides some efficiency in terms of bandwidth usage over PUT method.
+
+5. DELETE: Deletes a resource based on the provided resource ID. 
+
+Image of HTTP verbs
+
+
+### Conform to HTTP semantics
+1. Media-Types:
+The client and server agrees upon the representation of the resource through Media-Types, also know as MIME-types. For non-binary object, the vast majority of the application relies on JSON and XML.
+
+The Content-Type header is used to specify the representation of the resource, and is placed in both request and resource:
+```
+POST https://adventure-works.com/orders HTTP/1.1
+Content-Type: application/json; charset=utf-8
+Content-Length: 57
+
+{"Id":1,"Name":"Gizmo","Category":"Widgets","Price":1.99}
+```
+Besides, a client can also provide a list of accepted MIME-types:
+```
+GET https://adventure-works.com/orders/2 HTTP/1.1
+Accept: application/json
+```
+
+HTTP Status Code:
+   i. 415 (Unsupported Media Type): Server doesn't support the requested Media-Type provided
+   ii. 406 (Not Acceptable): Server can't match any of the accepted Meida-Type requested
+   
+   
 
 
 
