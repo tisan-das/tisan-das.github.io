@@ -32,4 +32,4 @@ Major benefits of message queues:
 ### References:
 1. [Implementing enterprise integration patterns with AWS messaging services: point-to-point channels](https://aws.amazon.com/blogs/compute/implementing-enterprise-integration-patterns-with-aws-messaging-services-point-to-point-channels/)
 2. [Implementing enterprise integration patterns with AWS messaging services: publish-subscribe channels](https://aws.amazon.com/blogs/compute/implementing-enterprise-integration-patterns-with-aws-messaging-services-publish-subscribe-channels/)
-3. [AWS Whitepaper on Implementing Microservices on AWS](https://docs.aws.amazon.com/whitepapers/latest/microservices-on-aws/microservices-on-aws.html)
+3. [Whitepaper on Implementing Microservices on AWS](https://docs.aws.amazon.com/whitepapers/latest/microservices-on-aws/microservices-on-aws.html)
