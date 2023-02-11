@@ -14,8 +14,9 @@ Now that we've got an overview on the asynchonous communication, and learnt abou
 ![](../images/asynchronous-intro/pointToPoint_oneWayMessaging.png)
 ![](../images/asynchronous-intro/pointToPoint_requestResponseMessaging.png)
 Major benefits of message queues:
-i. Depending upon the message queue load, the number of message receivers can be scaled
-ii. Mssage queues flatten the requests sent to the receivers, thus acting as buffering space in case of 
+    i. Depending upon the message queue load, the number of message receivers can be scaled
+    ii. Mssage queues flatten the requests sent to the receivers, thus acting as buffering space in case of spike or peak load
+
 
 2. Publish/Subscribe Channel: Another type of message channel, where the publisher sends a message, and the message is read by all the subscribers to the channel. This is more of a "notification" kind of messaging, where whenever a message is sent to the channel also known as a topic, it's forwarded to all the subscribers. Even though certain notification services do provide some sort of retry mechanism in case some message pushing fails, however, the messages are not stored in persistence storage, unlike message queues.
 ![](../images/asynchronous-intro/publishSubscribe_oneWayMessaging.png)
