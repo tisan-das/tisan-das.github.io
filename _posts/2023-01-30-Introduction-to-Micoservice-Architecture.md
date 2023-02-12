@@ -2,11 +2,12 @@
 published: true
 ---
 
-#### Microservice Architecture
 In this blog post, we will learn about microservices. We would learn why microservices are evolved and are preferred nowadays over monolithic architecture. We would also learn about a few patterns and useful ideas on microservices.
 
+#### Microservice Architecture
 Microservice is an architectural approach to software development, where the overall software is broken down into multiple independent and loosely coupled services, communicating over a well-defined interface. Microservices are typically structured around business needs and are owned by a small team.
 
+#### Comparision with Monolith:
 Earlier software development used to follow the monolith architecture, where all the processes are run as a single service. The codebase is generally used to be maintained as a single repo, and the application is used to deploy as a whole. However, there are a couple of disadvantages, which led to the large adoption of microservice:
 1. Scalability: As the whole application is deployed in a single go, scaling the application horizontally means a certain portion of the application goes unused, thus wasting resources
 2. Coupling: Monolith architecture by nature becomes highly coupled. Even though there's a distinction between the responsibility of different modules or processes, however over a long time, these process becomes highly dependent on each other, thus causing tight coupling.
