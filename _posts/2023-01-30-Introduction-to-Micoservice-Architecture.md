@@ -58,7 +58,7 @@ There should be a standard way to create a "good" microservice. Three verticles 
 
 i. Monitoring: How to trace the cross-service view of a request passing through different components of a system. This is also known as distributed tracing. There is a couple of industry-provided offerings like Zipkin and AWS X-Ray tracing. As part of this, need to keep track of the following:
 - how every server is doing? => CPU, memory, disk consumption
-- how every service is doing? => health check3
+- how every service is doing? => health check
     
     - Insert Image
     Collect metrics: CPU, RAM, Disk, N/w
@@ -71,7 +71,7 @@ ii. Interfaces:
 - How would the end user talk to a service?
 
 Also within a protocol, need to standardize:
-- how to define routes?
+- how to define routes?1
 - how to name the endpoints?
 - how to paginate documents?
 
