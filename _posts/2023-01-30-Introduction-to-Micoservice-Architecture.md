@@ -67,17 +67,20 @@ i. Monitoring: How to trace the cross-service view of a request passing through 
     Possible tech: Prometheus, Graphine, NewReplic, Datadog
     
 ii. Interfaces:
-     - How would two service talk to each other? => HTTP/REST/gRPC
-     - How would the end user talk to a service?
-     Also within a protocol, need to standardize:
-        - how to define routes?
-        - how to name the endpoints?
-        - how to paginate documents?
-     APIs:
-        - how to version the APIs?
-        - connection timeout: neither too small nor too large
-        - retry strategy: Exponential backoff
-        - payload type: JSON/XML/TXT
+- How would two service talk to each other? => HTTP/REST/gRPC
+- How would the end user talk to a service?
+
+Also within a protocol, need to standardize:
+- how to define routes?
+- how to name the endpoints?
+- how to paginate documents?
+
+APIs:
+- how to version the APIs?
+- connection timeout: neither too small nor too large
+- retry strategy: Exponential backoff
+- payload type: JSON/XML/TXT
+
 
 iii. Tolerance: What if one service bombards the other? One bad service can take down the entire infrastructure. Hence each service should shield itself. Strategies to achieve this:
 - Ration the number of requests from each service
