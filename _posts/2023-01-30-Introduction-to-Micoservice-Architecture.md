@@ -31,9 +31,9 @@ One starting point to convert a codebase from monolithic to microservice-based i
 
 3. Service Discover:
 With hundreds of microservices spanning thousands of servers, how can we find whom to talk to to get it done? Service discovery can be used in this case:
-     i. Central Service Registry1
-     ii. Load-Balancer based discovery
-     iii. Service Mesh
+- i. Central Service Registry2
+- ii. Load-Balancer based discovery
+- iii. Service Mesh
     
    All the above-mentioned approaches have their advantages and disadvantages. We would explore them as part of a separate blog post.
 
