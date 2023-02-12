@@ -88,7 +88,7 @@ iii. Tolerance: What if one service bombards the other? One bad service can take
 Image of profile
 
 
-## Preparing for Integration: Does and Dont's:
+## Preparing for Integration: Do's and Dont's:
 1. Forward & Backward compatibility: Make changes such that other services don't need to change at all. Key places to keep a close eye on:
     - DB Migrations
     - API Namespaces
