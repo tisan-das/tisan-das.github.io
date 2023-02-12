@@ -4,6 +4,8 @@ published: true
 
 In this blog post, we will learn about microservices. We would learn why microservices are evolved and are preferred nowadays over monolithic architecture. We would also learn about a few patterns and useful ideas on microservices.
 
+![](../images/REST-intro/monolithMicroservice.png)
+
 #### Microservice Architecture
 Microservice is an architectural approach to software development, where the overall software is broken down into multiple independent and loosely coupled services, communicating over a well-defined interface. Microservices are typically structured around business needs and are owned by a small team.
 
@@ -42,7 +44,7 @@ With hundreds of microservices spanning thousands of servers, how can we find wh
 
 5. Configuration Management: Each service has its own set of secrets and configs. There needs to be a way to store and access configurations centrally. Every service has its way for this is a waste of time, and should be standardized.
 
-6. Fault-tolerance: There are many ways for the service to fail. Outages are inevitable, however, the important part is to ensure the outage isn't bringing down the whole service itself. The microservices are supposed to be modeled around the loose coupling and asynchronous dependency
+6. Fault-tolerance: There are many ways for the service to fail. Outages are inevitable, however, the important part is to ensure the outage isn't bringing down the whole service itself. The microservices are supposed to be modeled around the loose coupling and asynchronous dependency.
 
 7. Internal & External testing:
 - hard to test in a completely isolated environment
@@ -60,19 +62,20 @@ There should be a standard way to create a "good" microservice. Three verticles 
 i. Monitoring: How to trace the cross-service view of a request passing through different components of a system. This is also known as distributed tracing. There is a couple of industry-provided offerings like Zipkin and AWS X-Ray tracing. As part of this, need to keep track of the following:
 - how every server is doing? => CPU, memory, disk consumption
 - how every service is doing? => health check
-    
-    - Insert Image
-    Collect metrics: CPU, RAM, Disk, N/w
-    Collect logs: Application, Process, User log, SSH, OS
-    Collect app metrics: 2xx, 3xx, 4xx, response time, number of requests, # of servers
-    Possible tech: Prometheus, Graphine, NewReplic, Datadog
+
+![](../images/REST-intro/microserviceMonitoring.png)    
+Data Collection:
+- Collect metrics: CPU, RAM, Disk, N/w
+- Collect logs: Application, Process, User log, SSH, OS
+- Collect app metrics: 2xx, 3xx, 4xx, response time, number of requests, # of servers
+- Possible tech: Prometheus, Graphine, NewReplic, Datadog
     
 ii. Interfaces:
 - How would two service talk to each other? => HTTP/REST/gRPC
 - How would the end user talk to a service?
 
 Also within a protocol, need to standardize:
-- how to define routes?1
+- how to define routes?
 - how to name the endpoints?
 - how to paginate documents?
 
@@ -89,7 +92,7 @@ iii. Tolerance: What if one service bombards the other? One bad service can take
 - Have the ability to cutoff incoming resources from a service
 - Have an ability to cutoff outgoing resources to a service
 
-Image of profile
+Profiling is one of the renowned techniques used for this.
 
 
 ## Preparing for Integration: Do's and Dont's:
@@ -106,6 +109,7 @@ Image of profile
     - Common Protocols 
 
 4. Make API technology agnostic, and simple
+
 5. Hide Internal Implementation details:
    All communication should happen over public APIs. This would allow us to upgrade internal implementation logic.
 
