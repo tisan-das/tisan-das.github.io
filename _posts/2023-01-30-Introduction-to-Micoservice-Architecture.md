@@ -31,7 +31,7 @@ One starting point to convert a codebase from monolithic to microservice-based i
 
 3. Service Discover:
 With hundreds of microservices spanning thousands of servers, how can we find whom to talk to to get it done? Service discovery can be used in this case:
-- i. Central Service Registry2
+- i. Central Service Registry
 - ii. Load-Balancer based discovery
 - iii. Service Mesh
     
@@ -48,9 +48,9 @@ With hundreds of microservices spanning thousands of servers, how can we find wh
 - hard to simulate the distributed failures
 
 8. Dependency management is a nightmare:
-    i. Service dependency: Synchronous dependency may trigger cascading failures
-    ii. Library/Module dependency: Without proper versioning or backward compatibility, rolling out changes becomes painfully slow
-    iii. Data dependency: Services relying on data coming from other services hampers user-experience
+    - i. Service dependency: Synchronous dependency may trigger cascading failures
+    - ii. Library/Module dependency: Without proper versioning or backward compatibility, rolling out changes becomes painfully slow
+    - iii. Data dependency: Services relying on data coming from other services hampers user-experience
 
 
 ### Standardizing Microservices:
