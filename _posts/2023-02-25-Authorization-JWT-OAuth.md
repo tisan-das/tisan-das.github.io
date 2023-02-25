@@ -42,6 +42,9 @@ API keys are another commonly used authentication mechanism, where the end-user 
     -d @request.json \
     "https://translation.googleapis.com/language/translate/v2"
 ```
+  
+OAuth:
+OAuth is one of the mot used authorization mechanism. It's a authroization mechanism, in a sense that it's targeted to validate the access permission, rather than identifying user or validating credentials. OAuth specifies the use of an access token to verify the access permission. The RFC doesn't specifies any specific format for the OAuth, even though JWT is the most used format. The access tokens are not meant to be understand by the client requesting for a protected resource. It's only meant to be understood by the resource server and the OAuth server. However before going deep, we've to understand different actors or roles as mentioned by OAuth 
 
   
 ### References:
@@ -50,3 +53,4 @@ API keys are another commonly used authentication mechanism, where the end-user 
   3. https://www.ibm.com/docs/en/cics-ts/5.4?topic=concepts-http-basic-authentication
   4. https://www.twilio.com/docs/glossary/what-is-basic-authentication
   5. https://cloud.google.com/docs/authentication/api-keys
+  6. https://auth0.com/intro-to-iam/what-is-oauth-2
