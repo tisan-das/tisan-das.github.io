@@ -27,7 +27,11 @@ Different servers has different mechanism for implementing HTTP Basic Auth. For 
     auth_basic_user_file /etc/apache2/.htpasswd; 
   }
 ```
-  
+<HTTP Basic Auth Image>
+
+It's to be noted that as credentials are transferred over a network call in this case, a secure layer like HTTPS is needed to ensure the credentials is safe from evasdropping or man-in-the-middle attack.
+
+#### API Keys:
   
 ### References:
   1. https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication
