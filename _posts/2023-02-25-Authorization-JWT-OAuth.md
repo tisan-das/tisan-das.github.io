@@ -35,18 +35,13 @@ It's to be noted that as credentials are transferred over a network call in this
 API keys are another commonly used authentication mechanism, where the end-user has to create an API key beforehand by registering, and then including the API_KEY as part of the request. It's to be noted that even though HTTPS encrypts both query parameters and headers, before transmitting over network, it's advised to use the API Key in the header section, as majority of the web-server logs the request with the query parameters, and hence compromising logs of the web-server may leak the API key as well.
   
 ```curl
-  POST https://language.googleapis.com/v1/documents:analyzeEntities?key=API_KEY
-  
-  curl -X POST \
+   curl -X POST \
     -H "Authorization: Bearer $(gcloud auth print-access-token)" \
     -H "X-goog-api-key: API_KEY" \
     -H "Content-Type: application/json; charset=utf-8" \
     -d @request.json \
     "https://translation.googleapis.com/language/translate/v2"
 ```
-
-  
-#### OAuth
 
   
 ### References:
