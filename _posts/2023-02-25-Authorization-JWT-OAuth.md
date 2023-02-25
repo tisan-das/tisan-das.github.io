@@ -32,9 +32,26 @@ Different servers has different mechanism for implementing HTTP Basic Auth. For 
 It's to be noted that as credentials are transferred over a network call in this case, a secure layer like HTTPS is needed to ensure the credentials is safe from evasdropping or man-in-the-middle attack.
 
 #### API Keys:
+API keys are another commonly used authentication mechanism, where the end-user has to create an API key beforehand by registering, and then including the API_KEY as part of the request. It's to be noted that even though HTTPS encrypts both query parameters and headers, before transmitting over network, it's advised to use the API Key in the header section, as majority of the web-server logs the request with the query parameters, and hence compromising logs of the web-server may leak the API key as well.
+  
+```curl
+  POST https://language.googleapis.com/v1/documents:analyzeEntities?key=API_KEY
+  
+  curl -X POST \
+    -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+    -H "X-goog-api-key: API_KEY" \
+    -H "Content-Type: application/json; charset=utf-8" \
+    -d @request.json \
+    "https://translation.googleapis.com/language/translate/v2"
+```
+
+  
+#### OAuth
+
   
 ### References:
   1. https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication
   2. https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/
   3. https://www.ibm.com/docs/en/cics-ts/5.4?topic=concepts-http-basic-authentication
   4. https://www.twilio.com/docs/glossary/what-is-basic-authentication
+  5. https://cloud.google.com/docs/authentication/api-keys
