@@ -62,8 +62,12 @@ OAuth is one of the mot used authorization mechanism. It's a authroization mecha
 - Front Channel: The data is passed through user's address bar
 - Back Channel: Server directly send the requests over a secured network call
   
-### Registering the Application:
+### Registering the Client:
+The first stage is of using OAuth is to register the client, ie the application, which needs the access to the protected resource. During the registration, depending upon the type of application, client ID and client secret is assigned. A list of redirect URIs are also provided, they're the same pages where the user will be redirected once authentication is successful. This also provides an additional security layer on the OAuth, where even though a rouge service can redirect to the authorization server, however they won't be abld to redirect the targeted user to their own site. It's advised not to provide any wildcard or any way for partial matching, which may help malicous attacker. It's to be noted that the generated client ID and client secret is needed to be treated as username and password, and hence the client secret should only be used with confidential clients, which can't be easily debugged or reversed-engineered.
 
+
+
+  
 
   
 ### References:
