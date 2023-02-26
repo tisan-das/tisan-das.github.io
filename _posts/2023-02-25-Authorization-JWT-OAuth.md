@@ -84,9 +84,11 @@ Also, the lifetime can be changed depending on the type of user also:
 ### Handling Revoked and Invalidated Access Token
 There are several reasons why an access token is needed to be revoked and invalidated. Operations like account deactivation, user revoking permission for application, updating the password, and updating token lifetime; are a few of the examples for which the OAuth server needs to revoke the active token. It's the responsibility of the API to validate the access tokens. Even though the local validation provides speed and efficiency, however, it still needs to use the Token Introspection Endpoint to validate that the access token is not invalidated.
 It's to be noted that the OAuth server provides a Revocation Endpoint, to revoke the access token from the application side as well.
-  
-<Image of API gateway > 
-  
+
+```
+<Image>
+```
+
 ### Local Validation of JWT Access token:
 1. Check the key ID and algorithm used from the header of the JWT payload, and validate that the signature is matching with the header and content.
 2. Check the claims are intended for this particular application:
@@ -127,10 +129,11 @@ It's to be noted that refresh token isn't issued for client credentials grant fl
 
   
 ### References:
-  1. https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication
-  2. https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/
-  3. https://www.ibm.com/docs/en/cics-ts/5.4?topic=concepts-http-basic-authentication
-  4. https://www.twilio.com/docs/glossary/what-is-basic-authentication
-  5. https://cloud.google.com/docs/authentication/api-keys
-  6. https://auth0.com/intro-to-iam/what-is-oauth-2
-  7. https://www.udemy.com/course/oauth-2-simplified/
+1. [HTTP Authentication Framework](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication)
+2. [NGINIX: Restricting Access with HTTP Basic Authentication
+](https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/)
+3. [HTTP Basic Authentication](https://www.ibm.com/docs/en/cics-ts/5.4?topic=concepts-http-basic-authentication)
+4. [Basic Authentication](https://www.twilio.com/docs/glossary/what-is-basic-authentication)
+5. [API Key](https://cloud.google.com/docs/authentication/api-keys)
+6. [What is OAuth 2.0](https://auth0.com/intro-to-iam/what-is-oauth-2)
+7. [The Nuts and Bolts of OAuth 2.0](https://www.udemy.com/course/oauth-2-simplified/)
