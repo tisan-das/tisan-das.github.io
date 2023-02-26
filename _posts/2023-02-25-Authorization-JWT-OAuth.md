@@ -125,6 +125,14 @@ It's mainly used for machine-to-machine communication, no user interaction is ne
 ```
 It's to be noted that refresh token isn't issued for client credentials grant flow, as this is mainly used by service accounts, that is for programmatic access, where the application itself is the resource owner.
 
+### Access Token in API requests
+```curl
+POST /resource/1/update HTTP/1.1
+Authorization: Bearer RsT5OjbzRn430zqMLgV3Ia"
+Host: api.authorization-server.com
+ 
+description=Hello+World
+```
   
 ### References:
 1. [HTTP Authentication Framework](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication)
@@ -135,3 +143,4 @@ It's to be noted that refresh token isn't issued for client credentials grant fl
 5. [API Key](https://cloud.google.com/docs/authentication/api-keys)
 6. [What is OAuth 2.0](https://auth0.com/intro-to-iam/what-is-oauth-2)
 7. [The Nuts and Bolts of OAuth 2.0](https://www.udemy.com/course/oauth-2-simplified/)
+8. [Making Authenticated Requests](https://www.oauth.com/oauth2-servers/making-authenticated-requests/)
