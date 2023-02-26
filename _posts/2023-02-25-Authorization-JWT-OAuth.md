@@ -65,6 +65,20 @@ OAuth is one of the mot used authorization mechanism. It's a authroization mecha
 ### Registering the Client:
 The first stage is of using OAuth is to register the client, ie the application, which needs the access to the protected resource. During the registration, depending upon the type of application, client ID and client secret is assigned. A list of redirect URIs are also provided, they're the same pages where the user will be redirected once authentication is successful. This also provides an additional security layer on the OAuth, where even though a rouge service can redirect to the authorization server, however they won't be abld to redirect the targeted user to their own site. It's advised not to provide any wildcard or any way for partial matching, which may help malicous attacker. It's to be noted that the generated client ID and client secret is needed to be treated as username and password, and hence the client secret should only be used with confidential clients, which can't be easily debugged or reversed-engineered.
 
+  
+  
+### OpenID Connect:
+An extension of Oauth specification, it includes some small info about the users. The token associated with OpenID Connect is termed as ID token, which is provided in JWT format. It's to be noted that the ID token certain times can be stored on different storage media or sent throught the front channel, hence it's recommenended never to use any sensitive or protected data in the ID token. Also in case the ID token is stored on the client side, or in some untrusted location, need to validate the token locally, to ensure no data is changed. Also anytime the application accepts ID token except from authroization server, needs to validate it.
+  
+### Access Token Type:
+- Reference token: These are the access tokens which doesn't store any meaningful infromation on themselves, rather they can be thought of a pointer to such data. Reference tokens are useful if the access token needs to store some sensitive data, and it's also very easy to revoke the access token, however the primary disadvantage lies in scaling up the OAuth server, as large store would be needed. Besides, the application has to invoke the OAuth server each time to validate the token, which added a network call, thus significantly increasing the latency.
+- Structured token: Thesse are the self encrypted or self-encoded tokens, which stores some information. The content of the access token can be read easily, hence no senstive data should be part of this token. JWT token is one such implementation of structured token. The main benefit is that these tokens can be locally validated, even though OAuth server provides support for Token Introspection Endpoint. One of the major hiccup with these kind of tokens are to check for revoked access tokens, which would need a network call to check through the Token Introspecition Endpoint.
+  
+### Token Lifetime:
+
+### Handling Revoked and Invalidated Access Token
+
+### Scope:
 
 
   
