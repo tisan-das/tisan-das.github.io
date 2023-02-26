@@ -75,11 +75,33 @@ An extension of Oauth specification, it includes some small info about the users
 - Structured token: Thesse are the self encrypted or self-encoded tokens, which stores some information. The content of the access token can be read easily, hence no senstive data should be part of this token. JWT token is one such implementation of structured token. The main benefit is that these tokens can be locally validated, even though OAuth server provides support for Token Introspection Endpoint. One of the major hiccup with these kind of tokens are to check for revoked access tokens, which would need a network call to check through the Token Introspecition Endpoint.
   
 ### Token Lifetime:
+The general convention is to have a short access token lifetime, and a longer lifetime for the refresh token. This way even though the access token is expired, the application can request a new access token using the refresh token, and this way it's also verified that the requested user is still having proper permission on the resource. This lifetime values are generally determined with the help of policy, and policies can also be associated with certain device type. This way, in case a mobile device is used, the refresh token can have a longer lifetime, as a shorter refresh token would mean the user will be redirected to browser, which is quite a slow process for mobile applications, and would impact user experience.
+  
+Also, depending upoon the type of user also the lifetime can be changed:
+- Admin User: Access token lifetime: 1hr, refresh token lifetime: 24hr => login once in a day
+- Consuemer User: Access token lifetime: 24 hr, refresh token lifetime: unlimited => login only once
+- Priviledge Scope: Access token lifetime: 4hr, refresh token lifetime: None => Require auth for sensitive operations
 
 ### Handling Revoked and Invalidated Access Token
+There are several reasons for which an access token is needed to be revoked and invalidated. Operations like account deactivation, user revokes permission for application, or password is modified, token lifetime changed, these are the few of the examples for which the OAuth server needs to revoke the active token. It's the responsibility of the API to validate the access tokens. Even though the local validation provides speed and efficiency, however it still needs to use the Token Introspection Endpoint to validate the access token is not invalidated.
+It's to be noted that the OAuth server provides a Revocation Endpoint, to revoke the access token from the application side as well.
+  
+<Image of API gateway > 
+  
+### Local Validation of JWT Access token:
+1. Check the key ID and algorithm used from the header of the JWT payload, and validate that the signature is matching with the header and content.
+2. Check the claims are intended for this particular application:
+  	i. iss: Issuer OAuth Server
+  	ii. aud: Audience, genrally client_id is provided
+  	iii. iat ,exp: Issuance time and Expiration time, the current time should be in-between these two timestamps
+  	iv. nounce: Check the nounce val with earlier request
 
 ### Scope:
-
+OAuth specification doesn't specify any particular values for scope, however it's used to denote the access level to the protected resource. If no scope value is provided, then by default it's understood to have full access to the resource requested. The scope is the concept of permission, gouping and roles, and is dependent upon which kind of API the application intends to invoke. Eg:
+  photos:read
+  photos:write
+  
+It's reccomended to have atleast two different scope for read-only and read-write mode to be available. Also these scope details are shown at the user consent screen.
 
   
 
