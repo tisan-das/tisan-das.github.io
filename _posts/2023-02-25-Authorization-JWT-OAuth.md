@@ -102,8 +102,29 @@ OAuth specification doesn't specify any particular values for scope, however it'
   photos:write
   
 It's reccomended to have atleast two different scope for read-only and read-write mode to be available. Also these scope details are shown at the user consent screen.
-
   
+### Authorization Code Flow:
+  
+### Client Credentials Grant Flow:
+It's mainly used for machine-to-machine communication, no user interaction is needed. Primary usecase lies in an application trying to fetch it's own resource.
+Question: Why needed?
+
+```curl
+  POST https://api.authorization-server.com/token
+  grant_type=client_credentials
+  scope=contacts&
+  client_id=<CLIENT_ID>&
+  client_secret=<CLIENT_SECRET>&
+```
+
+```json
+  {
+  	access_token:
+  	expires_in:
+  	scope:
+  }
+```
+It's to be noted that refresh token isn't issued for client credentials grant flow, as this is mainly used by service accounts, that is for programmatic access, where the application itself is the resource owner.
 
   
 ### References:
@@ -113,3 +134,4 @@ It's reccomended to have atleast two different scope for read-only and read-writ
   4. https://www.twilio.com/docs/glossary/what-is-basic-authentication
   5. https://cloud.google.com/docs/authentication/api-keys
   6. https://auth0.com/intro-to-iam/what-is-oauth-2
+  7. https://www.udemy.com/course/oauth-2-simplified/
