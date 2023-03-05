@@ -140,6 +140,7 @@ description=Hello+World
 - Even if the malicious user finds the authorization code from the browser history, or by eavesdropping network, they won't have access to the client secret, which is used only by the application through a secure network call from the application server
 - And if the attacker uses a redirect call by blocking the original one, and initiating a new call, the state value won't be  
 2. [9]The "state" parameter is used to link client requests and prevent CSRF attacks, for example, attacks against the redirect URI. An attacker could inject their own authorization "code" or access token, which can result in the client using an access token associated with the attacker's protected resources rather than the victim's (e.g. save the victim's bank account information to a protected resource controlled by the attacker).
+
   
 ### References:
 1. [HTTP Authentication Framework](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication)
