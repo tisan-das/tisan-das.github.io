@@ -135,11 +135,11 @@ description=Hello+World
 ```
 
 ### Attacks & Countermeasures:
-1. The user logons to the Authorization Server with the credentials, and a malicious program listens to the authorization code, and uses it to get the acces token. This attack is nullified by 2 ways:
-- The browser redirects are super quick, and the authorization code is used for one-time only, once the token is redeemed with the authroization token, it's discarded from Authorization server, and can't be used again
-- Even if the malicious user finds the authroization code from browser history, or by evasdropping network, they won't have access to the client secret, which is used only by the application through a secure network call from the application server
-- And if the attacker uses redirect call by blocking the original one,
-2.  
+1. The user logins to the Authorization Server with the credentials, and a malicious program listens to the authorization code and uses it to get the access token. This attack is nullified in 2 ways:
+- The browser redirects are super quick, and the authorization code is used one-time only, once the token is redeemed with the authorization token, it's discarded from the Authorization server, and can't be used again
+- Even if the malicious user finds the authorization code from the browser history, or by eavesdropping network, they won't have access to the client secret, which is used only by the application through a secure network call from the application server
+- And if the attacker uses a redirect call by blocking the original one, and initiating a new call, the state value won't be  
+2. [9]The "state" parameter is used to link client requests and prevent CSRF attacks, for example, attacks against the redirect URI. An attacker could inject their own authorization "code" or access token, which can result in the client using an access token associated with the attacker's protected resources rather than the victim's (e.g. save the victim's bank account information to a protected resource controlled by the attacker).
   
 ### References:
 1. [HTTP Authentication Framework](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication)
@@ -151,3 +151,6 @@ description=Hello+World
 6. [What is OAuth 2.0](https://auth0.com/intro-to-iam/what-is-oauth-2)
 7. [The Nuts and Bolts of OAuth 2.0](https://www.udemy.com/course/oauth-2-simplified/)
 8. [Making Authenticated Requests](https://www.oauth.com/oauth2-servers/making-authenticated-requests/)
+9. [Link the "state" Parameter to User Agent Session](https://datatracker.ietf.org/doc/html/rfc6819#section-5.3.5)
+10. [Threat: CSRF Attack against redirect-uri](https://datatracker.ietf.org/doc/html/rfc6819#section-4.4.1.8)
+11. ["state" Parameter](https://datatracker.ietf.org/doc/html/rfc6819#page-13)
