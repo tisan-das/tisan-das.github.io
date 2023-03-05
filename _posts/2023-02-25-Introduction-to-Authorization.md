@@ -133,6 +133,13 @@ Host: api.authorization-server.com
  
 description=Hello+World
 ```
+
+### Attacks & Countermeasures:
+1. The user logons to the Authorization Server with the credentials, and a malicious program listens to the authorization code, and uses it to get the acces token. This attack is nullified by 2 ways:
+- The browser redirects are super quick, and the authorization code is used for one-time only, once the token is redeemed with the authroization token, it's discarded from Authorization server, and can't be used again
+- Even if the malicious user finds the authroization code from browser history, or by evasdropping network, they won't have access to the client secret, which is used only by the application through a secure network call from the application server
+- And if the attacker uses redirect call by blocking the original one,
+2.  
   
 ### References:
 1. [HTTP Authentication Framework](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication)
