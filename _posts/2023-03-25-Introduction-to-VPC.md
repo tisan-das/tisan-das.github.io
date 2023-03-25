@@ -17,6 +17,13 @@ Internet gateway is a VPC component that allows the public internet connectivity
 Similar to Internet Gateway, there's NAT gateway, which provides the outward connectivity to the public internet only from the private subnet. Here it's to be noted that the NAT instance itself is to be placed under a public subnet, and the route table entry of the private subnet is supposed to point to the NAT gateway. Also NAT gateway, being an managed instance, is deployed on a specific AZ, and hence to ensure high availability, it's recommeneded to deploy NAT gateway in the same AZ the private subnet is created. Besides, being a AWS managed instance, NAT gateways incurs hourly costs.
 
 
+Security Group & N/W ACL:
+
+VPC Peering:
+
+VPC Endpoint:
+
+VPN:
 
 
 Enter text in [Markdown](http://daringfireball.net/projects/markdown/). Use the toolbar above, or click the **?** button for formatting help.
