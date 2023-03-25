@@ -8,7 +8,11 @@ VPC, Virutual Private Cloud, allows to deploy a logically isolated network infra
 
 A VPC contains a IP address range, determined at the time of creation. For AWS platform, the VPC is bound to a particular region. The IP address range can not be modifed at later point of time, hence need to consider the future requirements as well before deciding the IP range to be associated with.
 
-Subnet is another
+Subnet is a logical split of the IP address range asscociated with the VPC. In case of AWS, one particular subnet belongs to a specific Availability Zone, and the all resources deployed under the subnet deployed to that particular AZ.
+
+Each VPC has got a router implicitly. The router isn't directly accessible, however the route table entries can be modified. The primary route table associated with the VPC has the main flag set. It is to be noted that each subnet can be associated with only a route table, however the same route table can be associated with the multiple subnets across different AZs. In case a particular subnet is not having route table explicitly assigned, the main route table implictly gets associated with it.
+
+
 
 
 
