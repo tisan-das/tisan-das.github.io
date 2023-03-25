@@ -17,7 +17,21 @@ Internet gateway is a VPC component that allows the public internet connectivity
 Similar to Internet Gateway, there's NAT gateway, which provides the outward connectivity to the public internet only from the private subnet. Here it's to be noted that the NAT instance itself is to be placed under a public subnet, and the route table entry of the private subnet is supposed to point to the NAT gateway. Also NAT gateway, being an managed instance, is deployed on a specific AZ, and hence to ensure high availability, it's recommeneded to deploy NAT gateway in the same AZ the private subnet is created. Besides, being a AWS managed instance, NAT gateways incurs hourly costs.
 
 
-Security Group & N/W ACL:
+#### Traffic Privacy:
+Security Group:
+- Applied at the network interface level of the resources
+- Spans across multiple AZ, multiple subnets
+- Stateful nature: allows the return traffic automatically
+- Supports allow rule only
+- Multiple Security Groups can be applied to the same resource: the rules gets aggregrated
+
+Network ACL:
+- Applied on subnet level
+- One subnet can only be associated with one NACL at a time
+- Multiple subnets can use the same NACL
+- Besides having allow rule, NACL supports deny rule as well unlike Security Group
+- Stateless: need to explicitly allow the outgoing traffic for incoming ones
+
 
 VPC Peering:
 
