@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 ---
 
 In this blog post we're going to learn about VPC, a basic building block of creating a network infrastructure on the cloud environments. Even though we're going see some examples specific to AWS platform, this is supported by all the major cloud service providers, including the terminology and nomenclature, however, for sure, depending upon the cloud service providers, there are couple of restrictions imposed and conditions uplifted here and there. The basic understanding of VPC remains same across all the platforms.
@@ -41,9 +41,7 @@ VPC peering provides a networking capability to enable the resources across two 
 It's to be noted that VPC peering doesn't support transitive routing. Hence in case need to interconnect multiple VPC, then a full mesh topology with VPC peering is needed to be established.
 
 VPC Endpoint:
-
-
-VPN:
+Enables to connect to supported AWS services through private connection. The traffic doesn't leave the Amazon network. We would also explore more on this later as part of a project.
 
 
 Transit Gateway: 
