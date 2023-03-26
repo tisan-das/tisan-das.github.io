@@ -34,10 +34,20 @@ Network ACL:
 
 
 VPC Peering:
+VPC peering provides a networking capability to enable the resources across two VPC communicate with each other through private IP adresses. The VPC pair can be across different region, even across different AWS accounts. In case the VPC peering is configured for the VPC pair present in different AWS account, a peering request is pushed to the target AWS account, and is needed to be accepted within an acceptance time. 
+
+
+
+It's to be noted that VPC peering doesn't support transitive routing. Hence in case need to interconnect multiple VPC, then a full mesh topology with VPC peering is needed to be established.
 
 VPC Endpoint:
 
+
 VPN:
+
+
+Transit Gateway: 
+Transit gateway is advertised as the cloud router in AWS. This follows the hub-and-spoke model, where the transit gateway servers as the central hub and manages network to different private networks. This is also one of the resource which costs per hour basis. We would learn different use cases of transit gateway in a different blog post.
 
 
 Enter text in [Markdown](http://daringfireball.net/projects/markdown/). Use the toolbar above, or click the **?** button for formatting help.
