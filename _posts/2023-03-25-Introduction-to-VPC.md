@@ -27,6 +27,7 @@ Internet gateway is a VPC component that allows the public internet connectivity
 
 
 Similar to Internet Gateway, there's NAT gateway, which provides the outward connectivity to the public internet only from the private subnet. Here it's to be noted that the NAT instance itself is to be placed under a public subnet, and the route table entry of the private subnet is supposed to point to the NAT gateway. Also NAT gateway, being an managed instance, is deployed on a specific AZ, and hence to ensure high availability, it's recommeneded to deploy NAT gateway in the same AZ the private subnet is created. Besides, being a AWS managed instance, NAT gateways incurs hourly costs.
+![](../images/vpc-intro/natGateway.png)
 
 
 ### Traffic Privacy:
@@ -34,18 +35,21 @@ Security Group:
 - Applied at the network interface level of the resources
 - Spans across multiple AZ, multiple subnets
 - Stateful nature: allows the return traffic automatically
-- Supports allow rule only
+- Supports allow rule only, implicitly denies all the traffic not matching with any rules
 - Multiple Security Groups can be applied to the same resource: the rules gets aggregrated
 ![](../images/vpc-intro/secGroup.png)
 
 Network ACL:
-- Applied on subnet level
+- Enforced on subnet level
 - One subnet can only be associated with one NACL at a time
 - Multiple subnets can use the same NACL
 - Besides having allow rule, NACL supports deny rule as well unlike Security Group
-- Stateless: need to explicitly allow the outgoing traffic for incoming ones
+- Stateless: doesn't keep track of responses, need to explicitly allow the outgoing traffic for incoming ones
+- Rules are processed in-order, if one rule is matched, then no further rule is checked
 ![](../images/vpc-intro/nacl.png)
 
+### Overall security at VPC:
+![](../images/vpc-intro/security.png)
 
 ### VPC Peering:
 VPC peering provides a networking capability to enable the resources across two VPC communicate with each other through private IP adresses. The VPC pair can be across different region, even across different AWS accounts. In case the VPC peering is configured for the VPC pair present in different AWS account, a peering request is pushed to the target AWS account, and is needed to be accepted within an acceptance time. 
@@ -63,8 +67,13 @@ Enables to connect to supported AWS services through private connection. The tra
 Transit gateway is advertised as the cloud router in AWS. This follows the hub-and-spoke model, where the transit gateway servers as the central hub and manages network to different private networks. This is also one of the resource which costs per hour basis. We would learn different use cases of transit gateway in a different blog post.
 
 
+### Three Tier Architecture:
+![](../images/vpc-intro/3TierArchitecture.png)
+
+
 ### References:
 1. [AWS VPC Beginner to Pro - Virtual Private Cloud Tutorial](https://www.youtube.com/watch?v=g2JOHLHh4rI)
+2. [Talk on AWS VPC](https://wit-hdip-comp-sci-2018.github.io/devops/topic-06-AWS-VPC/unit-1-AWS-VPC//talk-1-AWS-VPC/AWS-VPC.pdf)
 2. [AWS VPC User Guide](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)
 3. [AWS VPC Peering](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html)
 4. [AWS PrivateLink Concepts](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html)
