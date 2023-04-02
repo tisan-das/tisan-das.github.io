@@ -28,7 +28,63 @@ Reccomended codec:
 
 DASH (Dynamic Adaptive Streaming over HTTP) is an adaptive bitrate protocol, which supports video streaming over an HTTP web server. The video file is partitioned into multiple segments, each segment contains a short interval playback time, each partitioned content is available under different bit rates, and an MPD file containing the information regarding all the segments corresponding to a video. DASH supports live stream video as well. The DASH client uses an Adaptive Bit Rate (ABR) algorithm to select the segment with the highest bit rate, and seamlessly adapts the resolution depending upon changing network behaviour.
 
-DASH uses two different profies: Live profile for 
+DASH uses two different profies: Live profile for live streaming, and On-demand profile for rest of the videos. All these profiles have the audio seggregrated, and contains segments with different bit-rates, and everyhing having stiched by the MPD file, and the HTML points to the MPD file, rather than pointing to individual video file.
+
+```html
+<video>
+  <source src="my.mpd" type="application/dash+xml" />
+  <!-- fallback -->
+  <source src="my.mp4" type="video/mp4" />
+  <source src="my.webm" type="video/webm" />
+</video>
+```
+As there are different web-servers which provides support for DASH out-of-the-box, we would not go into details of how MPD files can be created, rather we would explore on the changes needed to be done on the web server side, to support DASH.
+
+NGINX provides support for DASH through RTMP module, 
+
+```
+$ sudo apt install libpcre3-dev libssl-dev zlib1g-dev
+$ sudo yum groupinstall pcre-devel zlib-devel openssl-devel
+
+
+$ cd /path/to/build/dir
+$ git clone https://github.com/arut/nginx-rtmp-module.git
+$ git clone https://github.com/nginx/nginx.git
+$ cd nginx
+$ ./auto/configure --add-module=../nginx-rtmp-module
+$ make
+$ sudo make install
+
+```
+
+```conf
+rtmp { 
+    server { 
+        listen 1935; 
+        application live { 
+            live on; 
+            dash on; 
+            dash_path /tmp/dash; 
+            dash_fragment 15s; 
+        } 
+    } 
+} 
+ 
+http { 
+    server { 
+        listen 80; 
+        location /tv { 
+            root /tmp/dash; 
+        } 
+    }
+ 
+    types {
+        text/html html;
+        application/dash+xml mpd;
+    } 
+}
+```
+
 
 
 
@@ -44,4 +100,5 @@ Referencfes:
 5. Setting up adaptive streaming media sources https://developer.mozilla.org/en-US/docs/Web/Guide/Audio_and_video_delivery/Setting_up_adaptive_streaming_media_sources
 6. Enabling Video Streaming for Remote Learning with NGINX and NGINX Plus https://www.nginx.com/blog/video-streaming-for-remote-learning-with-nginx/
 7. TCP Congestion Control https://book.systemsapproach.org/congestion/tcpcc.html
+8. NGINX Dash configuration https://gist.github.com/shivasiddharth/30b998189c3dc76fdea4227f29e9dcf7
 
