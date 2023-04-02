@@ -59,6 +59,8 @@ $ sudo make install
 
 ```
 
+The following section provides a basic NGINX config to support DASH. The RTMP server listens to port 1935, where the broadcaster pushes the streaming video. The RTMP module, which provides support for the DASH, generates the segments and the MPD file, which is stored under the directory pointed by the directive dash_path. The DASH video client requests the video segments through the HTTP web server, served through port 80 here.
+ 
 ```conf
 rtmp { 
     server { 
@@ -87,13 +89,15 @@ http {
 }
 ```
 
+Nowadays with the advent of CDN, video broadcasting services are also served by them. Different CDN provides such kinds of services, albeit under different service names. For example, Cloudflare, one of the major players in CDN, provides support for DASH through Cloudflare Stream.
+
 ### References:
-1. [Digital Audio Concepts](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Audio_concepts)
-2. [Digital Video Concepts](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Video_codecs)
-3. [Web video codec guide](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Video_codecs)
-4. [DASH Adaptive Streaming for HTML 5 Video](https://developer.mozilla.org/en-US/docs/Web/Media/DASH_Adaptive_Streaming_for_HTML_5_Video)
-5. [Setting up adaptive streaming media sources](https://developer.mozilla.org/en-US/docs/Web/Guide/Audio_and_video_delivery/Setting_up_adaptive_streaming_media_sources)
-6. [Enabling Video Streaming for Remote Learning with NGINX and NGINX Plus](https://www.nginx.com/blog/video-streaming-for-remote-learning-with-nginx/)
-7. [TCP Congestion Control](https://book.systemsapproach.org/congestion/tcpcc.html)
-8. [NGINX Dash configuration](https://gist.github.com/shivasiddharth/30b998189c3dc76fdea4227f29e9dcf7)
+1. [NGINX Dash configuration](https://gist.github.com/shivasiddharth/30b998189c3dc76fdea4227f29e9dcf7)
+2. [Digital Audio Concepts](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Audio_concepts)
+3. [Digital Video Concepts](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Video_concepts)
+4. [Web video codec guide](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Video_codecs)
+5. [DASH Adaptive Streaming for HTML 5 Video](https://developer.mozilla.org/en-US/docs/Web/Media/DASH_Adaptive_Streaming_for_HTML_5_Video)
+6. [Setting up adaptive streaming media sources](https://developer.mozilla.org/en-US/docs/Web/Guide/Audio_and_video_delivery/Setting_up_adaptive_streaming_media_sources)
+7. [Enabling Video Streaming for Remote Learning with NGINX and NGINX Plus](https://www.nginx.com/blog/video-streaming-for-remote-learning-with-nginx/)
+8. [Cloudflare: What is MPEG-DASH](https://www.cloudflare.com/learning/video/what-is-mpeg-dash/) 
 
