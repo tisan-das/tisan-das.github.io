@@ -23,6 +23,11 @@ nginx -t
 
 NGINX configuration file consists of directives. There's two types of directives- line directives are terminated by semi-colon, and block directives are terminated by the closing parenthesis. 
 
+Directive examples:
+- user: specifies the user and group used by the worker process, which accepts incoming requests
+- worker_processes: defines the no. of worker processes, "auto" option sets the worker process count based on the number of cores available to the CPU
+- worker_connections: the total number of connections can be concurrently served by each worker process. It's to be noted that total number of connection across all the worker processes can't exceed the maximum number of open files, which can be modified by worker_rlimit_nofile
+- 
 
 ```conf
 user www-data;
