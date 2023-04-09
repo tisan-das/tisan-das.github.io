@@ -136,6 +136,21 @@ The directive "proxy_pass" redirects the request to a proxied server. For the pr
 - Least Time to respond
 
 
+NGINX has also got in-built support for cache. Folowing is one of the most simple example:
+```conf
+proxy_cache_path /path/to/cache levels=1:2 keys_zone=my_cache:10m max_size=10g 
+                 inactive=60m use_temp_path=off;
+
+server {
+    # ...
+    location / {
+        proxy_cache my_cache;
+        proxy_pass http://my_upstream;
+    }
+}
+```
+THe document as referred by [11] proivdes a detailed description on the cache parameters. Would request to check the page as well in-order to get a firm grasp on different cache configuration.
+
 
 ### References
 1. http://nginx.org/en/docs/beginners_guide.html
