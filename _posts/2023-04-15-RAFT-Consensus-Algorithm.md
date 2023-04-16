@@ -32,7 +32,15 @@ The primary concept behind the Raft algorithm is that each node can either be a 
 
 The transition rules are pretty much self evident. When the system is initialized, an external force is needed to select the initial leader. However once the leader is elected, it remains leader until it goes down, or it gets disconnected from majority of the servers. The leader node periodically sends a heartbeat signal to the rest of the nodes. 
 
-If one of the node sees that it's not recieving any hearbeat from the leader nodes, it becomes a candidate node, proposes itself to be a leader node, and broadcasts a voting request to other node. Now, there's a concept of term number, an increasing number to denote the term for which election is going on. When a leader with appropi
+If one of the node sees that it's not recieving any hearbeat from the leader nodes, it becomes a candidate node, proposes itself to be a leader node, and broadcasts a voting request to other node. Now, there's a concept of term number, an increasing number to denote the term for which election is going on, and when a leader is selected it uses the term number to replicate and store the logs in persistence storage. Raft algorithm only allows append operation on logs. Hence when a leader is selected, it's assumed all the logs till the previous term is already commited, and requires no further intervention.
+
+Now, leader selection is a vital process. To ensure that not all the nodes becomes candidate node at the same time, a randomized election timeout is used. Also there's one more vital issue for the leader election. The leader node should have the all the entries updated, hence before casting vote, the followe node verifies whether the candidate node is up-to-date both interms of term number, and the log index of the previous term. Also, a follower node can casts it's vote for only one node given a term. The candidate node becomes the leader if it has got the votes for the majority of the nodes.
+
+// Image for request votes
+
+
+
+
 
 
 
