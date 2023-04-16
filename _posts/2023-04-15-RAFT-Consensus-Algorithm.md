@@ -36,18 +36,23 @@ If one of the node sees that it's not recieving any hearbeat from the leader nod
 
 Now, leader selection is a vital process. To ensure that not all the nodes becomes candidate node at the same time, a randomized election timeout is used. Also there's one more vital issue for the leader election. The leader node should have the all the entries updated, hence before casting vote, the followe node verifies whether the candidate node is up-to-date both interms of term number, and the log index of the previous term. Also, a follower node can casts it's vote for only one node given a term. The candidate node becomes the leader if it has got the votes for the majority of the nodes.
 
+
 // Image for request votes
 
 
 
+The appendLog is the second type of message broadcasted. Only the leader node can broadcast this type of message. Now because only append operation is allowed on the logs i.e. the data modification, the out of sync appending isn't allowed. It's always assumed that logs are appended in the same order leader is having. In order to enforce this prevLogIndex value is maintained as well as prevLogTerm, which denotes the index and the term of the latest updated log. And in case the node finds some log which are out-of-sync, i.e. more recent logs, the node discards them and waits to get the intended logs. These arguments are sent by the leader node, and the follower verifies whether need to append the logs, or reject and wait for older messages to get appened, or in case of conflicting entry with the leader node specific to the current term, then to update it. Now from the above discussion, it's clear that the leader node have to broadcast the entries multiple times, and is generally is generally broadcasted periodically.
+
+Following are the arguments to the appendEntry/appendLog command:
+
+// Image of appendLog
+
+Once the leader gets acknowledgement from majority of the node for a specific logIndex, it updates the commitIndex, denoting that the logs or transactions till that index is already committed. This is a way to let the higher level application know that the transaction is already committed. Now in case the leader goes down abruptly, the client will know that the rest of the data isn't committed to the system.
 
 
+It's to be noted that, there's still a possibility of having multiple leader nodes, in case the earlier leader is partitioned, and is disconnected from rest of the nodes, due to which it still remains an isolated node, and isn't updated about the latest term. However in this case the obsolete leader will not have acknowledgement from the majority of the nodes, hence commit willn't occur. There are also some improvement proposed to top of Raft, by using a commit timeout, where in case there's no further commit happpens within a stipulated time, then it's assumed that the leader is disconnected, and goes back to the follower state, to let another round of election take place.
 
-
-
-
-
-
+As soon as this node gets connected to the current leader node, it understands that the it's own term is a of preeceding term, and hence relegates to the follower state. In this case the logs from the earlier terms can be lost from this particular node, however as the data is already committed to the majority of the nodes, and each read also needs the majority consensus, this scenario wouldn't cause any issue.
 
 
 
@@ -57,3 +62,4 @@ Now, leader selection is a vital process. To ensure that not all the nodes becom
 3. https://www.youtube.com/watch?v=uXEYuDwm7e4&list=PLeKd45zvjcDFUEv_ohr_HdUFe97RItdiB&index=18
 2. https://towardsdatascience.com/raft-algorithm-explained-a7c856529f40
 3. https://towardsdatascience.com/raft-algorithm-explained-2-30db4790cdef
+6. Improving Raft When There Are Failures https://tik-db.ee.ethz.ch/file/17210168ce3be9d0e6a5e3f846fb1b29/Improving_RAFT_When_There_Are_Failures.pdf
