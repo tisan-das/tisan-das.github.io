@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 ---
 One of the foundation problem of designing a distributed system is how to store some data over a distributed system. One basic approach is to share or duplicate all the data between the nodes. However the complexity arises when multiple nodes can operate independently, and in case some node goes down the complexity arises many folds. In this blogpost we will learn about Raft: one of the most commonly used coneseus algorithm. We would brifely touch about the generic replication technique on DB replication as well.
 
