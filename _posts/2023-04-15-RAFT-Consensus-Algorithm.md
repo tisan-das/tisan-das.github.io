@@ -24,7 +24,15 @@ Single leader replication failure contains two major drawbacks:
 1. How to handle a node going down: If a node goes down, and joins back again, how to have the updated data replicated?
 2. What if a leader goes down: How to elect a new leader? Also would there be a possibility of two leaders operating simultaneosly?
 
-This is where a consensus algorithm like Raft comes into the picture. Consesus algorithm provides the procedure to not only to elect a leader in case the current leader goes down, it also provides a way to ensure
+This is where a consensus algorithm like Raft comes into the picture. Consesus algorithm provides the procedure to not only to elect a leader in case the current leader goes down, it also provides a way to ensure that the 
+
+The primary concept behind the Raft algorithm is that each node can either be a leader, follower or at the election time, a candidate:
+
+// Image transition
+
+The transition rules are pretty much self evident. When the system is initialized, an external force is needed to select the initial leader. However once the leader is elected, it remains leader until it goes down, or it gets disconnected from majority of the servers. The leader node periodically sends a heartbeat signal to the rest of the nodes. 
+
+If one of the node sees that it's not recieving any hearbeat from the leader nodes, it becomes a candidate node, proposes itself to be a leader node, and broadcasts a voting request to other node. Now, there's a concept of term number, an increasing number to denote the term for which election is going on. When a leader with appropi
 
 
 
@@ -38,5 +46,6 @@ This is where a consensus algorithm like Raft comes into the picture. Consesus a
 ### References:
 1. https://www.geeksforgeeks.org/advantages-of-dbms-over-file-system/
 1. https://towardsdatascience.com/database-replication-explained-5c76a200d8f3
+3. https://www.youtube.com/watch?v=uXEYuDwm7e4&list=PLeKd45zvjcDFUEv_ohr_HdUFe97RItdiB&index=18
 2. https://towardsdatascience.com/raft-algorithm-explained-a7c856529f40
 3. https://towardsdatascience.com/raft-algorithm-explained-2-30db4790cdef
