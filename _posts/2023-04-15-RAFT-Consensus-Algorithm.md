@@ -7,18 +7,33 @@ Each distributed system caters to large number of requests, which ultimately boi
 
 Now, even though from the application perspective, the database interface layer points to a single database, however databases also consists of serveral nodes connected through network, and it's the responsibility of the distrbuted database to ensure data can be retrieved even if couple of nodes goes down. This where data replication among the nodes comes into the picture.
 
-One of the most commonly used approach here to use a single leader replication, where the write operations are catered by the leader node only. As and when the write operations are done, they are replicated to the other nodes. There's two types of replication policy which can be used:
+One of the most commonly used approach here to use a single leader replication, where the write operations are catered by the leader node only. As and when the write operations are done, they are replicated to the other nodes. And depending upon the configuration, the read operations can be catered by the followers also. There's two types of replication policy which can be used:
 1. Synchonous replication: Wait for acknowledgement from the follower nodes first, before commiting data
 2. Asynchronous replication: Trigger replication, however not to wait for acknowledgement from the follower nodes before commiting data
 
-
-
 // Image for dataReplication
 
+The asynchronous replication technique has one drawback: the consistency for read after write requests can't be guranteed. 
+
+// Image for async read issue
+
+There are cetain workarounds to this, for example storing updated timestamp on client side to read the updated after the specific timestamp, or by means of sticky routing, however none of them still gurantees strong consistency. So the distributed systems not requiring strong consistency can absolutely take this approach. However based on CAP theorem, which we would explore in a later post, the CP and CA systems wouldn't be able to rely on async data replication technique.
+
+
+Single leader replication failure contains two major drawbacks:
+1. How to handle a node going down: If a node goes down, and joins back again, how to have the updated data replicated?
+2. What if a leader goes down: How to elect a new leader? Also would there be a possibility of two leaders operating simultaneosly?
+
+This is where a consensus algorithm like Raft comes into the picture. Consesus algorithm provides the procedure to not only to elect a leader in case the current leader goes down, it also provides a way to ensure
 
 
 
-And depending upon the configuration, the read operations can be catered by the followers also.
+
+
+
+
+
+
 
 ### References:
 1. https://www.geeksforgeeks.org/advantages-of-dbms-over-file-system/
