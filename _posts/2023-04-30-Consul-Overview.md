@@ -36,7 +36,110 @@ All the server and client agents participates in a LAN gossip pool. Agents in th
 // lan gossip image
 
 
+consul agent -dev -enable-script-checks -config-dir=/root/consul
 
+[root@ip-172-31-45-208 consul]# cat conf.hcl
+{
+        "datacenter":"Consul-SG",
+        "data_dir": "/opt/consul",
+        "log_level": "INFO",
+        "node_name": "sample-node-name",
+        "server": true,
+        "addresses": {
+                "http":"0.0.0.0"
+        },
+        "ports":{
+                "http":8500
+        }
+}
+[root@ip-172-31-45-208 consul]# cat counting.hcl
+service {
+        name = "counting"
+        id = "counting-1"
+        port = 9003
+
+        connect{
+                sidecar_service{}
+        }
+
+        check{
+                id = "counting-check"
+                http = "http://localhost:9003/health"
+                method = "GET"
+                interval = "1s"
+                timeout = "1s"
+        }
+}
+[root@ip-172-31-45-208 consul]# cat dashboard.hcl
+service{
+        name = "dashboard"
+        port = 9002
+
+        connect{
+                sidecar_service{
+                        proxy{
+                                upstreams = [
+                                        {
+                                                destination_name = "counting"
+                                                local_bind_port = 5000
+                                        }
+                                ]
+                        }
+                }
+        }
+
+        check {
+                id = "dashboard-check"
+                http = "http://localhost:9002/health"
+                method = "GET"
+                interval = "1s"
+                timeout = "1s"
+        }
+}
+[root@ip-172-31-45-208 consul]#
+
+
+consul intention create dashboard counting
+
+consul intention list
+
+[root@ip-172-31-45-208 consul]# consul catalog --help
+Usage: consul catalog <subcommand> [options] [args]
+
+  This command has subcommands for interacting with Consul's catalog. The
+  catalog should not be confused with the agent, although the APIs and
+  responses may be similar.
+
+  Here are some simple examples, and more detailed examples are available
+  in the subcommands or the documentation.
+
+  List all datacenters:
+
+      $ consul catalog datacenters
+
+  List all nodes:
+
+      $ consul catalog nodes
+
+  List all services:
+
+      $ consul catalog services
+
+  For more examples, ask for subcommand help or view the documentation.
+
+Subcommands:
+    datacenters    Lists all known datacenters
+    nodes          Lists all nodes in the given datacenter
+    services       Lists all registered services in a datacenter
+[root@ip-172-31-45-208 consul]#
+
+  
+
+
+ consul kv get --recurse  
+  consul kv put redis/config/devops value
+  consul kv get redis/config/devops
+  
 
 
 #### References:
@@ -45,4 +148,3 @@ All the server and client agents participates in a LAN gossip pool. Agents in th
 3. https://developer.hashicorp.com/consul/docs
 4. https://developer.hashicorp.com/consul/docs/architecture
 5. https://developer.hashicorp.com/consul/docs/architecture/improving-consul-resilience
-
