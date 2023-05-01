@@ -24,7 +24,9 @@ Consul consists of two planes:
     - handles the communication between services
     
     
-Consul control place consists of two types of agents- server agent and client client agent. The server agent creates a datacenter, which consists of a leader server agent, and rest of them are follower server agents. The server agents are the ones that stores all the service related info and does the heavey lifting of enforcing service discovery and access rules. It's generally advised to have 3 or 5 server agents, beyond which the overhead can negatively impact on the performance. However there's no such restriction on the client agents, large no of organizations follows datacenters with 5000 client agents, and couple of organization even maitains datacenter with tens of thousands of client agent.
+Consul control place consists of two types of agents- server agent and client client agent. The server agent creates a datacenter, which consists of a leader server agent, and rest of them are follower server agents. The server agents are the ones that stores all the service related info and does the heavey lifting of enforcing service discovery and access rules. It's generally advised to have 3 or 5 server agents, beyond which the overhead for consesus might negatively impact on the performance. To improve resiliency of the Consul cluster, it's advised to have the server agents also distributed across multiple availability zones, also to have backup server agent ready, so that in case one server agent goes down, the backup server agent in the same availbilty zone can take it's place.
+
+However there's no such restriction on the client agents, large no of organizations follows datacenters with 5000 client agents, and couple of organization even maitains datacenter with tens of thousands of client agent.
 
 The leader among the server agents is selected based upon a specific consesus algorithm. All the queries and the transactions are processed by the leader, the followers forwards the requests received from the client agents to the leader, and leader in-turn replicates all the updations to the followers.
 
@@ -32,7 +34,9 @@ The leader among the server agents is selected based upon a specific consesus al
 
 All the server and client agents participates in a LAN gossip pool. Agents in the pool propagate the health check information across the cluster. Agent gossip communication occurs on port 8301 using UDP. Agent gossip falls back to TCP if UDP is not available. 
 // lan gossip image
- 
+
+
+
 
 
 #### References:
@@ -40,4 +44,5 @@ All the server and client agents participates in a LAN gossip pool. Agents in th
 2. https://istio.io/latest/about/service-mesh/
 3. https://developer.hashicorp.com/consul/docs
 4. https://developer.hashicorp.com/consul/docs/architecture
+5. https://developer.hashicorp.com/consul/docs/architecture/improving-consul-resilience
 
