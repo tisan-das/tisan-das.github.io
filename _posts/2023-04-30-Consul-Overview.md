@@ -1,8 +1,6 @@
 ---
 published: true
 ---
-
-### Introduction:
 With the advent of microservices, the networking got more complicated. Earlier, with the monolithic approach, the vertical scalability was pretty much simplistic. The applications were viewed as 3-tier applications and a majority of the traffic flow was north-south, i.e. majority of the data flow consisted of client requests and responses, which may be in the form of browser requests or may be in the form of direct API requests. Event the networking configuration was also simpler due to the nature of these 3 tiers, where the network flow was allowed from the downstream layer to the immediate upstream layer, and there a load balancer is usually placed, which works as a reverse proxy server to the external users.
 
 ![](../images/consul-overview/network_traffic.png)
