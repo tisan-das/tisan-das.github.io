@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 ---
 With the rapid adaption of microservice architectural patterns, one of the major issues has arisen related to secret management. With the microservices pattern, teams have become quite independent, and they interact through a set of well-defined endpoints, and apart from the API contract, the service is treated as a black box by the downstream services. As each team becomes independent, the independent nature is also reflected in different aspects: starting from selecting the tech stack to design patterns used. And thus it increases the complexity of following a uniform core-security principle. And one major concern regarding this is the leaking of security credentials. Storing security credentials on the codebase or setting them as environment variables from the deployment pipeline, even though seems to allow teams to quickly build features, however, should be highly discouraged. To solve this kind of credential sprawling, an enterprise-level centralized credential management system is needed, and Hashicorp provides one such solution with Hashicorp Vault.
 
