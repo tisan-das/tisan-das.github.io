@@ -40,11 +40,11 @@ It's to be noted that just like secrets policies are also path based. All the re
 ![](../images/vault-intro/policyWorkflow.png)
 
 ### References:
-1. https://developer.hashicorp.com/vault/docs/what-is-vault
-2. https://developer.hashicorp.com/vault/docs/secrets
-3. https://developer.hashicorp.com/vault/docs/concepts/seal
-4. https://developer.hashicorp.com/vault/docs/concepts/policies
-5. https://developer.hashicorp.com/vault/docs/concepts/storage
-6. https://www.youtube.com/playlist?list=PL7iMyoQPMtAP7XeXabzWnNKGkCex1C_3C
-7. https://medium.com/@othillo/encryption-as-a-service-with-vault-61b0e652685f
+1. [What is Vault?](https://developer.hashicorp.com/vault/docs/what-is-vault)
+2. [Vault Secrets Engines](https://developer.hashicorp.com/vault/docs/secrets)
+3. [Vault Seal/Unseal](https://developer.hashicorp.com/vault/docs/concepts/seal)
+4. [Vault Policies](https://developer.hashicorp.com/vault/docs/concepts/policies)
+5. [Vault Storage](https://developer.hashicorp.com/vault/docs/concepts/storage)
+6. [HashiCorp Vault](https://www.youtube.com/playlist?list=PL7iMyoQPMtAP7XeXabzWnNKGkCex1C_3C)
+7. [Encryption as a service with Vault](https://medium.com/@othillo/encryption-as-a-service-with-vault-61b0e652685f)
 
