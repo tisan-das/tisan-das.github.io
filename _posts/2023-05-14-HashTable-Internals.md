@@ -36,6 +36,7 @@ Probing: function for finding the next available slot. A good probing function s
 For adding or lookup, we need to continuously probe until an empty slot is encountered or all the slots are checked. Hence while deleting a key, it needs to be a soft delete, otherwise, the lookup would miss existing keys.
 
 Linear probing:
+
 ![](../images/hash-internals/linearProbing.png)
 - Search linearly from the hash index until the end of the table, then wrap from the start
 - If empty slot, then the key is not present
@@ -47,6 +48,7 @@ Linear probing:
 
 
 Quadratic probing:
+
 ![](../images/hash-internals/quadraticProbing.png)
 - Clustered and cascaded collisions are reduced as collided keys are placed further away from each other
 - Offset is increased quadratically
@@ -54,6 +56,7 @@ Quadratic probing:
 
 
 Double hashing:
+
 ![](../images/hash-internals/doubleHashing.png)
 - Use a secondary hash function to offset collision 
 - Unlike quadratic probing, offset for double hashing follows a linear pattern
