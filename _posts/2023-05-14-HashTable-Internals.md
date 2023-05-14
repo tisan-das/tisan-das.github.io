@@ -20,6 +20,7 @@ In case different objects map to the same application key, or a different applic
 The collided keys are placed in a data structure pointed by the hash table key. The basic implementation is to form a chain of keys with the use of a linked list that is mapped to the same hash table key.
 
 ![](../images/hash-internals/chaining.png)
+
 Chaining with linked list:
 - The hash table is an array of pointers to a linked list. Each slot of the array contains a pointer to the head of the linked list
 - Each node of the list contains a pointer to the actual data (key and the value) and a pointer to the next node in the list
@@ -35,8 +36,7 @@ Probing: function for finding the next available slot. A good probing function s
 
 For adding or lookup, we need to continuously probe until an empty slot is encountered or all the slots are checked. Hence while deleting a key, it needs to be a soft delete, otherwise, the lookup would miss existing keys.
 
-Linear probing:
-
+###### Linear probing:
 ![](../images/hash-internals/linearProbing.png)
 - Search linearly from the hash index until the end of the table, then wrap from the start
 - If empty slot, then the key is not present
@@ -47,16 +47,14 @@ Linear probing:
 ![](../images/hash-internals/linearProbingResolution.png)
 
 
-Quadratic probing:
-
+###### Quadratic probing:
 ![](../images/hash-internals/quadraticProbing.png)
 - Clustered and cascaded collisions are reduced as collided keys are placed further away from each other
 - Offset is increased quadratically
 ![](../images/hash-internals/quadraticProbing.png)
 
 
-Double hashing:
-
+###### Double hashing:
 ![](../images/hash-internals/doubleHashing.png)
 - Use a secondary hash function to offset collision 
 - Unlike quadratic probing, offset for double hashing follows a linear pattern
