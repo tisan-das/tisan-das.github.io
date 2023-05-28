@@ -34,7 +34,7 @@ Apart from these, manual labeling is also supported by AWS. Each version of the 
 ```sh
 C:\Users\Tisan>aws secretsmanager get-secret-value --secret-id sample-secret
 {
-    "ARN": "arn:aws:secretsmanager:ap-south-1:653981763904:secret:sample-secret-eJF34f",
+    "ARN": "arn:aws:secretsmanager:ap-south-1:___4:secret:sample-secret-eJF34f",
     "Name": "sample-secret",
     "VersionId": "a7d5bc19-6b8c-43f2-8286-b8cab07af17b",
     "SecretString": "{\"key1\":\"value1\",\"key2\":\"value2\"}",
@@ -46,7 +46,7 @@ C:\Users\Tisan>aws secretsmanager get-secret-value --secret-id sample-secret
 
 C:\Users\Tisan>aws secretsmanager get-secret-value --secret-id sample-secret
 {
-    "ARN": "arn:aws:secretsmanager:ap-south-1:653981763904:secret:sample-secret-eJF34f",
+    "ARN": "arn:aws:secretsmanager:ap-south-1:___4:secret:sample-secret-eJF34f",
     "Name": "sample-secret",
     "VersionId": "13ba7fd1-673c-41ed-88e0-d812c2cbedfc",
     "SecretString": "{\"key1\":\"value3\",\"key2\":\"value2\"}",
