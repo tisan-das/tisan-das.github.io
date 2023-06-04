@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Design Patterns: Case Study
+title: Design Patterns Case Study
 published: true
 ---
 
@@ -240,7 +240,7 @@ Analyzer:
 
 ![](../images/system-design-case-study/visitor.png)
 
-The visitor pattern discussed here provides a way to allow an open-ended number of algorithms for a specific problem. This is most suitable where the context object ie. the object on which algorithms are applied having a stable structure and prone to very less changes.
+The visitor pattern discussed here provides a way to allow an open-ended number of algorithms for a specific problem. This is most suitable where the context object ie. the object on which algorithms are applied having a stable structure and prone to less changes.
 
 ### References:
 1. Design Patterns: Elements of Reusable Object-oriented Software
