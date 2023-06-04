@@ -244,7 +244,7 @@ The visitor pattern discussed here provides a way to allow an open-ended number 
 
 ### References:
 1. Design Patterns: Elements of Reusable Object-oriented Software
-2. (Decorator Pattern)[https://refactoring.guru/design-patterns/decorator]
+2. [Decorator Pattern](https://refactoring.guru/design-patterns/decorator)
 3. [Abstract Factory Pattern](https://refactoring.guru/design-patterns/abstract-factory)
 4. [Bridge Pattern](https://refactoring.guru/design-patterns/bridge)
 5. [Command Pattern](https://refactoring.guru/design-patterns/command)
