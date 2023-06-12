@@ -4,7 +4,7 @@ title: Introduction to Creational Design Patterns
 published: true
 ---
 
-Creational design pattern handles the object instantiation process. They provide an abstracted way to make the client independent of how objects are instantiated, which objects are getting instantiated, and how they're represented. For smaller applications, the objects are instantiated in hard-coded way, as the type of object is fixed. However, as the application gets evolved, there comes requirement of the same application or client to accomodate different set of objects, and thus the need of definiting a smaller set of behaviour arises, which then can be extended into different type of objects. Hence the creational design pattern tries to acheive two goal:
+Creational design pattern handles the object instantiation process. They provide an abstract way to make the client independent of how objects are instantiated, which objects are getting instantiated, and how they're represented. For smaller applications, the objects are instantiated in a hard-coded way, as the type of object has remained fixed. However, as the application gets evolved, there comes the requirement of the same application or client to accommodate different sets of objects to be handled similarly, and thus the need of defining a smaller set of behavior arises, which then can be extended into different types of objects. Here the creational design pattern tries to achieve two goal:
 1. To encapsulate the knowledge of which concrete classes the application uses
 2. How the instances of these concrete classes are created and composed
 
@@ -75,7 +75,7 @@ func (ins *SingletonThreadSafe) GetInstance() *SingletonStruct {
 ## Prototype Pattern:
 Intent: Specify the kinds of objects to create using a prototypical instance, and create new objects by copying this prototype
 - Create new objects by cloning other objects to improve performance
-- Use when creation of object is costly or complex eg: Object created out of complex join query 
+- Use when the creation of the object is costly or complex eg: An object created out of a complex join query 
 
 Class Diagram:
 ![](../images/creation-design-patterns/prototype.png)
@@ -147,9 +147,9 @@ type File struct {
 ```
 
 ## Builder Pattern:
-Intent: Seperate the construction of a couplex object from it's representation so that the same construction process can create different representation
-- Build complex object using simple objects and using step-by-step procedure
-- Process of constructing complex object should be generic enough to be used to create objects with different representations
+Intent: Separate the construction of a complex object from its representation so that the same construction process can create a different representation
+- Build complex objects using simple objects and using a step-by-step procedure
+- The process of constructing complex objects should be generic enough to be used to create objects with different representations
 
 
 Class Diagram:
@@ -200,8 +200,8 @@ func (builder *ConcreteBuilder1) GetResult() *Product {
 
 ## Factory Pattern:
 Intent: Define an interface for creating an object, but let the subclasses decide which class to instantiate
-- Create object without exposing creation logic to client and refer to newly created object using a common interface
-- At runtime, we get an object of similar type based on the parameter passed
+- Create an object without exposing creation logic to the client and refer to the newly created object using a common interface
+- At runtime, we get an object of a similar type based on the parameter passed
 
 Class Diagram:
 ![](../images/creation-design-patterns/factoryMethod.png)
@@ -283,8 +283,8 @@ func (creator *ConcreteCreator2) GetProduct() IProduct {
 ```
 
 ## Abstract Factory Pattern:
-Intent: Provide an interface for creating  familiesf of related or dependent objects without specifying their concrete classes 
-- Super factory which creates other factories. Also known as "factory of factories"
+Intent: Provide an interface for creating families of related or dependent objects without specifying their concrete classes 
+- Super factory which creates other factories. Also known as the "factory of factories"
 
 Class Diagram:
 ![](../images/creation-design-patterns/abstractFactory.png)
