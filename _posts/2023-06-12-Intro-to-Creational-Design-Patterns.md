@@ -14,6 +14,7 @@ Intent: Ensure a class has only one instance, and provide a global point of acce
 - Used in conjecture with Factory design pattern
 
 Class Diagram:
+
 ![](../images/creation-design-patterns/singleton.png)
 
 Notes:
@@ -22,6 +23,7 @@ Notes:
 3. The implementation should also consider thread safety: generally achieved by using a global mutex lock 
 
 Implementation:
+
 ```go
 package singleton
 
@@ -78,9 +80,11 @@ Intent: Specify the kinds of objects to create using a prototypical instance, an
 - Use when the creation of the object is costly or complex eg: An object created out of a complex join query 
 
 Class Diagram:
+
 ![](../images/creation-design-patterns/prototype.png)
 
 Implementation:
+
 ```go
 package prototype
 
@@ -153,9 +157,11 @@ Intent: Separate the construction of a complex object from its representation so
 
 
 Class Diagram:
+
 ![](../images/creation-design-patterns/builder.png)
 
 Implementation:
+
 ```go
 package builder
 
@@ -204,9 +210,11 @@ Intent: Define an interface for creating an object, but let the subclasses decid
 - At runtime, we get an object of a similar type based on the parameter passed
 
 Class Diagram:
+
 ![](../images/creation-design-patterns/factoryMethod.png)
 
 Implementation:
+
 ```go
 package factory
 
@@ -287,9 +295,11 @@ Intent: Provide an interface for creating families of related or dependent objec
 - Super factory which creates other factories. Also known as the "factory of factories"
 
 Class Diagram:
+
 ![](../images/creation-design-patterns/abstractFactory.png)
 
 Implementation:
+
 ```go
 package abstractFactory
 
