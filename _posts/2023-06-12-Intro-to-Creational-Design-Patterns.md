@@ -13,7 +13,7 @@ Intent: Ensure a class has only one instance, and provide a global point of acce
 - Generally used in logging, caches, thread pools, config setting, device driver objects
 - Used in conjecture with Factory design pattern
 
-Class Diagram:
+###### Class Diagram:
 
 ![](../images/creation-design-patterns/singleton.png)
 
@@ -22,7 +22,7 @@ Notes:
 2. Static public method provides a global access point to the Singleton object
 3. The implementation should also consider thread safety: generally achieved by using a global mutex lock 
 
-Implementation:
+###### Implementation:
 
 ```go
 package singleton
@@ -79,11 +79,11 @@ Intent: Specify the kinds of objects to create using a prototypical instance, an
 - Create new objects by cloning other objects to improve performance
 - Use when the creation of the object is costly or complex eg: An object created out of a complex join query 
 
-Class Diagram:
+###### Class Diagram:
 
 ![](../images/creation-design-patterns/prototype.png)
 
-Implementation:
+###### Implementation:
 
 ```go
 package prototype
@@ -156,11 +156,11 @@ Intent: Separate the construction of a complex object from its representation so
 - The process of constructing complex objects should be generic enough to be used to create objects with different representations
 
 
-Class Diagram:
+###### Class Diagram:
 
 ![](../images/creation-design-patterns/builder.png)
 
-Implementation:
+###### Implementation:
 
 ```go
 package builder
@@ -209,11 +209,11 @@ Intent: Define an interface for creating an object, but let the subclasses decid
 - Create an object without exposing creation logic to the client and refer to the newly created object using a common interface
 - At runtime, we get an object of a similar type based on the parameter passed
 
-Class Diagram:
+###### Class Diagram:
 
 ![](../images/creation-design-patterns/factoryMethod.png)
 
-Implementation:
+###### Implementation:
 
 ```go
 package factory
@@ -294,11 +294,11 @@ func (creator *ConcreteCreator2) GetProduct() IProduct {
 Intent: Provide an interface for creating families of related or dependent objects without specifying their concrete classes 
 - Super factory which creates other factories. Also known as the "factory of factories"
 
-Class Diagram:
+###### Class Diagram:
 
 ![](../images/creation-design-patterns/abstractFactory.png)
 
-Implementation:
+###### Implementation:
 
 ```go
 package abstractFactory
