@@ -7,7 +7,7 @@ published: true
 In the last blog post, we've explored on the creational design patterns. In this blog post, we would explore a different set of design patterns: the structural ones. The structural design patterns are concerned with how classes and objects are composed to form even larger structure. The primary objective here is to compose the components in a flexible and extensible way, so that change can be made in specific parts of the structure without changing the entire structure.
 
 
-## Adapter:
+## Adapter Pattern:
 Intent: Covert the interface of a class into another interface clients expect. Adapter lets classes work together that couldn't otherwise due to incompatible interfaces.
 
 ###### Class Diagram:
@@ -63,7 +63,7 @@ func (adpt *adapter) Request() {
 }
 ```
 
-## Bridge:
+## Bridge Pattern:
 Intent: Decouple an abstraction from its implementation so that it can vary independently
 
 ###### Class Diagram:
@@ -108,25 +108,25 @@ func (impl *ConcreteImplementorA) OperationImp() {
 }
 ```
 
-## Composite:
+## Composite Pattern:
 Intent: Compose objects into tree structures to represent part-whole hierarchies. Composite lets clients treat individual objects and compositions of objects uniformly.
 
 ###### Class Diagram:
 ![](../images/structural-design-pattern/composite.png)
 
-## Decorator;
+## Decorator Pattern:
 Intent: Attach additional responsibilities to an object dynamically. Decorator provides a flexible alternative to subclassing for extending functionality.
 
 ###### Class Diagram:
 ![](../images/structural-design-pattern/decorator.png)
 
-## Facade:
+## Facade Pattern:
 Intent: Provide a unified interface to a set of interfaces in a subsystem. Facade defines a higher-level interface that makes the subsystem easier to use.
 
 ###### Class Diagram:
 ![](../images/structural-design-pattern/facade.png)
 
-## Flyweight:
+## Flyweight Pattern:
 Intent: Use sharing to support large numbers of fine-grained objects efficiently.
 
 ###### Class Diagram:
@@ -135,7 +135,7 @@ Intent: Use sharing to support large numbers of fine-grained objects efficiently
 ###### Object Diagram:
 ![](../images/structural-design-pattern/flyweightObject.png)
 
-## Proxy:
+## Proxy Pattern:
 Intent: Provide a surrogate or placeholder for another object to control access to it.
 
 ###### Class Diagram:
