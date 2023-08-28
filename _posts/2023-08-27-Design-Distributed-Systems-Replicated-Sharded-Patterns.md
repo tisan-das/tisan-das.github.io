@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Design Distrbuted Systems - Replicated & Sharded Patterns
+title: Designing Distributed Systems - Replicated & Sharded Patterns
 published: true
 ---
 
