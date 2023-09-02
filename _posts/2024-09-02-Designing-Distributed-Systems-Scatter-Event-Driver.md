@@ -1,6 +1,6 @@
 ---
 layout: post
-title: esigning Distributed Systems - Scatter-gather & FaaS with event-driven pattern
+title: Designing Distributed Systems - Scatter-gather & FaaS with event-driven pattern
 published: true
 ---
 
