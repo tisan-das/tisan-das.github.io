@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Introduction to System Design
+title: esigning Distributed Systems - Scatter-gather & FaaS with event-driven pattern
 published: true
 ---
 
