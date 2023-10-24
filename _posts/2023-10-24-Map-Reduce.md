@@ -85,9 +85,16 @@ func Reduce(key string, values []string) string {
 
 ```
 
+### To be explored:
+- Implementation of Map-Reduce
+- Cloud Dataflow
+
+**Note**: As of now, Google has replaced the map-reduce model with Cloud Dataflow. 
+
 ### References:
 1. [MIT 6.824: Lecture 1 - MapReduce](https://timilearning.com/posts/mit-6.824/lecture-1-mapreduce/)
 2. [Dean, Jeffrey, and Sanjay Ghemawat. "MapReduce: simplified data processing on large clusters." Communications of the ACM 51, no. 1 (2008): 107-113.](https://www.cs.amherst.edu/~ccmcgeoch/cs34/papers/p107-dean.pdf)
 3. [Map Reduce Paper](https://pdos.csail.mit.edu/6.824/papers/mapreduce.pdf)
 4. [Reducer starts before mapper has finished](https://stackoverflow.com/questions/30893970/reducer-starts-before-mapper-has-finished)
 5. [How does partitioning in MapReduce exactly work?](https://stackoverflow.com/questions/17734468/how-does-partitioning-in-mapreduce-exactly-work)
+6. [Google Dumps MapReduce in Favor of New Hyper-Scale Analytics System](https://www.datacenterknowledge.com/archives/2014/06/25/google-dumps-mapreduce-favor-new-hyper-scale-analytics-system)
