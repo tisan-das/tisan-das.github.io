@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Golang Roughwork I - RPC and Concurrency 
+title: Golang Roughwork I for RPC and Concurrency
 published: true
 ---
 
