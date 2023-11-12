@@ -44,10 +44,11 @@ The master server contains only the metadata of the file-system. Each operaation
 
 ##### Relaxed consistency:
 GFS offeres flexible consistency, hence depending upon replica, the client might find different data.
+
 ![](../images/gfs/replicaDataMismatch.png)
 
 **NB:** Cerain times master server might come across with a chunk server with a chunk handler having higher version number than the metadata stored on the master. In that case master assumes that there were some node failure while assigning the version number, and master updates the metadata with the updated version number. Also master doesn't store the list of chunk servers for chunk handler, as it scans the chunk server and updates it metadata when the chunk server joins the network.
 
 ### References:
 1. [Lecture 3: GFS](https://www.youtube.com/watch?v=EpIgvowZr00)
-2. [The Google File System: Paper](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/035fc972c796d33122033a0614bc94cff1527999.pdf)
+2. [The Google File System Paper](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/035fc972c796d33122033a0614bc94cff1527999.pdf)
