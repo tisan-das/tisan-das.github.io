@@ -47,7 +47,7 @@ GFS offeres flexible consistency, hence depending upon replica, the client might
 
 ![](../images/gfs/replicaDataMismatch.png)
 
-**NB:** Cerain times master server might come across with a chunk server with a chunk handler having higher version number than the metadata stored on the master. In that case master assumes that there were some node failure while assigning the version number, and master updates the metadata with the updated version number. Also master doesn't store the list of chunk servers for chunk handler, as it scans the chunk server and updates it metadata when the chunk server joins the network.
+**NB:** Certain times master server might come across with a chunk server with a chunk handler having higher version number than the metadata stored on the master. In that case master assumes that there were some node failure while assigning the version number, and master updates the metadata with the updated version number. Also master doesn't store the list of chunk servers for chunk handler, as it scans the chunk server and updates it metadata when the chunk server joins the network.
 
 ### References:
 1. [Lecture 3: GFS](https://www.youtube.com/watch?v=EpIgvowZr00)
