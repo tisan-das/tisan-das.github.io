@@ -45,7 +45,7 @@ Apart from this, there's also sequential flag, the nodes created with sequential
 
 ##### Exclusive Lock:
 
-```
+```py
 def lock():
     n = create(l+"/lock-", EPHEMERAL|SEQUENTIAL)
     C = getChildren(l, True)
@@ -57,14 +57,14 @@ def lock():
     go to step 2
 ```
 
-```
+```py
 def unlock():
     delete(n)
 ```
 
 ##### Read/Write Lock:
 
-```
+```py
 def read_lock():
     n = create(l+"/read-", EPHEMERAL|SEQUENTIAL)
     C = getChildren(l, True)
@@ -76,7 +76,7 @@ def read_lock():
     go to step 2
 ```
 
-```
+```py
 def write_lock():
     n = create(l+"/write-", EPHEMERAL|SEQUENTIAL)
     C = getChildren(l, True)
