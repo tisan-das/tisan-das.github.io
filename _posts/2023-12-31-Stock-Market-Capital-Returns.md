@@ -41,7 +41,7 @@ published: false
 
 - Conventional wisdom that M&A destroys value over the long term, which is why the share price of an acquiring company normally falls when a deal is announced.
 
--**Inversion of the earlier bubble signs:**
+- **Inversion of the earlier bubble signs:**
     1. Commodity price decline
     2. Private equity valuation collapse
     3. Private equity losses
