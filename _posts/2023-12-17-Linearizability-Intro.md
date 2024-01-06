@@ -25,7 +25,7 @@ The general approach to test linearizability is to first capture the execution h
 
 ### References:
 1. [Distributed Systems Safety Tool: Knossos](https://github.com/jepsen-io/knossos)
-1. [Distributed Systems Safety Research: Jespen](https://jepsen.io/)
-2. [Jepsen 9: A Fsyncing Feeling • Kyle Kingsbury • GOTO 2018](https://www.youtube.com/watch?v=tRc0O9VgzB0)
-1. [Testing Distributed Systems for Linearizability](https://anishathalye.com/testing-distributed-systems-for-linearizability/)
+2. [Distributed Systems Safety Research: Jespen](https://jepsen.io/)
+3. [Jepsen 9: A Fsyncing Feeling • Kyle Kingsbury • GOTO 2018](https://www.youtube.com/watch?v=tRc0O9VgzB0)
+4. [Testing Distributed Systems for Linearizability](https://anishathalye.com/testing-distributed-systems-for-linearizability/)
 
