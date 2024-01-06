@@ -12,7 +12,7 @@ Even though Zookeeper is used as a distributed coordination service, it's to be 
 
 ### Ordering Gurantees:
 The major benefit of Zookeer lies in it's simple, general-purpose API that it provides to support new type of co-ordination primitives defined by the client. Even though Zookeeper service is not linearizable, it does provide two basic ordering gurantees:
-1. **Linearizable Writes**: All the write operations are serializable and respect precedenc
+1. **Linearizable Writes**: All the write operations are serializable and respect precedence
 2. **FIFO Client Order**: All requests from a given client is executed in the same order and the successive reads from the same client would never move backward in time.
 
 The linearizable definition used by the Zookeeper paper is some-what deviated from the original definition of linearzable. In order to provide the first gurantee of Linearlizable write, the Zookeeper servers redirects all the write operation through the leader node, and the leader node uses Raft to commit the write only if consesus is achieved. However the read operations are performed locally, basically it's fetched from the same server with which the current session is established. To handle the property of the FIFO client order, Zookeeper client stamps a read request with the latest transaction ID response receivef from the connected server, called zxid. In case the client gets disconnected from the server, it connects with another server which is having more recent transaction committed than it, and client is bound to find such a server, as each individual write operation is committed only after it's accepted by majority of the servers.
