@@ -7,12 +7,12 @@ published: true
 Frangipani is one of the intial attempts to create a scalable distributed file-system. This was primarily designed for the earlier generation of computers, which was primarily used on time-sharing basis, where the system is connected by multiple terminals, and different users can access the same file-system through these terminals. Even though the pattern of how systems are getting used is completely different, this Frangipani file-system was designed with certain techniques, which has paved the way to the distributed transactions.
 
 
-### Overview:
+### Architecture Overview:
 Frangipani file-system is built on top of Petal, a distributed storage system that manages the underlying virtual disks, and Frangipani provides the file-system abstraction on top of the disk service. Besides that Frangipani also uses a lock service for cache coherance and atomicity.
 
-![](../images/frangipani/architecture.pngs)
+![](../images/frangipani/architecture.png)
 
-It's to be noted that, even though the 
+It's to be noted that, even though the lock server is shown as residing over the same Petal disk devices in the above diagram, it's completely decoupled.
 
 
 ### Desirable properties of a filesystem:
