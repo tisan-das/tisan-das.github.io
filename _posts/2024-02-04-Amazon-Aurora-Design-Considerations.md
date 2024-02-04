@@ -31,10 +31,10 @@ In order to support the above set of fault-tolerance goals, each AZ mantains two
 A quoram is needed for the write operations, however read operations don't need quoram always. The DB instances keeps track of how much of the WAL entries are applied for each storage segment, and would redirect the read request to the appropriate storage server. Read quoram is needed only for recovery purpose.
 
 
-### Desirable properties of a filesystem:
-- Consistency: The users should have a consistent view of the file-system
-- Scalability: New servers can be added easily without much interruption to the service
-- Recovery: When a node goes down, how to recover
+### Desirable properties of a large-scale system:
+- Consistency
+- Scalability
+- Recovery
 - Backup
 - Security
 
