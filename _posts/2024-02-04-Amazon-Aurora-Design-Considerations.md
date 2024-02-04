@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Amazon Aurora Design Considerations
+title: Amazon Aurora DB Design Considerations
 published: true
 ---
 
