@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Testing Distrbuted Systems through Linearizability
+title: Testing Distributed Systems for Linearizability
 published: true
 ---
 
