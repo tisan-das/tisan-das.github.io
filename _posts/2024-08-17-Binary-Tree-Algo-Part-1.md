@@ -4,6 +4,7 @@ title: Binary Tree Algorithms - Part I
 published: true
 ---
 
+This wiki contains a couple of well-defined problems on Binary Tree.
 
 #### Iterative Post-order Traversal (1783):
 
@@ -85,7 +86,6 @@ published: true
 ```
 
 
-
 ### Lowest Common Ancestor in BST (1311):
 
 ```cpp
@@ -108,7 +108,8 @@ published: true
     }
 ```
 
-#### Minimum depth (155):
+
+### Minimum depth (155):
 
 ```cpp
     int minDepth(TreeNode *root) {
@@ -128,8 +129,8 @@ published: true
     }
 ```
 
-#### Diameter (1181):
 
+### Diameter (1181):
 
 ```cpp
     int diameterOfBinaryTree(TreeNode *root) {
@@ -150,6 +151,7 @@ published: true
         return 1+max(depth(root->left),depth(root->right));
     }
 ```
+
 
 ### Binary Tree Paths (480):
 
@@ -202,7 +204,7 @@ published: true
 ```
 
 
-#### Sum of Two Binary Trees (1126):
+### Sum of Two Binary Trees (1126):
 
 ```cpp
      TreeNode* mergeTrees(TreeNode *t1, TreeNode *t2) {
@@ -256,7 +258,6 @@ published: true
 ```
 
 
-
 ### Convert BST to Greater Tree (661):
 
 Given a Binary Search Tree (BST), convert it to a Greater Tree such that every key of the original BST is changed to the original key plus sum of all keys greater than the original key in BST.
@@ -284,7 +285,7 @@ Given a Binary Search Tree (BST), convert it to a Greater Tree such that every k
 ```
 
 
-### Second Minimum Node:
+### Second Minimum Node (1094):
 
 ```cpp
     int findSecondMinimumValue(TreeNode *root) {
