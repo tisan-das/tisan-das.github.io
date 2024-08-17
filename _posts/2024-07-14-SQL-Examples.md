@@ -4,6 +4,7 @@ title: SQL Examples
 published: true
 ---
 
+This wiki contains a couple of example of SQL. 
 
 #### 
 
