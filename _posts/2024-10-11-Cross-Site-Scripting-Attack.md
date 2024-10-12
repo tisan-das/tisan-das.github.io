@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Web Application Security- Cross Site Scripting (XSS)
+title: Web Application Security - Cross Site Scripting (XSS)
 published: true
 ---
 
