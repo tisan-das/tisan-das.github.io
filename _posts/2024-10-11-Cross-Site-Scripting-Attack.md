@@ -23,7 +23,7 @@ Mutation-based XSS (mXSS) is a newer type of XSS, where the sanitizer libraries 
 
 Protocol-relative URL (PRURL) is one of the legacy mechanisms, which allows the browser to choose the protocol to open a link. This is a security anti-pattern and should be avoided at all costs.
 
-At certain times, the browser also attempts to correct improper quotes. <a> is one such tag, where Chrome browser tries to perform such kind of rectification, which can also result in bypassing sanitizer to convert a non-malicious script to a malicious one.`
+At certain times, the browser also attempts to correct improper quotes. ```<a>``` is one such tag, where Chrome browser tries to perform such kind of rectification, which can also result in bypassing sanitizer to convert a non-malicious script to a malicious one.`
 
 Generally, the exploit payload changes based on which browser context it's supposed to be used. For example, the XSS payload executing under the eval() method would be significantly different than the one to be added ``` element.innerHTML```. There's also a concept of polyglot payload, where the script is written in such a way that it can be executed in a wide variety of browser contexts. One such example is posted here https://github.com/0xSobky/HackVault/blob/master/XSS-polyglot.js
 
@@ -96,4 +96,4 @@ In summary, CSP is a powerful tool for enhancing the security of web application
 
 
 ### References:
-1. [Content Security Policy | How to solve content security policy error](https://www.youtube.com/watch?v=hUDUqyy0jPM)
+1. [Content Security Policy:How to solve content security policy error](https://www.youtube.com/watch?v=hUDUqyy0jPM)
