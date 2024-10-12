@@ -96,4 +96,4 @@ In summary, CSP is a powerful tool for enhancing the security of web application
 
 
 ### References:
-1. [Content Security Policy | How to solve content security policy error](https://www.youtube.com/watch?v=hUDUqyy0jPM)
+1. [Content Security Policy:How to solve content security policy error](https://www.youtube.com/watch?v=hUDUqyy0jPM)
