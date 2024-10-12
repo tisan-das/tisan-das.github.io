@@ -11,10 +11,12 @@ Cross-site scripting (XSS) attacks, at their core, execute a malicious script on
 
 ##### Stored XSS:
 ![](../images/web-security/stored_xss.png)
+
 One issue with stored XSS is that some of the advanced XSS payloads are not even written in plain text, rather they're written in other formats like base64 binary, etc. On top of that, in certain scenarios, the whole payload is split and stored in multiple places and can be dangerous only when combined. Generally, this is handled with the help of a sanitizer library, which detects anomalous scripts stored on the server.
 
 ##### Reflected XSS:
 ![](../images/web-security/reflected_xss.png)
+
 Reflected XSS is much more difficult to detect since the payloads are not stored on the server side. This type of attack is directed to hit a set of users, as the malicious payload needs to be distributed separately.
 
 ##### Mutation-Based XSS:
