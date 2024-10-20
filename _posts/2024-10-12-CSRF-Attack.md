@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Web Application Security - Cross-Site Request Forgery (CSRF)
+title: Web Application Security - Cross-Site Request Forgery (CSRF) Attack
 published: true
 ---
 
@@ -75,3 +75,6 @@ Following are the best practices for these Anti-CSRF tokens:
 ### Future work:
 - How to disable other parent or child tabs from reading cookies intended for the web app
 
+
+### References
+1. Web Application Security by Andrew Hoffman
