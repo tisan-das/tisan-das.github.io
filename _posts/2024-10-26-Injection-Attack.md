@@ -30,17 +30,19 @@ Code injections are similar to command injection, the only difference is that ra
 
 ### Mitigation:
 
-1. **Prepared statement & stored procedures:**
+- **Prepared statement & stored procedures:**
 
 Prepared statements and stored procedures are two primary weapons to make the application resistive against SQL injection type of attacks.
 Almost all the web frameworks now support the prepared statement. The way prepared statements are declared can vary depending upon the language or the web framework, however, majorly the way prepared statement works is that they segregate the SQL query and data. The prepared statement is compiled first, and then the values are provided, thus, the provided value will be treated as data, and not as the part of SQL query.
 
 The stored procedures are also similar to the prepared statement, with the only difference being that stored procedures are native to the databases. Hence once the stored procedure is compiled, it can be reused multiple times, with some extra benefit in terms of performance. Hence, in the case of performance-sensitive applications, stored procedures are always recommended.
 
-2. **Principle of least-privilege:**
+- **Principle of least-privilege:**
+
 Even though the term "principle of least privilege" became more famous with the advent of cloud computing, it's been getting used in the context of web applications long before that. The principle of least privilege suggests creating a specific user for the web application and providing only the required permissions, to ensure that the injected command would be ineffective even if the web application gets exploited.s
 
-3. **Use of allowlist for whitelisted command:**
+- **Use of allowlist for whitelisted command:**
+
 Always use allowlist to whitelist the commands intended to be run by the application. Certain times developers rely on blocklists, however, the use of blocklists is not recommended, as there's always a possibility of some commands being omitted, or the blocklist may not be that effective with later updates. Hence, it's always advisable to use a whitelist rather than a blocklist.
 
 
