@@ -30,7 +30,7 @@ Code injections are similar to command injection, the only difference is that ra
 
 ### Mitigation:
 
-- **Prepared statement & stored procedures:**
+- **Prepared statement & Stored procedures:**
 
 Prepared statements and stored procedures are two primary weapons to make the application resistive against SQL injection type of attacks.
 Almost all the web frameworks now support the prepared statement. The way prepared statements are declared can vary depending upon the language or the web framework, however, majorly the way prepared statement works is that they segregate the SQL query and data. The prepared statement is compiled first, and then the values are provided, thus, the provided value will be treated as data, and not as the part of SQL query.
@@ -48,5 +48,5 @@ Always use allowlist to whitelist the commands intended to be run by the applica
 
 ### References
 1. Web Application Security by Andrew Hoffman
-2. [https://www.programmerinterview.com/database-sql/example-of-prepared-statements-and-sql-injection-prevention/](Prepared statements)
-3. [https://stackoverflow.com/questions/7296417/difference-between-stored-procedures-and-prepared-statements](Difference Between Stored Procedures and Prepared Statements?)
+2. [Details about prepared statements](https://www.programmerinterview.com/database-sql/example-of-prepared-statements-and-sql-injection-prevention/)
+3. [Difference Between Stored Procedures and Prepared Statements?](https://stackoverflow.com/questions/7296417/difference-between-stored-procedures-and-prepared-statements)
