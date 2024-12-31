@@ -29,18 +29,18 @@ The encoders are decoders built using the transformer architecture proposed by G
 ### How are they trained?
 
 The LLMs are trained in three different phases:
-- Step 01:**Language Modeling**:
+- Phase 01: **Language Modeling**:
 
 This is the very first phase, where the base model is trained on massive datasets. This is where the model learns the linguistic and semantic representation from the dataset, where it tries to predict the next token more accurately. The output is the base model, which is also called the pre-trained model or foundation model.
 
-- Step 02:**Supervised Fine-tuning (SFT)**:
+- Phase 02: **Supervised Fine-tuning (SFT)**:
 
 The foundation model is trained to predict the next token when given a stream of input tokens. However, that is not sufficient for many day-to-day activities. LLMs are more useful when they follow specific instructions. This is where the base model is trained to follow a specific instruction set, updated to be in line with the target activity. SFT is also used for the classification task but is largely used to make a base generative model to an instruction (or chat) generative model.
 
 The number of parameters that need to be updated on the base model is generally restricted while performing SFT. Even though all the parameters can be updated, that requires significant computation. Rather the results show that we can achieve almost similar results by allowing updates on a small subset of the overall weights. This approach is also known as **Parameter-Efficient Fine-Tuning (PEFT)**. Adapter and LoRA are two major approaches followed for PEFT.
 **Adapters** are separate components added in the LLM, which are allowed for updation in the fine-tuning phase. In the case of **LoRA**, two low-rank matrices contain the details for the differential weight matrix. 
 
-- Step 03:**Preference Tuning**:
+- Phase 03: **Preference Tuning**:
 
 This is the final step, where the behavior of the model is aligned with AI safety. Different reward models are maintained for different aspects.
 **PPO** (Proximity Policy Optimization) is one popular technique that uses such reinforcement reward models.
