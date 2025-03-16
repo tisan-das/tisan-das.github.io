@@ -1516,7 +1516,7 @@ public:
     int shortestPathBinaryMatrix(vector<vector<int>> &board) {
         // write your code here
         pair<int,int> start={0,0}, end={board.size()-1, board[board.size()-1].size()-1};
-        vector<pair<int,int>> dirVec = {{-1,0},{-1,1},{-1,-1}, {0,1},{0,-1}, {1,0},{1,1},{1,-1}};
+        vector<pair<int,int>> dirVec = { {-1,0},{-1,1},{-1,-1}, {0,1},{0,-1}, {1,0},{1,1},{1,-1} };
         list<pair<pair<int,int>,int>> que;
         set<pair<int,int>> visitedNodes;
         if(canVisit(start, board)){
@@ -1577,7 +1577,7 @@ public:
         if(board.size()==0){
             return -1;
         }
-        vector<pair<int,int>> dirArray = {{-1,0},{1,0},{0,-1},{0,1}};
+        vector<pair<int,int>> dirArray = { {-1,0},{1,0},{0,-1},{0,1} };
         priority_queue< pair<int,pair<int,int>>, vector<pair<int,pair<int,int>>>, greater<pair<int,pair<int,int>>> > que;
         pair<int,int> start={board.size()-1,0}, end={0,board[0].size()-1};
         set<pair<int,int>> visitedNodes;
