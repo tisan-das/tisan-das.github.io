@@ -34,7 +34,7 @@ public:
     }
 
     void bfsTraversal(vector<pair<int,int>> initialNodes, vector<vector<int>> &board, vector<vector<int>> &checkedMat){
-        vector<pair<int,int>> dirArray = {{-1,0},{1,0},{0,-1},{0,1}};
+        vector<pair<int,int>> dirArray = { {-1,0},{1,0},{0,-1},{0,1} };
         list<pair<int,int>> que;
         set<pair<int,int>> visitedNodes;
         for(int i=0;i<initialNodes.size();i++){
@@ -91,7 +91,7 @@ public:
             initialNodes.push_back({0,i});
         }
         // cout<<"first traversal"<<endl;
-        bfsTraversal(initialNodes, matrix, checkedMat);//, {{0,1},{1,0}});
+        bfsTraversal(initialNodes, matrix, checkedMat);//, { {0,1},{1,0} });
         // printGraph(checkedMat);
         initialNodes.clear();
         for(int i=0;i<matrix.size();i++){
@@ -101,7 +101,7 @@ public:
             initialNodes.push_back({matrix.size()-1,i});
         }
         // cout<<"second traversal"<<endl;
-        bfsTraversal(initialNodes, matrix, checkedMat);//, {{0,-1},{-1,0}});
+        bfsTraversal(initialNodes, matrix, checkedMat);//, { {0,-1},{-1,0} });
         // printGraph(checkedMat);
 
         vector<vector<int>> result;
@@ -577,7 +577,7 @@ public:
     }
 
 private:
-    vector<pair<int,int>> dirArray = {{-1,-1},{-1,0},{-1,1}, {0,-1},{0,1}, {1,-1},{1,0},{1,1}};
+    vector<pair<int,int>> dirArray = { {-1,-1},{-1,0},{-1,1}, {0,-1},{0,1}, {1,-1},{1,0},{1,1} };
 };
 ```
 
@@ -703,7 +703,7 @@ public:
         pair<int,int> start={0,0}, end={grid.size()-1, grid[grid.size()-1].size()-1};
         que.push_back({start, {grid[0][0], 0}});
         visitedNodes.insert({start, grid[0][0]});
-        vector<pair<int,int>> dirArray = {{-1,0},{1,0},{0,-1},{0,1}};
+        vector<pair<int,int>> dirArray = { {-1,0},{1,0},{0,-1},{0,1} };
 
         while(que.size()>0){
             pair<int,int> node = que.front().first;
@@ -852,7 +852,7 @@ public:
     }
 
 private:
-    vector<pair<int,int>> dirArray = {{1,0},{-1,0},{0,1},{0,-1}};
+    vector<pair<int,int>> dirArray = { {1,0},{-1,0},{0,1},{0,-1} };
 };
 ```
 
@@ -1002,7 +1002,7 @@ public:
 private:
     vector<char> directions = {'U','D','L','R'};
     vector<char> reverseDirections = {'D','U','R','L'};
-    vector<pair<int,int>> dirArray = {{-1,0},{1,0},{0,-1},{0,1}};
+    vector<pair<int,int>> dirArray = { {-1,0},{1,0},{0,-1},{0,1} };
 };
 ```
 
@@ -1050,7 +1050,7 @@ public:
     void bfsFindShortest(vector<vector<int>> &board){
         list<pair<pair<int,int>, int>> que;
         set<pair<int,int>> visitedNodes;
-        vector<pair<int,int>> dirArray = {{1,0},{-1,0},{0,1},{0,-1}};
+        vector<pair<int,int>> dirArray = { {1,0},{-1,0},{0,1},{0,-1} };
         vector<int> dirCharArray = {2,3,4,5};
         vector<pair<int,int>> initialPoints = findStartPoints(board);
         for(int i=0;i<initialPoints.size();i++){
