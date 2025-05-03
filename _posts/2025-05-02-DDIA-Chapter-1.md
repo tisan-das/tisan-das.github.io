@@ -23,7 +23,7 @@ It describes the system's ability to cope with an increased load. It's to be not
 ##### Approaches for coping with load:
 - How  do we maintain good performance even when the load parameters increase by some amount
 - Scaling up (vertical scaling) vs Scaling out (horizontal scaling)
-- Common wisdom until recently is to keep the database on a single system (scale up) until scaling cost or high availability requirementsts force to make it distributed
+- Common wisdom until recently is to keep the database on a single system (scale up) until scaling cost or high availability requirements force to make it distributed
 
 
 ### 3. Maintainability:
