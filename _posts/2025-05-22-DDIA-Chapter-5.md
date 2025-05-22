@@ -4,7 +4,7 @@ title: DDIA - Chap05 - Replication
 published: true
 ---
 
-In this blog post, we would try to get an overview of the replication, and different scenarios that we would need to consider while picking up a replication solution. The discussions here would later help us to dig deep into the implementation of such replicated systems.
+In this blog post, we would try to get an overview of how replication works in replicated systems, and different scenarios that we would need to consider while picking up a replication solution. The discussions here would later help us to dig deep into the implementation of such replicated systems.
 
 
 ### Types of distributed systems:
