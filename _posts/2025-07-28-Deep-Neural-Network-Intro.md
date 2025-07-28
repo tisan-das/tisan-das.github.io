@@ -45,4 +45,4 @@ Additionally, if the training data is small, there's a possibility of model over
 
 
 ### References:
-1. [MIT Introduction to Deep Learning | 6.S191](https://www.youtube.com/watch?v=alfdI7S6wCY&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&index=1)
+1. [MIT Introduction to Deep Learning 6.S191](https://www.youtube.com/watch?v=alfdI7S6wCY&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&index=1)
