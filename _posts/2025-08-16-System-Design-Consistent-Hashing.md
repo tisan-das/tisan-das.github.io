@@ -10,12 +10,12 @@ Hashing is one of the most crucial concepts, and has found usage in multiple unc
 
 Suppose we've a hash function which evenly distributes the keys among n servers. Now what happens if one of the servers goes down? Most clients will try to connect to the wrong server, and the request will fail. The critical question is how to effectively mitigate this problem when one of the servers goes down.
 
-Consistent hashing is a commonly used technique for this rehashing problem, as only k/n keys need to be remapped on average, where k is the number of keys and n is the number of servers.
+Consistent hashing is a commonly used technique for this rehashing problem, as only *k/n* keys need to be remapped on average, where *k* is the number of keys and *n* is the number of servers.
 
 
 ##### Hash ring and consistent hashing
 
-All the cryptographic hashes used have a mathematical lower and upper value. For example, SHA-1 has a lower bound of 0 and an upper bound of 2^160-1. Logically, a hash ring can be thought of as a ring by connecting both ends of the possible values of the cryptographic hash. 
+All the cryptographic hashes used have a mathematical lower and upper value. For example, SHA-1 has a lower bound of *0* and an upper bound of *2^160-1*. Logically, a hash ring can be thought of as a ring by connecting both ends of the possible values of the cryptographic hash. 
 
 ![](../images/sys-design-vol1/02-consistent-hashing-hash-ring.png)
 
