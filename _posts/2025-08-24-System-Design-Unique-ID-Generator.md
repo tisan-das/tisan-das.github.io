@@ -7,14 +7,14 @@ published: true
 In this wiki, we will explore how various services generate unique IDs. 
 
 ### Requirements:
-- Characteristics of the unique ID required
-    - IDs must be unique and sortable
-    - IDs created later must be larger than those created previously
-    - ID should have only numerical value
-    - IDs should fit into 64-bit
+1. Characteristics of the unique ID required
+- IDs must be unique and sortable
+- IDs created later must be larger than those created previously
+- ID should have only numerical value
+- IDs should fit into 64-bit
 
-- System requirements
-    - System should be able to generate at least 10000 IDs per second 
+2. System requirements
+- System should be able to generate at least 10000 IDs per second 
 
 ### Alternative ways to generate Unique ID
 
