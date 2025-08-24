@@ -91,10 +91,10 @@ Network Time Protocol (NTP) is generally used to synchronize time over the datac
 
 
 ### References:
-1. [https://news.ycombinator.com/item?id=36900641](Ever see a UUID collision?)
-2. [https://en.wikipedia.org/wiki/Universally_unique_identifier](Universally unique identifier)
-3. [https://blog.x.com/engineering/en_us/a/2010/announcing-snowflake](Announcing Twitter Snowflake)
-4. [https://www.reddit.com/r/programming/comments/cajap/twitter_announces_snowflake_a_distributed_unique/](Twitter announces Snowflake, a distributed unique ID generator)
-5. [https://planetscale.com/blog/the-problem-with-using-a-uuid-primary-key-in-mysql](The Problem with Using a UUID Primary Key in MySQL)
-6. [https://en.wikipedia.org/wiki/Network_Time_Protocol](Network Time Protocol)
-7. [https://www.youtube.com/watch?v=BAo5C2qbLq8](Network Time Protocol (NTP) - Computerphile)
+1. [Ever see a UUID collision?](https://news.ycombinator.com/item?id=36900641)
+2. [Universally unique identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier)
+3. [Announcing Twitter Snowflake](https://blog.x.com/engineering/en_us/a/2010/announcing-snowflake)
+4. [Twitter announces Snowflake, a distributed unique ID generator](https://www.reddit.com/r/programming/comments/cajap/twitter_announces_snowflake_a_distributed_unique/)
+5. [The Problem with Using a UUID Primary Key in MySQL](https://planetscale.com/blog/the-problem-with-using-a-uuid-primary-key-in-mysql)
+6. [Network Time Protocol](https://en.wikipedia.org/wiki/Network_Time_Protocol)
+7. [Network Time Protocol (NTP) - Computerphile](https://www.youtube.com/watch?v=BAo5C2qbLq8)
