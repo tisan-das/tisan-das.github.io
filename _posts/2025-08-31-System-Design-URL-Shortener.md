@@ -4,7 +4,7 @@ title: System Design - Design a URL Shortener
 published: true
 ---
 
-In this wiki, we will explore an approach to designing a URL shortener service.
+In this wiki, we will explore an approach to design a URL shortener service.
 
 
 ### Requirements:
