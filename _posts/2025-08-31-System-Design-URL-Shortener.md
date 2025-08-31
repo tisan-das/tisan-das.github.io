@@ -21,7 +21,7 @@ In this wiki, we will explore an approach to designing a URL shortener service.
 - Assuming average URL length of 100 bytes, storage requirement: 365 billion * 100 bytes => 36.5 PB
 
 
-### API endpoints
+### API endpoints:
 
 POST api/v1/shorten
 - request payload: {longUrl: string}
@@ -31,7 +31,7 @@ GET api/v1/shortUrl
 - Response status code of 301 redirect for permanent redirect: Browser caches the redirection response
 - Response status code of 302 redirect for temporary redirect: Used for analytical purposes, where the server needs to be aware of every query
 
-### High-level diagram
+### High-level diagram:
 
 ![](../images/sys-design-vol1/05-url-shortner-system-design-hld.png)
 
