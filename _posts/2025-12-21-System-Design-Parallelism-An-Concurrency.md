@@ -69,6 +69,7 @@ The **event loop** is the core runtime mechanism that enables asynchronous progr
 ​
 
 ##### How the Event Loop Works
+
 The event loop operates in phases:
 ​- Waiting State: The loop blocks on a system call (like epoll_wait on Linux, kqueue on macOS, or IOCP on Windows) that monitors multiple file descriptors or sockets
 ​- Event Detection: When an I/O operation completes, the OS notifies the event loop that a resource is ready
