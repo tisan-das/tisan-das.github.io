@@ -71,6 +71,17 @@ bundle install
 bundle exec jekyll serve --livereload
 ```
 
+## Enabling comments (giscus)
+
+Comments are powered by [giscus](https://giscus.app) (GitHub Discussions). One-time setup:
+
+1. Repo **Settings → General → Features → enable Discussions**
+2. Install the [giscus app](https://github.com/apps/giscus) on this repo
+3. Open [giscus.app](https://giscus.app), enter the repo, category **Announcements**, copy the `data-category-id`
+4. In `_config.yml`: set `comments.giscus.category_id` to that value and `comments.provider` to `giscus`
+
+(`repo` and `repo_id` are already configured.)
+
 ## Deployment
 
 Pushes to `master` build via GitHub Actions and deploy to GitHub Pages. Pushes to `develop` run the build as a check only.

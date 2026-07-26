@@ -14,6 +14,31 @@
 
 /* append your custom style below */
 
+/* Brand accent — logo purple (#44469D) for links, sidebar & TOC highlights.
+   Follows the theme's own light/dark variable pattern. */
+:root {
+  --link-color: #44469d;
+  --link-underline-color: #c6c7ea;
+  --sidebar-active-color: #44469d;
+  --toc-highlight: #44469d;
+}
+
+html[data-mode='dark'] {
+  --link-color: #a5a8e8;
+  --link-underline-color: #565a9e;
+  --sidebar-active-color: #a5a8e8;
+  --toc-highlight: #a5a8e8;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-mode]) {
+    --link-color: #a5a8e8;
+    --link-underline-color: #565a9e;
+    --sidebar-active-color: #a5a8e8;
+    --toc-highlight: #a5a8e8;
+  }
+}
+
 /* Series navigation box (see _includes/series-nav.html) */
 .series-nav {
   background: rgba(127, 127, 127, 0.08);

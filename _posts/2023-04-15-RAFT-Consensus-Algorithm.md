@@ -1,6 +1,7 @@
 ---
 published: true
 title: RAFT Consensus Algorithm
+pin: true
 image: /images/raft-consensus/dataReplication.png
 series: "Distributed Systems Papers"
 categories: ["Distributed Systems", "Consensus"]
