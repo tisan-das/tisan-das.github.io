@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Testing Distributed Systems for Linearizability
+image: /images/raft-consensus/linearizable.png
 series: "Distributed Systems Papers"
 categories: ["Distributed Systems", "Consensus"]
 tags: [linearizability, consistency, jepsen]
@@ -19,11 +20,11 @@ The general approach to test linearizability is to first capture the execution h
 
 ##### Example of a linearizable execution history:
 
-![](/images/raft-consensus/linearizable.png)
+![Example of a linearizable execution history: linearizable](/images/raft-consensus/linearizable.png)
 
 ##### Example of a non-linearizable execution history:
 
-![](/images/raft-consensus/non-linearizable.png)
+![Example of a non-linearizable execution history: non linearizable](/images/raft-consensus/non-linearizable.png)
 
 ### To be explored:
 - Explore how Knossos and Jespen work, use them in application

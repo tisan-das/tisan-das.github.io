@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Introduction to Creational Design Patterns
+image: /images/creation-design-patterns/singleton.png
 series: "Design Patterns"
 categories: ["Programming", "Design Patterns"]
 tags: [design-patterns, creational]
@@ -20,7 +21,7 @@ Intent: Ensure a class has only one instance, and provide a global point of acce
 
 ###### Class Diagram:
 
-![](/images/creation-design-patterns/singleton.png)
+![Class Diagram: singleton](/images/creation-design-patterns/singleton.png)
 
 Notes:
 1. Private constructor is used to prevent anybody else to instantiate the singleton class
@@ -86,7 +87,7 @@ Intent: Specify the kinds of objects to create using a prototypical instance, an
 
 ###### Class Diagram:
 
-![](/images/creation-design-patterns/prototype.png)
+![Class Diagram: prototype](/images/creation-design-patterns/prototype.png)
 
 ###### Implementation:
 
@@ -163,7 +164,7 @@ Intent: Separate the construction of a complex object from its representation so
 
 ###### Class Diagram:
 
-![](/images/creation-design-patterns/builder.png)
+![Class Diagram: builder](/images/creation-design-patterns/builder.png)
 
 ###### Implementation:
 
@@ -216,7 +217,7 @@ Intent: Define an interface for creating an object, but let the subclasses decid
 
 ###### Class Diagram:
 
-![](/images/creation-design-patterns/factoryMethod.png)
+![Class Diagram: factory Method](/images/creation-design-patterns/factoryMethod.png)
 
 ###### Implementation:
 
@@ -301,7 +302,7 @@ Intent: Provide an interface for creating families of related or dependent objec
 
 ###### Class Diagram:
 
-![](/images/creation-design-patterns/abstractFactory.png)
+![Class Diagram: abstract Factory](/images/creation-design-patterns/abstractFactory.png)
 
 ###### Implementation:
 

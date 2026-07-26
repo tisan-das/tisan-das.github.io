@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Intro to Zookeeper 
+image: /images/zookeeper/architecture.png
 series: "Distributed Systems Papers"
 categories: ["Distributed Systems", "Consensus"]
 tags: [zookeeper, coordination-service]
@@ -13,7 +14,7 @@ Apache Zookeeper provides highly reliable distributed co-ordination service. It 
 
 Even though Zookeeper is used as a distributed coordination service, it's to be noted that the distributed processes are prone to failure, due to severe issues ranging from network issues to process fault to server power failure. However, while designing such coordination primitives, we would need to ensure that even though the process has failed before it can fully operate the critical portion, another process can take over the workload and proceed to perform the same functionality without any further impact.
 
-![](/images/zookeeper/architecture.png)
+![Architecture](/images/zookeeper/architecture.png)
 
 ### Ordering Gurantees:
 The major benefit of Zookeer lies in it's simple, general-purpose API that it provides to support new type of co-ordination primitives defined by the client. Even though Zookeeper service is not linearizable, it does provide two basic ordering gurantees:
@@ -37,7 +38,7 @@ Zookeeper also provides support of notification through watches. Watches are set
 
 ### Data Objects:
 
-![](/images/zookeeper/fileStructure.png)
+![Data Objects: file Structure](/images/zookeeper/fileStructure.png)
 
 Zookeeper provides support of hierarchial data structure to store metadata info. Each node in the hierarchical data structure in called znode, and it's similar to file-system. Even though znodes displays similar behaviour to UNIX file-system, it's to be noted that znode is used only to store co-ordination metadata and not the actual application data. Hence it's useful to store upto 100MBs of data, and in case GBs of data is needed to be store, we would need to check other data store alternatives.
 
@@ -96,7 +97,7 @@ def write_lock():
 
 ### Performance:
 
-![](/images/zookeeper/performanceData.png)
+![Performance Data](/images/zookeeper/performanceData.png)
 
 One of the interesting experiment of throughput performance shows that the number of servers have a negative impact on the performance. The paper attributes this negative performance to the atomic broadcast protocol. However we would need to study more such applications built on top of Raft, to verify whether this is an inherent issue of Raft, in which transactions are stored on non-volatile store before returning response. 
 

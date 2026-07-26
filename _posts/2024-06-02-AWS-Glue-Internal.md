@@ -1,6 +1,7 @@
 ---
 layout: post
 title: AWS Glue Internal Working
+image: /images/aws-glue/comparisionWithSpark.png
 categories: ["Cloud & DevOps", "AWS"]
 tags: [aws, glue, etl]
 published: true
@@ -15,7 +16,7 @@ Earlier the majority of the data was stored in the relational databases, and the
 
 ### DynamicFrame and Schema Inference:
 
-![](/images/aws-glue/comparisionWithSpark.png)
+![Dynamic Frame and Schema Inference: comparision With Spark](/images/aws-glue/comparisionWithSpark.png)
 
 To handle this kind of issue Glue has introduced a new concept termed **DynamicFrame**, which is a collection of Spark DynamicRecords with additional flexibility that DynamicFrame doesn't need to know the schema upfront, rather it embedded the schema information for each entry of DynamicRecord and then infers the global schema only when needed. 
 
@@ -23,7 +24,7 @@ To handle this kind of issue Glue has introduced a new concept termed **DynamicF
 Alongside this, a new schema inference algorithm is also introduced which follows that of Spark, however with the flexibility to accommodate schema conflict. A new union type called **ChoiceType** is introduced which contains all the different types taken by the field in a DynamicFrame. ChoiceTypes support an array of heterogeneous elements also. 
 Apart from this, the Glue schema inference mechanism also keeps track of the absence of values with the help of NullType.
 
-![](/images/aws-glue/choiceState.png)
+![Dynamic Frame and Schema Inference: choice State](/images/aws-glue/choiceState.png)
 
 For nested structures, the structure is flattened and the nested ones are logically stored at a different table with the help of a similar concept to a foreign key.
 
@@ -36,7 +37,7 @@ It's to be noted that certain analytical engine needs separate configurable opti
 ### Crawler:
 Query engines need metadata such as schemas and storage locations to plan and execute queries. A metadata store is used for this purpose, which is generally a relation datastore. Hive meta-store is one such open-source implementation, a de-facto standard for the Hadoop ecosystem for metadata management.
 
-![](/images/aws-glue/schemaCrawling.png)
+![Crawler: schema Crawling](/images/aws-glue/schemaCrawling.png)
 
 Glue Crawler works in two different phases:
 1. Listing and Classification: The first stage, where the crawler enumerates each object listed. The objects are parsed in parallel to determine the file format and schema on the object level. Crawler only uses the first block information to do so.

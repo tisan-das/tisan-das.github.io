@@ -1,6 +1,7 @@
 ---
 published: true
 title: Introduction to Docker
+image: /images/docker-intro/containers-vs-virtual-machines.jpg
 series: "Docker"
 categories: ["Cloud & DevOps", "Containers"]
 tags: [docker, containers]
@@ -23,8 +24,8 @@ On the other hand container usees OS provided features to isolate the run-times 
 #### Docker client:
 
 Docker CLI is having a specific set of commands called management commands. Each such command referes to specific resource that the docker daemon manages.
-![](/images/docker-intro/docker.png)
-![](/images/docker-intro/docker_commands.png)
+![Docker client: docker](/images/docker-intro/docker.png)
+![Docker client: docker commands](/images/docker-intro/docker_commands.png)
 
 Note: The majority of the docker client commands are legacy, just there for backward compatibility, and generally discouraged for new learners. These commands can be hidden by using the environemnt variable:
 ```sh

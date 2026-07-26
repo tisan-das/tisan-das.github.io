@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Introduction to Deep Learning - Deep Neural Network
+image: /images/deep-learning/01_01_ai_vs_ml_vs_deep_learning.png
 series: "Deep Learning Fundamentals"
 categories: ["Deep Learning", "Fundamentals"]
 tags: [neural-networks, deep-learning]
@@ -10,16 +11,16 @@ The progress of the deep learning field over the last couple of years is astound
 
 {% include series-nav.html %}
 
-![](/images/deep-learning/01_01_ai_vs_ml_vs_deep_learning.png)
+![AI vs ML vs deep learning](/images/deep-learning/01_01_ai_vs_ml_vs_deep_learning.png)
 
 Deep learning aims to extract features from the data. Engineering the features manually is time-consuming, error-prone, and unscalable. Hence, neural networks are used to extract different levels of features in a lower-dimensional scenario.
 
 ### Perceptron
-![](/images/deep-learning/01_02_perceptron.png)
+![Perceptron](/images/deep-learning/01_02_perceptron.png)
 
 A single unit of a neuron in a neural network is referred to as a perceptron. The purpose of the activation function is to introduce non-linearity in the network. This non-linearity enables the network to learn complex models with ease, which would otherwise require a larger network.
 
-![](/images/deep-learning/01_03_deep_neural_nw.png)
+![Perceptron: deep neural nw](/images/deep-learning/01_03_deep_neural_nw.png)
 
 ### Loss & Gradients
 
@@ -27,7 +28,7 @@ The loss of our network measures the cost of incorrect predictions. Empirical lo
 Cross-entropy loss can be used with models that output a probability between 0 and 1. Mean-squared error loss can be used for continuous real numbers.
 We aim to determine network weights that yield the lowest loss. The gradient descent algorithm can be used to converge to the lowest loss iteratively.
 
-![](/images/deep-learning/01_04_gradient_descent.png)
+![Loss & Gradients: gradient descent](/images/deep-learning/01_04_gradient_descent.png)
 
 The way the gradients are calculated in a step-by-step manner from output to input direction is called backpropagation. It's worth noting that the gradient descent algorithm is inherently a greedy approach.
 
@@ -39,12 +40,12 @@ Additionally, if the training data is small, there's a possibility of model over
 1. During training, randomly set some activations to 0 with some probability. It prevents the network from depending on any specific node.
 2. Early stopping: Stop training before we can have a chance of overfitting
 
-![](/images/deep-learning/01_05_early_stopping.png)
+![Loss & Gradients: early stopping](/images/deep-learning/01_05_early_stopping.png)
 
 
 ### Concepts covered
 
-![](/images/deep-learning/01_06_overview.png)
+![Concepts covered: overview](/images/deep-learning/01_06_overview.png)
 
 
 ### References:

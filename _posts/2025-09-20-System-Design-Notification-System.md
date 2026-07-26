@@ -1,6 +1,7 @@
 ---
 layout: post
 title: System Design - Notification System
+image: /images/sys-design-vol1/07-notification-system-hld.png
 series: "System Design Case Studies"
 categories: ["System Design", "Case Studies"]
 tags: [notification-system, system-design]
@@ -28,7 +29,7 @@ In this wiki, we will explore an approach to designing a notification service.
 
 
 ### Architecture
-![](/images/sys-design-vol1/07-notification-system-hld.png)
+![Architecture: notification system hld](/images/sys-design-vol1/07-notification-system-hld.png)
 
 **Tracking:**
 - Monitor queued notifications

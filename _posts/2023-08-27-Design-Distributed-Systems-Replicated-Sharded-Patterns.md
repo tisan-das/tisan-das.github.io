@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Designing Distributed Systems - Replicated & Sharded Patterns
+image: /images/distributed-system-patterns-single-node/09.basicReplicatedStatelessService.png
 series: "Designing Distributed Systems"
 categories: ["Distributed Systems", "Patterns"]
 tags: [sharding, replication]
@@ -16,7 +17,7 @@ In the last blog post, we discussed about the generic patterns used to create co
 
 The simplest of the serving design patterns is the replicated load-balanced service, where every server is identical and capable of serving traffic, and the requests are routed through a load-balancer placed in front of the servers.
 
-![](/images/distributed-system-patterns-single-node/09.basicReplicatedStatelessService.png)
+![Replicated Load-balanced Services: 09.basic Replicated Stateless Service](/images/distributed-system-patterns-single-node/09.basicReplicatedStatelessService.png)
 
 ##### Probes:
 Utilize readiness probe so that load-balancer is aware when the server is ready to serve requests. This is crucial where the server needs some set of operations to perform as part of start up. Besides this, liveness probe specifies the health check mechanism, which informs the load-balancer regarding it's inability to serve requests. Each container orchestrator got it's own layer to manage the probes, Kubernetes uses the service layer to manage this.
@@ -221,7 +222,7 @@ Another common usage of HTTP reverse proxy is for SSL termination, where the inc
 
 ##### Hands On: SSL Termination through NGINX:
 
-![](/images/distributed-system-patterns-single-node/10.HandsOnReplicatedService.png)
+![Hands On: SSL Termination through NGINX: 10.Hands On Replicated Service](/images/distributed-system-patterns-single-node/10.HandsOnReplicatedService.png)
 
 
 ```sh
@@ -519,7 +520,7 @@ controlplane $ curl http://localhost:32705 -k
 ### Sharded Services:
 In the sharded service, the replicas are not identical, they aren't homogeneous and is capable of serving only a specific subset of requests. The load-balancing node, termed root is responsible for routing the requests to the appropriate shard. The replicas are called shard. Sharded services are stateful in nature. 
 
-![](/images/distributed-system-patterns-single-node/11.shardedService.png)
+![Sharded Services: 11.sharded Service](/images/distributed-system-patterns-single-node/11.shardedService.png)
 
 ##### Sharded Cache:
 Data storage is where sharding is much more useful. If a replicated cache layer is deployed, then the storage utilization becomes terrible, as each replica might contain similar set of data. However with sharded cache, the effective storage utilization increases multifold. 

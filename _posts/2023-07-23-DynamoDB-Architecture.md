@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Amazon DynamoDB - Architecture
+image: /images/dynamo-db/logReplica.png
 series: "Distributed Systems Papers"
 categories: ["Databases", "DynamoDB"]
 tags: [dynamodb, architecture]
@@ -23,11 +24,11 @@ The DynamoDB table is a collection of items, and each item is a collection of at
 
 The DynamoDB table is divided into multiple partitions to handle throughput requirements. Each partition of the table hosts a disjoint and contiguous part of the key range, and the same partition is replicated across multiple availability zones. The replicas of a partition form a replication group, and a consensus algorithm Paxos is used to determine the leader node. Each leader node also has a leadership lease, and in case one replica is unable to connect to the leader node, it can trigger the leader election process, and when a new leader is selected, it waits till the earlier leadership lease is expired. All the write operations under the partition are served by the leader node and are committed by Write-Ahead-Log by the quorum of replicas, then only the leader node acknowledge write is successful. DynamoDB read item operations can either be strongly consistent, which is served by the leader node, or can be eventually consistent, in which case it would be served by any replica. The replicas are typically placed under different AZs, and in the case of global tables, the replicas are placed under different regions to increase availability further.
 
-![](/images/dynamo-db/logReplica.png)
+![Architecture Overview: log Replica](/images/dynamo-db/logReplica.png)
 
 Each replica of a partition consists of a write-ahead log and a B-tree that stores the key-value data. However, as the same B-tree can be generated from the write-ahead log, hence only the leader node maintains the B-tree.
 
-![](/images/dynamo-db/architecture.png)
+![Architecture Overview: architecture](/images/dynamo-db/architecture.png)
 
 Metadata service stores the routing information about tables, indexes, and replication groups for keys for a given table or index. 
 

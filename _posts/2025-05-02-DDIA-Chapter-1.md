@@ -1,6 +1,7 @@
 ---
 layout: post
 title: DDIA - Chap01 - Reliable, Scalable and Maintainable Applications
+image: /images/ddia/chap01_intro.png
 series: "Designing Data-Intensive Applications"
 categories: ["Databases", "DDIA"]
 tags: [ddia, reliability, scalability]
@@ -14,7 +15,7 @@ A majority portion of web applications are largely data-intensive, and not compu
 
 From a software architecture perspective, the following three concerns need to be addressed for such applications:
 
-![](/images/ddia/chap01_intro.png)
+![Chap01 intro](/images/ddia/chap01_intro.png)
 
 ### 1. Reliability: 
 The system should continue to work correctly even with failures and faults. Fault denotes that one or more components are facing the issue, whereas failure means the service as a whole stops providing service. Fault-tolerance mechanisms are placed to prevent faults from causing failures.

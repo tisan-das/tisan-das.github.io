@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Fundamentals of System Design - Concurrency and Parallelism
+image: /images/sys-design-fundamentals/01-concurrency/01-concurrency_vs_parallelism.png
 categories: ["System Design", "Fundamentals"]
 tags: [concurrency, parallelism]
 published: true
@@ -10,7 +11,7 @@ Concurrency and Paralleism - these terms sound similar; however, from a software
 
 **Concurrency** is the ability of a system to perform multiple tasks simultaneously or in an overlapping fashion. A concurrent system can work on multiple tasks at a given time. **Parallelism** is a special case of concurrency in which multiple tasks are executed simultaneously. A system can be concurrent without being parallel; it can switch between the processes quickly to provide an illusion of simultaneous execution. This is known as time-slicing or interleaving.
 
-![](/images/sys-design-fundamentals/01-concurrency/01-concurrency_vs_parallelism.png)
+![Concurrency vs parallelism](/images/sys-design-fundamentals/01-concurrency/01-concurrency_vs_parallelism.png)
 
 
 **Multiprocessing** is a specific approach to parallelism that uses multiple processors or cores within a single system. Parallelism is a more general concept that refers to executing multiple tasks or computations simultaneously across different processing units or resources, whether within a single system or across multiple systems.
@@ -30,7 +31,7 @@ Context-switch overhead varies dramatically by level of abstraction: process swi
 ##### Process Context Switch Cost
 Process context switches are the most expensive; at a typical CPU frequency of 3 GHz, this translates to approximately 8,000-16,000 CPU instructions per context switch.
 
-![](/images/sys-design-fundamentals/01-concurrency/02-context-switch-process.png)
+![Process Context Switch Cost: context switch process](/images/sys-design-fundamentals/01-concurrency/02-context-switch-process.png)
 
 The high cost comes from the extensive operations required:
 ​- Saving and restoring complete process state (registers, program counter, stack pointer)
@@ -116,9 +117,9 @@ func main() {
 
 ##### Goroutine Scheduling Model
 
-![](/images/sys-design-fundamentals/01-concurrency/03-go-schedular-components.png)
+![Goroutine Scheduling Model: go schedular components](/images/sys-design-fundamentals/01-concurrency/03-go-schedular-components.png)
 
-![](/images/sys-design-fundamentals/01-concurrency/04-go-schedular-image.png)
+![Goroutine Scheduling Model: go schedular image](/images/sys-design-fundamentals/01-concurrency/04-go-schedular-image.png)
 
 ```go
 runtime.schedule() {

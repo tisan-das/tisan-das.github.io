@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Distributed Filesystem Design
+image: /images/gfs/copyOnWrite.png
 categories: ["Distributed Systems", "Storage"]
 tags: [distributed-file-system]
 published: true
@@ -33,18 +34,18 @@ There's three classical aprroaches to take snapshot:
 - **Split mirror**: Copies every byte of the file-system
 - **Changed blocks**: Employes copy-on-write strategy
 
-![](/images/gfs/copyOnWrite.png)
+![Snapshot of Filesystem: copy On Write](/images/gfs/copyOnWrite.png)
 
 The snapshot node logs the changes since the last snapshot. The snapshot system can recover the file-system from the referenced snapshots and an array of patch object. Each patch object represents a file or directory, and contains the list of changegs on top of the previous snapshot. 
 There's a special snapshot called head snapshot which is a writable snapshot and is essentially the current file-structure. Each branch points to a writable snapshot.
 
-![](/images/gfs/snapshotPatch.png)
+![Snapshot of Filesystem: snapshot Patch](/images/gfs/snapshotPatch.png)
 
 - **Concurrent IO**: Redirects the IO to a different location
 
 ### File-system entities:
 
-![](/images/gfs/fileSystemAttributes.png)
+![File-system entities: file System Attributes](/images/gfs/fileSystemAttributes.png)
 
 
 ### References:

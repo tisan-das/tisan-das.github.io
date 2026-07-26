@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Designing Distributed Systems - Batch Computational Patterns
+image: /images/distributed-system-patterns-single-node/17.eventBatchProcessingPatterns.png
 series: "Designing Distributed Systems"
 categories: ["Distributed Systems", "Patterns"]
 tags: [batch-processing, work-queue]
@@ -15,7 +16,7 @@ In the last couple of blog posts, we've explored patterns of distributed systems
 Event driven batch processing can be thought of as workflow systems, where the flow of work is a directed acyclic graph and each node of the graph represents a specific step or task that needs to be performed. This is useful for the scenarios where multiple actions are needed to be performed on the specific event, and depending upon some condition, certain steps can be omitted. This kind of systems can be thought of as output of the processing of the one stream acts as input to another stream, which is then processed by it's consumer. 
 
 
-![](/images/distributed-system-patterns-single-node/17.eventBatchProcessingPatterns.png)
+![Event-Driven Batch Processing: 17.event Batch Processing Patterns](/images/distributed-system-patterns-single-node/17.eventBatchProcessingPatterns.png)
 
 ##### Copier:
 Take a single stream of work items, and duplicate it to multiple streams. This is useful for the scenarios where different type of acitivity to be performed on the same work item.
@@ -32,12 +33,12 @@ More generic form of sharder. Divide a workstream into multiple streams based up
 ##### Merger:
 Take multiple workstreams and turn them into a single workstream
 
-![](/images/distributed-system-patterns-single-node/18.eventBatchProcessingMergerPattern.png)
+![Merger: 18.event Batch Processing Merger Pattern](/images/distributed-system-patterns-single-node/18.eventBatchProcessingMergerPattern.png)
 
 
 ##### Example 01: Building an Event-Driven Flow for New User Sign-up:
 
-![](/images/distributed-system-patterns-single-node/19.eventBatchProcessingExample.png)
+![Example 01: Building an Event-Driven Flow for New User Sign-up: 19.event Batch Processing Example](/images/distributed-system-patterns-single-node/19.eventBatchProcessingExample.png)
 
 #### Hands On: Produce & Consume events:
 Publisher/Subscriber is one of the most popular approach to build batch processing workflows. The publisher/subscriber system provides queue or topic, to which publishers publish messages and consumers consume messages from. The messages are stored and delivered in a reliable way so that no message is missed. Certain implementation gurantees at-least one delivery. Kafka is one such industry-standard implementation.
@@ -78,7 +79,7 @@ controlplane $
 ##### Join (Barrier Synchronizaztion):
 Join is having more strict co-ordinated primitive compared to merger. Just like the join in thread, even though work items are processed in parallel, they are released only when all the processing is completed.
 
-![](/images/distributed-system-patterns-single-node/20.eventBatchProcessingJoin.png)
+![Join (Barrier Synchronizaztion): 20.event Batch Processing Join](/images/distributed-system-patterns-single-node/20.eventBatchProcessingJoin.png)
 
 ##### Reduce:
 Reduce merges several different work items from stream into a singel work item. In contrast to join, reduce doesn't wait for all operations to get completed to release the work items, rather optimally releases work items once they're processed and merged to form the output stream.

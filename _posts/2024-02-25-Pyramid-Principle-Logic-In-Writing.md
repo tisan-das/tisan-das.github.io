@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Logic in Writing using Pyramid Principle
+image: /images/aurora/PyramidPrinciple_DocumentStructure.png
 categories: ["Miscellaneous", "Writing"]
 tags: [writing, pyramid-principle]
 published: false
@@ -18,14 +19,14 @@ The pyramid principle dictates a rigid substructure that can serve to speed the 
 ### How to build a pyramid structure:
 Generally, it's easier to start at the top by thinking about the things that are the easiest for you to be sure of - your subject and the reader's knowledge of it, which you will remind him of in the introduction part.
 
-![](/images/aurora/PyramidPrinciple_DocumentStructure.png)
+![How to build a pyramid structure: Pyramid Principle Document Structure](/images/aurora/PyramidPrinciple_DocumentStructure.png)
 
 Always put historical chronology in the introduction and limit it to what the reader will agree is true.
 
 ### Fine points of introduction
 The introduction part establishes what the reader already knows and adds relevant questions. It narrates a story with the **situation** within which a **complication** is developed that raises the **question** to which the document is providing the answer. The situation and complication portion can each be as long as three or four paragraphs, but not more than that, as it's not supposed to take a long time to remind the readers what they already know.
 
-![](/images/aurora/PyramidPrinciple_IntroStrcture.png)
+![Fine points of introduction: Pyramid Principle Intro Strcture](/images/aurora/PyramidPrinciple_IntroStrcture.png)
 
 Start the introduction with a self-sufficient and non-controversial statement about the subject. Introductions are meant to remind rather than to inform, thus the scope is to include whatever is necessary for full understanding.
 The key lines not only provide a brief answer to the question raised by the statement of the main point, it also indicate the plan of the whole document.

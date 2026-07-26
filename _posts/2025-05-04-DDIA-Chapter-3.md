@@ -1,6 +1,7 @@
 ---
 layout: post
 title: DDIA - Chap03 - Storage and Retrieval
+image: /images/ddia/chap_02_hash_index_01.png
 series: "Designing Data-Intensive Applications"
 categories: ["Databases", "DDIA"]
 tags: [ddia, storage-engines]
@@ -20,11 +21,11 @@ It's to be noted that there's a trade-off in the storage system concerning index
 
 One of the most simple approach of storage engines is to use append only file, and to keep the indexes in-memory with the help of a hash-map. Hash-map contains the key and the byte-offset of the memory address. Whenever a new key-value pair is appended on the file, the key is added or updated on the in-memory hashmap.
 
-![](/images/ddia/chap_02_hash_index_01.png)
+![Hash Index: chap 02 hash index 01](/images/ddia/chap_02_hash_index_01.png)
 
 Storage engine like *Bitcask* (default engine of Riak), uses this approach, with the limitation that the all the keys can be fit into the available RAM. These storage engines are suitable for use-cases where the value of each key is updated quite frequently, eg. view count of viral videos. 
 
-![](/images/ddia/chap_02_hash_index_02.png)
+![Hash Index: chap 02 hash index 02](/images/ddia/chap_02_hash_index_02.png)
 
 Compaction and segmentation are used to ensure the efficiency of disk utilization. Once a segment is written, it's never modified, and once a couple of segments are created, they're merged through compaction. Once this compaction process is completed, the read requests are switched to the compact segment.
 
@@ -53,7 +54,7 @@ Compaction and segmentation are used to ensure the efficiency of disk utilizatio
 
 Segment files are sorted based on key. This format is known as Sorted String or *SSTable* for short. With this, the merging of segment files become efficient, by using an algorithm similar to merge sort. Also, there's no need to maintain the index of all the keys, a sparse index can be used with this.
 
-![](/images/ddia/chap_02_sstable_index_02.png)
+![SSTables & LSM-Trees: chap 02 sstable index 02](/images/ddia/chap_02_sstable_index_02.png)
 
 ##### How SSTable is used?
 - When a write request comes in add the key to the in-memory balanced tree. This in-memory tree is known as **memtable**.
@@ -61,7 +62,7 @@ Segment files are sorted based on key. This format is known as Sorted String or 
 - When a read request is received, the current memtable instance is used to find the key in the latest segment, and if not found iteratively next older segment files are checked
 - Run a merging and compaction process to combine segment files to discard overwritten and deleted records
 
-![](/images/ddia/chap_02_sstable_index_01.png)
+![How SSTable is used?: chap 02 sstable index 01](/images/ddia/chap_02_sstable_index_01.png)
 
 While the SSTables are used to store the index, the actual write is happening on the storage layer in append-only format. Storage engines that follow this structure are called *Log-Structured Merge-Tree* (**LSM-Tree**).
 
@@ -70,7 +71,7 @@ While the SSTables are used to store the index, the actual write is happening on
 
 B-Trees are most widely used for indexing structure. The major benefit of B-Tree is that it can hold large amount of data. For example, a four-level tree of 4 KB pages with a branching factor of 500 can store upto 250 TB. It's to be noted, the branching factor is decided in such a way that a node can fit in a page.
 
-![](/images/ddia/chap_02_btree_01.png)
+![B-Trees: chap 02 btree 01](/images/ddia/chap_02_btree_01.png)
 
 To make it crash consistent, a Write-ahead log (WAL) is used. It's an append-only file, and every modification is first applied to this WAL, before updating the B-Tree. This log, along with a snapshot can be used to easily build the B-Tree in case of a service crash. In addition, a lightweight lock, called *latch*, is used for concurrency control.
 

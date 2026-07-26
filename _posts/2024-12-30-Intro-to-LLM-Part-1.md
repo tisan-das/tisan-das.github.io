@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Introduction to Large Language Models (LLM)
+image: /images/llm/basic_arch.png
 series: "LLM & RAG"
 categories: ["Deep Learning", "LLM"]
 tags: [llm]
@@ -19,7 +20,7 @@ LLMs contain two basic building blocks: encoder and decoder. It's to be noted th
 
 Now, coming back to the original discussion about LLMs, the input streams are first tokenized into numerical data. This is performed by **Tokenizer**. So far, the tokenizers are also trained on the same data the actual LLMs are trained with, and hence generally each LLM has its own set of compatible tokenizers. Encoders consume the string of tokens and try to create a context embedding out of each token. The **context embedding** can be thought of as a prioritization matrix, which attempts to find out the tokens closely related to the current token.
 
-![](/images/llm/basic_arch.png)
+![Building blocks: basic arch](/images/llm/basic_arch.png)
 
 The second building block, the decoder block is responsible for generating output. It's to be noted that not all LLMs are designed to generate output that we see generally. For example, there are some classification LLM models, like the sentiment models, which try to classify a set of tokens. This kind of model is called a **representation model**, and doesn't contain the decoder block. The ones that generate output in generic form are called **generative model**. These generative models, on the other hand, need this decoder block.
 
@@ -50,7 +51,7 @@ The number of parameters that need to be updated on the base model is generally 
 This is the final step, where the behavior of the model is aligned with AI safety. Different reward models are maintained for different aspects.
 **PPO** (Proximity Policy Optimization) is one popular technique that uses such reinforcement reward models.
 
-![](/images/llm/reward_model.png)
+![How are they trained?: reward model](/images/llm/reward_model.png)
 
 However, maintaining different models has some disadvantages also. That is where **DPO** comes into the picture, where the shift between the accepted answer and rejected answer is calculated during fine-tuning itself, thus aligning the model with the expected behavior.
 

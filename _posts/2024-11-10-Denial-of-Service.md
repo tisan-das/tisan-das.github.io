@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Web Application Security - Denial of Service Attack
+image: /images/web-security/dos_logical.png
 series: "Web Security"
 categories: ["Security", "Web Security"]
 tags: [denial-of-service, ddos]
@@ -22,7 +23,7 @@ Regular expressions are often used in web applications to validate the input tex
 ### Logical DoS Vulnerability:
 Logical DoS vulnerabilities are among the hardest to find and exploit, as they require some experience with how the application behaves in certain scenarios.
 
-![](/images/web-security/dos_logical.png)
+![Logical Do S Vulnerability: DOS logical](/images/web-security/dos_logical.png)
 
 **Mitigation:**
 Logical DoS attacks are based on resource-intensive operations. To anticipate some kind of DoS attacks, first, look for occurrences in the web application that are resource-heavy. The following might be a good place to look at:
@@ -37,7 +38,7 @@ Introducing a rate limit, or allocating more resources depending upon the type o
 ### DDoS Attacks:
 DDoS attacks are generally initiated by a network of a large number of nodes flooding a service with requests, thus overloading the servers and rendering the service useless to the actual users. 
 
-![](/images/web-security/dos_ddos.png)
+![DDo S Attacks: DOS DDOS](/images/web-security/dos_ddos.png)
 
 
 **Yoyo Attack**
@@ -50,7 +51,7 @@ As DDoS requires significant compute resources, at certain times the DDoS attack
 **Mitigation**
 DDoS attacks can't be prevented. However, the easiest way to handle this is to invest in a bandwidth management service. These services are capable of intercepting large quantities of network requests and filtering out against the known botnet networks.
 
-![](/images/web-security/dos_blackhole.png)
+![DDo S Attacks: DOS blackhole](/images/web-security/dos_blackhole.png)
 
 Further study:
 - How to implement rate-limiting

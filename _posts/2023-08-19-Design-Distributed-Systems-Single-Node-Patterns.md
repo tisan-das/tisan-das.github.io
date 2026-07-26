@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Designing Distributed Systems - Single Node Patterns
+image: /images/distributed-system-patterns-single-node/01.SidecarPattern.png
 series: "Designing Distributed Systems"
 categories: ["Distributed Systems", "Patterns"]
 tags: [sidecar, ambassador-pattern, adapter-pattern]
@@ -14,12 +15,12 @@ Containers and container orchestrators have introduced a great deal of flexibili
 ### Sidecar Pattern:
 A sidecar container is attached to the application container to add functionalities that might otherwise be difficult to improve.
 
-![](/images/distributed-system-patterns-single-node/01.SidecarPattern.png)
+![Sidecar Pattern: 01.Sidecar Pattern](/images/distributed-system-patterns-single-node/01.SidecarPattern.png)
 
 ##### Example 01: Adding HTTPS layer to a legacy service:
 New development on legacy applications is significantly more challenging compared to adding an NGINX ingress which terminates the SSL connectivity and redirects the request to the legacy application.
 
-![](/images/distributed-system-patterns-single-node/02.HttpsSidecar.png)
+![Example 01: Adding HTTPS layer to a legacy service: 02.HTTPS Sidecar](/images/distributed-system-patterns-single-node/02.HttpsSidecar.png)
 
 ##### Example 02: Dynamic configuration:
 Earlier applications were written with the understanding that the configuration file would reside on the filesystem. However, with the advent of cloud computing, it's easier to use API to update the configuration. This provides a way to do a dynamic push of configuration without the need to log into each node and then update the configuration file through some command. 
@@ -29,11 +30,11 @@ docker run --pid:container:${APP_ID} -p 8080:8080 brendanburns/topz:db0fa58 \
         /server -address=0.0.0.0:8080
 ```
 
-![](/images/distributed-system-patterns-single-node/03.DynamicConfiguration.png)
+![Example 02: Dynamic configuration: 03.Dynamic Configuration](/images/distributed-system-patterns-single-node/03.DynamicConfiguration.png)
 
 ##### Example 03: Building Simple PaaS:
 
-![](/images/distributed-system-patterns-single-node/04.SidecarBasedPaaS.png)
+![Example 03: Building Simple Paa S: 04.Sidecar Based Paa S](/images/distributed-system-patterns-single-node/04.SidecarBasedPaaS.png)
 
 
 The sidecar container should be reusable across a wide variety of applications and deployments. During the development, focus on the following areas:
@@ -44,12 +45,12 @@ The sidecar container should be reusable across a wide variety of applications a
 ### Ambassadors:
 Ambassador container brokers interactions between the application container and the rest of the world.
 
-![](/images/distributed-system-patterns-single-node/05.ambassadorPattern.png)
+![Ambassadors: 05.ambassador Pattern](/images/distributed-system-patterns-single-node/05.ambassadorPattern.png)
 
 ##### Example 01: Shard a service:
 Sharding splits a layer into multiple disjoint places, each hosted by a different node. Generally, the sharding logic is built into the sharding service itself, and the sharding service uses a stateless load balancer to route the request to the appropriate shard
 
-![](/images/distributed-system-patterns-single-node/06.genericShardedService.png)
+![Example 01: Shard a service: 06.generic Sharded Service](/images/distributed-system-patterns-single-node/06.genericShardedService.png)
 
 ##### Example 02: Service brokering:
 Service discovery is a way for Microservices to discover each other over a network. The process is called service discovery, and the service that performs this discovery and links microservices is called service broker.
@@ -205,7 +206,7 @@ controlplane $
 ### Adapters:
 Adapter container transforms the output of the application container so that it conforms to the standard other containers are expecting it to be.
 
-![](/images/distributed-system-patterns-single-node/08.AdapterPattern.png)
+![Adapters: 08.Adapter Pattern](/images/distributed-system-patterns-single-node/08.AdapterPattern.png)
 
 ##### Example 01: Monitoring:
 
