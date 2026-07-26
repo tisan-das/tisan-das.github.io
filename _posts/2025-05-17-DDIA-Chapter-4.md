@@ -1,7 +1,6 @@
 ---
 layout: post
 title: DDIA - Chap04 - Enconding and Evolution
-image: /assets/img/series/designing-data-intensive-applications.png
 series: "Designing Data-Intensive Applications"
 categories: ["Databases", "DDIA"]
 tags: [ddia, serialization]

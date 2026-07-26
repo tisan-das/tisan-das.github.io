@@ -1,7 +1,6 @@
 ---
 layout: post
 title: PostgreSQL - Isolation Levels
-image: /assets/img/series/postgresql.png
 series: "PostgreSQL"
 categories: ["Databases", "PostgreSQL"]
 tags: [postgres, isolation-levels, mvcc]

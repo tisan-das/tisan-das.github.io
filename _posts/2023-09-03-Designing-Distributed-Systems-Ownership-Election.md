@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Designing Distributed Systems - Ownership Election
-image: /assets/img/series/designing-distributed-systems.png
 series: "Designing Distributed Systems"
 categories: ["Distributed Systems", "Patterns"]
 tags: [leader-election]

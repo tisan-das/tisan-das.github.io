@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Binary Tree Algorithms - Part II
-image: /assets/img/series/binary-tree-problems.png
 series: "Binary Tree Problems"
 categories: ["Algorithms", "Problem Sets"]
 tags: [binary-tree, cpp]
