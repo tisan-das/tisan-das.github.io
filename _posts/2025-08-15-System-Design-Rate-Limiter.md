@@ -6,6 +6,7 @@ image: /images/sys-design-vol1/01-rate-limiter-hld.png
 series: "System Design Case Studies"
 categories: ["System Design", "Case Studies"]
 tags: [rate-limiter, system-design]
+mermaid: true
 published: true
 ---
 
@@ -37,6 +38,15 @@ It involves two parameters:
 - **Bucket size**: A bucket is maintained for each type of request of each user. The bucket size represents the number of maximum tokens allowed in the bucket. Each request consumes a token from the bucket, and if there are no tokens left in the bucket, then the request is rejected.
 - **Refill rate**: number of tokens put into the bucket every unit time.
 
+```mermaid
+flowchart TD
+  R[Incoming request] --> T{"Tokens remaining > 0?"}
+  T -->|yes| D[Consume 1 token]
+  D --> A[Allow request]
+  T -->|no| X[Reject / 429]
+  RF[Refill timer] -->|add tokens at rate r| B[(Token bucket)]
+  B --- T
+```
 
 ![Rate-limiting Algorithm: rate limiter tokrn bucket algo](/images/sys-design-vol1/01-rate-limiter-tokrn-bucket-algo.png)
 

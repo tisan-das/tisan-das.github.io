@@ -60,7 +60,9 @@ Intro paragraph (becomes the home-page excerpt).
 
 - **Images**: store under `images/<topic>/`, reference absolutely, and **always write alt text**:
   `![Raft leader election timeline](/images/raft/election.png)`
-- **Code**: fenced blocks with a language tag (```` ```sql ````, ```` ```go ````, ```` ```cpp ````) — Chirpy adds line numbers and a copy button
+- **Code**: fenced blocks with a language tag (```` ```sql ````, ```` ```go ````, ```` ```cpp ````) — Chirpy adds line numbers and a copy button. Add `{: file='name.ext' }` right after a fence for a filename label; use ```` ```diff ```` for before/after snippets
+- **Math**: set `math: true` in front matter, then `$$...$$` blocks and `$...$` inline (MathJax)
+- **Diagrams**: set `mermaid: true` in front matter and use ```` ```mermaid ```` fences for sequence/flow/state diagrams — they follow dark mode automatically. Use PNGs for pictorial figures
 - **Categories**: pick an existing top-level + subcategory pair where possible (see the Categories tab)
 - **Series**: reuse the exact series name; the nav box builds itself
 

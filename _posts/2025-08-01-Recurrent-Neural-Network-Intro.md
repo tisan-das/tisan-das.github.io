@@ -5,6 +5,7 @@ image: /images/deep-learning/02_01_recurrence_network.png
 series: "Deep Learning Fundamentals"
 categories: ["Deep Learning", "Fundamentals"]
 tags: [rnn, sequence-models]
+math: true
 published: true
 ---
 
@@ -12,12 +13,25 @@ Given an image of a ball, how do we predict where it will go next? The tradition
 
 {% include series-nav.html %}
 
-The sequential feature can be captured by introducing another set of hidden states to maintain prior history, as we move through the sequence. The primary objective of these hidden states is to serve as a previous memory, updating with each timestamp input. These are also called recurrence relations, and the network is called **Recurrent Neural Network**. 
+The sequential feature can be captured by introducing another set of hidden states to maintain prior history, as we move through the sequence. The primary objective of these hidden states is to serve as a previous memory, updating with each timestamp input. These are also called recurrence relations, and the network is called **Recurrent Neural Network**.
+
+The hidden state $h_t$ and output $\hat{y}_t$ at time $t$ are:
+
+$$
+h_t = f\bigl(W_{hh}h_{t-1} + W_{xh}x_t + b_h\bigr), \qquad
+\hat{y}_t = g\bigl(W_{hy}h_t + b_y\bigr)
+$$
+
+where $f$ and $g$ are activation functions (e.g. $\tanh$, softmax), and the $W_{\cdot}$ matrices are shared across all timesteps.
 
 ![Recurrence network](/images/deep-learning/02_01_recurrence_network.png)
 ![Recurrence network calc](/images/deep-learning/02_02_recurrence_network_calc.png)
 
-Compute the loss of the network at the individual slice, and then the total loss by summing over all the timestamps in our sequence. 
+Compute the loss of the network at the individual slice, and then the total loss by summing over all the timestamps in our sequence of length $T$:
+
+$$
+\mathcal{L} = \sum_{t=1}^{T}\mathcal{L}_t\bigl(y_t, \hat{y}_t\bigr)
+$$
 
 ![Recurrence network loss](/images/deep-learning/02_03_recurrence_network_loss.png)
 
@@ -42,9 +56,9 @@ In order to handle the time-dependence, the backpropagation algorithm also needs
 
 ![Encoding language for a Neural Network: recurrence network backpropagation](/images/deep-learning/02_04_recurrence_network_backpropagation.png)
 
-The issue with this type of backpropagation algorithm:
-- **Exploding gradients**: where many of the gradients have values > 1
-- **Vanishing gradients**: where many of the gradients have values < 1
+The issue with this type of backpropagation algorithm is that the gradient multiplies through many timesteps, so the product of Jacobians can grow or shrink exponentially:
+- **Exploding gradients**: many factors $\lvert\partial h_t/\partial h_{t-1}\rvert > 1$
+- **Vanishing gradients**: many factors $\lvert\partial h_t/\partial h_{t-1}\rvert < 1$
 
 ![Encoding language for a Neural Network: recurrence network vaishing gradients](/images/deep-learning/02_05_recurrence_network_vaishing_gradients.png)
 

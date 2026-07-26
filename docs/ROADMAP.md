@@ -12,24 +12,19 @@ Guiding constraints:
 
 ---
 
-## Phase 5 — Reading experience: code, math, inline diagrams  (M)
+## Phase 5 — Reading experience: code, math, inline diagrams  (M) ✅ done
 
 The core of a CS blog. Target: snippets and formulas look as good as the prose.
 
-- [ ] **Code font**: JetBrains Mono + ligatures. Add via `@import` in our SCSS override;
-      override `code`/`pre`/`highlight` font-family, size, line-height.
-- [ ] **Rouge palette refresh**: hand-tuned token colors for `.highlight`, light + dark
-      variants (GitHub Light / One-Dark-inspired), in the same SCSS file.
-- [ ] **Filename labels**: adopt `{: file='path' }` on fenced blocks where the snippet
-      belongs to a file; use ` ```diff ` fences for before/after. Add both conventions
-      to `tools/new_post.py` template + README. (Verify exact Chirpy attribute syntax
-      at implementation time.)
-- [ ] **MathJax**: `math: true` in front matter (built-in). Convert prose-math to LaTeX
-      in: Deep-Neural-Network, RNN, Game-Theory, Sliding-Window, Binary-Search posts
-      (~6–10 posts). `$$...$$` blocks, `$...$` inline.
-- [ ] **Mermaid**: `mermaid: true` (built-in, dark-mode aware). Convert flow-type
-      diagrams to mermaid sequence/flow/state diagrams: RAFT election, primary-backup
-      flow, rate-limiter pipeline, scatter-gather. Keep PNGs for pictorial content.
+- [x] **Code font**: JetBrains Mono + ligatures, self-hosted woff2 under `assets/fonts/`.
+- [x] **Rouge palette refresh**: GitHub-light / One-Dark token colors in our SCSS override
+      (light + dark + system-dark modes).
+- [x] **Filename labels**: `{: file='path' }` convention documented; `tools/new_post.py`
+      template + README updated; ` ```diff ` called out for before/after.
+- [x] **MathJax**: `math: true` + LaTeX on DNN, RNN, HashTable, Consistent Hashing,
+      Union-Find, LSM-Tree (MSE/CE/GD, recurrence, load factor, $k/n$, $\alpha(n)$, etc.).
+- [x] **Mermaid**: RAFT state + election sequence, rate-limiter token-bucket flow,
+      consistent-hashing lookup flow. PNGs kept for pictorial figures.
 
 ## Phase 6 — Image & diagram polish  (M)
 

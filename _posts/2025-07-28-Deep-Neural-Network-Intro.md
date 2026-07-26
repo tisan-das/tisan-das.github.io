@@ -5,6 +5,7 @@ image: /images/deep-learning/01_01_ai_vs_ml_vs_deep_learning.png
 series: "Deep Learning Fundamentals"
 categories: ["Deep Learning", "Fundamentals"]
 tags: [neural-networks, deep-learning]
+math: true
 published: true
 ---
 The progress of the deep learning field over the last couple of years is astounding. From creating vague images in 2015 to generating realistic videos with just a few minutes of prompts, the changes are truly remarkable. 
@@ -25,14 +26,32 @@ A single unit of a neuron in a neural network is referred to as a perceptron. Th
 ### Loss & Gradients
 
 The loss of our network measures the cost of incorrect predictions. Empirical loss measures the total loss across the dataset.
-Cross-entropy loss can be used with models that output a probability between 0 and 1. Mean-squared error loss can be used for continuous real numbers.
-We aim to determine network weights that yield the lowest loss. The gradient descent algorithm can be used to converge to the lowest loss iteratively.
+
+**Mean-squared error** (continuous targets):
+
+$$
+\mathcal{L}_{\mathrm{MSE}} = \frac{1}{N}\sum_{i=1}^{N}\bigl(y_i - \hat{y}_i\bigr)^2
+$$
+
+**Binary cross-entropy** (models that output a probability $\hat{y}\in(0,1)$):
+
+$$
+\mathcal{L}_{\mathrm{CE}} = -\frac{1}{N}\sum_{i=1}^{N}\Bigl[y_i\log\hat{y}_i + (1-y_i)\log(1-\hat{y}_i)\Bigr]
+$$
+
+We aim to determine network weights that yield the lowest loss. **Gradient descent** converges to a local minimum iteratively by stepping against the gradient:
+
+$$
+w \leftarrow w - \eta\,\nabla_w\mathcal{L}(w)
+$$
+
+where $\eta$ is the learning rate and $\nabla_w\mathcal{L}$ is the gradient of the loss w.r.t. the weights.
 
 ![Loss & Gradients: gradient descent](/images/deep-learning/01_04_gradient_descent.png)
 
 The way the gradients are calculated in a step-by-step manner from output to input direction is called backpropagation. It's worth noting that the gradient descent algorithm is inherently a greedy approach.
 
-Use an adaptive learning rate to overcome the overshooting and undershooting problems commonly associated with fixed learning rates. Different gradient descent algorithms are proposed based upon different adaptive mechanisms. SGD and Adam are the most widely used variations of gradient descent.
+Use an adaptive learning rate $\eta$ to overcome the overshooting and undershooting problems commonly associated with fixed learning rates. Different gradient descent algorithms are proposed based upon different adaptive mechanisms. SGD and Adam are the most widely used variations of gradient descent.
 
 Gradient calculation is expensive. Hence, it is generally computed over a batch.
 

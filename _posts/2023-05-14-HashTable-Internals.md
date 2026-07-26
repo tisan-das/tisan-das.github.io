@@ -4,6 +4,7 @@ title: Introduction to Hash Table Internals
 image: /images/hash-internals/HashTableProcess.png
 categories: ["Programming", "Data Structures"]
 tags: [hashtable, data-structures]
+math: true
 published: true
 ---
 
@@ -29,7 +30,7 @@ Chaining with linked list:
 - Each node of the list contains a pointer to the actual data (key and the value) and a pointer to the next node in the list
 
 Chaining with other data structures:
-- Self-balancing binary tree: Insertion and lookup is O(h)
+- Self-balancing binary tree: insertion and lookup are $O(h)$ (and $O(\log n)$ when the tree stays balanced)
 - Useful when the collision rate is high, and could not resize the holding table
 
 
@@ -66,11 +67,19 @@ For adding or lookup, we need to continuously probe until an empty slot is encou
 
 
 ### Resizing hash table:
-Aggressive resizing would lead to too frequent resizing, which is a time-consuming process, and can't also be too lenient with resizing, as that would degrade performance. The general rule of thumb is to expand the holding array once the load factor is increased to 0.5 and shrink it once the load factor is reduced to 0.125.
+Aggressive resizing would lead to too frequent resizing, which is a time-consuming process, and can't also be too lenient with resizing, as that would degrade performance. The general rule of thumb is to expand the holding array once the load factor rises above $0.5$ and shrink it once the load factor falls below $0.125$.
 
-Also, one more point to be noted that having the hash table sized to be an exponent of 2, as the hash functions extensively rely upon mod operation. And the mod operation is compute-heavy if division operation is used. However with bit manipulation, AND operation with (2^n-1) would also result in equivalent mod operation.
+Also, one more point to be noted: sizing the table as a power of two is common, because hash functions extensively rely on the $\mathrm{mod}$ operation. Division-based $\mathrm{mod}$ is relatively expensive; with a power-of-two capacity $m = 2^n$, bit-masking is equivalent:
 
-Load factor = number of keys/number of slots
+$$
+x \bmod 2^n \;\equiv\; x \,\&\, (2^n - 1)
+$$
+
+**Load factor:**
+
+$$
+\alpha = \frac{\text{number of keys}}{\text{number of slots}}
+$$
 
 ##### One of the major optimization over chaining to introduce localized access:
 ![One of the major optimization over chaining to introduce localized access: chaining Optimization](/images/hash-internals/chainingOptimization.png)

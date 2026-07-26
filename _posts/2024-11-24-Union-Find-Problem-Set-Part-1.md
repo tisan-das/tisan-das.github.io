@@ -3,6 +3,7 @@ layout: post
 title: Union-Find Problem Sets
 categories: ["Algorithms", "Problem Sets"]
 tags: [union-find, cpp]
+math: true
 published: true
 ---
 
@@ -10,7 +11,7 @@ Union-find data structure is used extensively to solve problems associated with 
 - **Find**: finding a representative of the set
 - **Merge**: merge two disjoint sets to form a single set
 
-NB: To optimize the find operation, always assign the representative as the node having the highest rank. This is similar to assigning the subtree with a lower height as a child under the subtree with a higher height, thus reducing the complexity. The effective time complexity of these two operations can be reduced to O(α(n)), α being an Ackermann function.
+NB: To optimize the find operation, always assign the representative as the node having the highest rank. This is similar to assigning the subtree with a lower height as a child under the subtree with a higher height, thus reducing the complexity. With union-by-rank and path compression, both operations run in amortized $O\bigl(\alpha(n)\bigr)$ time, where $\alpha$ is the inverse Ackermann function (grows so slowly it is $\le 4$ for any practical $n$).
 
 This is useful in solving problems involving relationships, especially the ones that can be described with undirected graphs. Detecting the presence of a cycle in an undirected graph is one such example. For detecing cycle in directed graph, topological sort is used.
 
