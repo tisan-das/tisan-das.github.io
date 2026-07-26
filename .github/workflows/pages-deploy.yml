@@ -1,10 +1,16 @@
 name: "Build and Deploy"
 
 on:
-  # Build on every branch push; deploy is gated to master below.
   push:
-  pull_request:
-  # Manual runs from the Actions tab (deploy still only if the run is on master)
+    branches:
+      - master
+      - develop
+    paths-ignore:
+      - .gitignore
+      - README.md
+      - LICENSE
+
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 permissions:
@@ -12,7 +18,7 @@ permissions:
   pages: write
   id-token: write
 
-# Per-ref concurrency so a push to develop cannot cancel an in-flight master deploy.
+# Per-ref concurrency so a develop push cannot cancel an in-flight master deploy.
 concurrency:
   group: pages-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -43,14 +49,14 @@ jobs:
           JEKYLL_ENV: "production"
 
       - name: Test site
-        # Non-blocking — tighten later if you want the build to fail on link errors.
+        # Non-blocking for now — tighten once the migration has settled.
         continue-on-error: true
         run: |
           bundle exec htmlproofer _site \
             \-\-disable-external \
             \-\-ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/"
 
-      # Artifact is only needed for GitHub Pages deploy (master).
+      # Artifact only needed when deploying (master).
       - name: Upload site artifact
         if: github.ref == 'refs/heads/master'
         uses: actions/upload-pages-artifact@v5
