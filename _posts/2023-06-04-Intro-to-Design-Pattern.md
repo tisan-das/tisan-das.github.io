@@ -59,8 +59,9 @@ Border and scrollbar class has got some appearance, which suggests they should b
 _Embellishing UI: mono Glyph Class Relationship_
 
 The decorator pattern captures class and object relationship that support embellishment by attaching new behaviours to object by placing these objects under special wrapper class.
-![Embellishing UI: embellished Object Structure.png`](/images/system-design-case-study/embellishedObjectStructure.png`)
-_Embellishing UI: embellished Object Structure.png`_
+![Embellishing UI: embellished object structure](/images/system-design-case-study/embellishedObjectStructure.png){: .light }
+![Embellishing UI: embellished object structure](/images/system-design-case-study/embellishedObjectStructure-dark.png){: .dark }
+_Embellishing UI: embellished object structure_
 
 ### Supporting multiple look-and-feel standards
 We assume 2 set of widget Glyph classes:
