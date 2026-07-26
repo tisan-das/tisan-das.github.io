@@ -1,7 +1,7 @@
 ---
 # the default layout is 'page'
 icon: fas fa-info-circle
-order: 4
+order: 5
 ---
 
 Hey! I'm **Tisan Das**, a software engineer on a journey to design large-scale distributed systems.
@@ -11,6 +11,8 @@ Over the years I've worked on multiple products with varying stacks — from a s
 I welcome you to have a glimpse of the journey. If you find something interesting, or want to discuss an idea, I'm always happy to talk.
 
 ## What you'll find here
+
+Prefer a guided path? Start on the **[Series]({{ '/series/' | relative_url }})** page — reading tracks plus every multi-part series in order.
 
 - **[Distributed Systems]({{ '/categories/distributed-systems/' | relative_url }})** — consensus (Raft, PBFT), replication, distributed file systems, and notes on classic papers (GFS, DynamoDB, Aurora, Bitcoin…)
 - **[Databases]({{ '/categories/databases/' | relative_url }})** — PostgreSQL internals and isolation, LSM trees, and chapter-by-chapter notes on *Designing Data-Intensive Applications*

@@ -1,8 +1,7 @@
 # Site Improvement Roadmap (post-migration)
 
-Status: Phases 0–4 complete (quick fixes, Chirpy migration, taxonomy, tooling/polish,
-giscus-prep/pins/brand accent). The phases below are **independently shippable** —
-pick in any order. Each notes effort (S/M/L) and risk.
+Status: Phases 0–8 complete in-repo. Remaining **manual** flips: giscus Discussions +
+category_id, Google Search Console verification code. Each phase notes effort (S/M/L).
 
 Guiding constraints:
 - **No theme vendoring** (don't copy theme layouts/includes into the repo) unless a
@@ -50,19 +49,18 @@ The core of a CS blog. Target: snippets and formulas look as good as the prose.
 - [x] **Dark-mode QA**: structural check on top ~20 posts (light/dark pairs, details
       balance, prompt markup) — 0 issues.
 
-## Phase 8 — Discovery, curation & engagement  (S)
+## Phase 8 — Discovery, curation & engagement  (S) ✅ done (manual flips remain)
 
-- [ ] **Activate giscus**: enable Discussions, install app, paste category_id,
-      `comments.provider: giscus`. (Pre-configured; see README.)
-- [ ] **`/series/` tab**: new `_tabs/series.md` (layout page) with Liquid
-      `group_by: "series"` over all posts + `_data/series.yml` for per-series
-      descriptions. Renumber tab `order:` fields. No theme vendoring needed.
-- [ ] **Reading paths**: curated tracks on the series page — e.g. "Distributed Systems:
-      zero → papers" and "System Design interview track".
-- [ ] **Search Console**: `webmaster_verifications.google` in `_config.yml` + submit
-      `sitemap.xml`.
-- [ ] (Optional, higher cost) **Home "featured series" section** — requires vendoring
-      the home layout; only if the series tab feels insufficient.
+- [x] **Giscus**: `repo` + `repo_id` pre-filled; README has the 5-step activation.
+      *Your action:* enable Discussions, install giscus app, paste `category_id`,
+      set `comments.provider: giscus`.
+- [x] **`/series/` tab**: `_tabs/series.md` (order 3) — all 13 series with ordered
+      part lists from front matter + `_data/series.yml` descriptions.
+- [x] **Reading paths** on the Series page: DS zero→papers, system-design interview,
+      data internals, algorithms practice (links resolve via post titles).
+- [x] **Search Console**: config comments + README steps for verification code and
+      sitemap submit (`/sitemap.xml`). *Your action:* paste `webmaster_verifications.google`.
+- [x] **Home featured series**: skipped — Series tab covers IA without vendoring home.
 
 ---
 

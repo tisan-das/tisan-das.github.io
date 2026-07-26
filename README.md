@@ -75,14 +75,27 @@ bundle exec jekyll serve --livereload
 
 ## Enabling comments (giscus)
 
-Comments are powered by [giscus](https://giscus.app) (GitHub Discussions). One-time setup:
+Comments are powered by [giscus](https://giscus.app) (GitHub Discussions). One-time setup (~3 minutes):
 
 1. Repo **Settings → General → Features → enable Discussions**
-2. Install the [giscus app](https://github.com/apps/giscus) on this repo
-3. Open [giscus.app](https://giscus.app), enter the repo, category **Announcements**, copy the `data-category-id`
-4. In `_config.yml`: set `comments.giscus.category_id` to that value and `comments.provider` to `giscus`
+2. Install the [giscus app](https://github.com/apps/giscus) on this repo (only this repository)
+3. Open [giscus.app](https://giscus.app):
+   - Repository: `tisan-das/tisan-das.github.io`
+   - Category: **Announcements** (only maintainers can create new discussion threads)
+   - Copy **category id** (`data-category-id`)
+4. In `_config.yml` under `comments`:
+   - set `provider: giscus`
+   - set `giscus.category_id: "..."` (paste the id)
+5. Push to `master` and hard-refresh a post — the comment box appears at the bottom
 
-(`repo` and `repo_id` are already configured.)
+Already filled in for you: `giscus.repo`, `giscus.repo_id` (`R_kgDOId0yPg`), mapping, lang, reactions.
+
+## Google Search Console
+
+1. [Search Console](https://search.google.com/search-console) → Add property → URL prefix `https://gemsofcoding.com`
+2. Verification method **HTML tag** → copy only the `content="..."` value
+3. Paste into `_config.yml` → `webmaster_verifications.google`
+4. Push, click **Verify**, then **Sitemaps** → submit `https://gemsofcoding.com/sitemap.xml`
 
 ## Deployment
 

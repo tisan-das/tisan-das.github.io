@@ -40,8 +40,12 @@ social:
     - https://github.com/tisan-das
 
 # Site Verification Settings
+# Google Search Console: https://search.google.com/search-console
+# 1) Add property https://gemsofcoding.com
+# 2) Choose HTML-tag verification → copy the content= value only
+# 3) Paste below, push, then click Verify and submit sitemap.xml
 webmaster_verifications:
-  google: # fill in your Google verification code
+  google: # e.g. "AbCdEf..." content value from the meta tag
   bing: # fill in your Bing verification code
   alexa: # fill in your Alexa verification code
   yandex: # fill in your Yandex verification code

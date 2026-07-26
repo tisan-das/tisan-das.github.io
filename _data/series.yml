@@ -1,53 +1,78 @@
-# Series catalog (Phase 6) — used by series tab / social cards
+# Series catalog — sidebar Series tab, social cards, reading paths
 - name: "Distributed Systems Papers"
   slug: distributed-systems-papers
-  description: "Classic papers: Raft, GFS, DynamoDB, …"
+  description: "Reading notes on classic systems papers — consensus, replication, storage, and coordination."
   image: /assets/img/series/distributed-systems-papers.png
+  order: 1
+
 - name: "System Design Case Studies"
   slug: system-design-case-studies
-  description: "Rate limiter, KV store, crawler, …"
+  description: "Interview-style designs: rate limiter, consistent hashing, key-value store, crawler, and more."
   image: /assets/img/series/system-design-case-studies.png
+  order: 2
+
 - name: "Designing Distributed Systems"
   slug: designing-distributed-systems
-  description: "Patterns from Brendan Burns"
+  description: "Patterns from Brendan Burns — single-node, sharding, scatter-gather, ownership, and batch compute."
   image: /assets/img/series/designing-distributed-systems.png
-- name: "Web Security"
-  slug: web-security
-  description: "XSS, CSRF, XXE, injection, DoS"
-  image: /assets/img/series/web-security.png
+  order: 3
+
 - name: "Designing Data-Intensive Applications"
   slug: designing-data-intensive-applications
-  description: "Chapter notes on DDIA"
+  description: "Chapter-by-chapter notes on Kleppmann's DDIA — reliability, models, storage, encoding, replication."
   image: /assets/img/series/designing-data-intensive-applications.png
-- name: "Design Patterns"
-  slug: design-patterns
-  description: "GoF creational, structural, behavioral"
-  image: /assets/img/series/design-patterns.png
-- name: "Docker"
-  slug: docker
-  description: "Containers from first principles"
-  image: /assets/img/series/docker.png
-- name: "Binary Tree Problems"
-  slug: binary-tree-problems
-  description: "Problem sets in C++"
-  image: /assets/img/series/binary-tree-problems.png
-- name: "Binary Search Problems"
-  slug: binary-search-problems
-  description: "Problem sets in C++"
-  image: /assets/img/series/binary-search-problems.png
-- name: "BFS Problems"
-  slug: bfs-problems
-  description: "Graph BFS problem sets"
-  image: /assets/img/series/bfs-problems.png
-- name: "LLM & RAG"
-  slug: llm-rag
-  description: "Large language models & retrieval"
-  image: /assets/img/series/llm-rag.png
-- name: "Deep Learning Fundamentals"
-  slug: deep-learning-fundamentals
-  description: "DNN and sequence models"
-  image: /assets/img/series/deep-learning-fundamentals.png
+  order: 4
+
+- name: "Web Security"
+  slug: web-security
+  description: "XSS, CSRF, XXE, injection, and denial-of-service — how common web attacks work and how to stop them."
+  image: /assets/img/series/web-security.png
+  order: 5
+
 - name: "PostgreSQL"
   slug: postgresql
-  description: "Isolation levels & internals"
+  description: "Isolation levels, MVCC, and storage/index internals for day-to-day performance intuition."
   image: /assets/img/series/postgresql.png
+  order: 6
+
+- name: "Design Patterns"
+  slug: design-patterns
+  description: "Gang of Four patterns — creational, structural, and behavioral — with diagrams and code."
+  image: /assets/img/series/design-patterns.png
+  order: 7
+
+- name: "Docker"
+  slug: docker
+  description: "Containers from first principles — images, layers, volumes, and build-time concepts."
+  image: /assets/img/series/docker.png
+  order: 8
+
+- name: "Deep Learning Fundamentals"
+  slug: deep-learning-fundamentals
+  description: "Neural nets and sequence models — loss, gradients, RNNs, and the usual failure modes."
+  image: /assets/img/series/deep-learning-fundamentals.png
+  order: 9
+
+- name: "LLM & RAG"
+  slug: llm-rag
+  description: "Large language models and retrieval-augmented generation for semantic search."
+  image: /assets/img/series/llm-rag.png
+  order: 10
+
+- name: "Binary Tree Problems"
+  slug: binary-tree-problems
+  description: "C++ problem sets on binary tree traversals and classic tree algorithms."
+  image: /assets/img/series/binary-tree-problems.png
+  order: 11
+
+- name: "Binary Search Problems"
+  slug: binary-search-problems
+  description: "C++ problem sets on binary search over answers, rotated arrays, and variants."
+  image: /assets/img/series/binary-search-problems.png
+  order: 12
+
+- name: "BFS Problems"
+  slug: bfs-problems
+  description: "C++ graph BFS problem sets — shortest paths, grids, and multi-source search."
+  image: /assets/img/series/bfs-problems.png
+  order: 13
