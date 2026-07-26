@@ -1,18 +1,10 @@
 name: "Build and Deploy"
 
 on:
+  # Build on every branch push; deploy is gated to master below.
   push:
-    branches:
-      - main
-      - master
-      # Build-only check for the working branch (deploy job is gated below)
-      - develop
-    paths-ignore:
-      - .gitignore
-      - README.md
-      - LICENSE
-
-  # Allows you to run this workflow manually from the Actions tab
+  pull_request:
+  # Manual runs from the Actions tab (deploy still only if the run is on master)
   workflow_dispatch:
 
 permissions:
@@ -20,9 +12,9 @@ permissions:
   pages: write
   id-token: write
 
-# Allow one concurrent deployment
+# Per-ref concurrency so a push to develop cannot cancel an in-flight master deploy.
 concurrency:
-  group: "pages"
+  group: pages-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -51,21 +43,23 @@ jobs:
           JEKYLL_ENV: "production"
 
       - name: Test site
-        # Non-blocking for now — tighten once the migration has settled.
+        # Non-blocking — tighten later if you want the build to fail on link errors.
         continue-on-error: true
         run: |
           bundle exec htmlproofer _site \
             \-\-disable-external \
             \-\-ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/"
 
+      # Artifact is only needed for GitHub Pages deploy (master).
       - name: Upload site artifact
+        if: github.ref == 'refs/heads/master'
         uses: actions/upload-pages-artifact@v5
         with:
           path: "_site${{ steps.pages.outputs.base_path }}"
 
   deploy:
-    # Only deploy from the default branch; other branches just verify the build.
-    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+    # Live site updates only from master.
+    if: github.ref == 'refs/heads/master'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
