@@ -15,6 +15,9 @@ _Sliding window approach 01_
 
 ### Minimum Swaps to Group All 1's Together (3675):
 
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
+
 ```cpp
     int countOccurance(vector<int> &arr, int val){
         int count = 0;
@@ -56,7 +59,12 @@ _Sliding window approach 01_
     }
 ```
 
+</details>
+
 ### Max Consecutive Ones III (3811):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int longestOnes(vector<int> &nums, int k) {
@@ -84,7 +92,12 @@ _Sliding window approach 01_
     }
 ```
 
+</details>
+
 ### Subarray Product Less Than K (1075):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int numSubarrayProductLessThanK(vector<int> &nums, int k) {
@@ -113,9 +126,14 @@ _Sliding window approach 01_
         return count;
     }
 ```
+
+</details>
 
 ### Number of Equal Count Substrings (3751):
 
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
+
 ```cpp
     int numSubarrayProductLessThanK(vector<int> &nums, int k) {
         // Write your code here
@@ -144,7 +162,12 @@ _Sliding window approach 01_
     }
 ```
 
+</details>
+
 ### Longest Nice Subarray (3603):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     vector<int> convertToBinary(int val){
@@ -185,3 +208,5 @@ _Sliding window approach 01_
         return maxLen;
     }
 ```
+
+</details>

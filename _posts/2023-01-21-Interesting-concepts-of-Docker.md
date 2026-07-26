@@ -27,7 +27,9 @@ The instructions that are not updating the filesystem are stored as metadata and
 ![Concept 01: Docker Image is built with layers: Image Inspect Config](/images/docker-concept/ImageInspect_Config-dark.png){: .dark }
 _Concept 01: Docker Image is built with layers: Image Inspect Config_
 
-Note: Remote images do also contain intermediate steps, however, those intermediate layers aren't generally pulled from the repository.
+> Remote images do also contain intermediate steps, however, those intermediate layers aren't generally pulled from the repository.
+{: .prompt-info }
+
 
 Docker ImageIDs are nothing but SHA-256 of the image configuration along with metadata.
 
@@ -176,7 +178,9 @@ ARG buildno=1
 # ...
 ```
 
-Warning: It is not recommended to use build-time variables for passing secrets like GitHub keys, user credentials, etc. Build-time variable values are visible to any user of the image with the docker history command. Refer to the RUN --mount=type=secret section to learn about secure ways to use secrets when building images.
+> It is not recommended to use build-time variables for passing secrets like GitHub keys, user credentials, etc. Build-time variable values are visible to any user of the image with the docker history command. Refer to the RUN --mount=type=secret section to learn about secure ways to use secrets when building images.
+{: .prompt-warning }
+
 
 An ARG instruction can optionally include a default value. If an ARG instruction has a default value and if there is no value passed at build-time, the builder uses the default.
 

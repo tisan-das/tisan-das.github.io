@@ -9,7 +9,10 @@ tags: [postgres, internals]
 published: true
 ---
 
-This document discusses a few high-level concepts of PostgreSQL's internals. It's worth noting that, even though these are not needed in day-to-day activities, knowing them would certainly help understand queries and why some take longer.
+This document discusses a few high-level concepts of PostgreSQL's internals.
+
+> Even though these are not needed in day-to-day activities, knowing them would certainly help understand queries and why some take longer.
+{: .prompt-tip }
 
 {% include series-nav.html %}
 
@@ -141,7 +144,9 @@ CREATE EXTENSION IF NOT EXISTS pgstattuple;
 
 Postgres uses an optimistic locking mechanism when performing table operations. This is handled by MVCC, which PostgreSQL employs internally. This ensures that a new version of the entry is created whenever an update operation is performed. This is maintained internally using two hidden system columns, xmin and xmax, to record transaction IDs.
 
-It's worth noting that at the row level, Postgres employs pessimistic locking. When multiple queries update the same row, PostgreSQL internally uses a queuing strategy that processes row updates one at a time.
+> at the row level, Postgres employs pessimistic locking. When multiple queries update the same row, PostgreSQL internally uses a queuing strategy that processes row updates one at a time.
+{: .prompt-tip }
+
 
 ### Index wraparound
 

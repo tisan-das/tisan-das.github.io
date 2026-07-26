@@ -57,7 +57,10 @@ where $\eta$ is the learning rate and $\nabla_w\mathcal{L}$ is the gradient of t
 ![Loss & Gradients: gradient descent](/images/deep-learning/01_04_gradient_descent-dark.png){: .w-75 .dark }
 _Loss & Gradients: gradient descent_
 
-The way the gradients are calculated in a step-by-step manner from output to input direction is called backpropagation. It's worth noting that the gradient descent algorithm is inherently a greedy approach.
+The way the gradients are calculated in a step-by-step manner from output to input direction is called backpropagation.
+
+> The gradient descent algorithm is inherently a greedy approach.
+{: .prompt-tip }
 
 Use an adaptive learning rate $\eta$ to overcome the overshooting and undershooting problems commonly associated with fixed learning rates. Different gradient descent algorithms are proposed based upon different adaptive mechanisms. SGD and Adam are the most widely used variations of gradient descent.
 

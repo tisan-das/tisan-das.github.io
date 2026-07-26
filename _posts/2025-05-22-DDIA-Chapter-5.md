@@ -90,7 +90,9 @@ Monotonic reads guarantees that if a user reads a specific version of data, any 
 ##### Consistent Prefix Reads:
 Consistent prefix reads guarantee that if a sequence of writes happens in a particular order, anyone reading those writes will see them appear in the same order. This preserves causality or sequence between related operations.
 
-NB: Pretending that replication is synchronous when infact it's asynchrnous is a recipe for problems down the road.
+> Pretending that replication is synchronous when infact it's asynchrnous is a recipe for problems down the road.
+{: .prompt-info }
+
 
 ### Multi-leader replication
 

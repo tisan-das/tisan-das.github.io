@@ -12,7 +12,9 @@ The Byzantine consensus problem is an interesting problem in distributed systems
 
 {% include series-nav.html %}
 
-It's worth noting that the primary idea here is that all non-adversarial nodes must agree on a value, and that adversarial nodes are hard to detect. 
+> the primary idea here is that all non-adversarial nodes must agree on a value, and that adversarial nodes are hard to detect.
+{: .prompt-tip }
+
 
 The following set of **assumptions** are made about the system to support Byzantine consensus:
 - There are ***N*** nodes which communicate with each other by sending messages.

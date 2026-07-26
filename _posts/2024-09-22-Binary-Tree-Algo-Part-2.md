@@ -14,6 +14,9 @@ This wiki contains a couple of well-defined problems on Binary Tree.
 
 #### Delete Node in a Linked List (372):
 
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
+
 ```cpp
     void deleteNode(ListNode * node) {
         // Assumption: node is not head or tail
@@ -30,7 +33,12 @@ This wiki contains a couple of well-defined problems on Binary Tree.
     }
 ```
 
+</details>
+
 ### Construct Binary Tree from Preorder and Inorder Traversal (73):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     TreeNode* buildTree(vector<int> &preorder, vector<int> &inorder) {
@@ -59,7 +67,12 @@ This wiki contains a couple of well-defined problems on Binary Tree.
     }
 ```
 
+</details>
+
 ### Construct Binary Tree from Inorder and Postorder Traversal (72):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     TreeNode* buildTree(vector<int> &inorder, vector<int> &postorder) {
@@ -89,7 +102,12 @@ This wiki contains a couple of well-defined problems on Binary Tree.
     }
 ```
 
+</details>
+
 ### Binary Tree Maximum Path Sum (94):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int maxPathSum(TreeNode *root) {
@@ -117,9 +135,14 @@ This wiki contains a couple of well-defined problems on Binary Tree.
     }
 ```
 
+</details>
+
 ### Trim a Binary Search Tree (701):
 
 Given the root of a binary search tree and 2 numbers min and max, trim the tree such that all the numbers in the new tree are between min and max (inclusive).
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     TreeNode* trimBST(TreeNode *root, int minimum, int maximum) {
@@ -140,7 +163,12 @@ Given the root of a binary search tree and 2 numbers min and max, trim the tree 
     }
 ```
 
+</details>
+
 ### Sum Root to Leaf Numbers (1353):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int sumNumbers(TreeNode *root) {
@@ -169,6 +197,8 @@ Given the root of a binary search tree and 2 numbers min and max, trim the tree 
     }
 ```
 
+</details>
+
 ### Verify Preorder Sequence in Binary Search Tree (1307):
 
 Given an array of numbers, verify whether it is the correct preorder traversal sequence of a binary search tree.
@@ -177,6 +207,9 @@ You may assume each number in the sequence is unique.
 
 Follow up:
 Could you do it using only constant space complexity?
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     bool verifyPreorder(vector<int> &preorder) {
@@ -207,9 +240,14 @@ Could you do it using only constant space complexity?
     }
 ```
 
+</details>
+
 ### Equal Tree Partition (864):
 
 Given a binary tree with n nodes, your task is to check if it's possible to partition the tree to two trees which have the equal sum of values after removing exactly one edge on the original tree.
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     bool checkEqualTree(TreeNode *root) {
@@ -249,11 +287,16 @@ Given a binary tree with n nodes, your task is to check if it's possible to part
     }
 ```
 
+</details>
+
 ### Fix Binary Search Tree (3600):
 
 Given the root of a binary tree where exactly two nodes have been swapped.
 
 Please identify the nodes and swap them back in order to recover the original binary search tree. You should try to do this without changing the structure of the tree. Finally, return it.
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     TreeNode* fixBST(TreeNode *root) {
@@ -291,11 +334,16 @@ Please identify the nodes and swap them back in order to recover the original bi
     }
 ```
 
+</details>
+
 ### Inorder Successor in BST II (3665):
 
 There exists a binary search tree, and the binary tree node holds its parent node parent.
 
 In this question, you will get any node of the binary search tree. You need to return the node after this node in the inorder traversal order, or null if there is no successor node.
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     ParentTreeNode* inorderSuccessor(ParentTreeNode *node) {
@@ -315,11 +363,16 @@ In this question, you will get any node of the binary search tree. You need to r
     }
 ```
 
+</details>
+
 ### Count Univalue Subtrees (921):
 
 Given a binary tree, count the number of uni-value subtrees.
 
 A Uni-value subtree means all nodes of the subtree have the same value.
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int countUnivalSubtrees(TreeNode *root) {
@@ -349,7 +402,12 @@ A Uni-value subtree means all nodes of the subtree have the same value.
     }
 ```
 
+</details>
+
 ### Construct Binary Tree from Preorder and Postorder Traversal (1593):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     TreeNode* constructFromPrePost(vector<int> &pre, vector<int> &post) {
@@ -380,3 +438,5 @@ A Uni-value subtree means all nodes of the subtree have the same value.
         return node;
     }
 ```
+
+</details>

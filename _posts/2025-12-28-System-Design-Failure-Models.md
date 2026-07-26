@@ -15,7 +15,9 @@ Each retry attempt should have a reasonable timeout to prevent hanging indefinit
 
 Without proper request timeouts, the service would consume excessive resources. For example, 100 requests per second, each using around 200 KB of memory, can accumulate ~1GB of memory to serve inflight requests. From the above example, if the timeout isn't used appropriately, the service could run into out-of-memory issues pretty soon.
 
-It's also worth noting that the underlying work on abandoned requests should be canceled once the timeout is hit. Otherwise, the benefit of relinquishing resources will not take place.
+> the underlying work on abandoned requests should be canceled once the timeout is hit. Otherwise, the benefit of relinquishing resources will not take place.
+{: .prompt-tip }
+
 
 A good metric for choosing the timeout value is the latency of the downstream service. Choose an acceptable rate of false timeout (0.01%). We also need to note the latency for both **p99.9** and **p50**. If their latencies are similar, it's better to pad the timeout value to avoid a small latency change causing high timeouts.
 

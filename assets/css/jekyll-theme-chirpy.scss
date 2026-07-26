@@ -39,6 +39,156 @@ html[data-mode='dark'] {
   }
 }
 
+/* ---- Phase 7: body font (Inter) + brand extensions ---- */
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/inter-latin-400-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/assets/fonts/inter-latin-500-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/inter-latin-600-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/inter-latin-700-normal.woff2') format('woff2');
+}
+
+$inter: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue',
+  Arial, sans-serif;
+
+html,
+body {
+  font-family: $inter;
+  font-feature-settings: 'kern' 1, 'liga' 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6,
+.site-title,
+.site-subtitle,
+#access-last,
+.page-view {
+  font-family: $inter;
+}
+
+/* Brand accents beyond links */
+blockquote {
+  border-left-color: var(--link-color, #44469d) !important;
+}
+
+::selection {
+  background: rgba(68, 70, 157, 0.28);
+  color: inherit;
+}
+
+html[data-mode='dark'] ::selection {
+  background: rgba(165, 168, 232, 0.35);
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-mode]) ::selection {
+    background: rgba(165, 168, 232, 0.35);
+  }
+}
+
+/* Prompt blocks — brand-tint info/tip; keep warning/danger semantic */
+div.prompt-info,
+.prompt-info {
+  border-left-color: #44469d !important;
+}
+
+div.prompt-tip,
+.prompt-tip {
+  border-left-color: #2a9d8f !important; /* readable teal, pairs with purple brand */
+}
+
+html[data-mode='dark'] {
+  div.prompt-info,
+  .prompt-info {
+    border-left-color: #a5a8e8 !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-mode]) {
+    div.prompt-info,
+    .prompt-info {
+      border-left-color: #a5a8e8 !important;
+    }
+  }
+}
+
+/* Collapsible solutions (algorithm problem sets) */
+details.solution {
+  border: 1px solid var(--main-border-color, rgba(127, 127, 127, 0.35));
+  border-radius: 0.5rem;
+  padding: 0.65rem 1rem 0.85rem;
+  margin: 1rem 0 1.5rem;
+  background: rgba(68, 70, 157, 0.05);
+}
+
+html[data-mode='dark'] details.solution {
+  background: rgba(165, 168, 232, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-mode]) details.solution {
+    background: rgba(165, 168, 232, 0.08);
+  }
+}
+
+details.solution > summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--link-color, #44469d);
+  list-style: none;
+}
+
+details.solution > summary::-webkit-details-marker {
+  display: none;
+}
+
+details.solution > summary::before {
+  content: '▸ ';
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+
+details.solution[open] > summary::before {
+  content: '▾ ';
+}
+
+details.solution[open] > summary {
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed var(--main-border-color, rgba(127, 127, 127, 0.35));
+}
+
+details.solution .highlight {
+  margin-bottom: 0;
+}
+
 /* ---- Phase 5: code typography & syntax palette ---- */
 
 /* JetBrains Mono, self-hosted (no CDN dependency) */

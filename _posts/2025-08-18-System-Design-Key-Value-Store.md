@@ -32,7 +32,9 @@ CAP Theorem suggests that distributed systems can satisfy two of the above three
 ![CAP Theorem: KV system CAP theorem](/images/sys-design-vol1/03-kv-system-cap-theorem-dark.png){: .dark }
 _CAP Theorem: KV system CAP theorem_
 
-It's worth noting that distributed systems must be partition-tolerant. Thus, the distributed systems can either be a CP (Consistent & Partition Tolerance) system or an AP (Availability & Partition Tolerance) system. A CA (Consistent & Availability) distributed system is of no use. The type of system we want to design depends on the use case. For example, the banking sector requires strict consistency systems.
+> distributed systems must be partition-tolerant. Thus, the distributed systems can either be a CP (Consistent & Partition Tolerance) system or an AP (Availability & Partition Tolerance) system. A CA (Consistent & Availability) distributed system is of no use. The type of system we want to design depends on the use case. For example, the banking sector requires strict consistency systems.
+{: .prompt-tip }
+
 
 ### Core Components:
 - Data partition

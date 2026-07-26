@@ -42,4 +42,6 @@ Instead of answering the "Why" question first and the "How" question second, sim
 While mentioning recommended action, never give the findings that do not lead to conclusions, nor state conclusions that are not based on findings. The conclusions generally state the problem that the recommendations solve.
 
 Generally, it's better to present the action before the argument, since that's what the reader cares about most of the time, unless some rare scenarios in which the argument is what the reader truly cares about. 
-Note that, with inductive ideas you generally either hold the subject constant and vary the predicate, or hold the predicate constant and vary the subject.
+> that, with inductive ideas you generally either hold the subject constant and vary the predicate, or hold the predicate constant and vary the subject.
+{: .prompt-info }
+

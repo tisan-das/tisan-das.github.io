@@ -14,6 +14,9 @@ This wiki contains a couple of well-defined problems solved via Breadth First Se
 
 ### Pacific Atlantic Water Flow (778):
 
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
+
 ```cpp
 #include <list>
 #include <set>
@@ -121,8 +124,13 @@ public:
 };
 ```
 
+</details>
+
 ### Smallest Greater Multiple Made of Two Digits (3743)
 - Combinatorial problem solved via BFS
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 #include <list>
@@ -184,7 +192,12 @@ public:
 };
 ```
 
+</details>
+
 ### Smallest Common Region (3669):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 #include <map>
@@ -253,7 +266,12 @@ public:
 };
 ```
 
+</details>
+
 ### Minimum Genetic Mutation (1244):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 #include <list>
@@ -327,7 +345,12 @@ public:
 };
 ```
 
+</details>
+
 ### Closest Leaf in a Binary Tree (854):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 /**
@@ -454,7 +477,12 @@ public:
 };
 ```
 
+</details>
+
 ### Minesweeper (1189):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 #include  <set>
@@ -575,7 +603,12 @@ private:
 };
 ```
 
+</details>
+
 ### Minimum Height Trees (1298):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 #include <list>
@@ -663,7 +696,12 @@ public:
 };
 ```
 
+</details>
+
 ### Shortest Path in a Grid with Obstacles Elimination (1723):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 #include <list>
@@ -724,7 +762,12 @@ public:
 };
 ```
 
+</details>
+
 ### Shortest Bridge (1708):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 #include <list>
@@ -844,7 +887,12 @@ private:
 };
 ```
 
+</details>
+
 ### Absolutely Continuous Numbers (3650):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 #include <list>
@@ -916,7 +964,12 @@ public:
 };
 ```
 
+</details>
+
 ### Shortest Path in the Maze (3727):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 /**
@@ -990,7 +1043,12 @@ private:
 };
 ```
 
+</details>
+
 ### Shortest Path in Matrix (1888):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 #include <list>
@@ -1074,3 +1132,5 @@ public:
     }
 };
 ```
+
+</details>

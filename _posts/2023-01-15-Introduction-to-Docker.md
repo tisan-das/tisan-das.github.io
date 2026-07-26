@@ -32,7 +32,9 @@ _Docker client: docker_
 ![Docker client: docker commands](/images/docker-intro/docker_commands-dark.png){: .dark }
 _Docker client: docker commands_
 
-Note: The majority of the docker client commands are legacy, just there for backward compatibility, and generally discouraged for new learners. These commands can be hidden by using the environemnt variable:
+> The majority of the docker client commands are legacy, just there for backward compatibility, and generally discouraged for new learners. These commands can be hidden by using the environemnt variable:
+{: .prompt-info }
+
 ```sh
 export DOCKER_HIDE_LEGACY_COMMANDS=true
 ```
@@ -64,9 +66,13 @@ EXPOSE 80
 
 STOPSIGNAL SIGQUIT
 ```
-Note: ADD is an interesting docker template instruction, which is having more functionality compared to copy, it can be used to fetch remote files, to extract compressed files automatically. More on the docker template instructions can be found here at https://docs.docker.com/engine/reference/builder/
+> ADD is an interesting docker template instruction, which is having more functionality compared to copy, it can be used to fetch remote files, to extract compressed files automatically. More on the docker template instructions can be found here at https://docs.docker.com/engine/reference/builder/
+{: .prompt-info }
 
-Note: Docker provides support for ignoring files and directories to be included as part of docker image creation through the .dockerignore file
+
+> Docker provides support for ignoring files and directories to be included as part of docker image creation through the .dockerignore file
+{: .prompt-info }
+
 
 ```sh
 docker image build -t tisan/nginx:latest .
@@ -146,9 +152,13 @@ docker volume ls
 docker volume inspect my-vol
 docker volume rm my-vol
 ```
-Note: Inorder to check which container is associated with which volume ```docker inspect <container>``` command can be used. 
+> Inorder to check which container is associated with which volume `docker inspect <container>` command can be used.
+{: .prompt-info }
 
-Note: Besides creating and attaching volumes at runtime, volume mount point can be added in the Dockerfile template as well using the VOLUME instruction.
+
+> Besides creating and attaching volumes at runtime, volume mount point can be added in the Dockerfile template as well using the VOLUME instruction.
+{: .prompt-info }
+
 
 More on the Docker volumes can be found at https://docs.docker.com/storage/volumes/
 

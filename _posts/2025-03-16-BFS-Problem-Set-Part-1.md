@@ -42,6 +42,9 @@ int main() {
 
 ### Clone Graph (137):
 
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
+
 ```cpp
 /**
  * Definition for undirected graph.
@@ -86,7 +89,12 @@ private:
 };
 ```
 
+</details>
+
 ### Number of Big Islands (677):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 #include <list>
@@ -174,8 +182,13 @@ public:
 };
 ```
 
+</details>
+
 ### Walls and Gates (663):
 - Use of BFS to find out shortest path
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 #include <list>
@@ -245,7 +258,12 @@ private:
 };
 ```
 
+</details>
+
 ### Surrounded Regions (477):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 #include <list>
@@ -341,8 +359,13 @@ public:
 };
 ```
 
+</details>
+
 ### Course Schedule (615):
 - Topological Sort
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 #include <list>
@@ -396,7 +419,12 @@ public:
 };
 ```
 
+</details>
+
 ### Course Schedule II (616):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 #include <list>
@@ -446,7 +474,12 @@ public:
 };
 ```
 
+</details>
+
 ### Is Graph Bipartite? (1031):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```
 #include <map>
@@ -497,8 +530,13 @@ public:
 };
 ```
 
+</details>
+
 ### Strobogrammatic Number II (776):
 - Corner case
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 class Solution {
@@ -556,7 +594,12 @@ private:
 };
 ```
 
+</details>
+
 ### Knight Shortest Path (611):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 #include <list>
@@ -664,7 +707,12 @@ public:
 };
 ```
 
+</details>
+
 ### Snakes and Ladders (1732):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 #include <list>
@@ -737,8 +785,13 @@ public:
 };
 ```
 
+</details>
+
 ### Minimum Step (1832):
 - Use of unordered map and unordered set to overcome TLE
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 #include <unordered_map>
@@ -843,7 +896,12 @@ public:
 };
 ```
 
+</details>
+
 ### Topological Sorting (127):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 /**
@@ -899,7 +957,12 @@ public:
 };
 ```
 
+</details>
+
 ### Sequence Reconstruction (605):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 #include <list>
@@ -971,7 +1034,12 @@ public:
 };
 ```
 
+</details>
+
 ### Parallel Courses (3673):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 #include <list>
@@ -1037,7 +1105,12 @@ public:
 };
 ```
 
+</details>
+
 ### As Far from Land as Possible (1911):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 #include<list>
@@ -1115,8 +1188,13 @@ public:
 };
 ```
 
+</details>
+
 ### Maximum Width of Binary Tree (1101):
 - Trick question on binary search
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 /**
@@ -1179,7 +1257,12 @@ public:
 };
 ```
 
+</details>
+
 ### Push Dominoes (1431):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 #include <list>
@@ -1238,7 +1321,12 @@ public:
 };
 ```
 
+</details>
+
 ### The Maze II (788):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 #include <list>
@@ -1328,7 +1416,12 @@ public:
 };
 ```
 
+</details>
+
 ### Serialize and Deserialize Binary Tree (7):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 /**
@@ -1399,7 +1492,12 @@ public:
 };
 ```
 
+</details>
+
 ###  Shortest Path in Undirected Graph (814):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 /**
@@ -1451,8 +1549,13 @@ public:
 };
 ```
 
+</details>
+
 ###  Shortest Path in Binary Matrix (3879):
 - Preferred implementation of BFS
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 #include <list>
@@ -1511,8 +1614,13 @@ public:
 };
 ```
 
+</details>
+
 ### Minimum Path Sum II (1582):
 - Preferred implementation of Dijkstra's shortet path
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 #include <vector>
@@ -1570,3 +1678,5 @@ public:
     }
 };
 ```
+
+</details>

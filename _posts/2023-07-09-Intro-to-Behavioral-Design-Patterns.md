@@ -15,9 +15,11 @@ In the earlier blog posts, the creational and structural design patterns were ex
 ## Chain of responsibility:
 Intent: Avoid coupling the sender of a request to its receiver by giving more than an object a chance to handle the request. Chain the receiving objects and pass the request along the chain until an object handles it.
 
-NB:
-- The client that issued the request may not have any direct reference to the object that ultimately fulfills it
-- Object that made the request has no explicit knowledge of what will handle it (Implicit receiver)
+> **Note**
+> - The client that issued the request may not have any direct reference to the object that ultimately fulfills it
+> - Object that made the request has no explicit knowledge of what will handle it (Implicit receiver)
+{: .prompt-info }
+
 
 ###### Class Diagram:
 ![Class Diagram: chain Command](/images/behavioral-design-patterns/chainCommand.png){: .light }

@@ -25,10 +25,12 @@ Intent: Ensure a class has only one instance, and provide a global point of acce
 ![Class Diagram: singleton](/images/creation-design-patterns/singleton-dark.png){: .dark }
 _Class Diagram: singleton_
 
-Notes:
-1. Private constructor is used to prevent anybody else to instantiate the singleton class
-2. Static public method provides a global access point to the Singleton object
-3. The implementation should also consider thread safety: generally achieved by using a global mutex lock 
+> **Note**
+> - Private constructor is used to prevent anybody else to instantiate the singleton class
+> - Static public method provides a global access point to the Singleton object
+> - The implementation should also consider thread safety: generally achieved by using a global mutex lock
+{: .prompt-info }
+
 
 ###### Implementation:
 

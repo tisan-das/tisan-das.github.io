@@ -98,7 +98,9 @@ func Reduce(key string, values []string) string {
 - Implementation of Map-Reduce
 - Cloud Dataflow
 
-**Note**: As of now, Google has replaced the map-reduce model with Cloud Dataflow. 
+> As of now, Google has replaced the map-reduce model with Cloud Dataflow.
+{: .prompt-info }
+
 
 ### References:
 1. [MIT 6.824: Lecture 1 - MapReduce](https://timilearning.com/posts/mit-6.824/lecture-1-mapreduce/)

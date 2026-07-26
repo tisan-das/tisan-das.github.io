@@ -12,6 +12,9 @@ This wiki contains a couple of well-defined problems on Stack.
 
 Given a non-empty integer array nums representing the student's scores for each test, return an equal-length array res, and for each test score nums[i] in nums, find the nearest higher score after it, or keep the original test score if the nearest higher score does not exist.
 
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
+
 ```cpp
     vector<int> getProgress(vector<int> &nums) {
         // write your code 
@@ -32,9 +35,14 @@ Given a non-empty integer array nums representing the student's scores for each 
     }
 ```
 
+</details>
+
 ### N-ary Tree Postorder Traversal (1525):
 
 Given an n-ary tree, return the postorder traversal of its nodes' values.
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     vector<int> postorder(UndirectedGraphNode *root) {
@@ -60,9 +68,14 @@ Given an n-ary tree, return the postorder traversal of its nodes' values.
     }
 ```
 
+</details>
+
 ### N-ary Tree Preorder Traversal (1526):
 
 Given an n-ary tree, return the preorder traversal of its nodes' values.
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     vector<int> preorder(UndirectedGraphNode *root) {
@@ -84,9 +97,14 @@ Given an n-ary tree, return the preorder traversal of its nodes' values.
     }
 ```
 
+</details>
+
 ### Longest Valid Parentheses (193):
 
 Given a string containing just the characters '(' and ')', find the length of the longest valid (well-formed) parentheses substring.
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int longestValidParentheses(string &s) {
@@ -117,9 +135,14 @@ Given a string containing just the characters '(' and ')', find the length of th
     }
 ```
 
+</details>
+
 ### Trapping Rain Water (363):
 
 Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int trapRainWater(vector<int> &heights) {
@@ -158,6 +181,8 @@ Given n non-negative integers representing an elevation map where the width of e
     }
 ```
 
+</details>
+
 ### Simplify Path (421):
 
 Given an absolute path for a file (Unix-style), simplify it.
@@ -165,6 +190,9 @@ Given an absolute path for a file (Unix-style), simplify it.
 In a UNIX-style file system, a period . refers to the current directory. Furthermore, a double period .. moves the directory up a level.
 
 The result must always begin with /, and there must be only a single / between two directory names. The last directory name (if it exists) must not end with a trailing /. Also, the result must be the shortest string representing the absolute path.
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     string simplifyPath(string &path) {
@@ -197,11 +225,16 @@ The result must always begin with /, and there must be only a single / between t
     }
 ```
 
+</details>
+
 ### Asteroid Collision (1001):
 
 Given an array of integers representing asteroids in a row. For each asteroid, the absolute value represents its size, and the sign represents its direction (positive meaning right, negative meaning left). Each asteroid moves at the same speed.
 
 Find out the state of the asteroids after all collisions. If two asteroids meet, the smaller one will explode. If both are the same size, both will explode. Two asteroids moving in the same direction will never meet.
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     vector<int> asteroidCollision(vector<int> &asteroids) {
@@ -242,12 +275,17 @@ Find out the state of the asteroids after all collisions. If two asteroids meet,
     }
 ```
 
+</details>
+
 ### Final Discounted Price (1852):
 
 A shopkeeper needs to complete a sales task. He arranges the items for sale in a row.
 Starting from the left, the shopkeeper subtracts the price of the first lower or the same price item on the right side of the item from its full price.
 If there is no item to the right that costs less than or equal to the current item's price, the current item is sold at full price.
 You should return the actual selling price of each item. (nearest smaller)
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     vector<int> finalDiscountedPrice(vector<int> &prices) {
@@ -269,6 +307,8 @@ You should return the actual selling price of each item. (nearest smaller)
     }
 ```
 
+</details>
+
 ### Online Stock Span (1740):
 
 Write a class StockSpanner which collects daily price quotes for some stock, and returns the span of that stock's price for the current day.
@@ -276,6 +316,9 @@ Write a class StockSpanner which collects daily price quotes for some stock, and
 The span of the stock's price today is defined as the maximum number of consecutive days (starting from today and going backwards) for which the price of the stock was less than or equal to today's price.
 
 For example, if the price of a stock over the next 7 days were [100, 80, 60, 70, 60, 75, 85], then the stock spans would be [1, 1, 1, 2, 1, 4, 6].
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int next(int price) {
@@ -297,9 +340,14 @@ For example, if the price of a stock over the next 7 days were [100, 80, 60, 70,
     }
 ```
 
+</details>
+
 ### Remove Repeated Letters (3599):
 
 Given a string s, remove the duplicate letters in the string so that the letters present in the string appear only once, and return the result with the smallest dictionary order without disrupting the relative positions of the letters in the original string.
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     string removeDuplicateLetters(string &s) {
@@ -332,12 +380,17 @@ Given a string s, remove the duplicate letters in the string so that the letters
     }
 ```
 
+</details>
+
 ### Parentheses Score (268):
 
 Given a balanced parentheses string S, compute the score of the string based on the following rule:
 - () has score 1
 - AB has score A + B, where A and B are balanced parentheses strings.
 - (A) has score 2 * A, where A is a balanced parentheses string.
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int parenthesesScore(string &s) {
@@ -363,9 +416,14 @@ Given a balanced parentheses string S, compute the score of the string based on 
     }
 ```
 
+</details>
+
 ###  Convert Expression to Reverse Polish Notation (370):
 
 Given a string array representing an expression, and return the Reverse Polish notation of this expression. (remove the parentheses)
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     vector<string> convertToRPN(vector<string> &expression) {
@@ -415,9 +473,14 @@ Given a string array representing an expression, and return the Reverse Polish n
     }
 ```
 
+</details>
+
 ### Prefix notation to postfix notation (271):
 
 Transform a prefix natation to a postfix notation.
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     string prefixNotationToPostfixNotation(string &str) {
@@ -463,9 +526,14 @@ Transform a prefix natation to a postfix notation.
     }
 ```
 
+</details>
+
 ### Remove Digits (693):
 
 Given a non-negative integer num represented as a string, remove k digits from the number so that the new number is the smallest possible.
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     string removeKdigits(string &num, int k) {
@@ -500,10 +568,15 @@ Given a non-negative integer num represented as a string, remove k digits from t
     }
 ```
 
+</details>
+
 ### Tall Building (285):
 
 At the weekend, Xiao Q and his friends came to the big city for shopping. There are many tall buildings.There are n tall buildings in a row, whose height is indicated by arr.
 Xiao Q has walked from the first building to the last one. Xiao Q has never seen so many buildings, so he wants to know how many buildings can he see at the location of each building? (When the height of the front building is greater than or equal to the back building, the back building will be blocked)
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
      vector<int> tallBuilding(vector<int> &arr) {
@@ -533,3 +606,5 @@ Xiao Q has walked from the first building to the last one. Xiao Q has never seen
         return result;
     }
 ```
+
+</details>
