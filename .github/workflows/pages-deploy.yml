@@ -3,9 +3,7 @@ name: "Build and Deploy"
 on:
   push:
     branches:
-      - main
       - master
-      # Build-only check for the working branch (deploy job is gated below)
       - develop
     paths-ignore:
       - .gitignore
@@ -20,9 +18,9 @@ permissions:
   pages: write
   id-token: write
 
-# Allow one concurrent deployment
+# Per-ref concurrency so a develop push cannot cancel an in-flight master deploy.
 concurrency:
-  group: "pages"
+  group: pages-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -58,14 +56,16 @@ jobs:
             \-\-disable-external \
             \-\-ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/"
 
+      # Artifact only needed when deploying (master).
       - name: Upload site artifact
+        if: github.ref == 'refs/heads/master'
         uses: actions/upload-pages-artifact@v5
         with:
           path: "_site${{ steps.pages.outputs.base_path }}"
 
   deploy:
-    # Only deploy from the default branch; other branches just verify the build.
-    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+    # Live site updates only from master.
+    if: github.ref == 'refs/heads/master'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
