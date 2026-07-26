@@ -24,11 +24,14 @@ The DynamoDB table is a collection of items, and each item is a collection of at
 
 The DynamoDB table is divided into multiple partitions to handle throughput requirements. Each partition of the table hosts a disjoint and contiguous part of the key range, and the same partition is replicated across multiple availability zones. The replicas of a partition form a replication group, and a consensus algorithm Paxos is used to determine the leader node. Each leader node also has a leadership lease, and in case one replica is unable to connect to the leader node, it can trigger the leader election process, and when a new leader is selected, it waits till the earlier leadership lease is expired. All the write operations under the partition are served by the leader node and are committed by Write-Ahead-Log by the quorum of replicas, then only the leader node acknowledge write is successful. DynamoDB read item operations can either be strongly consistent, which is served by the leader node, or can be eventually consistent, in which case it would be served by any replica. The replicas are typically placed under different AZs, and in the case of global tables, the replicas are placed under different regions to increase availability further.
 
-![Architecture Overview: log Replica](/images/dynamo-db/logReplica.png)
+![Architecture Overview: log Replica](/images/dynamo-db/logReplica.png){: .w-75 }
+_Architecture Overview: log Replica_
 
 Each replica of a partition consists of a write-ahead log and a B-tree that stores the key-value data. However, as the same B-tree can be generated from the write-ahead log, hence only the leader node maintains the B-tree.
 
-![Architecture Overview: architecture](/images/dynamo-db/architecture.png)
+![Architecture Overview: architecture](/images/dynamo-db/architecture.png){: .w-75 .light }
+![Architecture Overview: architecture](/images/dynamo-db/architecture-dark.png){: .w-75 .dark }
+_Architecture Overview: architecture_
 
 Metadata service stores the routing information about tables, indexes, and replication groups for keys for a given table or index. 
 
@@ -59,8 +62,6 @@ A newly elected leader can't accept any new write request until the lease of the
 ## Metadata availability:
 DynamoDB utilizes an in-memory distributed datastore called MemDS, which stores all the metadata in memory and replicates it across the MemDS fleet. MemDS scales horizontally to accommodate all the requests coming from the request routers. It's to be noted that even a cache hit also triggers an asynchronous call to refresh the cache. All the partition membership updates are pushed from the storage node to the MemDS.
 
-
-
 ### To explore:
 - How formal methods are used to prove the usefulness of algorithms
 - Database vs table in dynamoDB. Where do we mention throughput capacity?
@@ -77,4 +78,3 @@ DynamoDB utilizes an in-memory distributed datastore called MemDS, which stores 
 1. Elhemali M, Gallagher N, Tang B, Gordon N, Huang H, Chen H, Idziorek J, Wang M, Krog R, Zhu Z, Lazier C. Amazon {DynamoDB}: A Scalable, Predictably Performant, and Fully Managed {NoSQL} Database Service. In2022 USENIX Annual Technical Conference (USENIX ATC 22) 2022 (pp. 1037-1048).
 2. [How Amazon DynamoDB adaptive capacity accommodates uneven data access patterns](https://aws.amazon.com/blogs/database/how-amazon-dynamodb-adaptive-capacity-accommodates-uneven-data-access-patterns-or-why-what-you-know-about-dynamodb-might-be-outdated/)
 3. [Example on DynamoDB Burst Capacity and Adaptive Scaling](https://stackoverflow.com/questions/55262755/dynamodb-burst-capacity-and-adaptive-scaling)
-

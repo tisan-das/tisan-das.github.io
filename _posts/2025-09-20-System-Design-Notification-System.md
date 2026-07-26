@@ -12,8 +12,6 @@ In this wiki, we will explore an approach to designing a notification service.
 
 {% include series-nav.html %}
 
-
-
 ### Requirements
 - What type of notifications do we need to send? => Push, SMS, email
 - Real-time system? => Soft real-time system. In case of high load, a slight delay is tolerable
@@ -21,21 +19,17 @@ In this wiki, we will explore an approach to designing a notification service.
 - Who triggers notification => Any service, authenticated
 - Opt-out feature? => Available to the users
 
-
-
 ##### Back of the envelope estimation:
 - 10 million mobile push notifications, 1 million SMS, and 5 million Email notifications
 
-
-
 ### Architecture
-![Architecture: notification system hld](/images/sys-design-vol1/07-notification-system-hld.png)
+![Architecture: notification system hld](/images/sys-design-vol1/07-notification-system-hld.png){: .w-75 .light }
+![Architecture: notification system hld](/images/sys-design-vol1/07-notification-system-hld-dark.png){: .w-75 .dark }
+_Architecture: notification system hld_
 
 **Tracking:**
 - Monitor queued notifications
 - Track failure events
-
-
 
 ### Future Study:
 - How JWT authentication is used?

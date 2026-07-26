@@ -12,7 +12,6 @@ In this wiki, we will explore an approach to designing a Web-crawling service.
 
 {% include series-nav.html %}
 
-
 ### Requirements
 - What is the purpose of the crawler here? Search engine indexing, data mining, or for some other purpose? => Search engine indexing
 - Type of content that needs to be parsed: HTML/ Text/ PDF/ Image/ Video => HTML only
@@ -23,8 +22,6 @@ In this wiki, we will explore an approach to designing a Web-crawling service.
 - Politeness: Shouldn't make too many requests to a website within a short span of time. The service can get marked as a DoS attacker.
 - Extensibility: Flexible enough to support parsing new content types with minimal changes
 
-
-
 ##### Back of the envelope estimation:
 - 1 billion web pages to be downloaded each month
 - QPS => 1 billion pages / 30 days / 24 hours / 3600 seconds => ~400 pages/second
@@ -33,18 +30,17 @@ In this wiki, we will explore an approach to designing a Web-crawling service.
 - Storage requirement = 1 billion page/month * 500k => 500TB/month
 - Total Storage requirement = 500 TB * 12 months * 5 years => 30 PB
 
-
-
 ### Architecture
 
-![Architecture: web crawler components](/images/sys-design-vol1/06-web-crawler-components.png)
+![Architecture: web crawler components](/images/sys-design-vol1/06-web-crawler-components.png){: .w-75 .light }
+![Architecture: web crawler components](/images/sys-design-vol1/06-web-crawler-components-dark.png){: .w-75 .dark }
+_Architecture: web crawler components_
 
-
-![Architecture: web crawler hld](/images/sys-design-vol1/06-web-crawler-hld.png)
+![Architecture: web crawler hld](/images/sys-design-vol1/06-web-crawler-hld.png){: .w-75 .light }
+![Architecture: web crawler hld](/images/sys-design-vol1/06-web-crawler-hld-dark.png){: .w-75 .dark }
+_Architecture: web crawler hld_
 
 **Spider Trap**: Causes the crawler to loop in an infinite loop. Need to handle such edge cases.
-
-
 
 ### Future Study:
 - How to know a webpage is edited? Any optimization regarding this?

@@ -12,12 +12,13 @@ In the last blog post, we discussed about the generic patterns used to create co
 
 {% include series-nav.html %}
 
-
 ### Replicated Load-balanced Services:
 
 The simplest of the serving design patterns is the replicated load-balanced service, where every server is identical and capable of serving traffic, and the requests are routed through a load-balancer placed in front of the servers.
 
-![Replicated Load-balanced Services: 09.basic Replicated Stateless Service](/images/distributed-system-patterns-single-node/09.basicReplicatedStatelessService.png)
+![Replicated Load-balanced Services: 09.basic Replicated Stateless Service](/images/distributed-system-patterns-single-node/09.basicReplicatedStatelessService.png){: .light }
+![Replicated Load-balanced Services: 09.basic Replicated Stateless Service](/images/distributed-system-patterns-single-node/09.basicReplicatedStatelessService-dark.png){: .dark }
+_Replicated Load-balanced Services: 09.basic Replicated Stateless Service_
 
 ##### Probes:
 Utilize readiness probe so that load-balancer is aware when the server is ready to serve requests. This is crucial where the server needs some set of operations to perform as part of start up. Besides this, liveness probe specifies the health check mechanism, which informs the load-balancer regarding it's inability to serve requests. Each container orchestrator got it's own layer to manage the probes, Kubernetes uses the service layer to manage this.
@@ -61,8 +62,6 @@ spec:
 status: {}
 controlplane $ 
 
-
-
 controlplane $ k create service nodeport -name dictionary-svc --tcp 8090:8080 --dry-run=client -o yaml > dictionary-svc.yaml
 controlplane $
 controlplane $ cat dictionary-svc.yaml 
@@ -87,7 +86,6 @@ status:
   loadBalancer: {}
 controlplane $
 
-
 controlplane $ k apply -f dictionary-svc.yaml 
 service/dictionary-svc created
 controlplane $ k get all
@@ -107,14 +105,12 @@ NAME                                                DESIRED   CURRENT   READY   
 replicaset.apps/dictionary-server-depl-5d94b48cd5   3         3         3       8m6s
 controlplane $ 
 
-
 controlplane $ k exec -it dictionary-server-depl-5d94b48cd5-892ml -- curl dictionary-svc:8090/cat
 An animal of various species of the genera Felis and Lynx. Thedomestic cat is Felis domestica. The European wild cat (Felis catus)is much larger than the domestic cat. In the United States the namewild cat is commonly applied to the bay lynx (Lynx rufus) See Wildcat, and Tiger cat.controlplane $ 
 ```
 
 ##### Session Tracked Services:
 The servers in the above example are stateless in nature. However often time we would like the same user to land on the same server for the next set of requests, to have a consistent experience. In that case a session tracked service ensures that the request from a specific user is redirected to the same server. There's different type of session tracking mechanism available. IP-based session tracking is easy to implement, however can quickly get messy if cache is used. Also with the usage of NAT in cloud environment, the IP-based session tracking loses it edge. Due to this, application level tracking (like cookies) is more preferred.
-
 
 ##### Caching Layer:
 Certain times the computation required for serving the requests is expensive. Caching can be used here to inspect the requests and to send the response if it's a cache hit. There's different types of cache depending upon the application. The most used cache is of type web proxy, which caches the HTTP response.
@@ -134,8 +130,6 @@ backend default {
 controlplane $ k create configmap -name varnish-config -n default --from-file=default.vcl
 configmap/varnish-config created
 controlplane $ 
-
-
 
 controlplane $ k apply -f varnish-cache-depl.yaml 
 deployment.apps/varnish-cache-depl created
@@ -222,8 +216,9 @@ Another common usage of HTTP reverse proxy is for SSL termination, where the inc
 
 ##### Hands On: SSL Termination through NGINX:
 
-![Hands On: SSL Termination through NGINX: 10.Hands On Replicated Service](/images/distributed-system-patterns-single-node/10.HandsOnReplicatedService.png)
-
+![Hands On: SSL Termination through NGINX: 10.Hands On Replicated Service](/images/distributed-system-patterns-single-node/10.HandsOnReplicatedService.png){: .w-75 .light }
+![Hands On: SSL Termination through NGINX: 10.Hands On Replicated Service](/images/distributed-system-patterns-single-node/10.HandsOnReplicatedService-dark.png){: .w-75 .dark }
+_Hands On: SSL Termination through NGINX: 10.Hands On Replicated Service_
 
 ```sh
 controlplane $ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt
@@ -259,11 +254,9 @@ lrwxrwxrwx 1 root root    1 Aug  8 10:39 filesystem -> /
 -rw-r--r-- 1 root root 1245 Aug 26 06:01 tls.crt
 controlplane $ 
 
-
 controlplane $ k create secret tls ssl --cert=tls.crt --key=tls.key
 secret/ssl created
 controlplane $ 
-
 
 controlplane $ k create configmap -name nginx-conf --from-file=nginx.conf -n default
 configmap/nginx-conf created
@@ -294,7 +287,6 @@ http{
 controlplane $ k create configmap -name nginx-conf -n default --from-file=nginx.conf  
 configmap/nginx-conf created
 controlplane $
-
 
 controlplane $ k create deployment -name nginx-service-depl --image=nginx --dry-run=client -o yaml > nginx-depl.yaml
 
@@ -342,7 +334,6 @@ spec:
 status: {}
 controlplane $ 
 
-
 controlplane $ k apply -f nginx-svc.yaml 
 service/nginx-svc created
 controlplane $ cat nginx-svc.yaml 
@@ -366,8 +357,6 @@ spec:
 status:
   loadBalancer: {}
 controlplane $ 
-
-
 
 controlplane $ k get all
 NAME                                          READY   STATUS    RESTARTS   AGE
@@ -413,14 +402,6 @@ controlplane $ curl http://localhost:31705 -k
 controlplane $ curl https://localhost:31705 -k
  was not foundcontrolplane $ 
 
-
-
-
-
-
-
-
-
 controlplane $ k create configmap -name nginx-conf -n default --from-file=nginx.conf
 configmap/nginx-conf created
 controlplane $ cat nginx.conf 
@@ -449,8 +430,6 @@ http{
   }
 }
 controlplane $ 
-
-
 
 controlplane $ k get all
 NAME                                          READY   STATUS              RESTARTS   AGE
@@ -481,10 +460,6 @@ controlplane $
 controlplane $ curl http://localhost:32705 -k
  was not foundcontrolplane $ curl https://localhost:31705 -k
  was not foundcontrolplane $ 
-
-
-
-
 
 controlplane $ k get all
 NAME                                          READY   STATUS              RESTARTS   AGE
@@ -520,7 +495,9 @@ controlplane $ curl http://localhost:32705 -k
 ### Sharded Services:
 In the sharded service, the replicas are not identical, they aren't homogeneous and is capable of serving only a specific subset of requests. The load-balancing node, termed root is responsible for routing the requests to the appropriate shard. The replicas are called shard. Sharded services are stateful in nature. 
 
-![Sharded Services: 11.sharded Service](/images/distributed-system-patterns-single-node/11.shardedService.png)
+![Sharded Services: 11.sharded Service](/images/distributed-system-patterns-single-node/11.shardedService.png){: .light }
+![Sharded Services: 11.sharded Service](/images/distributed-system-patterns-single-node/11.shardedService-dark.png){: .dark }
+_Sharded Services: 11.sharded Service_
 
 ##### Sharded Cache:
 Data storage is where sharding is much more useful. If a replicated cache layer is deployed, then the storage utilization becomes terrible, as each replica might contain similar set of data. However with sharded cache, the effective storage utilization increases multifold. 
@@ -564,7 +541,6 @@ spec:
         resources: {}
 status: {}
 controlplane $  
-
 
 controlplane $ k apply -f memcache-svc.yaml 
 service/memcache-svc created
@@ -696,7 +672,6 @@ NAME                                 READY   AGE
 statefulset.apps/sharded-memcached   3/3     15m
 controlplane $
 
-
 controlplane $ 
 controlplane $ k get all
 NAME                                    READY   STATUS    RESTARTS   AGE
@@ -721,7 +696,6 @@ replicaset.apps/shared-twemproxy-845fd8957f   3         3         3       39s
 NAME                                 READY   AGE
 statefulset.apps/sharded-memcached   3/3     88s
 controlplane $ 
-
 
 controlplane $ python3
 Python 3.8.10 (default, May 26 2023, 14:05:08) 
@@ -779,9 +753,6 @@ http{
 }
 controlplane $ 
 
-
-
-
 controlplane $ cat web-server.yaml 
 apiVersion: apps/v1
 kind: Deployment
@@ -833,4 +804,3 @@ controlplane $
 3. [Kubernetes: Service](https://kubernetes.io/docs/concepts/services-networking/service/)
 4. [Varnish HTTP Cache](https://varnish-cache.org/)
 5. [Create a Self-Signed SSL Certificate for Nginx](https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-20-04-1)
-

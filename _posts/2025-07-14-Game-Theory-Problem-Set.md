@@ -9,9 +9,14 @@ published: true
 
 This post contains a couple of well-defined problems on game theory.
 
-![Game theory 01](/images/coding_questions/game_theory_01.png)
+![Game theory 01](/images/coding_questions/game_theory_01.png){: .w-75 .light }
+![Game theory 01](/images/coding_questions/game_theory_01-dark.png){: .w-75 .dark }
+_Game theory 01_
 
 ### Coins in a Line (394):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
 public:
@@ -44,9 +49,12 @@ private:
     vector< map<int, bool>> occurMapArr = vector<map<int, bool>>(2);
 ```
 
-
+</details>
 
 ### Coins in a Line II (395):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```
 public:
@@ -95,9 +103,12 @@ private:
     vector<map<int,bool>> occurMapArray = vector<map<int,bool>>(2);
 ```
 
-
+</details>
 
 ### Bash Game II (3735):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     bool canWinBash(vector<int> &rocks) {
@@ -109,3 +120,5 @@ private:
         return nimSum!=0;
     }
 ```
+
+</details>

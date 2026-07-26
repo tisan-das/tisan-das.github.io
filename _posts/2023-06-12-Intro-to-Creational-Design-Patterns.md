@@ -21,12 +21,16 @@ Intent: Ensure a class has only one instance, and provide a global point of acce
 
 ###### Class Diagram:
 
-![Class Diagram: singleton](/images/creation-design-patterns/singleton.png)
+![Class Diagram: singleton](/images/creation-design-patterns/singleton.png){: .light }
+![Class Diagram: singleton](/images/creation-design-patterns/singleton-dark.png){: .dark }
+_Class Diagram: singleton_
 
-Notes:
-1. Private constructor is used to prevent anybody else to instantiate the singleton class
-2. Static public method provides a global access point to the Singleton object
-3. The implementation should also consider thread safety: generally achieved by using a global mutex lock 
+> **Note**
+> - Private constructor is used to prevent anybody else to instantiate the singleton class
+> - Static public method provides a global access point to the Singleton object
+> - The implementation should also consider thread safety: generally achieved by using a global mutex lock
+{: .prompt-info }
+
 
 ###### Implementation:
 
@@ -87,7 +91,9 @@ Intent: Specify the kinds of objects to create using a prototypical instance, an
 
 ###### Class Diagram:
 
-![Class Diagram: prototype](/images/creation-design-patterns/prototype.png)
+![Class Diagram: prototype](/images/creation-design-patterns/prototype.png){: .w-75 .light }
+![Class Diagram: prototype](/images/creation-design-patterns/prototype-dark.png){: .w-75 .dark }
+_Class Diagram: prototype_
 
 ###### Implementation:
 
@@ -161,10 +167,11 @@ Intent: Separate the construction of a complex object from its representation so
 - Build complex objects using simple objects and using a step-by-step procedure
 - The process of constructing complex objects should be generic enough to be used to create objects with different representations
 
-
 ###### Class Diagram:
 
-![Class Diagram: builder](/images/creation-design-patterns/builder.png)
+![Class Diagram: builder](/images/creation-design-patterns/builder.png){: .light }
+![Class Diagram: builder](/images/creation-design-patterns/builder-dark.png){: .dark }
+_Class Diagram: builder_
 
 ###### Implementation:
 
@@ -217,7 +224,9 @@ Intent: Define an interface for creating an object, but let the subclasses decid
 
 ###### Class Diagram:
 
-![Class Diagram: factory Method](/images/creation-design-patterns/factoryMethod.png)
+![Class Diagram: factory Method](/images/creation-design-patterns/factoryMethod.png){: .w-75 .light }
+![Class Diagram: factory Method](/images/creation-design-patterns/factoryMethod-dark.png){: .w-75 .dark }
+_Class Diagram: factory Method_
 
 ###### Implementation:
 
@@ -302,7 +311,9 @@ Intent: Provide an interface for creating families of related or dependent objec
 
 ###### Class Diagram:
 
-![Class Diagram: abstract Factory](/images/creation-design-patterns/abstractFactory.png)
+![Class Diagram: abstract Factory](/images/creation-design-patterns/abstractFactory.png){: .w-75 .light }
+![Class Diagram: abstract Factory](/images/creation-design-patterns/abstractFactory-dark.png){: .w-75 .dark }
+_Class Diagram: abstract Factory_
 
 ###### Implementation:
 
@@ -369,8 +380,6 @@ func (menu *MacMenu) GetMenu() IMenu {
 	return &MacMenu{MacMenu: "mac menu"}
 }
 
-
-
 type IWidgetFactory interface {
 	CreateWindow() IWindow
 	CreateButton() IButton
@@ -424,4 +433,3 @@ func (factory *MacWidgetFactory) CreateMenu() IMenu {
 10. [Design pattern in Golang — Prototype](https://devcharmander.medium.com/design-pattern-in-golang-prototype-e864522e4eeb)
 11. [Singleton in Go](https://refactoring.guru/design-patterns/singleton/go/example)
 12. [How singleton pattern works with Golang](https://medium.com/golang-issue/how-singleton-pattern-works-with-golang-2fdd61cd5a7f)
-

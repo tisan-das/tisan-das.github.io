@@ -1,6 +1,7 @@
 ---
 layout: post
 title: DDIA - Chap02 - Data Models
+image: /assets/img/series/designing-data-intensive-applications.png
 series: "Designing Data-Intensive Applications"
 categories: ["Databases", "DDIA"]
 tags: [ddia, data-models]
@@ -19,7 +20,6 @@ Around the same time databases on top of network model and hierarchial model als
 
 In the network type of data model, a record could have multiple parents, and the link between records was not foreign keys, rather, they're more like pointers in a programming language.
 
-
 ### NoSQL:
 
 NoSQL is the latest attempt of overthrow the dominance of the relational model. It's to be noted that NoSQL doesn't point to any specific technology, rather the name got sticky due to widespread requirement to *bypass the performance restriction relational model imposes, to scale the database easily*, even though it increases redundancy. 
@@ -29,7 +29,6 @@ One of the major issues with the relational model is **object-relational mismatc
 This is why self-container document like *JSON* representation become quite famous, and **Document-oriented databases** like MongoDB, CouchDB started supporting this type of data model.
 
 Using and ID is always preferable whenever in doubt. As ID has no specific meaning to human, it never needs to change. The value that the ID refers, can be changed without any major impact.
-
 
 ### Which data model to choose?
 
@@ -44,7 +43,6 @@ Schema changes are slow and require downtime. ALTER statement can take few milli
 
 ##### Record size:
 It's recommended to keep the records small and avoid writing that increases the size of a record.
-
 
 ### Questions to ponder upon:
 - Why do social networking sites not rely upon graph model databases, even though it would be a natural use case?

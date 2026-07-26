@@ -8,7 +8,6 @@ published: true
 
 Databases are one of the most used components of any web service. It's safe to say that all the web services serve the requests by processing the data fetched from the databases, and by storing the updated information on there. Even though it's used as persistent storage, the primary benefit of a database lies in the efficient retrieval of the stored data. With the current generation of databases, they can be broadly categorized into RDBMS and NoSQL. Here in this blog post, we will mainly try to get an overview of the NoSQL database, how it started getting popularity, its use case, and its drawbacks. So off we go...
 
-
 ### History:
 From the '90s, with the advent of databases, relational databases started to gain popularity. The primary reason behind that was the relational nature, where the data is stored in a tabular fashion, and the relationship is maintained with the help of referential integrity in the form of the foreign key. The major benefit of the relational database lies in the support of transactions, where a bunch of statements are grouped to form a transaction, and are provided atomicity and isolation support. The transactions and relational nature also help business reporting much easier, where data can be captured across different relations, which is also consistent. **Integration of different applications over the same database** is one of the major deciding factors for adopting relational databases.
 
@@ -27,11 +26,8 @@ The majority of the prominent RDBMS organizations tried to come up with solution
 The first three types come under aggregate-oriented databases, as they're generally aggregated over certain key or document ID or column index.
 There's a general consensus that only the RDBMS provides support for ACID properties, but not the NoSQL ones. Even though it's true, however, it's to be noted that certain NoSQL databases also support the same ACID properties to a certain extent, which is generally good enough for the majority of the applications. For example, aggregate-oriented databases provide support for atomicity in the scope of their aggregate attributes. However, if there's a need to slice and dice the data, then aggregate-oriented databases are at a disadvantage, as the need to scan through the whole database to capture such info, graph database comes to the rescue in these cases.
 
-
 ### Future Study:
 - Implementation of NoSQL database, especially the graph database
 
-
 ### References:
 1. [Introduction to NoSQL by Martin Fowler](https://www.youtube.com/watch?v=qI_g07C_Q5I)
-

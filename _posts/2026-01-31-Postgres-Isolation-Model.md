@@ -1,6 +1,7 @@
 ---
 layout: post
 title: PostgreSQL - Isolation Levels
+image: /assets/img/series/postgresql.png
 series: "PostgreSQL"
 categories: ["Databases", "PostgreSQL"]
 tags: [postgres, isolation-levels, mvcc]
@@ -18,7 +19,6 @@ Instead of overwriting a record when it is updated, the database creates a new v
 - Writers update a new version without stopping others.
 - No read/write blocking happens.
 
-
 ### How MVCC Works
 
 PostgreSQL implements MVCC using transaction IDs and hidden metadata columns on every row:
@@ -29,7 +29,6 @@ PostgreSQL implements MVCC using transaction IDs and hidden metadata columns on 
 ​
 When a transaction modifies a row, PostgreSQL doesn't overwrite the existing version. Instead, it creates a new version with a new xmin value. For deletes, the xmax of the existing row is set to the current transaction's ID. Other transactions can still see the old version until they're ready to see the new committed state, based on their isolation level and transaction start time.
 ​
-
 
 ### Detailed Example: Concurrent Updates
 
@@ -74,7 +73,6 @@ SELECT * FROM accounts WHERE id = 1;
 -- Returns amount = 800.00 (now sees committed changes)
 COMMIT;
 ```
-
 
 ### Scenario 2: Lost Update Prevention
 
@@ -126,7 +124,6 @@ UPDATE accounts SET amount = amount + 100 WHERE id = 3;
 COMMIT;
 ```
 
-
 Transaction 1 reads again:
 ```sql
 SELECT sum(amount) FROM accounts WHERE client = 'bob';
@@ -136,8 +133,6 @@ COMMIT;
 ```
 
 At the REPEATABLE READ level, Transaction 1 sees a consistent snapshot of the database as it existed when the transaction began, even though other transactions have committed changes.
-
-
 
 ### Details on isolation levels
 
@@ -154,7 +149,6 @@ The SQL standard defines four isolation levels in increasing order of strictness
 - READ COMMITTED
 - REPEATABLE READ
 - SERIALIZABLE (strongest)
-
 
 PostgreSQL technically supports all four levels, but internally implements only three distinct isolation levels:
 
@@ -262,9 +256,6 @@ One transaction is aborted to prevent an inconsistent state where both withdrawa
 
 **When to use**: Critical financial operations, complex multi-row transactions, anywhere data integrity is paramount.
 
-
 ### References
 1. [What is Multi-Version Concurrency Control (MVCC) in DBMS?](https://www.geeksforgeeks.org/dbms/what-is-multi-version-concurrency-control-mvcc-in-dbms/)
 2. [What is MVCC? How does multiversion concurrency control work?](https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/What-is-MVCC-How-does-Multiversion-Concurrencty-Control-work)
-
-

@@ -14,27 +14,28 @@ Security is a major aspect while developing any application, and web application
 
 Cross-site scripting (XSS) attacks, at their core, execute a malicious script on a user's web browser. It uses the fact that all modern web browsers allow the executing of JavaScript on web browsers. Hence, most such attacks are performed with the help of JavaScript.
 
-
 ##### Stored XSS:
-![Stored XSS](/images/web-security/stored_xss.png)
+![Stored XSS](/images/web-security/stored_xss.png){: .light }
+![Stored XSS](/images/web-security/stored_xss-dark.png){: .dark }
+_Stored XSS_
 
 One issue with stored XSS is that some of the advanced XSS payloads are not even written in plain text, rather they're written in other formats like base64 binary, etc. On top of that, in certain scenarios, the whole payload is split and stored in multiple places and can be dangerous only when combined. Generally, this is handled with the help of a sanitizer library, which detects anomalous scripts stored on the server.
 
 ##### Reflected XSS:
-![Reflected XSS](/images/web-security/reflected_xss.png)
+![Reflected XSS](/images/web-security/reflected_xss.png){: .light }
+![Reflected XSS](/images/web-security/reflected_xss-dark.png){: .dark }
+_Reflected XSS_
 
 Reflected XSS is much more difficult to detect since the payloads are not stored on the server side. This type of attack is directed to hit a set of users, as the malicious payload needs to be distributed separately.
 
 ##### Mutation-Based XSS:
 Mutation-based XSS (mXSS) is a newer type of XSS, where the sanitizer libraries are bypassed. These are generally performed with a combination of tags and string, where the malicious script is provided as a string, however, due to browser behavior, the tags are handled separately, sometimes causing the string to get escaped, and it gets executed as script.
 
-
 Protocol-relative URL (PRURL) is one of the legacy mechanisms, which allows the browser to choose the protocol to open a link. This is a security anti-pattern and should be avoided at all costs.
 
 At certain times, the browser also attempts to correct improper quotes. ```<a>``` is one such tag, where Chrome browser tries to perform such kind of rectification, which can also result in bypassing sanitizer to convert a non-malicious script to a malicious one.`
 
 Generally, the exploit payload changes based on which browser context it's supposed to be used. For example, the XSS payload executing under the eval() method would be significantly different than the one to be added ``` element.innerHTML```. There's also a concept of polyglot payload, where the script is written in such a way that it can be executed in a wide variety of browser contexts. One such example is posted here https://github.com/0xSobky/HackVault/blob/master/XSS-polyglot.js
-
 
 ### Mitigation:
 
@@ -101,7 +102,6 @@ Content-Security-Policy: default-src 'self'; script-src 'self' https://apis.exam
 - **False Positives**: CSP can sometimes block legitimate content, leading to a poor user experience if not configured correctly.
 
 In summary, CSP is a powerful tool for enhancing the security of web applications by controlling the sources of content that can be loaded and executed on a page. However, it requires careful configuration to balance security with functionality.
-
 
 ### References:
 1. [Content Security Policy:How to solve content security policy error](https://www.youtube.com/watch?v=hUDUqyy0jPM)

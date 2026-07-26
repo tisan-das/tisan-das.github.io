@@ -7,7 +7,9 @@ tags: [rpc, go, concurrency]
 published: true
 ---
 
-![RPC](/images/map-reduce/rpc.png)
+![RPC](/images/map-reduce/rpc.png){: .light }
+![RPC](/images/map-reduce/rpc-dark.png){: .dark }
+_RPC_
 
 ### RPC Server:
 ```go
@@ -99,7 +101,6 @@ func main() {
 }
 
 ```
-
 
 ### Crawler example:
 
@@ -214,7 +215,6 @@ var fetcher = fakeFetcher{
 }
 
 ```
-
 
 ### References:
 

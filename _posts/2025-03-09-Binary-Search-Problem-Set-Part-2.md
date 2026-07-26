@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Binary Search Problem Sets Part II
+image: /assets/img/series/binary-search-problems.png
 series: "Binary Search Problems"
 categories: ["Algorithms", "Problem Sets"]
 tags: [binary-search, cpp]
@@ -11,9 +12,10 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
 
 {% include series-nav.html %}
 
-
-
 ### Median of two Sorted Arrays (65):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     double findMedian(vector<int> &a, vector<int> &b){
@@ -59,9 +61,12 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
+</details>
 
 ### Wood Cut (183):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     bool isPossible(vector<int> &vec, int len, int pieces){
@@ -113,9 +118,12 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
+</details>
 
 ### Minimize Max Distance to Gas Station (848):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     bool isPossible(vector<int> &stations, int maxStations, double distance){
@@ -176,4 +184,4 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
+</details>

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Binary Search Problem Sets Part I
+image: /assets/img/series/binary-search-problems.png
 series: "Binary Search Problems"
 categories: ["Algorithms", "Problem Sets"]
 tags: [binary-search, cpp]
@@ -12,6 +13,9 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
 {% include series-nav.html %}
 
 ### Search for a Range (61):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int binSearch(vector<int> &array, int start, int end, int target){
@@ -27,7 +31,6 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
         }
         return -1;
     }
-
 
     int binSearchStart(vector<int> &array, int start, int end, int target){
         while(start <= end){
@@ -97,9 +100,12 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
+</details>
 
 ### Search in Rotated Sorted Array (62):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int findRotatedIndex(vector<int> &array, int start, int end){
@@ -154,9 +160,12 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
+</details>
 
 ### First Bad Version (74):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int findBinSearch(long long int start, long long int end){
@@ -198,9 +207,12 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
+</details>
 
 ### Search in Rotated Sorted Array II (63):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int findRotatedIndex(vector<int> &array, int start, int end){
@@ -270,9 +282,12 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
+</details>
 
 ### Count of Smaller Number (248):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int findLowestUpper(vector<int> &array, int target){
@@ -314,9 +329,12 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
+</details>
 
 ### Copy Books (437):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     bool isPossibletoComplete(vector<int> &array, int persons, int time){
@@ -369,9 +387,12 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
+</details>
 
 ### How Many Problem Can I Accept (937):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     long long canAccept(long long n, int k) {
@@ -381,9 +402,12 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
+</details>
 
 ### Missing Element in Sorted Array (3661):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int binSearchLowerBoundDiff(vector<int> &array, int diffIndex){
@@ -430,9 +454,12 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
+</details>
 
 ### Count Pairs in Two Arrays (3733):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int binSearchGreaterThan(vector<int> &array, int startIndex, int endIndex, int target){
@@ -489,9 +516,12 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
+</details>
 
 ### Single Element in a Sorted Array (1183):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int binSearchNonDuplicate(vector<int> &array){
@@ -556,9 +586,12 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
+</details>
 
 ### Build a temple (1669):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     bool isPossibleConstruct(int m, vector<int> &woods, int len){
@@ -611,9 +644,12 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
+</details>
 
 ### Find Minimum in Rotated Sorted Array II (160):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int binSearchMinRotated(vector<int> &nums){
@@ -655,9 +691,12 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
+</details>
 
 ### Kth Smallest Subarray Sum (3736):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int kthSmallestSubarraySum(vector<int> &nums, int k) {
@@ -680,9 +719,12 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
+</details>
 
 ### Find K Closest Elements (460):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int binSearchUpperBoundIndex(vector<int> &array, int target){
@@ -737,9 +779,12 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
+</details>
 
 ### H-Index II (1303):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int binSearch(vector<int> &citations){
@@ -785,9 +830,12 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
+</details>
 
 ### Kth Smallest Number in Sorted Matrix (401):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int kthSmallest(vector<vector<int>> &matrix, int k) {
@@ -812,9 +860,12 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
+</details>
 
 ### Find Words (194):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     bool isSubsequence(string &str, string &target){
@@ -839,5 +890,4 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
-
+</details>

@@ -6,6 +6,7 @@ image: /images/raft-consensus/dataReplication.png
 series: "Distributed Systems Papers"
 categories: ["Distributed Systems", "Consensus"]
 tags: [raft, consensus]
+mermaid: true
 ---
 One of the foundation problems of designing a distributed system is how to store some data in a distributed system. One basic approach is to share or duplicate all the data between the nodes. However the complexity arises when multiple nodes can operate independently, and in case some node goes down the complexity arises by multiple folds. In this blog post, we will learn about Raft: one of the most commonly used consensus algorithms. We would briefly touch on the generic replication technique of the database replication as well.
 
@@ -20,14 +21,17 @@ One of the most commonly used approaches here is to use a single leader replicat
 1. Synchronous replication: Wait for acknowledgment from the follower nodes first, before committing data
 2. Asynchronous replication: Trigger replication, however not to wait for acknowledgment from the follower nodes before committing data
 
-![Single-leader replication: data Replication](/images/raft-consensus/dataReplication.png)
+![Single-leader replication: data Replication](/images/raft-consensus/dataReplication.png){: .light }
+![Single-leader replication: data Replication](/images/raft-consensus/dataReplication-dark.png){: .dark }
+_Single-leader replication: data Replication_
 
 The asynchronous replication technique has one drawback: the consistency for read-after-write requests can't be guaranteed. 
 
-![Single-leader replication: async Read Issue](/images/raft-consensus/asyncReadIssue.png)
+![Single-leader replication: async Read Issue](/images/raft-consensus/asyncReadIssue.png){: .light }
+![Single-leader replication: async Read Issue](/images/raft-consensus/asyncReadIssue-dark.png){: .dark }
+_Single-leader replication: async Read Issue_
 
 There are certain workarounds to this issue, for example storing updated timestamps on the client side to read the updated data after the specific timestamp, or utilizing sticky routing, however, none of them still guarantees strong consistency. So distributed systems not requiring strong consistency can take this approach. However, based on the CAP theorem, which we would explore in a later post, the CP and CA systems wouldn't be able to rely on the async data replication technique.
-
 
 Single-leader replication failure contains two major drawbacks:
 1. How to handle a node going down: If a node goes down, and joins back again, how to have the updated data replicated?
@@ -38,35 +42,63 @@ This is where a consensus algorithm like Raft comes into the picture. The consen
 ### Raft: State Transition of nodes:
 The primary concept behind the Raft algorithm is that each node can either be a leader, follower, or candidate node during an election:
 
-![Raft: State Transition of nodes: raft Transition Diagram](/images/raft-consensus/raftTransitionDiagram.png)
+![Raft: State Transition of nodes: raft Transition Diagram](/images/raft-consensus/raftTransitionDiagram.png){: .w-75 .light }
+![Raft: State Transition of nodes: raft Transition Diagram](/images/raft-consensus/raftTransitionDiagram-dark.png){: .w-75 .dark }
+_Raft: State Transition of nodes: raft Transition Diagram_
+
+```mermaid
+stateDiagram-v2
+  [*] --> Follower
+  Follower --> Candidate: election timeout
+  Candidate --> Candidate: split vote / new election
+  Candidate --> Leader: majority of votes
+  Candidate --> Follower: discover higher term / valid leader
+  Leader --> Follower: step down (higher term seen)
+```
 
 The transition rules are pretty much self-evident. When the system is initialized, an external force is needed to select the initial leader. However, once the leader is elected, it remains the leader until it goes down, or gets disconnected from the majority of the servers, which denotes a partitioned network. The leader node periodically sends a heartbeat signal to the rest of the nodes. 
-
 
 ### Raft: Leader Election:
 If one of the nodes sees that it's not receiving any heartbeat from the leader nodes for a pre-configured period, it becomes a candidate node, proposes itself to be a leader node, and broadcasts a voting request to other nodes. Now, there's a concept of term number, an increasing number to denote the term for which election is going on, and when a leader is selected it uses the term number to replicate and store the logs in persistence storage. The Raft algorithm only allows append operation on logs. Hence when a leader is selected, it's assumed all the logs till the previous term are already committed, and need no further intervention.
 
 Now, leader selection is a vital process. To ensure that not all the nodes become a candidate at the same time, a randomized election timeout is used. Also, there's one more vital issue for the leader election. The leader node should have all the entries updated, hence before casting vote, the follower node check whether the candidate node is up-to-date both in terms of the term number, and the log index of the previous term and also returns these values to the leader. If the leader finds out it's missing an updated log, then it cancels the election and goes back to being a follower node. Also, a follower node can cast its vote for only one node for a given term. The candidate node becomes the leader if it has got the votes for the majority of the nodes.
 
-![Raft: Leader Election: request Votes RPC](/images/raft-consensus/requestVotesRPC.png)
+![Raft: Leader Election: request Votes RPC](/images/raft-consensus/requestVotesRPC.png){: .light }
+![Raft: Leader Election: request Votes RPC](/images/raft-consensus/requestVotesRPC-dark.png){: .dark }
+_Raft: Leader Election: request Votes RPC_
 
+```mermaid
+sequenceDiagram
+  participant F1 as Follower A
+  participant C as Candidate B
+  participant F2 as Follower C
+
+  Note over F1,F2: election timeout fires on B
+  C->>C: become Candidate, term = term + 1
+  C->>F1: RequestVote(term, lastLogIndex, lastLogTerm)
+  C->>F2: RequestVote(term, lastLogIndex, lastLogTerm)
+  F1-->>C: vote granted (up-to-date log)
+  F2-->>C: vote granted
+  Note over C: majority reached → become Leader
+  C->>F1: AppendEntries heartbeat (term)
+  C->>F2: AppendEntries heartbeat (term)
+```
 
 ### Raft: Append Logs:
 The appendLog is the second type of message broadcasted by the leader. Now, as only append operation is allowed on the logs i.e. the data modification, the out-of-sync appending isn't allowed. It's always assumed that logs are appended in the same order leader is having. To enforce this, prevLogIndex value is maintained along with prevLogTerm, which denotes the index and the term of the latest updated log. And in case the node gets some logs that are out-of-sync, i.e. more recent logs, the node discards them and waits to get the intended logs. These arguments are sent by the leader node, and the follower verifies whether needs to append the logs or reject and wait for older messages to get appended or in case of conflicting entries with the leader node specific to the current term, then update it. Now from the above discussion, it's clear that the leader node has to broadcast the entries multiple times, and is generally broadcasted periodically.
 
 Following are the arguments to the appendEntry/appendLog command:
 
-![Raft: Append Logs: log Append RPC](/images/raft-consensus/logAppendRPC.png)
+![Raft: Append Logs: log Append RPC](/images/raft-consensus/logAppendRPC.png){: .light }
+![Raft: Append Logs: log Append RPC](/images/raft-consensus/logAppendRPC-dark.png){: .dark }
+_Raft: Append Logs: log Append RPC_
 
 Once the leader gets acknowledgment from the majority of the nodes for a specific logIndex, it updates the commitIndex, denoting that the logs or transactions till that index is already committed. This is a way to let the higher-level application know that the transaction is already committed. Now in case the leader goes down abruptly, the client will know that the rest of the data isn't committed to the system.
-
 
 ### Multiple leaders:
 It's to be noted that, there's still a possibility of having multiple leader nodes, in case the earlier leader is disconnected from the rest of the nodes, due to which it remains an isolated node, and isn't aware of the latest term. However, in this case, the obsolete leader will not have an acknowledgment from the majority of the nodes, hence commit will not occur. There is also some improvement proposed on top of vanilla Raft, by using a commit timeout, where in case no further commit happens within a stipulated time, then it's assumed that the leader is disconnected, and goes back to being a follower node, to let another round of election take place.
 
 As soon as this node gets connected to the current leader node, it understands that its term is of a preceding term, and hence relegates to the follower state. In this case, the logs from the earlier terms can be lost from this particular node, however, as the data is already committed to the majority of the nodes, and each read also needs the majority consensus, this scenario wouldn't cause any issue.
-
-
 
 ### References:
 1. [Advantages of DBMS over File system](https://www.geeksforgeeks.org/advantages-of-dbms-over-file-system/)

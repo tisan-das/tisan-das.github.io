@@ -27,7 +27,9 @@ Following are some examples of problems that are easily expressed in the MapRedu
 
 ### Execution Overview:
 
-![Execution Overview: architecture](/images/map-reduce/architecture.png)
+![Execution Overview: architecture](/images/map-reduce/architecture.png){: .w-75 .light }
+![Execution Overview: architecture](/images/map-reduce/architecture-dark.png){: .w-75 .dark }
+_Execution Overview: architecture_
 
 Step 01: The MapReduce librarry in user program splits the input file into M pieces of typilcally 16MB to 64MB
 Step 02: The user program spawns multiple worker agents, one among them is assigned as master. Overall there's M map tasks and R reduce tasks to assign. The value of M and R is generally much more higher than the systems available for the cluster of MapReduce.
@@ -36,7 +38,6 @@ Step 04: The intermediate key-value outputs buffered into memory, and periodical
 Step 05: When the reduce worker has read all the intermediate data, it sorts by the intermediate key, and stores on the disk using a partitioning function.
 Step 06: The reduce worker then iterates over the sorted and partitioned intermediate data trhough RPC and for each intermediate key it passes the key along with the associated list of values to the user-defined Reduce function. The output of the Reduce function is stored on the final output file in a sorted manner.
 Step 07: When all the Reduce functions are completed, then the master wakes up the user program, and the control is handed back to the user program. 
-
 
 ### Master Data Structure:
 The master stores the state for each map and reduce task in the form of idle, in-progress or completed along with the identity of the worker machine.
@@ -51,7 +52,9 @@ Any map tasks currently in-progress on a failed machine is also reverted back to
 ### Combiner Function:
 Combiner function is executed on each system that peforms map operation after it's completed. Combiner function does partial merging on the intermediate files to reduce the networ bandwidth requirement while transferring data through RPC for reduce tasks.
 
-![Combiner Function: mapreduce](/images/map-reduce/mapreduce.png)
+![Combiner Function: mapreduce](/images/map-reduce/mapreduce.png){: .light }
+![Combiner Function: mapreduce](/images/map-reduce/mapreduce-dark.png){: .dark }
+_Combiner Function: mapreduce_
 
 ### Example:
 ```go
@@ -95,7 +98,9 @@ func Reduce(key string, values []string) string {
 - Implementation of Map-Reduce
 - Cloud Dataflow
 
-**Note**: As of now, Google has replaced the map-reduce model with Cloud Dataflow. 
+> As of now, Google has replaced the map-reduce model with Cloud Dataflow.
+{: .prompt-info }
+
 
 ### References:
 1. [MIT 6.824: Lecture 1 - MapReduce](https://timilearning.com/posts/mit-6.824/lecture-1-mapreduce/)

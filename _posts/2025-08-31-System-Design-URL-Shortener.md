@@ -12,20 +12,17 @@ In this wiki, we will explore an approach to design a URL shortener service.
 
 {% include series-nav.html %}
 
-
 ### Requirements:
 - Shortened URLs' length should be as short as possible
 - Shortened URL should contain only ASCII characters
 - Shortened URLs are not updated
 - System should have high availability, scalability, and fault-tolerance
 
-
 ##### Back of the envelope estimation:
 - Write operations: 100 million URLs generated per day => 1160 operations/sec
 - Read operations: Assuming a ratio of read operations to write operations to be 10:1, read operations ~11600 operations/sec
 - Assuming service would run for 10 years: 100 million * 365 * 10 => 365 billion records
 - Assuming average URL length of 100 bytes, storage requirement: 365 billion * 100 bytes => 36.5 PB
-
 
 ### API endpoints:
 
@@ -39,5 +36,6 @@ GET api/v1/shortUrl
 
 ### High-level diagram:
 
-![High-level diagram: URL shortner system design hld](/images/sys-design-vol1/05-url-shortner-system-design-hld.png)
-
+![High-level diagram: URL shortner system design hld](/images/sys-design-vol1/05-url-shortner-system-design-hld.png){: .w-75 .light }
+![High-level diagram: URL shortner system design hld](/images/sys-design-vol1/05-url-shortner-system-design-hld-dark.png){: .w-75 .dark }
+_High-level diagram: URL shortner system design hld_

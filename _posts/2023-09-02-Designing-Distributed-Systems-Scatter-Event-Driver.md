@@ -15,15 +15,21 @@ In the last blog post, we have discussed two of the major patterns for designing
 ### Scatter/Gather:
 The root node frames out the incoming requests simultaneously to all the servers. Each server node does a small amount of processing and returns the output to the root node. The root node then combines these partial outputs and returns a response to the end-user. This is helpful in scenarios where each server node can compute the requests independently.
 
-![Scatter/Gather: 16.scatter Gather Pattern](/images/distributed-system-patterns-single-node/16.scatterGatherPattern.png)
+![Scatter/Gather: 16.scatter Gather Pattern](/images/distributed-system-patterns-single-node/16.scatterGatherPattern.png){: .light }
+![Scatter/Gather: 16.scatter Gather Pattern](/images/distributed-system-patterns-single-node/16.scatterGatherPattern-dark.png){: .dark }
+_Scatter/Gather: 16.scatter Gather Pattern_
 
 In the simplest form of scatter/gather pattern, each leaf node is entirely homogeneous. The primary benefit here lies in distributed computing, as the bottleneck of single CPU processing is overcome here. Also, the root node can dynamically assign nodes depending on resource usage and responsiveness. 
 
-![Scatter/Gather: 15.term Sharded Scatter Gather](/images/distributed-system-patterns-single-node/15.termShardedScatterGather.png)
+![Scatter/Gather: 15.term Sharded Scatter Gather](/images/distributed-system-patterns-single-node/15.termShardedScatterGather.png){: .light }
+![Scatter/Gather: 15.term Sharded Scatter Gather](/images/distributed-system-patterns-single-node/15.termShardedScatterGather-dark.png){: .dark }
+_Scatter/Gather: 15.term Sharded Scatter Gather_
 
 However this replicated scatter/gather pattern is not scalable beyond a certain data size, as all the leaf node has access to the same data, hence the overall data size becomes the bottleneck here. Hence majority of the applications following this scatter/gather pattern have the leaf nodes sharded. The primary benefit here is that each leaf node has access to a disjoint set of data, Each node processes the operation on a smaller set of data loaded to the specific shard and returns the partial output to the root node, and the root node then combines all these partial outputs.
 
-![Scatter/Gather: 14.conjunctive Query Executing Scatter Gather](/images/distributed-system-patterns-single-node/14.conjunctiveQueryExecutingScatterGather.png)
+![Scatter/Gather: 14.conjunctive Query Executing Scatter Gather](/images/distributed-system-patterns-single-node/14.conjunctiveQueryExecutingScatterGather.png){: .light }
+![Scatter/Gather: 14.conjunctive Query Executing Scatter Gather](/images/distributed-system-patterns-single-node/14.conjunctiveQueryExecutingScatterGather-dark.png){: .dark }
+_Scatter/Gather: 14.conjunctive Query Executing Scatter Gather_
 
 ##### Points to be noted:
 - Choose the right number of leaf nodes: As processing requests by a node also has an overhead, and as the leaf node increases, the computation cost reduces, however, the overhead for request processing remains the same
@@ -33,8 +39,9 @@ However this replicated scatter/gather pattern is not scalable beyond a certain 
 
 The straggler problem can be overcome by having a replica of each shard. Each leaf request from the root node is load-balanced across all the healthy replicas to the shard.
 
-![Points to be noted: 13.sharded Replicated Scatter Gather](/images/distributed-system-patterns-single-node/13.shardedReplicatedScatterGather.png)
-
+![Points to be noted: 13.sharded Replicated Scatter Gather](/images/distributed-system-patterns-single-node/13.shardedReplicatedScatterGather.png){: .light }
+![Points to be noted: 13.sharded Replicated Scatter Gather](/images/distributed-system-patterns-single-node/13.shardedReplicatedScatterGather-dark.png){: .dark }
+_Points to be noted: 13.sharded Replicated Scatter Gather_
 
 ### Functions & Event-Driven processing:
 Function as a Service (FaaS) and event-driven applications have emerged with the advent of cluster orchestrators to handle a single event.
@@ -51,14 +58,14 @@ Even though certain times FaaS and serverless are frequently used together, howe
 - Poor fit for the compute-heavy or memory-hog activities
 - Economics for pay-per-request tends to become bad as request handling becomes more frequent
 
-
-
 ##### Decorator Pattern:
 FaaS is ideal for deploying simple functions that can take an input transform it into an output, and then pass it to a different service.
 
 There's a distinct difference between requests and events, and it has to do with the notion of a session. Requests can be thought of as a part of a larger series of interactions as part of a session, whereas events tend to be single-instance and asynchronous. Events are also independent and stateless.
 
-![Decorator Pattern: 12.decorator Pattern](/images/distributed-system-patterns-single-node/12.decoratorPattern.png)
+![Decorator Pattern: 12.decorator Pattern](/images/distributed-system-patterns-single-node/12.decoratorPattern.png){: .light }
+![Decorator Pattern: 12.decorator Pattern](/images/distributed-system-patterns-single-node/12.decoratorPattern-dark.png){: .dark }
+_Decorator Pattern: 12.decorator Pattern_
 
 Use case-wise it's similar to the adapter container, that we've discussed as part of the co-scheduled pattern. However certain times we would like to have it decoupled and changed independently depending on the service consuming the output.
 
@@ -67,11 +74,8 @@ Example Problems:
 2. Implementing two-factor authentication
 3. Implementing pipe-line for new-user signup
 
-
-
 ### TODO:
 - Implementation is pending for these two patterns
-
 
 ### References:
 1. Designing Distributed Systems: Patterns & Paradigms for Scalable, Reliable Services

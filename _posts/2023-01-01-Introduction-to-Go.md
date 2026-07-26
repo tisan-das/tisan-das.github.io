@@ -9,7 +9,6 @@ Go/Golang is developed and supported by Google to obtain high-performance by hav
 
 The main objective here is to provide an overview of Golang an snippet to understand the basics
 
-
 #### Array
 
 ##### Example 01: Intro to Array
@@ -20,13 +19,11 @@ import ("fmt";"math/rand"; "time";"os")
 
 func main2(){
 
-
 	const(
 		winter = 1
 		summer = 3
 		yearly = summer + winter
 	)
-
 
 	// var books [4]string
 	
@@ -169,7 +166,6 @@ func main(){
 	fmt.Println("array: ",array)
 }
 
-
 func fun1() (string,string){
 	// return "fun1 function" // always need to return same no. values declared
 	return "fun1", "function"
@@ -210,7 +206,6 @@ func fun5(array [4]string){
 
 #### Slice: dynamic array
 
-
 ##### Example 01: Slice can be compared only to nil, unlike struct and array
 ```go
 package main
@@ -231,7 +226,6 @@ func main1(){
 	fmt.Printf("Type of slice3: %T\n",slice3)
 	fmt.Println("Length of slice3: ",len(slice3))
 	fmt.Println("Is slice3 empty: ",slice3==nil)
-
 
 	slice4 := append(slice3, "new_element")
 	slice3[0] = "elem1_mod"
@@ -261,7 +255,6 @@ func main4(){
 	
 	fmt.Println("nums elements:",nums)
 	fmt.Println("slice elements:",slice)
-
 
 	nums2 := [10]int {1,2,3,4,5,6}
 	slice2 := nums2[0:5]
@@ -297,7 +290,6 @@ func main(){
 }
 ```
 
-
 #### Struct
 
 ##### Example 01: Basics of struct
@@ -325,7 +317,6 @@ func main1(){
 	fmt.Println(adam)
 }
 ```
-
 
 ##### Example 02: Structs are compable only if they're of same type
 
@@ -483,6 +474,3 @@ func (book *Book) printBookDetailsPtr() {
 	fmt.Println("printBookDetailsPtr: value:", book)
 }
 ```
-
-
-

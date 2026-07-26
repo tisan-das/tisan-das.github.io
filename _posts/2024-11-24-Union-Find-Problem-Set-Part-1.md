@@ -3,6 +3,7 @@ layout: post
 title: Union-Find Problem Sets
 categories: ["Algorithms", "Problem Sets"]
 tags: [union-find, cpp]
+math: true
 published: true
 ---
 
@@ -10,13 +11,18 @@ Union-find data structure is used extensively to solve problems associated with 
 - **Find**: finding a representative of the set
 - **Merge**: merge two disjoint sets to form a single set
 
-NB: To optimize the find operation, always assign the representative as the node having the highest rank. This is similar to assigning the subtree with a lower height as a child under the subtree with a higher height, thus reducing the complexity. The effective time complexity of these two operations can be reduced to O(α(n)), α being an Ackermann function.
+> To optimize the find operation, always assign the representative as the node having the highest rank. This is similar to assigning the subtree with a lower height as a child under the subtree with a higher height, thus reducing the complexity. With union-by-rank and path compression, both operations run in amortized $O\bigl(\alpha(n)\bigr)$ time, where $\alpha$ is the inverse Ackermann function (grows so slowly it is $\le 4$ for any practical $n$).
+{: .prompt-info }
+
 
 This is useful in solving problems involving relationships, especially the ones that can be described with undirected graphs. Detecting the presence of a cycle in an undirected graph is one such example. For detecing cycle in directed graph, topological sort is used.
 
 This wiki contains a couple of well-defined problems solved via Union-Find data structure.
 
 ### Graph Valid Tree (178):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int find(vector<int> &parent, int index){
@@ -69,9 +75,12 @@ This wiki contains a couple of well-defined problems solved via Union-Find data 
     }
 ```
 
-
+</details>
 
 ### Number of Islands II (434):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     pair<int,int> findRoot(pair<int,int> node){
@@ -138,9 +147,12 @@ This wiki contains a couple of well-defined problems solved via Union-Find data 
         int groups;
 ```
 
-
+</details>
 
 ### Accounts Merge (1070):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int findRoot(vector<int> &parentArray, int index){
@@ -174,7 +186,6 @@ This wiki contains a couple of well-defined problems solved via Union-Find data 
         for(int i=0;i<parentArray.size();i++){
             parentArray[i] = i;
         }
-
 
         map<string, int> emailMapper;
         for(int i=0;i<accounts.size();i++){
@@ -210,9 +221,12 @@ This wiki contains a couple of well-defined problems solved via Union-Find data 
     }
 ```
 
-
+</details>
 
 ### Maximum Connected Area (261):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     pair<int,int> findRoot(pair<int,int> index){
@@ -350,9 +364,12 @@ This wiki contains a couple of well-defined problems solved via Union-Find data 
         map<pair<int,int>, int> groupSizeMap;
 ```
 
-
+</details>
 
 ### Making A Large Island (1391):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     pair<int,int> findRoot(pair<int,int> index){
@@ -397,7 +414,6 @@ This wiki contains a couple of well-defined problems solved via Union-Find data 
         }
         return true;
     }
-
 
     int largestIsland(vector<vector<int>> &grid) {
         //
@@ -487,9 +503,12 @@ This wiki contains a couple of well-defined problems solved via Union-Find data 
         map<pair<int,int>, int> rankMap, groupSizeMap; 
 ```
 
-
+</details>
 
 ### Minimum Number of Visited Lattices in a Matrix (3709):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     bool isValid(vector<vector<int>> &grid, int i, int j){
@@ -540,9 +559,12 @@ This wiki contains a couple of well-defined problems solved via Union-Find data 
     }
 ```
 
-
+</details>
 
 ### The Minimum String After Swapping (3604):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int findRoot(int index){
@@ -611,9 +633,12 @@ This wiki contains a couple of well-defined problems solved via Union-Find data 
         vector<int> parentArray,rankArray;
 ```
 
-
+</details>
 
 ### Minimize Malware Spread (1718):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int findRoot(int index){
@@ -686,4 +711,4 @@ This wiki contains a couple of well-defined problems solved via Union-Find data 
         vector<int> parentArray, rankArray, groupSize;
 ```
 
-
+</details>

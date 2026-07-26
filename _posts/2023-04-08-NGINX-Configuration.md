@@ -21,7 +21,6 @@ NGINX configuration file can be validated with the command:
 nginx -t
 ```
 
-
 ### NGINX Configuration Basics
 
 NGINX configuration file consists of directives. There are two types of directives- line directives are terminated by a semi-colon, and block directives are terminated by the closing parenthesis. 
@@ -66,13 +65,11 @@ There is a couple of generic guidance with NGINX configuration:
 - To have a default root specified under the server block
 - To use conditional statements as less as possible
 
-
 #### Server and location block selection:
 There's a good article on how NGINX selects the server and location block[6]. This document contains a detailed description along with some examples. However just to give some basic idea, NGINX first selects the server and then matches the location block to handle the incoming request. Selection criteria for both types of resource follow a similar approach:
 - Look for an exact match (server: IP address filter first, then based on server name)
 - In case an exact match doesn't exist, look for the longest prefix match (server: leading wildcard first, then training wildcard entries)
 - If no match is found, then evaluate the regular expressions in a top-down manner
-
 
 #### NGINX sample configuration:
 ```conf
@@ -140,7 +137,6 @@ The directive "proxy_pass" redirects the request to a proxied server. For the pr
 - Random
 - Least Time to respond
 
-
 #### Cache
 NGINX has also got in-built support for the cache. Following is one of the most simple examples:
 ```conf
@@ -156,7 +152,6 @@ server {
 }
 ```
 The document as referred to by [11] provides a detailed description of different cache parameters supported by NGINX. Would request you to check the page as well to get a firm grasp on different cache configurations.
-
 
 ### References
 1. [NGINX: Beginner’s Guide](http://nginx.org/en/docs/beginners_guide.html)

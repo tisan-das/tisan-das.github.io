@@ -15,8 +15,9 @@ In the last couple of blog posts, we've explored patterns of distributed systems
 ### Event-Driven Batch Processing
 Event driven batch processing can be thought of as workflow systems, where the flow of work is a directed acyclic graph and each node of the graph represents a specific step or task that needs to be performed. This is useful for the scenarios where multiple actions are needed to be performed on the specific event, and depending upon some condition, certain steps can be omitted. This kind of systems can be thought of as output of the processing of the one stream acts as input to another stream, which is then processed by it's consumer. 
 
-
-![Event-Driven Batch Processing: 17.event Batch Processing Patterns](/images/distributed-system-patterns-single-node/17.eventBatchProcessingPatterns.png)
+![Event-Driven Batch Processing: 17.event Batch Processing Patterns](/images/distributed-system-patterns-single-node/17.eventBatchProcessingPatterns.png){: .w-75 .light }
+![Event-Driven Batch Processing: 17.event Batch Processing Patterns](/images/distributed-system-patterns-single-node/17.eventBatchProcessingPatterns-dark.png){: .w-75 .dark }
+_Event-Driven Batch Processing: 17.event Batch Processing Patterns_
 
 ##### Copier:
 Take a single stream of work items, and duplicate it to multiple streams. This is useful for the scenarios where different type of acitivity to be performed on the same work item.
@@ -33,12 +34,15 @@ More generic form of sharder. Divide a workstream into multiple streams based up
 ##### Merger:
 Take multiple workstreams and turn them into a single workstream
 
-![Merger: 18.event Batch Processing Merger Pattern](/images/distributed-system-patterns-single-node/18.eventBatchProcessingMergerPattern.png)
-
+![Merger: 18.event Batch Processing Merger Pattern](/images/distributed-system-patterns-single-node/18.eventBatchProcessingMergerPattern.png){: .light }
+![Merger: 18.event Batch Processing Merger Pattern](/images/distributed-system-patterns-single-node/18.eventBatchProcessingMergerPattern-dark.png){: .dark }
+_Merger: 18.event Batch Processing Merger Pattern_
 
 ##### Example 01: Building an Event-Driven Flow for New User Sign-up:
 
-![Example 01: Building an Event-Driven Flow for New User Sign-up: 19.event Batch Processing Example](/images/distributed-system-patterns-single-node/19.eventBatchProcessingExample.png)
+![Example 01: Building an Event-Driven Flow for New User Sign-up: 19.event Batch Processing Example](/images/distributed-system-patterns-single-node/19.eventBatchProcessingExample.png){: .w-75 .light }
+![Example 01: Building an Event-Driven Flow for New User Sign-up: 19.event Batch Processing Example](/images/distributed-system-patterns-single-node/19.eventBatchProcessingExample-dark.png){: .w-75 .dark }
+_Example 01: Building an Event-Driven Flow for New User Sign-up: 19.event Batch Processing Example_
 
 #### Hands On: Produce & Consume events:
 Publisher/Subscriber is one of the most popular approach to build batch processing workflows. The publisher/subscriber system provides queue or topic, to which publishers publish messages and consumers consume messages from. The messages are stored and delivered in a reliable way so that no message is missed. Certain implementation gurantees at-least one delivery. Kafka is one such industry-standard implementation.
@@ -48,7 +52,6 @@ Publisher/Subscriber is one of the most popular approach to build batch processi
 helm repo add rhcharts https://ricardo-aires.github.io/helm-charts/
 helm repo update
 helm upgrade --install kafka rhcharts/kafka
-
 
 controlplane $ k exec -it kafka-0 -- /bin/kafka-topics --create replication-factor 3 --partitions 10 --topic photos-topic --bootstrap-server kafka-headless:9092
 Created topic photos-topic.
@@ -61,7 +64,6 @@ controlplane $ k exec -it kafka-1 -- /bin/kafka-console-producer --bootstrap-ser
 >^C^Ccommand terminated with exit code 130
 controlplane $ 
 
-
 controlplane $ k exec -it kafka-2 -- /bin/kafka-console-consumer --bootstrap-server kafka-headless:9092 --topic photos-topic --from-beginning
 asd
 asdad
@@ -73,17 +75,17 @@ sample-2
 controlplane $ 
 ```
 
-
 ### Coordinated Batch Processing:
 
 ##### Join (Barrier Synchronizaztion):
 Join is having more strict co-ordinated primitive compared to merger. Just like the join in thread, even though work items are processed in parallel, they are released only when all the processing is completed.
 
-![Join (Barrier Synchronizaztion): 20.event Batch Processing Join](/images/distributed-system-patterns-single-node/20.eventBatchProcessingJoin.png)
+![Join (Barrier Synchronizaztion): 20.event Batch Processing Join](/images/distributed-system-patterns-single-node/20.eventBatchProcessingJoin.png){: .light }
+![Join (Barrier Synchronizaztion): 20.event Batch Processing Join](/images/distributed-system-patterns-single-node/20.eventBatchProcessingJoin-dark.png){: .dark }
+_Join (Barrier Synchronizaztion): 20.event Batch Processing Join_
 
 ##### Reduce:
 Reduce merges several different work items from stream into a singel work item. In contrast to join, reduce doesn't wait for all operations to get completed to release the work items, rather optimally releases work items once they're processed and merged to form the output stream.
-
 
 ##### Hands On: Implement Copier
 
@@ -108,7 +110,6 @@ topicName = 'photos-topic'
 # Initialize consumer variable
 consumer = KafkaConsumer (topicName, group_id ='group1',bootstrap_servers=bootstrap_servers)
 
-
 # Initialize producer variable
 producer = KafkaProducer(bootstrap_servers = bootstrap_servers)
 
@@ -118,9 +119,7 @@ for msg in consumer:
     producer.send(second_topic, msg)
 ```
 
-
 ##### Hands On: Implement Reduce:
-
 
 ```python3
 
@@ -139,7 +138,6 @@ topicName2 = 'photos-topic-2'
 consumer1 = KafkaConsumer (topicName1, group_id ='group1',bootstrap_servers=bootstrap_servers)
 consumer2 = KafkaConsumer (topicName2, group_id ='group2',bootstrap_servers=bootstrap_servers)
 
-
 # Initialize producer variable
 producer = KafkaProducer(bootstrap_servers = bootstrap_servers)
 
@@ -149,9 +147,7 @@ while True:
     print("Message1=%s Message2=%s"%(msg1.value, msg2.value))
     time.sleep(20)
 
-
 ```
-
 
 ```sh
 controlplane $ k exec -it kafka-1 -- /bin/kafka-console-producer --bootstrap-server kafka-headless:9092 --topic photos-topic
@@ -163,8 +159,6 @@ controlplane $ k exec -it kafka-1 -- /bin/kafka-console-producer --bootstrap-ser
 >sample-12
 >
 
-
-
 controlplane $ k exec -it kafka-1 -- /bin/kafka-console-producer --bootstrap-server kafka-headless:9092 --topic photos-topic-2
 >sample-2
 >sample-4
@@ -174,9 +168,6 @@ controlplane $ k exec -it kafka-1 -- /bin/kafka-console-producer --bootstrap-ser
 >sample-11
 >
 ```
-
-
-
 
 ### References:
 1. Designing Distributed Systems: Patterns & Paradigms for Scalable, Reliable Services

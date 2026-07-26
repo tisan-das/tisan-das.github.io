@@ -12,7 +12,8 @@ The Byzantine consensus problem is an interesting problem in distributed systems
 
 {% include series-nav.html %}
 
-It's worth noting that the primary idea here is that all non-adversarial nodes must agree on a value, and that adversarial nodes are hard to detect. 
+> the primary idea here is that all non-adversarial nodes must agree on a value, and that adversarial nodes are hard to detect.
+{: .prompt-tip }
 
 
 The following set of **assumptions** are made about the system to support Byzantine consensus:
@@ -24,11 +25,9 @@ The following set of **assumptions** are made about the system to support Byzant
 - Non-traitor nodes follow the distributed algorithm given.
 - Traitor nodes may not follow the algorithm
 
-
 Lamport, Shostak, and Pease proved that no algorithm exists for ***N < 3M+1*** that solves the Byzantine Generals problem, and gave a distributed algorithm that works for the ***N ≥ 3M+1*** case.
 
 With ***M*** traitors, ***M+1*** stages are needed to ensure the correctness of the algorithm. These stages are referred to as the ***k=M*** stage, in which the king sends his order to the other ***N−1*** generals (first stage), all the way down to the ***k=0*** stage.
-
 
 ***python3
 def decide():
@@ -58,8 +57,9 @@ def OM(path):
 ***
 
 The above algorithm is also known as Open Messaging, Exponential Information Gathering (EIG) Algorithm
-![EIG](/images/sys-design-fundamentals/03-byzantine-concensus/EIG.png)
-
+![EIG](/images/sys-design-fundamentals/03-byzantine-concensus/EIG.png){: .w-75 .light }
+![EIG](/images/sys-design-fundamentals/03-byzantine-concensus/EIG-dark.png){: .w-75 .dark }
+_EIG_
 
 The signed version of Lamport’s algorithm works as follows:
 - **Node requirement:** Agreement among the honest nodes requires only ***N ≥ M+2. That means even if there are many traitors, as long as two honest nodes exist, they can still agree.
@@ -74,12 +74,11 @@ The signed version of Lamport’s algorithm works as follows:
 
 All modern Byzantine Fault-Tolerant protocols — PBFT, Tendermint, HotStuff — rely heavily on digital signatures.
 
-
 ### Practical Byzantine Fault Tolerance (PBFT) algorithm:
 It introduces the concept of a primary (leader), responsible for ordering client requests, while backups confirm and cross-check. Instead of flooding the system with cascades, PBFT uses quorum-based phases — pre-prepare, prepare, and commit — to reach agreement. It also optimizes cryptography: instead of signing every message, it uses lightweight message authentication codes (MACs) in normal operation, with signatures only during rare view-change events. The result is an ***O(n^2)*** message complexity instead of exponential.
 
-![Practical Byzantine Fault Tolerance (PBFT) algorithm: pbft](/images/sys-design-fundamentals/03-byzantine-concensus/pbft.png)
-
+![Practical Byzantine Fault Tolerance (PBFT) algorithm: pbft](/images/sys-design-fundamentals/03-byzantine-concensus/pbft.png){: .w-75 }
+_Practical Byzantine Fault Tolerance (PBFT) algorithm: pbft_
 
 ### References
 1. [Lamport's Byzantine Generals algorithm in Python](https://bytepawn.com/lamport-byzantine-generals.html)

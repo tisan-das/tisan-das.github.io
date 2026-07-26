@@ -26,13 +26,13 @@ Amazon DynamoDB is one of the most prominent fully-managemed NoSQL database serv
     - TransactWriteItems: Performs read and write operations (PutItem, GetItem, UpdateItem, DeleteItem) on a set of items including CheckItem
     - CheckItem: Verifies that the latest value of an item satisfies the provided condition
 
-
 Both TransactGetItems and TransactWriteItems are synchronous and idempotent. If there's any read or write operation on an item when it's getting modified by another operation, the request is rejected. Also, a Client Request Token is used with each transaction to ensure idempotency.
-
 
 ### Transaction Routing
 
-![Transaction Routing: high Level Architecture Transaction](/images/dynamo-db/highLevelArchitectureTransaction.png)
+![Transaction Routing: high Level Architecture Transaction](/images/dynamo-db/highLevelArchitectureTransaction.png){: .light }
+![Transaction Routing: high Level Architecture Transaction](/images/dynamo-db/highLevelArchitectureTransaction-dark.png){: .dark }
+_Transaction Routing: high Level Architecture Transaction_
 
 All the DynamoDB operations are sent to a fleet of front-end hosts named request routers. The request route authenticates the requests and redirects the non-transactional requests to the storage node containing the key. The key-range information is stored in the metadata system. The transaction requests have got one extra hop. The request routers forward the transactional request to the transactional coordinator, which then breaks the transaction, and co-ordinates with the associated storage nodes to complete the transaction in a two-phased way.
 
@@ -96,7 +96,6 @@ Once all the storage nodes have accepted the prepared statements, the transactio
 
 It's to be noted that all the write operations irrespective of transactional or non-transactional, updates the item timestamp.
 
-
 ### Read transaction protocol:
 
 Read transactions also follow a similar two-phase protocol, albeit in a write-less way. In the first phase, the transaction coordinator reads all the items from the associated storage nodes. In case there's any conflict with any write operation, the read operation is rejected. If the read operation is succeeded, the storage node sends the current committed Log Sequence Number(LSN) of the storage node. If all the operations are succeeded in the first phase, the same operations are again performed in the second phase. If the LSN of the associated storage nodes hasn't changed, then the read transaction is marked as successful, and the values are returned.
@@ -109,7 +108,6 @@ The transaction coordinator is not aware of any failover of storage nodes. If an
 However there's still one bottleneck for transactions, and it's the transaction coordinator itself. The transaction coordinator maintains a persistent record of all the transactions and the outcomes in a ledger. There's a recovery manager who periodically checks for a probable stalled transaction, by checking if the transaction waited for a longer time, and reassigns them to a different transaction coordinator to resume the transaction. Multiple recovery manager scans the ledger, and they start scanning the centralized ledger from a random index and up to a thousand transactions. Even if the same transaction is picked up by multiple transaction coordinators, then also it's fine, as the same write requests are ignored by the storage nodes.
 
 Storage nodes also can invoke the recovery manager by providing the transaction id, in case it gets a read or write request on a pending item and a significant time is passed after the transaction is initiated. 
-
 
 ### To explore:
 - How Client Request Tokens are used to ensure idempotency?

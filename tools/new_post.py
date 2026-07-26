@@ -74,10 +74,18 @@ def main() -> None:
         "",
         "![Describe what the image shows](/images/<topic>/<file>.png)",
         "",
+        "```python",
+        "print(\"hello\")  # code with line numbers + copy button",
+        "```",
+        "{: file='example.py' }",
+        "",
+        "<!-- Optional front matter for this post:  math: true | mermaid: true  -->",
+        "",
     ]
 
     path.write_text("\n".join(fm + body), encoding="utf-8", newline="\n")
     print(f"created {path.relative_to(ROOT)}")
+    print("tips: {: file='name' } after a fence adds a filename label; use ```diff for before/after;")
     print("next: add images under images/<topic>/, write alt text for every image,")
     print("then preview with: bundle exec jekyll serve --livereload")
 

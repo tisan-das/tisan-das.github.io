@@ -15,15 +15,21 @@ In the earlier blog posts, the creational and structural design patterns were ex
 ## Chain of responsibility:
 Intent: Avoid coupling the sender of a request to its receiver by giving more than an object a chance to handle the request. Chain the receiving objects and pass the request along the chain until an object handles it.
 
-NB:
-- The client that issued the request may not have any direct reference to the object that ultimately fulfills it
-- Object that made the request has no explicit knowledge of what will handle it (Implicit receiver)
+> **Note**
+> - The client that issued the request may not have any direct reference to the object that ultimately fulfills it
+> - Object that made the request has no explicit knowledge of what will handle it (Implicit receiver)
+{: .prompt-info }
+
 
 ###### Class Diagram:
-![Class Diagram: chain Command](/images/behavioral-design-patterns/chainCommand.png)
+![Class Diagram: chain Command](/images/behavioral-design-patterns/chainCommand.png){: .light }
+![Class Diagram: chain Command](/images/behavioral-design-patterns/chainCommand-dark.png){: .dark }
+_Class Diagram: chain Command_
 
 ###### Object Diagram:
-![Object Diagram: chain Command obj Struct](/images/behavioral-design-patterns/chainCommand_objStruct.png)
+![Object Diagram: chain Command obj Struct](/images/behavioral-design-patterns/chainCommand_objStruct.png){: .light }
+![Object Diagram: chain Command obj Struct](/images/behavioral-design-patterns/chainCommand_objStruct-dark.png){: .dark }
+_Object Diagram: chain Command obj Struct_
 
 ###### Implementation
 ```go
@@ -128,7 +134,9 @@ func (proc *ShipmentProcessor) Execute(task *Task) {
 Intent: Encapsulate a request as an object, thereby letting you parameterize clients with different requests, queue or log requests, and support undoable operations
 
 ###### Class Diagram:
-![Class Diagram: command](/images/behavioral-design-patterns/command.png)
+![Class Diagram: command](/images/behavioral-design-patterns/command.png){: .light }
+![Class Diagram: command](/images/behavioral-design-patterns/command-dark.png){: .dark }
+_Class Diagram: command_
 
 ###### Implementation:
 ```go
@@ -174,10 +182,14 @@ func (remoteCon *RemoteController) Execute() {
 Intent: Given a language, define a representation for its grammar along with an interpreter that uses the representation to interpret sentences in the language
 
 ###### Class Diagram:
-![Class Diagram: interpreter](/images/behavioral-design-patterns/interpreter.png)
+![Class Diagram: interpreter](/images/behavioral-design-patterns/interpreter.png){: .light }
+![Class Diagram: interpreter](/images/behavioral-design-patterns/interpreter-dark.png){: .dark }
+_Class Diagram: interpreter_
 
 ###### Object Diagram:
-![Object Diagram: interpreter obj Struct](/images/behavioral-design-patterns/interpreter_objStruct.png)
+![Object Diagram: interpreter obj Struct](/images/behavioral-design-patterns/interpreter_objStruct.png){: .w-75 .light }
+![Object Diagram: interpreter obj Struct](/images/behavioral-design-patterns/interpreter_objStruct-dark.png){: .w-75 .dark }
+_Object Diagram: interpreter obj Struct_
 
 ###### Implementation:
 ```go
@@ -232,7 +244,9 @@ func (minus *Minus) Interpret() string {
 Intent: Provide a way to access the elements of an aggregate object sequentially without exposing its underlying representation
 
 ###### Class Diagram:
-![Class Diagram: iterator](/images/behavioral-design-patterns/iterator.png)
+![Class Diagram: iterator](/images/behavioral-design-patterns/iterator.png){: .light }
+![Class Diagram: iterator](/images/behavioral-design-patterns/iterator-dark.png){: .dark }
+_Class Diagram: iterator_
 
 ###### Implementation:
 ```go
@@ -286,7 +300,9 @@ func (collection *UserCollection) CreateIterator() Iterator {
 Intent: Without violating encapsulation, capture and externalize an object's internal state so that the object can be restored to this state later.
 
 ###### Class Diagram:
-![Class Diagram: memento](/images/behavioral-design-patterns/memento.png)
+![Class Diagram: memento](/images/behavioral-design-patterns/memento.png){: .w-75 .light }
+![Class Diagram: memento](/images/behavioral-design-patterns/memento-dark.png){: .w-75 .dark }
+_Class Diagram: memento_
 
 ###### Implementation:
 ```go
@@ -335,7 +351,9 @@ func (caretaker *Caretaker) GetMementoIndex(index int) *ObserverMemento {
 Intent: Define a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically 
 
 ###### Class Diagram:
-![Class Diagram: observer](/images/behavioral-design-patterns/observer.png)
+![Class Diagram: observer](/images/behavioral-design-patterns/observer.png){: .light }
+![Class Diagram: observer](/images/behavioral-design-patterns/observer-dark.png){: .dark }
+_Class Diagram: observer_
 
 ###### Implementation:
 ```go
@@ -389,7 +407,9 @@ func (obs *ConcreteObserver) Update() {
 Intent: Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from the clients that use it
 
 ###### Class Diagram:
-![Class Diagram: strategy](/images/behavioral-design-patterns/strategy.png)
+![Class Diagram: strategy](/images/behavioral-design-patterns/strategy.png){: .light }
+![Class Diagram: strategy](/images/behavioral-design-patterns/strategy-dark.png){: .dark }
+_Class Diagram: strategy_
 
 ###### Implementation:
 ```go
@@ -443,6 +463,7 @@ Intent: Represent an operation to be performed on the elements of an object stru
 
 ###### Class Diagram:
 ![Class Diagram: visitor](/images/behavioral-design-patterns/visitor.png)
+_Class Diagram: visitor_
 
 ###### Implementation:
 ```go
@@ -500,6 +521,3 @@ func (area *AreaCalculator) VisitCircle(circle *Circle) {
 1. Design Patterns: Elements of Reusable Object-oriented Software
 2. [Behavioral Design Patterns: Javapoint](https://www.javatpoint.com/behavioral-design-patterns)
 3. [Behavioral Design Patterns: Refactoring Guru](https://refactoring.guru/design-patterns/behavioral-patterns)
-
-
-

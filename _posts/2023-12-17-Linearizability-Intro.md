@@ -20,11 +20,15 @@ The general approach to test linearizability is to first capture the execution h
 
 ##### Example of a linearizable execution history:
 
-![Example of a linearizable execution history: linearizable](/images/raft-consensus/linearizable.png)
+![Example of a linearizable execution history: linearizable](/images/raft-consensus/linearizable.png){: .light }
+![Example of a linearizable execution history: linearizable](/images/raft-consensus/linearizable-dark.png){: .dark }
+_Example of a linearizable execution history: linearizable_
 
 ##### Example of a non-linearizable execution history:
 
-![Example of a non-linearizable execution history: non linearizable](/images/raft-consensus/non-linearizable.png)
+![Example of a non-linearizable execution history: non linearizable](/images/raft-consensus/non-linearizable.png){: .light }
+![Example of a non-linearizable execution history: non linearizable](/images/raft-consensus/non-linearizable-dark.png){: .dark }
+_Example of a non-linearizable execution history: non linearizable_
 
 ### To be explored:
 - Explore how Knossos and Jespen work, use them in application
@@ -34,4 +38,3 @@ The general approach to test linearizability is to first capture the execution h
 2. [Distributed Systems Safety Research: Jespen](https://jepsen.io/)
 3. [Jepsen 9: A Fsyncing Feeling • Kyle Kingsbury • GOTO 2018](https://www.youtube.com/watch?v=tRc0O9VgzB0)
 4. [Testing Distributed Systems for Linearizability](https://anishathalye.com/testing-distributed-systems-for-linearizability/)
-

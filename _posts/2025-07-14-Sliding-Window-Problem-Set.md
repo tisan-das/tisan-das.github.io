@@ -9,9 +9,14 @@ published: true
 
 This post contains a couple of well-defined problems solved via sliding window approach.
 
-![Sliding window approach 01](/images/coding_questions/sliding_window_approach_01.png)
+![Sliding window approach 01](/images/coding_questions/sliding_window_approach_01.png){: .light }
+![Sliding window approach 01](/images/coding_questions/sliding_window_approach_01-dark.png){: .dark }
+_Sliding window approach 01_
 
 ### Minimum Swaps to Group All 1's Together (3675):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int countOccurance(vector<int> &arr, int val){
@@ -54,9 +59,12 @@ This post contains a couple of well-defined problems solved via sliding window a
     }
 ```
 
-
+</details>
 
 ### Max Consecutive Ones III (3811):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int longestOnes(vector<int> &nums, int k) {
@@ -84,10 +92,13 @@ This post contains a couple of well-defined problems solved via sliding window a
     }
 ```
 
-
+</details>
 
 ### Subarray Product Less Than K (1075):
 
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
+
 ```cpp
     int numSubarrayProductLessThanK(vector<int> &nums, int k) {
         // Write your code here
@@ -116,10 +127,13 @@ This post contains a couple of well-defined problems solved via sliding window a
     }
 ```
 
-
+</details>
 
 ### Number of Equal Count Substrings (3751):
 
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
+
 ```cpp
     int numSubarrayProductLessThanK(vector<int> &nums, int k) {
         // Write your code here
@@ -148,9 +162,12 @@ This post contains a couple of well-defined problems solved via sliding window a
     }
 ```
 
-
+</details>
 
 ### Longest Nice Subarray (3603):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     vector<int> convertToBinary(int val){
@@ -192,3 +209,4 @@ This post contains a couple of well-defined problems solved via sliding window a
     }
 ```
 
+</details>

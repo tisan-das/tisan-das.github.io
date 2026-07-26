@@ -5,6 +5,7 @@ image: /images/deep-learning/02_01_recurrence_network.png
 series: "Deep Learning Fundamentals"
 categories: ["Deep Learning", "Fundamentals"]
 tags: [rnn, sequence-models]
+math: true
 published: true
 ---
 
@@ -12,15 +13,33 @@ Given an image of a ball, how do we predict where it will go next? The tradition
 
 {% include series-nav.html %}
 
-The sequential feature can be captured by introducing another set of hidden states to maintain prior history, as we move through the sequence. The primary objective of these hidden states is to serve as a previous memory, updating with each timestamp input. These are also called recurrence relations, and the network is called **Recurrent Neural Network**. 
+The sequential feature can be captured by introducing another set of hidden states to maintain prior history, as we move through the sequence. The primary objective of these hidden states is to serve as a previous memory, updating with each timestamp input. These are also called recurrence relations, and the network is called **Recurrent Neural Network**.
 
-![Recurrence network](/images/deep-learning/02_01_recurrence_network.png)
-![Recurrence network calc](/images/deep-learning/02_02_recurrence_network_calc.png)
+The hidden state $h_t$ and output $\hat{y}_t$ at time $t$ are:
 
-Compute the loss of the network at the individual slice, and then the total loss by summing over all the timestamps in our sequence. 
+$$
+h_t = f\bigl(W_{hh}h_{t-1} + W_{xh}x_t + b_h\bigr), \qquad
+\hat{y}_t = g\bigl(W_{hy}h_t + b_y\bigr)
+$$
 
-![Recurrence network loss](/images/deep-learning/02_03_recurrence_network_loss.png)
+where $f$ and $g$ are activation functions (e.g. $\tanh$, softmax), and the $W_{\cdot}$ matrices are shared across all timesteps.
 
+![Recurrence network](/images/deep-learning/02_01_recurrence_network.png){: .w-75 .light }
+![Recurrence network](/images/deep-learning/02_01_recurrence_network-dark.png){: .w-75 .dark }
+_Recurrence network_
+![Recurrence network calc](/images/deep-learning/02_02_recurrence_network_calc.png){: .w-75 .light }
+![Recurrence network calc](/images/deep-learning/02_02_recurrence_network_calc-dark.png){: .w-75 .dark }
+_Recurrence network calc_
+
+Compute the loss of the network at the individual slice, and then the total loss by summing over all the timestamps in our sequence of length $T$:
+
+$$
+\mathcal{L} = \sum_{t=1}^{T}\mathcal{L}_t\bigl(y_t, \hat{y}_t\bigr)
+$$
+
+![Recurrence network loss](/images/deep-learning/02_03_recurrence_network_loss.png){: .w-75 .light }
+![Recurrence network loss](/images/deep-learning/02_03_recurrence_network_loss-dark.png){: .w-75 .dark }
+_Recurrence network loss_
 
 #### Design criteria of sequence models:
 - Handle variable-length sequence
@@ -30,31 +49,31 @@ Compute the loss of the network at the individual slice, and then the total loss
 
 Real-life example: Predict the next word
 
-
 #### Encoding language for a Neural Network:
 - Create a vocabulary of all possible words/sub-words
 - Map each word into an index, so that the Neural network can be trained on a series of numerical values
 - Embedding: transform indexes into a vector of fixed size
    - Neural networks are trained to embed indexes in a fixed-dimensional space, so that similar words are placed together
 
-
 In order to handle the time-dependence, the backpropagation algorithm also needs to aggregate the loss over the individual time slices. This is also known as Backpropagation Through Time.
 
-![Encoding language for a Neural Network: recurrence network backpropagation](/images/deep-learning/02_04_recurrence_network_backpropagation.png)
+![Encoding language for a Neural Network: recurrence network backpropagation](/images/deep-learning/02_04_recurrence_network_backpropagation.png){: .w-75 .light }
+![Encoding language for a Neural Network: recurrence network backpropagation](/images/deep-learning/02_04_recurrence_network_backpropagation-dark.png){: .w-75 .dark }
+_Encoding language for a Neural Network: recurrence network backpropagation_
 
-The issue with this type of backpropagation algorithm:
-- **Exploding gradients**: where many of the gradients have values > 1
-- **Vanishing gradients**: where many of the gradients have values < 1
+The issue with this type of backpropagation algorithm is that the gradient multiplies through many timesteps, so the product of Jacobians can grow or shrink exponentially:
+- **Exploding gradients**: many factors $\lvert\partial h_t/\partial h_{t-1}\rvert > 1$
+- **Vanishing gradients**: many factors $\lvert\partial h_t/\partial h_{t-1}\rvert < 1$
 
-![Encoding language for a Neural Network: recurrence network vaishing gradients](/images/deep-learning/02_05_recurrence_network_vaishing_gradients.png)
+![Encoding language for a Neural Network: recurrence network vaishing gradients](/images/deep-learning/02_05_recurrence_network_vaishing_gradients.png){: .w-75 .light }
+![Encoding language for a Neural Network: recurrence network vaishing gradients](/images/deep-learning/02_05_recurrence_network_vaishing_gradients-dark.png){: .w-75 .dark }
+_Encoding language for a Neural Network: recurrence network vaishing gradients_
 
 One way to handle the issue of exploding and vanishing gradients is to use gates to selectively add or remove information within each recurrent unit. 
-
 
 #### Limitations of RNN:
 - Slow, no parallelism
 - Not long memory
-
 
 ### References:
 1. [MIT 6.S191: Recurrent Neural Networks, Transformers, and Attention](https://www.youtube.com/watch?v=GvezxUdLrEk&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&index=2)

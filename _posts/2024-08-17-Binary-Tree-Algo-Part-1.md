@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Binary Tree Algorithms - Part I
+image: /assets/img/series/binary-tree-problems.png
 series: "Binary Tree Problems"
 categories: ["Algorithms", "Problem Sets"]
 tags: [binary-tree, cpp]
@@ -12,6 +13,9 @@ This wiki contains a couple of well-defined problems on Binary Tree.
 {% include series-nav.html %}
 
 #### Iterative Post-order Traversal (1783):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     vector<int> postorderTraversalStack(TreeNode *root){
@@ -41,8 +45,12 @@ This wiki contains a couple of well-defined problems on Binary Tree.
     }
 ```
 
+</details>
 
 #### Iterative Pre-order Traversal (66):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     vector<int> preorderIterativeTraversal(TreeNode *root){
@@ -66,8 +74,12 @@ This wiki contains a couple of well-defined problems on Binary Tree.
     }
 ```
 
+</details>
 
 ### In-order Traversal (1746):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     vector<int> inorderTraversal(TreeNode *root){
@@ -90,8 +102,12 @@ This wiki contains a couple of well-defined problems on Binary Tree.
     }
 ```
 
+</details>
 
 ### Lowest Common Ancestor in BST (1311):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     TreeNode * lowestCommonAncestor(TreeNode * root, TreeNode * p, TreeNode * q) {
@@ -113,8 +129,12 @@ This wiki contains a couple of well-defined problems on Binary Tree.
     }
 ```
 
+</details>
 
 ### Minimum depth (155):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int minDepth(TreeNode *root) {
@@ -134,8 +154,12 @@ This wiki contains a couple of well-defined problems on Binary Tree.
     }
 ```
 
+</details>
 
 ### Diameter (1181):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int diameterOfBinaryTree(TreeNode *root) {
@@ -157,8 +181,12 @@ This wiki contains a couple of well-defined problems on Binary Tree.
     }
 ```
 
+</details>
 
 ### Binary Tree Paths (480):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
      vector<string> binaryTreePaths(TreeNode *root) {
@@ -208,8 +236,12 @@ This wiki contains a couple of well-defined problems on Binary Tree.
     }
 ```
 
+</details>
 
 ### Sum of Two Binary Trees (1126):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
      TreeNode* mergeTrees(TreeNode *t1, TreeNode *t2) {
@@ -231,8 +263,12 @@ This wiki contains a couple of well-defined problems on Binary Tree.
     }
 ```
 
+</details>
 
 ### Longest Consecutive Sequence with Parent-child relation (595):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
      int longestConsecutive(TreeNode *root) {
@@ -262,10 +298,14 @@ This wiki contains a couple of well-defined problems on Binary Tree.
     }
 ```
 
+</details>
 
 ### Convert BST to Greater Tree (661):
 
 Given a Binary Search Tree (BST), convert it to a Greater Tree such that every key of the original BST is changed to the original key plus sum of all keys greater than the original key in BST.
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     TreeNode* convertBST(TreeNode *root) {
@@ -289,8 +329,12 @@ Given a Binary Search Tree (BST), convert it to a Greater Tree such that every k
     }
 ```
 
+</details>
 
 ### Second Minimum Node (1094):
+
+<details class="solution" markdown="1">
+<summary>Show solution</summary>
 
 ```cpp
     int findSecondMinimumValue(TreeNode *root) {
@@ -333,3 +377,5 @@ Given a Binary Search Tree (BST), convert it to a Greater Tree such that every k
         secondMinimumValue(head->right, distinctValuesVisited,firstValue,secondValue);
     }
 ```
+
+</details>

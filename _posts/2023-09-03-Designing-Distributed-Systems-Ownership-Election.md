@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Designing Distributed Systems - Ownership Election
+image: /assets/img/series/designing-distributed-systems.png
 series: "Designing Distributed Systems"
 categories: ["Distributed Systems", "Patterns"]
 tags: [leader-election]
@@ -26,7 +27,6 @@ There's two different ways to implement master election:
 Many key value stores let us watch for changes instaed of polling.
 
 TTL is helpful in scenarios where a process has obtained lock, however got crashed before releasing it. Also it needs to be ensured that any processing doesn't take more time than the TTL. Otherwise there's a possibility of lock getting expired before processing is completed, and violating the mutex ownership. Key-value stores generally aloso provide support for watchdog, which is used to keep looking for changes in a key, the same can be utilized to terminate a worker in case TTL is expires before unlock is invoked. However depending upon the key-value store, watchdog can take some time to perform these operation.
-
 
 However still, there's a scope of issue:
 ```
@@ -81,13 +81,10 @@ this is bad because R2 has already been processed.
 
 Such sequence of events seem byzantine, but in reality, in any large system they occur with disturbing frequency. Fortunately, this is similar to the case described previously, which we resolved with the resource version in etcd. We can do the same thing here. In addition to storing the name of the current owner in etcd, we also send the resource version along with each request. So in the previous example, R1 becomes (R1, Version1)
 
-
 ### TODO:
 - Explore on implementation
 - Whether well-known DBs provide support on locking
 - Explore on byzantine issues
-
-
 
 ### References:
 1. Designing Distributed Systems: Patterns & Paradigms for Scalable, Reliable Services
