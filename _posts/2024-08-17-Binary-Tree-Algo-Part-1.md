@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Binary Tree Algorithms - Part I
+image: /assets/img/series/binary-tree-problems.png
 series: "Binary Tree Problems"
 categories: ["Algorithms", "Problem Sets"]
 tags: [binary-tree, cpp]
@@ -41,7 +42,6 @@ This wiki contains a couple of well-defined problems on Binary Tree.
     }
 ```
 
-
 #### Iterative Pre-order Traversal (66):
 
 ```cpp
@@ -66,7 +66,6 @@ This wiki contains a couple of well-defined problems on Binary Tree.
     }
 ```
 
-
 ### In-order Traversal (1746):
 
 ```cpp
@@ -90,7 +89,6 @@ This wiki contains a couple of well-defined problems on Binary Tree.
     }
 ```
 
-
 ### Lowest Common Ancestor in BST (1311):
 
 ```cpp
@@ -113,7 +111,6 @@ This wiki contains a couple of well-defined problems on Binary Tree.
     }
 ```
 
-
 ### Minimum depth (155):
 
 ```cpp
@@ -133,7 +130,6 @@ This wiki contains a couple of well-defined problems on Binary Tree.
         }
     }
 ```
-
 
 ### Diameter (1181):
 
@@ -156,7 +152,6 @@ This wiki contains a couple of well-defined problems on Binary Tree.
         return 1+max(depth(root->left),depth(root->right));
     }
 ```
-
 
 ### Binary Tree Paths (480):
 
@@ -208,7 +203,6 @@ This wiki contains a couple of well-defined problems on Binary Tree.
     }
 ```
 
-
 ### Sum of Two Binary Trees (1126):
 
 ```cpp
@@ -230,7 +224,6 @@ This wiki contains a couple of well-defined problems on Binary Tree.
         return node;
     }
 ```
-
 
 ### Longest Consecutive Sequence with Parent-child relation (595):
 
@@ -262,7 +255,6 @@ This wiki contains a couple of well-defined problems on Binary Tree.
     }
 ```
 
-
 ### Convert BST to Greater Tree (661):
 
 Given a Binary Search Tree (BST), convert it to a Greater Tree such that every key of the original BST is changed to the original key plus sum of all keys greater than the original key in BST.
@@ -288,7 +280,6 @@ Given a Binary Search Tree (BST), convert it to a Greater Tree such that every k
         return sum;
     }
 ```
-
 
 ### Second Minimum Node (1094):
 

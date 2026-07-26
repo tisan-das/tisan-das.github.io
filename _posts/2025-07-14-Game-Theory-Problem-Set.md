@@ -9,7 +9,9 @@ published: true
 
 This post contains a couple of well-defined problems on game theory.
 
-![Game theory 01](/images/coding_questions/game_theory_01.png)
+![Game theory 01](/images/coding_questions/game_theory_01.png){: .w-75 .light }
+![Game theory 01](/images/coding_questions/game_theory_01-dark.png){: .w-75 .dark }
+_Game theory 01_
 
 ### Coins in a Line (394):
 
@@ -43,8 +45,6 @@ public:
 private:
     vector< map<int, bool>> occurMapArr = vector<map<int, bool>>(2);
 ```
-
-
 
 ### Coins in a Line II (395):
 
@@ -94,8 +94,6 @@ public:
 private:
     vector<map<int,bool>> occurMapArray = vector<map<int,bool>>(2);
 ```
-
-
 
 ### Bash Game II (3735):
 

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Binary Search Problem Sets Part I
+image: /assets/img/series/binary-search-problems.png
 series: "Binary Search Problems"
 categories: ["Algorithms", "Problem Sets"]
 tags: [binary-search, cpp]
@@ -27,7 +28,6 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
         }
         return -1;
     }
-
 
     int binSearchStart(vector<int> &array, int start, int end, int target){
         while(start <= end){
@@ -97,8 +97,6 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
-
 ### Search in Rotated Sorted Array (62):
 
 ```cpp
@@ -154,8 +152,6 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
-
 ### First Bad Version (74):
 
 ```cpp
@@ -197,8 +193,6 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
         return findBinSearch(1, n);
     }
 ```
-
-
 
 ### Search in Rotated Sorted Array II (63):
 
@@ -270,8 +264,6 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
-
 ### Count of Smaller Number (248):
 
 ```cpp
@@ -313,8 +305,6 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
         return result;
     }
 ```
-
-
 
 ### Copy Books (437):
 
@@ -369,8 +359,6 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
-
 ### How Many Problem Can I Accept (937):
 
 ```cpp
@@ -380,8 +368,6 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
         return value;
     }
 ```
-
-
 
 ### Missing Element in Sorted Array (3661):
 
@@ -429,8 +415,6 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
         return nums[index]+(k-(nums[index]-nums[0]-index));
     }
 ```
-
-
 
 ### Count Pairs in Two Arrays (3733):
 
@@ -488,8 +472,6 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
         return count;
     }
 ```
-
-
 
 ### Single Element in a Sorted Array (1183):
 
@@ -556,8 +538,6 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
-
 ### Build a temple (1669):
 
 ```cpp
@@ -611,8 +591,6 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
-
 ### Find Minimum in Rotated Sorted Array II (160):
 
 ```cpp
@@ -655,8 +633,6 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
-
 ### Kth Smallest Subarray Sum (3736):
 
 ```cpp
@@ -679,8 +655,6 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
         return heap.top();
     }
 ```
-
-
 
 ### Find K Closest Elements (460):
 
@@ -737,8 +711,6 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
-
 ### H-Index II (1303):
 
 ```cpp
@@ -785,8 +757,6 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
-
 ### Kth Smallest Number in Sorted Matrix (401):
 
 ```cpp
@@ -812,8 +782,6 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
     }
 ```
 
-
-
 ### Find Words (194):
 
 ```cpp
@@ -838,6 +806,3 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
         return result;
     }
 ```
-
-
-

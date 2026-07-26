@@ -1,6 +1,7 @@
 ---
 layout: post
 title: BFS Problem Sets Part II
+image: /assets/img/series/bfs-problems.png
 series: "BFS Problems"
 categories: ["Algorithms", "Problem Sets"]
 tags: [bfs, graph, cpp]
@@ -10,8 +11,6 @@ published: true
 This wiki contains a couple of well-defined problems solved via Breadth First Search (BFS) traversal.
 
 {% include series-nav.html %}
-
-
 
 ### Pacific Atlantic Water Flow (778):
 
@@ -122,8 +121,6 @@ public:
 };
 ```
 
-
-
 ### Smallest Greater Multiple Made of Two Digits (3743)
 - Combinatorial problem solved via BFS
 
@@ -186,8 +183,6 @@ public:
     }
 };
 ```
-
-
 
 ### Smallest Common Region (3669):
 
@@ -257,8 +252,6 @@ public:
     }
 };
 ```
-
-
 
 ### Minimum Genetic Mutation (1244):
 
@@ -333,8 +326,6 @@ public:
     }
 };
 ```
-
-
 
 ### Closest Leaf in a Binary Tree (854):
 
@@ -463,8 +454,6 @@ public:
 };
 ```
 
-
-
 ### Minesweeper (1189):
 
 ```cpp
@@ -586,8 +575,6 @@ private:
 };
 ```
 
-
-
 ### Minimum Height Trees (1298):
 
 ```cpp
@@ -676,8 +663,6 @@ public:
 };
 ```
 
-
-
 ### Shortest Path in a Grid with Obstacles Elimination (1723):
 
 ```cpp
@@ -738,8 +723,6 @@ public:
     }
 };
 ```
-
-
 
 ### Shortest Bridge (1708):
 
@@ -861,8 +844,6 @@ private:
 };
 ```
 
-
-
 ### Absolutely Continuous Numbers (3650):
 
 ```cpp
@@ -934,8 +915,6 @@ public:
     }
 };
 ```
-
-
 
 ### Shortest Path in the Maze (3727):
 
@@ -1010,8 +989,6 @@ private:
     vector<pair<int,int>> dirArray = { {-1,0},{1,0},{0,-1},{0,1} };
 };
 ```
-
-
 
 ### Shortest Path in Matrix (1888):
 

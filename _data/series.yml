@@ -1,0 +1,53 @@
+# Series catalog (Phase 6) — used by series tab / social cards
+- name: "Distributed Systems Papers"
+  slug: distributed-systems-papers
+  description: "Classic papers: Raft, GFS, DynamoDB, …"
+  image: /assets/img/series/distributed-systems-papers.png
+- name: "System Design Case Studies"
+  slug: system-design-case-studies
+  description: "Rate limiter, KV store, crawler, …"
+  image: /assets/img/series/system-design-case-studies.png
+- name: "Designing Distributed Systems"
+  slug: designing-distributed-systems
+  description: "Patterns from Brendan Burns"
+  image: /assets/img/series/designing-distributed-systems.png
+- name: "Web Security"
+  slug: web-security
+  description: "XSS, CSRF, XXE, injection, DoS"
+  image: /assets/img/series/web-security.png
+- name: "Designing Data-Intensive Applications"
+  slug: designing-data-intensive-applications
+  description: "Chapter notes on DDIA"
+  image: /assets/img/series/designing-data-intensive-applications.png
+- name: "Design Patterns"
+  slug: design-patterns
+  description: "GoF creational, structural, behavioral"
+  image: /assets/img/series/design-patterns.png
+- name: "Docker"
+  slug: docker
+  description: "Containers from first principles"
+  image: /assets/img/series/docker.png
+- name: "Binary Tree Problems"
+  slug: binary-tree-problems
+  description: "Problem sets in C++"
+  image: /assets/img/series/binary-tree-problems.png
+- name: "Binary Search Problems"
+  slug: binary-search-problems
+  description: "Problem sets in C++"
+  image: /assets/img/series/binary-search-problems.png
+- name: "BFS Problems"
+  slug: bfs-problems
+  description: "Graph BFS problem sets"
+  image: /assets/img/series/bfs-problems.png
+- name: "LLM & RAG"
+  slug: llm-rag
+  description: "Large language models & retrieval"
+  image: /assets/img/series/llm-rag.png
+- name: "Deep Learning Fundamentals"
+  slug: deep-learning-fundamentals
+  description: "DNN and sequence models"
+  image: /assets/img/series/deep-learning-fundamentals.png
+- name: "PostgreSQL"
+  slug: postgresql
+  description: "Isolation levels & internals"
+  image: /assets/img/series/postgresql.png

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Binary Search Problem Sets Part II
+image: /assets/img/series/binary-search-problems.png
 series: "Binary Search Problems"
 categories: ["Algorithms", "Problem Sets"]
 tags: [binary-search, cpp]
@@ -10,8 +11,6 @@ published: true
 This wiki contains a couple of well-defined problems solved via Binary Search algorithm.
 
 {% include series-nav.html %}
-
-
 
 ### Median of two Sorted Arrays (65):
 
@@ -58,8 +57,6 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
         return findMedian(a,b);
     }
 ```
-
-
 
 ### Wood Cut (183):
 
@@ -112,8 +109,6 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
         return binSearchPieces(l,k);
     }
 ```
-
-
 
 ### Minimize Max Distance to Gas Station (848):
 
@@ -175,5 +170,3 @@ This wiki contains a couple of well-defined problems solved via Binary Search al
         // return maxHeap.top();
     }
 ```
-
-

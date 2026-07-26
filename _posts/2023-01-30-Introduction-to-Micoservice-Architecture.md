@@ -8,7 +8,9 @@ tags: [microservices, architecture]
 
 In this blog post, we will learn about microservices. We would learn why microservices are evolved and are preferred nowadays over monolithic architecture. We would also learn about a few patterns and useful ideas on microservices.
 
-![Monolith Microservice](/images/REST-intro/monolithMicroservice.png)
+![Monolith Microservice](/images/REST-intro/monolithMicroservice.png){: .light }
+![Monolith Microservice](/images/REST-intro/monolithMicroservice-dark.png){: .dark }
+_Monolith Microservice_
 
 #### Microservice Architecture
 Microservice is an architectural approach to software development, where the overall software is broken down into multiple independent and loosely coupled services, communicating over a well-defined interface. Microservices are typically structured around business needs and are owned by a small team.
@@ -59,7 +61,6 @@ With hundreds of microservices spanning thousands of servers, how can we find wh
     - ii. Library/Module dependency: Without proper versioning or backward compatibility, rolling out changes becomes painfully slow
     - iii. Data dependency: Services relying on data coming from other services hampers user-experience
 
-
 ### Standardizing Microservices:
 There should be a standard way to create a "good" microservice. Three verticles to standardize:
 
@@ -67,7 +68,9 @@ i. Monitoring: How to trace the cross-service view of a request passing through 
 - how every server is doing? => CPU, memory, disk consumption
 - how every service is doing? => health check
 
-![Standardizing Microservices: microservice Monitoring](/images/REST-intro/microserviceMonitoring.png)    
+![Standardizing Microservices: microservice Monitoring](/images/REST-intro/microserviceMonitoring.png){: .light }
+![Standardizing Microservices: microservice Monitoring](/images/REST-intro/microserviceMonitoring-dark.png){: .dark }
+_Standardizing Microservices: microservice Monitoring_
 Data Collection:
 - Collect metrics: CPU, RAM, Disk, N/w
 - Collect logs: Application, Process, User log, SSH, OS
@@ -89,7 +92,6 @@ APIs:
 - retry strategy: Exponential backoff
 - payload type: JSON/XML/TXT
 
-
 iii. Tolerance: What if one service bombards the other? One bad service can take down the entire infrastructure. Hence each service should shield itself. Strategies to achieve this:
 - Ration the number of requests from each service
 - Limit the number of outgoing calls from a service
@@ -97,7 +99,6 @@ iii. Tolerance: What if one service bombards the other? One bad service can take
 - Have an ability to cutoff outgoing resources to a service
 
 Profiling is one of the renowned techniques used for this.
-
 
 ## Preparing for Integration: Do's and Dont's:
 1. Forward & Backward compatibility: Make changes such that other services don't need to change at all. Key places to keep a close eye on:

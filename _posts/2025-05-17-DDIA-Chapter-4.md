@@ -1,6 +1,7 @@
 ---
 layout: post
 title: DDIA - Chap04 - Enconding and Evolution
+image: /assets/img/series/designing-data-intensive-applications.png
 series: "Designing Data-Intensive Applications"
 categories: ["Databases", "DDIA"]
 tags: [ddia, serialization]
@@ -21,8 +22,6 @@ Different programming languages provide built-in support to marshal and unmarsha
 
 JSON, XML, and Binary variants of encoding are the most popular ones with microservices. They've their flaws, like categorizing a numerical value as an integer or float, however, their difficulty is often trumped by the difficulty it takes for different teams to agree on a common payload for inter-service communication.
 
-
-
 ### Thrift and Protocol Buffers:
 Apache Thrift and Protocol Buffers are binary encoding libraries that require a schema for any data that needs encoding. Both the protocol requires the schema require the following:
 - attribute name
@@ -37,7 +36,6 @@ struct Person {
     3: optional list<string> interests
 }
 
-
 message Person {
     required string user_name = 1;
     optional int64 favorite_number = 2;
@@ -48,8 +46,6 @@ message Person {
 The names of the attributes can be changed independently, as the encoded data refers to the attributes through the tag number. Forward compatibility is achieved through this. Backward compatibility is achieved by adding new fields and marking them as optional. Also, only the optional fields can be deleted, and the same tag number should never be used in the future.
 
 The primary reason thrift and protobuf protocols are selected over encoding formats like JSON and XML is primarily due to speed in serializing and deserializing large amounts of data.
-
-
 
 ### Avro:
 
@@ -62,7 +58,6 @@ record Person {
     array<string> interests;
 }
 ```
-
 
 ### To be explored:
 1. Do the thrift, protocol buffer, and Avro encoding format supports nested structure?

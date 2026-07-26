@@ -9,7 +9,6 @@ published: true
 
 AWS secrets Manager is a secrets management service, whose primary goal is to store a secret securely, and to provide ways to retrieve and allow authorized users to rotate the secret. This is how applications are enabled to retrieve the secrets at runtime rather than having them hardcoded in the codebase or deployment time, thus improving the security aspect. There's different type of secrets an application can use: application specific keys, database credentioals, OAuth tokens, API keys are some of them, and each one of them can be stored on Secrets Manager in the form of key-value pair.
 
-
 #### Secrets:
 A secret is a confidential info. Secrets Manager stores some metadata info also alongside a secret. The secret value can be binary data or string. Multiple values can be stored in the same secret by using the key-value format of JSON structure.
 ```json
@@ -24,7 +23,6 @@ A secret is a confidential info. Secrets Manager stores some metadata info also 
 ```
 
 The secret metadata stores the information regarding the version, label, and key used for encryption. The rotation schedules are also maintained on the secret level ie. each secret has got its own rotation schedule. 
-
 
 #### Version:
 Secret has versions, whenever a secret is created or rotated, or updated, a new version is created. A specific version of the secret is identified as version Id. However, the secret manager doesn't maintain the linear history of secrets. By default, it keeps track of three different versions by marking them with the following labels:
@@ -61,12 +59,12 @@ C:\Users\Tisan>aws secretsmanager get-secret-value --secret-id sample-secret
 
 C:\Users\Tisan>
 ```
-![Version: key Version](/images/secrets-manager/keyVersion.png)
-
+![Version: key Version](/images/secrets-manager/keyVersion.png){: .light }
+![Version: key Version](/images/secrets-manager/keyVersion-dark.png){: .dark }
+_Version: key Version_
 
 #### Deletion:
 To ensure that critical secrets aren't removed by haste, secrets aren't immediately deleted, rather they become inaccessible and scheduled for deletion after a cool-off period, typically varying between 7 days to 30 days. The secret can be restored if needed within this recovery window, however, once this recovery window is over the secret is deleted permanently. Also, a specific version of a secret is only deleted if all the staging labels are removed. And in case the secret has got a replica in other regions, the replicas are needed to be deleted first, then only the primary secret can be scheduled for deletion. It's to be noted that the replica secrets are immediately deleted.
-
 
 #### Replica secrets:
 Secrets can be replicated to multiple AWS regions. The replica contains the same secret values as the primary secret, and some new secret key-value pairs can also be added on top of that. The replica secrets don't have any separate rotation schedule. And with automatic rotation enabled, whenever the primary secret gets rotated, it's propagated to all the associated replica secrets.
@@ -75,13 +73,14 @@ The replica secrets can't be updated independently, except for the encryption ke
 
 ###### Note to self: Can the secrets which are already promoted be marked as replicas again?
 
-
 #### Secrets Rotation:
 Rotation is the process of updating the secret. The rotation procedure takes care of updating the credential for the associated service with the help of a lambda function, thus maintaining a consistent state for the secret, allowing the dependent services to consistently use it. The lambda function can't invoke another lambda function to update the secret.
 
 It's to be noted that the auto-rotation schedule considers manual rotation as well, and schedules the next rotation based on it.
 
-![Secrets Rotation: configure Rotation](/images/secrets-manager/configureRotation.png)
+![Secrets Rotation: configure Rotation](/images/secrets-manager/configureRotation.png){: .w-75 .light }
+![Secrets Rotation: configure Rotation](/images/secrets-manager/configureRotation-dark.png){: .w-75 .dark }
+_Secrets Rotation: configure Rotation_
 
 Certain AWS services like RDS and Aurora offers managed rotation, where the service itself rotates the secret. The primary advantage is, the service manages the lambda function for secret rotation.
 
@@ -91,7 +90,9 @@ The Lambda rotation function consists of four distinct steps:
 3. test_secret: verify the newly created credential is working by using it to access the service
 4. finish_secret: AWSCURRENT staging label is applied to the one with AWSPENDING and AWSPREVIOUS version is associated with the previous version of secret
 
-![Secrets Rotation: lambda Rotation Function](/images/secrets-manager/lambdaRotationFunction.png)
+![Secrets Rotation: lambda Rotation Function](/images/secrets-manager/lambdaRotationFunction.png){: .w-75 .light }
+![Secrets Rotation: lambda Rotation Function](/images/secrets-manager/lambdaRotationFunction-dark.png){: .w-75 .dark }
+_Secrets Rotation: lambda Rotation Function_
 
 If any step is failed, the entire rotation process is retried multiple times. On a successful rotation the AWSPENDING staging label might be allocated to the same version getting pointed by the staging label AWSCURRENT, or the AWSPENDING staging label might not be attached to any version. Otherwise, the lambda rotation function assumes that the previous rotation request is still under-progress, and hence returns an error. For managed rotation, no need to specify the lambda function, as the corresponding AWS service takes care of the whole rotation process.
 
@@ -99,13 +100,11 @@ Rotation Strategy:
 - Single user rotation strategy: there's a low risk of denying a call when the service credential is getting rotated
 - Alternating user rotation strategy: each time the secret is rotated, it alternates which user's password is updated by having two set of user credentials, thus avoiding the denying issue 
 
-
 #### Security:
 - Encryption in transit: The data in transit is encrypted as all the API calls are required to be signed by X.509 certificates
 - Encryption at rest: AWS KMS is used to store the secret in encrypted form.
 
 Secret Manager invokes AWS KMS GenerateDataKey request for 256bit AES symmetric key whenever a new secret value is to be updated. AWS KMS returns the plaintext data key and the copy pf encrypted data key. Secret Manager uses AES along with the plaintext data key to encrypt the secret value, and discards the data key as soon as the operation is completed. The encrypted data key is stored along side the secret for decrypt. While decrypting the encrypted data is decrypted first with the help of AWS KMS and the encrypted data is then decrypted with the decrypted data key. It's to be noted that rotating AWS KMS key doesn't impact the decryption facility of Secrets Manager, as AWS KMS stores the linear history of KMS key versions.
-
 
 ### References:
 1. [What is AWS Secrets Manager?](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html)

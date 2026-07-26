@@ -11,21 +11,26 @@ Docker provides an platform to build and deploy application on an isolated envir
 
 {% include series-nav.html %}
 
-
 #### Comparision with Virtualization:
-![Comparision Image](/images/docker-intro/containers-vs-virtual-machines.jpg)
+![Comparision Image](/images/docker-intro/containers-vs-virtual-machines.jpg){: .w-75 .light }
+![Comparision Image](/images/docker-intro/containers-vs-virtual-machines-dark.jpg){: .w-75 .dark }
+_Comparision Image_
 Virtualization is also a competitive technology compared to containers. However virtualization provides an abstraction on the hardware level, it slices the resources like compute, memory, and filesystem, and then installs a guest OS with the slices resources. Hence each VM has got its boot process. 
 
 On the other hand container usees OS provided features to isolate the run-times on the process level, making it more light-weight to run a container. More on this would be explored as part of another blog post in near future.
 
-
 ![Docker Architecture](/images/docker-intro/architecture.png)
+_Docker Architecture_
 
 #### Docker client:
 
 Docker CLI is having a specific set of commands called management commands. Each such command referes to specific resource that the docker daemon manages.
-![Docker client: docker](/images/docker-intro/docker.png)
-![Docker client: docker commands](/images/docker-intro/docker_commands.png)
+![Docker client: docker](/images/docker-intro/docker.png){: .light }
+![Docker client: docker](/images/docker-intro/docker-dark.png){: .dark }
+_Docker client: docker_
+![Docker client: docker commands](/images/docker-intro/docker_commands.png){: .light }
+![Docker client: docker commands](/images/docker-intro/docker_commands-dark.png){: .dark }
+_Docker client: docker commands_
 
 Note: The majority of the docker client commands are legacy, just there for backward compatibility, and generally discouraged for new learners. These commands can be hidden by using the environemnt variable:
 ```sh
@@ -77,7 +82,6 @@ docker image rm [OPTIONS] IMAGE [IMAGE...]
 docker image tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
 ```
 
-
 #### Container:
 Docker container is the unit of application deployment and execution runtime, which contains all the dependencies along with the executable, which ensures the application can be run in isolated environment reliably.
 
@@ -103,6 +107,7 @@ Unlike the shell form, the exec form does not invoke a command shell. This means
 #### Persistence Storage:
 Even though docker containers are preferred to be stateless, however there's certain scenarios, where a container might need to access some external data stored on disk drive, or else might need to store some persisting data. Docker provides support for these scenarios as well.
 ![Image of the mounts](/images/docker-intro/types-of-mounts-volume.png)
+_Image of the mounts_
 
 ##### 1. Bind mounts:
 In this kind of mount, a directory under the host node is mounted into the container. The filesystem is managed from the host-OS directly, and not by the docker container. 
@@ -247,4 +252,3 @@ round-trip min/avg/max = 0.086/0.086/0.086 ms
 / # exit
 controlplane $
 ```
-

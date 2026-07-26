@@ -26,18 +26,16 @@ The core of a CS blog. Target: snippets and formulas look as good as the prose.
 - [x] **Mermaid**: RAFT state + election sequence, rate-limiter token-bucket flow,
       consistent-hashing lookup flow. PNGs kept for pictorial figures.
 
-## Phase 6 — Image & diagram polish  (M)
+## Phase 6 — Image & diagram polish  (M) ✅ done
 
-- [ ] **Dark-mode audit**: script scans all images for near-black-on-transparent
-      (invisible in dark mode) and glaring white backgrounds. Fix via per-mode variants:
-      `![alt](x-dark.png){: .dark}` + `![alt](x.png){: .light}` (Chirpy built-in).
-- [ ] **Captions**: italic line directly under an image renders as a styled caption
-      (built-in). Script mirrors existing alt text as captions where meaningful.
-- [ ] **Width normalization**: oversized screenshots get `{: .w-75 }` / `{: .w-50 }`.
-- [ ] **Compression**: batch all PNGs through oxipng (or convert to WebP with PNG
-      fallback) — expect 40–60% weight reduction. Keep source images untouched in git.
-- [ ] **Per-series og-images**: extend the PIL social-card script (Phase 3) to render
-      13 series-branded cards; set `image:` accordingly on series posts.
+- [x] **Dark-mode audit + variants**: `tools/phase6_images.py` classified all content
+      images; generated 228 `*-dark.png` variants (white-bg → dark canvas, ink inverted);
+      wired 221 light/dark pairs via Chirpy `{: .light }` / `{: .dark }`.
+- [x] **Captions**: 239 italic captions mirrored from alt text under figures.
+- [x] **Width normalization**: `{: .w-75 }` / `{: .w-50 }` on wide diagrams (≥1000px).
+- [x] **Compression**: PNG optimize pass (PIL); modest savings on already-decent assets.
+- [x] **Per-series og-images**: 13 cards under `assets/img/series/` + `_data/series.yml`;
+      applied as `image:` on series posts that lacked a content image.
 
 ## Phase 7 — Typography & editorial voice  (S–M)
 

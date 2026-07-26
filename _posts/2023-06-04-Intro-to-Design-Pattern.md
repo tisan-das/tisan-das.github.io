@@ -12,7 +12,6 @@ Design patterns are the blueprints of commonly encountered problems in software 
 
 {% include series-nav.html %}
 
-
 Let's start with the design aspect of WYSIWYG editor:
 - Formatting: How the text and graphics are going to be arranged?
 - Embellishing UI: UI to support scroll bars, borders, drop shadows. More of such embelishments are likely to get added later, which would require our editor to evolve.
@@ -21,47 +20,58 @@ Let's start with the design aspect of WYSIWYG editor:
 - User operations: Buttons and drop-down menus are scattered through the UI. There should be a uniform mechanism for accessing this scattered functionality and undoing the affects
 - Spell checking and hyphenation: How to minimize the changes to introduce a new analytical operation?
 
-
 ### Document Structure
 A document consists of basic graphical elements such as characters, lines, polygons and other shapes. Besides, users are allowed to use these basic structure freely, and they can create complex structure by nesting one type of element in another element with certain set of arragement.
 
 A common way to represent such hierarchial document is with the help of recursive composition, where increasinginly complex structure can be created with the help of simpler units. For an example, multiple characters are arranged from left-to-right to form a line, multiple lines are arranged from top-to-bottom to create a complete wiki. Also there can be shapes within shapes along with texts.
 We can represent such physical structure by devoting an object to each important element. This includes the structural elements as well like lines, rows, columns beside the visible elements like characters. The result is an object structure like following:
-![Document Structure: object Structure Composition](/images/system-design-case-study/objectStructureComposition.png)
+![Document Structure: object Structure Composition](/images/system-design-case-study/objectStructureComposition.png){: .w-75 .light }
+![Document Structure: object Structure Composition](/images/system-design-case-study/objectStructureComposition-dark.png){: .w-75 .dark }
+_Document Structure: object Structure Composition_
 
 We can define a abstract class called Glyph for all the objects that may appear in a document structure. The subclasses define both the primitive elements (like characters and images) and structural elements (like rows and columns).
 
-![Document Structure: document Structure](/images/system-design-case-study/documentStructure.png)
+![Document Structure: document Structure](/images/system-design-case-study/documentStructure.png){: .w-75 .light }
+![Document Structure: document Structure](/images/system-design-case-study/documentStructure-dark.png){: .w-75 .dark }
+_Document Structure: document Structure_
 
 Composite pattern captures the essence of recursive composition in object oriented terms. It is used to represent any potentially complex hierachial structure through tree of structures and then work with these structures. This is also useful when the client code treats both simple and complex elements uniformly.
-
 
 ### Formatting:
 The document structure discussed in the previous section provides a way to represent the underlying physical structure, however it doesn't tell us how to format the document i.e how the text is broken down into lines, how the variation in margin width, indentation impacts the overall formatting of the document. There're variety of formatting algorithm with different strengths and weakness. Hence it's desirable to make it independent of document structure.
 
-![Formatting: compositor Generated Linebreaking](/images/system-design-case-study/compositorGeneratedLinebreaking.png)
+![Formatting: compositor Generated Linebreaking](/images/system-design-case-study/compositorGeneratedLinebreaking.png){: .w-75 .light }
+![Formatting: compositor Generated Linebreaking](/images/system-design-case-study/compositorGeneratedLinebreaking-dark.png){: .w-75 .dark }
+_Formatting: compositor Generated Linebreaking_
 
 The formatting algorithm is encapsulated under a compositor class. The glyphs it formats are the children of a special Glyph subclass called composition. When composition needs formatting it invokes compositor's Compose() operation, which inturn iterations through the children of composition.
 Encapsulating an alogirhtm in an object is the intent of the strategy pattern. It consists of strategy objects (compositor) and the context in which they operate. The context should be general enough to support new algorithms 
-![Formatting: composition Class Diagram](/images/system-design-case-study/compositionClassDiagram.png)
-
+![Formatting: composition Class Diagram](/images/system-design-case-study/compositionClassDiagram.png){: .w-75 .light }
+![Formatting: composition Class Diagram](/images/system-design-case-study/compositionClassDiagram-dark.png){: .w-75 .dark }
+_Formatting: composition Class Diagram_
 
 ### Embellishing UI:
 We can start with two types of embelishment: borders and scrollbar. From programmer perspective embelishment involves extending over the existing codes. However achieving this functionality by extending exiting compoistion class would result into explosion of classes. 
 Border and scrollbar class has got some appearance, which suggests they should be subclass of Glyph, however, clients shouldn't care whether a glyph is having border or not, hence embellishment class should have the same interface of the Glyph.
 
-![Embellishing UI: mono Glyph Class Relationship](/images/system-design-case-study/monoGlyphClassRelationship.png)
+![Embellishing UI: mono Glyph Class Relationship](/images/system-design-case-study/monoGlyphClassRelationship.png){: .light }
+![Embellishing UI: mono Glyph Class Relationship](/images/system-design-case-study/monoGlyphClassRelationship-dark.png){: .dark }
+_Embellishing UI: mono Glyph Class Relationship_
 
 The decorator pattern captures class and object relationship that support embellishment by attaching new behaviours to object by placing these objects under special wrapper class.
 ![Embellishing UI: embellished Object Structure.png`](/images/system-design-case-study/embellishedObjectStructure.png`)
-
+_Embellishing UI: embellished Object Structure.png`_
 
 ### Supporting multiple look-and-feel standards
 We assume 2 set of widget Glyph classes:
 1. A set of abstract Glyph subclasses for each category of widget graph. Eg: ScrollBar, Button, Menu etc
 2. A set of concrete subclasses for each abstract subclass that implement the different look-and-feel
-![Supporting multiple look-and-feel standards: abstract Factory](/images/system-design-case-study/abstractFactory.png)
-![Supporting multiple look-and-feel standards: abstract Factory2](/images/system-design-case-study/abstractFactory2.png)
+![Supporting multiple look-and-feel standards: abstract Factory](/images/system-design-case-study/abstractFactory.png){: .w-75 .light }
+![Supporting multiple look-and-feel standards: abstract Factory](/images/system-design-case-study/abstractFactory-dark.png){: .w-75 .dark }
+_Supporting multiple look-and-feel standards: abstract Factory_
+![Supporting multiple look-and-feel standards: abstract Factory2](/images/system-design-case-study/abstractFactory2.png){: .w-75 .light }
+![Supporting multiple look-and-feel standards: abstract Factory2](/images/system-design-case-study/abstractFactory2-dark.png){: .w-75 .dark }
+_Supporting multiple look-and-feel standards: abstract Factory2_
 
 Abstract factory pattern consists of two key participants: factories and products. This pattern captures how to create families of related product objects without instantiating objects directly.
 
@@ -82,14 +92,14 @@ Abstract factory pattern consists of two key participants: factories and product
     Scrollbar* sb = guiFactory->CreateScrollBar(); 
 ```
 
-
 ### Supporting multiple window system
 Supporting multiple window systems is very different compared to look-and-feel aka theme standards. There exist several window systems largely incompatible with one another. At first glance, the problem looks similar to the earlier one, where an abstract factory can be used, however, the different window systems provide different sets of interfaces, making it difficult to ensure all the operations are covered by a single set of interfaces.
 
-![Supporting multiple window system: bridge Pattern](/images/system-design-case-study/bridgePattern.png)
+![Supporting multiple window system: bridge Pattern](/images/system-design-case-study/bridgePattern.png){: .w-75 .light }
+![Supporting multiple window system: bridge Pattern](/images/system-design-case-study/bridgePattern-dark.png){: .w-75 .dark }
+_Supporting multiple window system: bridge Pattern_
 
 Encapsulate the concept that varies. What varies here is system-specific implementation. WindowImp class hierarchy is defined to hide different window system implementations. WindowImp is an abstract class to abstract system-dependent code.
-
 
 ```cpp
     void Rectange::Draw(Window* w) {
@@ -130,19 +140,21 @@ Encapsulate the concept that varies. What varies here is system-specific impleme
 
 The relationship between Window and WindowImp is an example of the Bridge pattern. The intent behind the bridge pattern is to allow separate class hierarchies to work together even as they evolve independently.
 
-
 ### User Operation
 The user operations are performed through menu items, buttons, and keyboard shortcuts. However, the same operation can be performed in different ways for example through the menu, and also through the keyboard shortcut. 
 
 The request can be encapsulated, with the help of the Command abstract class to provide an interface for issuing a request. Subclasses implement the execution in different ways to fulfill different requests. MenuItem simply invokes execute() on its Command object to carry out the requests.
-![User Operation: menu Item Command](/images/system-design-case-study/menuItemCommand.png)
+![User Operation: menu Item Command](/images/system-design-case-study/menuItemCommand.png){: .w-75 .light }
+![User Operation: menu Item Command](/images/system-design-case-study/menuItemCommand-dark.png){: .w-75 .dark }
+_User Operation: menu Item Command_
 
 To support undo-redo functionality, need to define a command list executed. Conceptually the command history looks like the following:
-![User Operation: undo Redo](/images/system-design-case-study/undoRedo.png)
+![User Operation: undo Redo](/images/system-design-case-study/undoRedo.png){: .w-75 .light }
+![User Operation: undo Redo](/images/system-design-case-study/undoRedo-dark.png){: .w-75 .dark }
+_User Operation: undo Redo_
 It's to be noted that undo and redo functionality should be meaningful. For example, if the same operation was performed multiple times consecutively, the undo-redo operation should do the changes as a whole, rather than having the user operate the same number of times.
 
 The command pattern prescribes a uniform interface for issuing requests and allows the client to handle multiple requests with the same set of operations. The interface shields the client from request implementation.
-
 
 ### Spelling checking and Hyphenation:
 Both spelling check and hyphenation depend upon textual analysis. The problem is similar to the formatting problem, as multiple algorithms exist for these problems. However, it's slightly different in a way, as there are two-piece to the puzzle:
@@ -152,7 +164,9 @@ Both spelling check and hyphenation depend upon textual analysis. The problem is
 ##### 1. Accessing information scattered over glyphs: Encapsulate access and traversal
 By using an abstract class Iterator, a general interface of access and traversal is defined.
 
-![1. Accessing information scattered over glyphs: Encapsulate access and traversal: iterator Pattern](/images/system-design-case-study/iteratorPattern.png)
+![1. Accessing information scattered over glyphs: Encapsulate access and traversal: iterator Pattern](/images/system-design-case-study/iteratorPattern.png){: .w-75 .light }
+![1. Accessing information scattered over glyphs: Encapsulate access and traversal: iterator Pattern](/images/system-design-case-study/iteratorPattern-dark.png){: .w-75 .dark }
+_1. Accessing information scattered over glyphs: Encapsulate access and traversal: iterator Pattern_
 
 The glyph subclass that has children overrides the CreateIterator to return an instance of different Iterator subclass, which subclass depends on the structure that stores the children.
 
@@ -205,7 +219,9 @@ The iterator pattern provides a mechanism to traverse composite structures and c
 ##### 2. Traversal Action
 The Glyph, iterator, and Analyzer all have separate responsibilities, hence it's better to have them encapsulated into different sets of objects.
 An instance of this analyzer class would work in conjunction with an appropriate iterator like the following:
-![2. Traversal Action: analyzer](/images/system-design-case-study/analyzer.png)
+![2. Traversal Action: analyzer](/images/system-design-case-study/analyzer.png){: .light }
+![2. Traversal Action: analyzer](/images/system-design-case-study/analyzer-dark.png){: .dark }
+_2. Traversal Action: analyzer_
 
 SpellingChecker's checking operation:
 ```cpp
@@ -244,7 +260,9 @@ Analyzer:
     }
 ```
 
-![2. Traversal Action: visitor](/images/system-design-case-study/visitor.png)
+![2. Traversal Action: visitor](/images/system-design-case-study/visitor.png){: .w-75 .light }
+![2. Traversal Action: visitor](/images/system-design-case-study/visitor-dark.png){: .w-75 .dark }
+_2. Traversal Action: visitor_
 
 The visitor pattern discussed here provides a way to allow an open-ended number of algorithms for a specific problem. This is most suitable where the context object ie. the object on which algorithms are applied having a stable structure and prone to less changes.
 
@@ -256,5 +274,3 @@ The visitor pattern discussed here provides a way to allow an open-ended number 
 5. [Command Pattern](https://refactoring.guru/design-patterns/command)
 6. [Iterator Pattern](https://refactoring.guru/design-patterns/iterator)
 7. [Visitor Pattern](https://refactoring.guru/design-patterns/visitor)
-
-

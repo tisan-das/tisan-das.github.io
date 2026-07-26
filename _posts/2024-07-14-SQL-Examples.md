@@ -21,8 +21,6 @@ JOIN
     customers ON orders.customer_id = customers.customer_id;
 ```
 
-
-
 ```sql
 -- Create a test table
 CREATE TABLE test_table (
@@ -58,9 +56,6 @@ ROLLBACK;
 -- Select all records to see the state of the table
 SELECT * FROM test_table;
 ```
-
-
-
 
 ```sql
 SELECT 

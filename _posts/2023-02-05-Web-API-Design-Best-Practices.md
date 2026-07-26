@@ -71,9 +71,9 @@ HTTP Status Codes:
     i. 204 (No Content): Deletion completed, no further response is sent
     ii. 404 (Not Found): Requested resource doesn't exist
 
-![Define API operations in terms of HTTP methods: HTTP Verbs](/images/REST-intro/httpVerbs.png)
-
-
+![Define API operations in terms of HTTP methods: HTTP Verbs](/images/REST-intro/httpVerbs.png){: .light }
+![Define API operations in terms of HTTP methods: HTTP Verbs](/images/REST-intro/httpVerbs-dark.png){: .dark }
+_Define API operations in terms of HTTP methods: HTTP Verbs_
 
 ### Conform to HTTP semantics
 1. Media-Types:
@@ -146,7 +146,5 @@ Content-Range: bytes 0-2499/4580
 ### Versioning a RESTful web API
 As the service evolves, it's accepted that the APIs would also evolve. However, from the client side, it would be difficult to keep track of all the changes and make changes on short notice. Adding a few new attributes in response might not cause the client code to fail, however, drastic changes, like a change in resource representation, or removal of some attributes can cause the client code to fail. It's always recommended to follow versioning when designing APIs to accommodate this kind of issue. 
 
-
 ### References:
 1. [API Design Best Practices](https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design)
-

@@ -12,17 +12,15 @@ Concurrency and Paralleism - these terms sound similar; however, from a software
 **Concurrency** is the ability of a system to perform multiple tasks simultaneously or in an overlapping fashion. A concurrent system can work on multiple tasks at a given time. **Parallelism** is a special case of concurrency in which multiple tasks are executed simultaneously. A system can be concurrent without being parallel; it can switch between the processes quickly to provide an illusion of simultaneous execution. This is known as time-slicing or interleaving.
 
 ![Concurrency vs parallelism](/images/sys-design-fundamentals/01-concurrency/01-concurrency_vs_parallelism.png)
-
+_Concurrency vs parallelism_
 
 **Multiprocessing** is a specific approach to parallelism that uses multiple processors or cores within a single system. Parallelism is a more general concept that refers to executing multiple tasks or computations simultaneously across different processing units or resources, whether within a single system or across multiple systems.
-
 
 ### Context Switch
 
 The above discussion of concurrency and parallelism is theoretical. However, as application developers, we're more interested in the practical aspects of concurrency and parallelism and need to understand how they impact the tasks executed and, ultimately, the application level.
 
 Context switching is the mechanism for storing the state of the currently executing task so it can be paused and resumed later. Context switching is one of the core mechanisms for supporting concurrency and parallelism. Each context switch incurs some overhead, depending on the task type.
-
 
 ### Context Switching Cost Hierarchy
 Context-switch overhead varies dramatically by level of abstraction: process switches are the most expensive, thread switches are moderately expensive, and goroutine switches are the cheapest.
@@ -31,7 +29,9 @@ Context-switch overhead varies dramatically by level of abstraction: process swi
 ##### Process Context Switch Cost
 Process context switches are the most expensive; at a typical CPU frequency of 3 GHz, this translates to approximately 8,000-16,000 CPU instructions per context switch.
 
-![Process Context Switch Cost: context switch process](/images/sys-design-fundamentals/01-concurrency/02-context-switch-process.png)
+![Process Context Switch Cost: context switch process](/images/sys-design-fundamentals/01-concurrency/02-context-switch-process.png){: .light }
+![Process Context Switch Cost: context switch process](/images/sys-design-fundamentals/01-concurrency/02-context-switch-process-dark.png){: .dark }
+_Process Context Switch Cost: context switch process_
 
 The high cost comes from the extensive operations required:
 ​- Saving and restoring complete process state (registers, program counter, stack pointer)
@@ -63,7 +63,6 @@ The dramatic efficiency comes from:
 - Shared memory: Coroutines on the same OS thread share stack and heap without synchronization overhead
 - Small stack: 2-8KB vs 1MB for OS threads means less memory to manage during switches
 
-
 ### AsynIO and Event Loop
 
 **Asynchronous I/O** is a programming model that allows a program to initiate I/O operations without blocking execution while they complete. When a task issues an I/O request (such as a network call or a disk read), it yields control back to the program rather than blocking, allowing other tasks to execute freely. The program later re-runs the paused task once its I/O request completes.
@@ -80,8 +79,6 @@ The event loop operates in phases:
 ​- Repeat: The loop returns to the waiting state for the next event
 ​
 This non-blocking I/O approach allows a single-threaded program to efficiently handle thousands of concurrent connections.
-
-
 
 ### GMP model in Go
 
@@ -117,9 +114,13 @@ func main() {
 
 ##### Goroutine Scheduling Model
 
-![Goroutine Scheduling Model: go schedular components](/images/sys-design-fundamentals/01-concurrency/03-go-schedular-components.png)
+![Goroutine Scheduling Model: go schedular components](/images/sys-design-fundamentals/01-concurrency/03-go-schedular-components.png){: .w-75 .light }
+![Goroutine Scheduling Model: go schedular components](/images/sys-design-fundamentals/01-concurrency/03-go-schedular-components-dark.png){: .w-75 .dark }
+_Goroutine Scheduling Model: go schedular components_
 
-![Goroutine Scheduling Model: go schedular image](/images/sys-design-fundamentals/01-concurrency/04-go-schedular-image.png)
+![Goroutine Scheduling Model: go schedular image](/images/sys-design-fundamentals/01-concurrency/04-go-schedular-image.png){: .light }
+![Goroutine Scheduling Model: go schedular image](/images/sys-design-fundamentals/01-concurrency/04-go-schedular-image-dark.png){: .dark }
+_Goroutine Scheduling Model: go schedular image_
 
 ```go
 runtime.schedule() {
@@ -134,9 +135,6 @@ runtime.schedule() {
 
 More details on the go runtime scheduling can be read [here](https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part2.html).
 
-
-
-
 ### References
 1. [A Deep Dive into Concurrency, Parallelism, Multiprocessing, and Distributed Systems-Part-1-Introduction](https://www.thetechcruise.com/a-deep-dive-into-concurrency-parallelism-multiprocessing-and-distributed-systems-part-1-introduction)
 2. [Concurrency vs. Parallelism – Key Differences Explained](https://getsdeready.com/concurrency-vs-parallelism-key-differences-explained/)
@@ -147,4 +145,3 @@ More details on the go runtime scheduling can be read [here](https://www.ardanla
 7. [Gist of Go: Concurrency internals](https://antonz.org/go-concurrency/internals/)
 8. [Scheduling In Go : Part II - Go Scheduler](https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part2.html)
 9. [Python behind the scenes #12: how async/await works in Python](https://tenthousandmeters.com/blog/python-behind-the-scenes-12-how-asyncawait-works-in-python/)
-

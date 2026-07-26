@@ -12,7 +12,6 @@ Each programming language provides support of threading to improve performance o
 
 {% include series-nav.html %}
 
-
 ### Atomicity:
 **Definition**: An action is atomic if there is no way for a higher layerto discover the internal structure of it's implementation
 
@@ -34,14 +33,14 @@ Observation suggests that lock set information can be stored in the volative sto
 ### Two Phase Commit:
 Two phase commit is one of the most used distributed transaction protocol, where performs the transaction in two different phases- **voting phase**, where the lower level transactions are either prepared to be committed; and the **commitment phase**, where the lower level transactions are actually committed or aborted.
 
-![Two Phase Commit: distributed Transactions](/images/zookeeper/distributedTransactions.png)
+![Two Phase Commit: distributed Transactions](/images/zookeeper/distributedTransactions.png){: .light }
+![Two Phase Commit: distributed Transactions](/images/zookeeper/distributedTransactions-dark.png){: .dark }
+_Two Phase Commit: distributed Transactions_
 
 In this overall design of two-phase commit protocol, co-ordinator is the single point of failure, and in case that happens, all the worker nodes must wait till it recovers. Also each component of this design is persistent sender, which ensures that even of some of the network communication is lost, eventually they will receive it.
-
 
 ### References:
 1. [Concurrency Control](https://www.cbcb.umd.edu/confcour/Spring2014/CMSC424/Concurrency.pdf)
 2. [Difference between 2-Phase Locking and 2-Phase Commit](https://stackoverflow.com/questions/68640301/difference-between-2pc-2-phase-commit-and-2-pl-2-phase-locking)
 3. [Two Phase Locking Protocol](https://www.geeksforgeeks.org/two-phase-locking-protocol/)
 4. [Principles Of Computer System Design: An Introduction](https://ocw.mit.edu/courses/res-6-004-principles-of-computer-system-design-an-introduction-spring-2009/pages/online-textbook/)
-

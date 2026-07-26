@@ -15,19 +15,18 @@ This document discusses a few high-level concepts of PostgreSQL's internals. It'
 
 SQL, short for Structured Query Language, is a high-level declarative language. Unlike imperative languages, it just specifies what info is needed and doesn't expose the internal details or how they're fetched. Thus, it might be confusing when the database is under load or when queries are not performing as expected.
 
-
 ### Storage:
 
 Database indexes are represented as B-trees or other self-balancing trees. The non-leaf nodes are the keys and child node pointers, and the leaves contain the key and point to the actual location where the row is stored.
 
 ![Storage: BTree with slot](/images/postgres/01-internal/BTree%20with%20slot.png)
+_Storage: BTree with slot_
 
 Postgres uses the concept of a page, where each page has a fixed size. Each page can contain a few entries, each specified with a block. The entries are internally identified as the pair of (page, block). This identification is known as ctid in PostgreSQL and can be fetched as part of the SQL query. 
 
 ```sql
 SELECT ctid, * FROM your_table_name;
 ```
-
 
 ### Index
 
@@ -38,13 +37,21 @@ Internally, index access takes very little time compared to fetching the whole e
 
 #####  Scan strategies
 
-![Scan strategies: scan sequential](/images/postgres/01-internal/scan_sequential.png)
+![Scan strategies: scan sequential](/images/postgres/01-internal/scan_sequential.png){: .light }
+![Scan strategies: scan sequential](/images/postgres/01-internal/scan_sequential-dark.png){: .dark }
+_Scan strategies: scan sequential_
 
-![Scan strategies: scan index only](/images/postgres/01-internal/scan_index_only.png)
+![Scan strategies: scan index only](/images/postgres/01-internal/scan_index_only.png){: .light }
+![Scan strategies: scan index only](/images/postgres/01-internal/scan_index_only-dark.png){: .dark }
+_Scan strategies: scan index only_
 
-![Scan strategies: scan index](/images/postgres/01-internal/scan_index.png)
+![Scan strategies: scan index](/images/postgres/01-internal/scan_index.png){: .light }
+![Scan strategies: scan index](/images/postgres/01-internal/scan_index-dark.png){: .dark }
+_Scan strategies: scan index_
 
-![Scan strategies: scan bitmap index scan](/images/postgres/01-internal/scan_bitmap_index_scan.png)
+![Scan strategies: scan bitmap index scan](/images/postgres/01-internal/scan_bitmap_index_scan.png){: .light }
+![Scan strategies: scan bitmap index scan](/images/postgres/01-internal/scan_bitmap_index_scan-dark.png){: .dark }
+_Scan strategies: scan bitmap index scan_
 
 ##### How to choose an index
 
@@ -56,14 +63,16 @@ Internally, index access takes very little time compared to fetching the whole e
 CREATE INDEX idx_active_users ON users(email) WHERE is_active = TRUE;
 ```
 
-![How to choose an index: index decision tree](/images/postgres/01-internal/index_decision_tree.png)
+![How to choose an index: index decision tree](/images/postgres/01-internal/index_decision_tree.png){: .light }
+![How to choose an index: index decision tree](/images/postgres/01-internal/index_decision_tree-dark.png){: .dark }
+_How to choose an index: index decision tree_
 
-
-![How to choose an index: index composite](/images/postgres/01-internal/index_composite.png)
+![How to choose an index: index composite](/images/postgres/01-internal/index_composite.png){: .light }
+![How to choose an index: index composite](/images/postgres/01-internal/index_composite-dark.png){: .dark }
+_How to choose an index: index composite_
 
 ##### Use the right index type
 B-Tree handles almost everything. GIN for JSONB, arrays, and full-text search. BRIN for huge append-only tables where physical order matches the column. GiST for geometry and custom range types.
-
 
 Always opt for creating an index concurrently without blocking write operations on the table:
 
@@ -75,6 +84,7 @@ ON orders (user_id);
 ##### Verification — How to Check Index Health & Usage
 
 ![Verification — How to Check Index Health & Usage: index corruption strategies](/images/postgres/01-internal/index_corruption_strategies.png)
+_Verification — How to Check Index Health & Usage: index corruption strategies_
 
 **Check if an index is being used**
 
@@ -84,7 +94,6 @@ FROM pg_stat_user_indexes
 ORDER BY idx_scan ASC;
 ```
 idx_scan = 0 → the index has never been used — a candidate for removal.
-
 
 **Check for unused indexes**
 
@@ -128,35 +137,34 @@ SELECT * FROM pg_extension WHERE extname = 'amcheck';
 CREATE EXTENSION IF NOT EXISTS pgstattuple;
 ```
 
-
 ### Use of optimistic lock vs pessimistic lock
 
 Postgres uses an optimistic locking mechanism when performing table operations. This is handled by MVCC, which PostgreSQL employs internally. This ensures that a new version of the entry is created whenever an update operation is performed. This is maintained internally using two hidden system columns, xmin and xmax, to record transaction IDs.
 
 It's worth noting that at the row level, Postgres employs pessimistic locking. When multiple queries update the same row, PostgreSQL internally uses a queuing strategy that processes row updates one at a time.
 
-
 ### Index wraparound
 
-![Index wraparound: indexwrap circular](/images/postgres/01-internal/indexwrap_circular.png)
+![Index wraparound: indexwrap circular](/images/postgres/01-internal/indexwrap_circular.png){: .light }
+![Index wraparound: indexwrap circular](/images/postgres/01-internal/indexwrap_circular-dark.png){: .dark }
+_Index wraparound: indexwrap circular_
 
 Every row written in PostgreSQL is stamped with the Transaction ID (XID) of the transaction that created it. PostgreSQL uses this stamp to decide visibility — "was this row written before or after my transaction?"
 The problem: XIDs are 32-bit integers, so they max out at ~4.2 billion and then wrap back to zero — like an odometer rolling over. When this happens, old rows can suddenly appear in the future, making them invisible to all queries. PostgreSQL will actually shut down the database before allowing this to happen.
 
-
-![Index wraparound: indexwrap rows xid](/images/postgres/01-internal/indexwrap_rows_xid.png)
+![Index wraparound: indexwrap rows xid](/images/postgres/01-internal/indexwrap_rows_xid.png){: .light }
+![Index wraparound: indexwrap rows xid](/images/postgres/01-internal/indexwrap_rows_xid-dark.png){: .dark }
+_Index wraparound: indexwrap rows xid_
 
 PostgreSQL doesn't think of XIDs linearly — it treats them as a circle, where exactly half (~2.1 billion) are considered "the past," and half are "the future" from any given XID. The key insight: PostgreSQL uses modular arithmetic — it doesn't compare XIDs with > or <, but checks "is B within 2.1 billion steps ahead of A on the circle?" If yes, B is in the future. If no, B is in the past.
-
-
 
 ##### How PostgreSQL determines visibility:
 
 PostgreSQL compares current_xid vs row. xmin using the formula: if (current_xid - row.xmin) mod 2^32 < 2^31, then the row is visible. This is the modular circle — no signed integer comparison is used.
 
-
-![How Postgre SQL determines visibility: indexwrap freeze](/images/postgres/01-internal/indexwrap_freeze.png)
-
+![How Postgre SQL determines visibility: indexwrap freeze](/images/postgres/01-internal/indexwrap_freeze.png){: .light }
+![How Postgre SQL determines visibility: indexwrap freeze](/images/postgres/01-internal/indexwrap_freeze-dark.png){: .dark }
+_How Postgre SQL determines visibility: indexwrap freeze_
 
 **Why FrozenTransactionId = 2 is special**
 XID 2 is a hardcoded constant. The visibility check has a special case: any row with xmin = 2 is unconditionally treated as visible to all transactions, bypassing the circular math entirely. This is what VACUUM does when it "freezes" a row.
@@ -164,7 +172,9 @@ The three PostgreSQL warning levels you'll see in logs as XIDs age:
 
 ##### Detect XID wraparound risk 
 
-![Detect XID wraparound risk: indexwrap danger](/images/postgres/01-internal/indexwrap_danger.png)
+![Detect XID wraparound risk: indexwrap danger](/images/postgres/01-internal/indexwrap_danger.png){: .light }
+![Detect XID wraparound risk: indexwrap danger](/images/postgres/01-internal/indexwrap_danger-dark.png){: .dark }
+_Detect XID wraparound risk: indexwrap danger_
 
 **Database Level**
 ```sql
@@ -206,7 +216,9 @@ SELECT relfilenode FROM pg_class WHERE relname = 'orders';
 -- Returns: 24890  ← completely new file
 ```
 
-![How deletion works: indexwrap truncate delete](/images/postgres/01-internal/indexwrap_truncate_delete.png)
+![How deletion works: indexwrap truncate delete](/images/postgres/01-internal/indexwrap_truncate_delete.png){: .light }
+![How deletion works: indexwrap truncate delete](/images/postgres/01-internal/indexwrap_truncate_delete-dark.png){: .dark }
+_How deletion works: indexwrap truncate delete_
 
 **Caveat: TRUNCATE holds a table lock**
 

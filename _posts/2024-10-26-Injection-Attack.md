@@ -19,20 +19,21 @@ SQL Injection is the most popular kind of injection attack, whether attackers tr
 
 Recently web frameworks started advocating implementation patterns to mitigate these SQL injection attacks.
 
-![SQL Injection: injection SQL](/images/web-security/injection_sql.png)
-
+![SQL Injection: injection SQL](/images/web-security/injection_sql.png){: .light }
+![SQL Injection: injection SQL](/images/web-security/injection_sql-dark.png){: .dark }
+_SQL Injection: injection SQL_
 
 ### Command Injection:
 With the command injection type of attacks, the user can provide the payload to execute a malicious command on the application server. Just like SQL injection, these types of attacks also exploit the web application not sanitizing user input, thus not restricting users from executing malicious commands on the server. These commands may not be direct Linux commands, but they can be thought of as some tweak, which alters the actual command that is supposed to be executed.
 
 An example can be thought of for some video converters, where the convert operation is generally performed by some other application installed on the server, and based upon a request from the user, the web server triggers the video conversion command meant for the third-party application. Now in case the attacker can exploit certain vulnerabilities in the application code to run its commands, or alter the way the internal video convert application is supposed to be used, that would be an example of command injection.
 
-![Command Injection: injection command](/images/web-security/injection_command.png)
+![Command Injection: injection command](/images/web-security/injection_command.png){: .w-75 .light }
+![Command Injection: injection command](/images/web-security/injection_command-dark.png){: .w-75 .dark }
+_Command Injection: injection command_
 
 ### Code Injection:
 Code injections are similar to command injection, the only difference is that rather than injecting the command, code is injected in the user payload, which in turn again defers the application from the normal operating process.
-
-
 
 ### Mitigation:
 
@@ -50,7 +51,6 @@ Even though the term "principle of least privilege" became more famous with the 
 - **Use of allowlist for whitelisted command:**
 
 Always use allowlist to whitelist the commands intended to be run by the application. Certain times developers rely on blocklists, however, the use of blocklists is not recommended, as there's always a possibility of some commands being omitted, or the blocklist may not be that effective with later updates. Hence, it's always advisable to use a whitelist rather than a blocklist.
-
 
 ### References
 1. Web Application Security by Andrew Hoffman

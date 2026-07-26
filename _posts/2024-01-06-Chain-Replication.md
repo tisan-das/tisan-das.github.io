@@ -18,11 +18,11 @@ Chain replication is built for storage service, which generally lies between the
 - update operation: atomically change the object data or state of the object
 Query operations are generally idempotent, however, update operations might not be. In case update operations are not idempotent, the client needs to issue query operations to ensure whether the object already reflects the update.
 
-
 ### Architecture:
 
-![Architecture: chain Replication](/images/zookeeper/chainReplication.png)
-
+![Architecture: chain Replication](/images/zookeeper/chainReplication.png){: .light }
+![Architecture: chain Replication](/images/zookeeper/chainReplication-dark.png){: .dark }
+_Architecture: chain Replication_
 
 The chain replication model is achieved by connecting couple of replicated state machines through a chain. the query requests are sent to the tail, and the update operations are sent to the head node, which first computes all the necessary updation and propagates the results to the next node. Client receives the reply for both the query and update operation from the tail node. In this way it's ensured that all the nodes contain updated info. For the non-deterministic update operations, the value is computed at the head node, and then propagated through the chain.
 
@@ -33,7 +33,6 @@ Chain replication takes help of a master process to detect server failure. The m
 - informs each server it's new predecessor or new sucessor
 - informs clients which server is head and which one is tail
 
-
 Type of failures:
 - Failure of head node: master process removes the head node from the chain and makes it's successor as new head node of the updated chain
 - Failure of tail node: the tail node is discarded from the chain and making it's predecessor as the new tail node of the updated chain
@@ -41,13 +40,10 @@ Type of failures:
 
 There's also provision of extending the chain by adding new servers in case the chain becomes too short, provided the rate of adding new server doesn't take long time. Theoretically the new nodes can be added at any particular position of the chain, however it's generally placed as the tail node.
 
-
 ### To be explored:
 - Explore applications built over chain replication
 - How consensus algorithms like Raft performs against chain replication
 
-
 ### References:
 1. [Van Renesse, Robbert, and Fred B. Schneider. "Chain Replication for Supporting High Throughput and Availability." OSDI. Vol. 4. No. 91–104. 2004.](https://www.usenix.org/legacy/events/osdi04/tech/full_papers/renesse/renesse.pdf)
 2. [Lecture 9: More Replication, CRAQ](https://www.youtube.com/watch?v=IXHzbCuADt0)
-

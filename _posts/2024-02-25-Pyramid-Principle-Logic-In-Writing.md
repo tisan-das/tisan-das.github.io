@@ -19,14 +19,18 @@ The pyramid principle dictates a rigid substructure that can serve to speed the 
 ### How to build a pyramid structure:
 Generally, it's easier to start at the top by thinking about the things that are the easiest for you to be sure of - your subject and the reader's knowledge of it, which you will remind him of in the introduction part.
 
-![How to build a pyramid structure: Pyramid Principle Document Structure](/images/aurora/PyramidPrinciple_DocumentStructure.png)
+![How to build a pyramid structure: Pyramid Principle Document Structure](/images/aurora/PyramidPrinciple_DocumentStructure.png){: .light }
+![How to build a pyramid structure: Pyramid Principle Document Structure](/images/aurora/PyramidPrinciple_DocumentStructure-dark.png){: .dark }
+_How to build a pyramid structure: Pyramid Principle Document Structure_
 
 Always put historical chronology in the introduction and limit it to what the reader will agree is true.
 
 ### Fine points of introduction
 The introduction part establishes what the reader already knows and adds relevant questions. It narrates a story with the **situation** within which a **complication** is developed that raises the **question** to which the document is providing the answer. The situation and complication portion can each be as long as three or four paragraphs, but not more than that, as it's not supposed to take a long time to remind the readers what they already know.
 
-![Fine points of introduction: Pyramid Principle Intro Strcture](/images/aurora/PyramidPrinciple_IntroStrcture.png)
+![Fine points of introduction: Pyramid Principle Intro Strcture](/images/aurora/PyramidPrinciple_IntroStrcture.png){: .light }
+![Fine points of introduction: Pyramid Principle Intro Strcture](/images/aurora/PyramidPrinciple_IntroStrcture-dark.png){: .dark }
+_Fine points of introduction: Pyramid Principle Intro Strcture_
 
 Start the introduction with a self-sufficient and non-controversial statement about the subject. Introductions are meant to remind rather than to inform, thus the scope is to include whatever is necessary for full understanding.
 The key lines not only provide a brief answer to the question raised by the statement of the main point, it also indicate the plan of the whole document.
@@ -39,4 +43,3 @@ While mentioning recommended action, never give the findings that do not lead to
 
 Generally, it's better to present the action before the argument, since that's what the reader cares about most of the time, unless some rare scenarios in which the argument is what the reader truly cares about. 
 Note that, with inductive ideas you generally either hold the subject constant and vary the predicate, or hold the predicate constant and vary the subject.
-

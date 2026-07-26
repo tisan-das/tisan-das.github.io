@@ -12,7 +12,6 @@ A key-value store, also referred to as a key-value database, is a crucial topic 
 
 {% include series-nav.html %}
 
-
 ### Requirements:
 - Ability to store big data
 - High availability
@@ -20,7 +19,6 @@ A key-value store, also referred to as a key-value database, is a crucial topic 
 - Automatic scaling
 - Tunable consistency
 - Low latency
-
 
 ### CAP Theorem:
 
@@ -30,10 +28,11 @@ A key-value store, also referred to as a key-value database, is a crucial topic 
 
 CAP Theorem suggests that distributed systems can satisfy two of the above three properties, not all three of them.
 
-![CAP Theorem: KV system CAP theorem](/images/sys-design-vol1/03-kv-system-cap-theorem.png)
+![CAP Theorem: KV system CAP theorem](/images/sys-design-vol1/03-kv-system-cap-theorem.png){: .light }
+![CAP Theorem: KV system CAP theorem](/images/sys-design-vol1/03-kv-system-cap-theorem-dark.png){: .dark }
+_CAP Theorem: KV system CAP theorem_
 
 It's worth noting that distributed systems must be partition-tolerant. Thus, the distributed systems can either be a CP (Consistent & Partition Tolerance) system or an AP (Availability & Partition Tolerance) system. A CA (Consistent & Availability) distributed system is of no use. The type of system we want to design depends on the use case. For example, the banking sector requires strict consistency systems.
-
 
 ### Core Components:
 - Data partition
@@ -43,17 +42,13 @@ It's worth noting that distributed systems must be partition-tolerant. Thus, the
 - Handling Failures
 - System architecture diagram
 
-
-
 ##### Data partition:
 Split the data into multiple partitions and store them across servers. Consistent hashing is generally used to distribute data across multiple servers.
-
 
 ##### Data replication:
 To achieve high availability and reliability, data needs to be replicated across multiple servers. Generally, the data is replicated asynchronously.
 
 Once a key is mapped to a position on the hash ring, walk clockwise from that position and choose the first *N* partitions to replicate the same data.  Only select unique servers while performing the clockwise walk from the key on the hash ring in the consistent hashing mechanism.
-
 
 ##### Consistency:
 
@@ -69,22 +64,21 @@ Strong consistency is guaranteed only if *W+R > N*, as this ensures there must b
 
 These types of systems can handle loss of *N – min(W, R)* replicas.
 
-
 **Consistency models**
 - Strong consistency: Any read operation either returns the most recent update or returns failure
 - Weak consistency: Read operations mayn't see the most recent update
 - Eventual consistency: This is a subset of weak consistency, where the updates are propagated to all the nodes, and they will get synced eventually
 
-
 ##### Inconsistency resolution:
 Versioning and vector clocks are used to detect inconsistency. We need to explore specific research papers to understand how different KV stores employ vector clocks.
-
 
 ##### Handling failures:
 
 **Failure detection:**
 The gossip protocol is generally followed 
-![Handling failures: KV system gossip protocol](/images/sys-design-vol1/03-kv-system-gossip-protocol.png)
+![Handling failures: KV system gossip protocol](/images/sys-design-vol1/03-kv-system-gossip-protocol.png){: .light }
+![Handling failures: KV system gossip protocol](/images/sys-design-vol1/03-kv-system-gossip-protocol-dark.png){: .dark }
+_Handling failures: KV system gossip protocol_
 
 **Handling temporary failures:**
 
@@ -92,14 +86,14 @@ Sloppy Quoram: A flexible quorum technique, where read and writes are performed 
 
 Hinted Handoff: If a server is offline, another server processes the requests temporarily. Once the server is up, the changes are pushed to the node.
 
-
 **Handling permanent failures:**
 Data is migrated from a healthy node to a new node. Migration is performed on different layers. In the later phases of migration, anti-entropy protocols are used to keep the new node synced with the replica. Multiple mechanisms exist that internally utilize the *Merkle tree* to perform this type of migration.
 
 ##### System architecture diagram
 
-![System architecture diagram: KV system system design](/images/sys-design-vol1/03-kv-system-system-design.png)
+![System architecture diagram: KV system system design](/images/sys-design-vol1/03-kv-system-system-design.png){: .light }
+![System architecture diagram: KV system system design](/images/sys-design-vol1/03-kv-system-system-design-dark.png){: .dark }
+_System architecture diagram: KV system system design_
 
 ### Future study:
 - How a vector clock is used to detect and resolve inconsistency
-

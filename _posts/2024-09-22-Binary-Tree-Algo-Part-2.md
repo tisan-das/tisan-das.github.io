@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Binary Tree Algorithms - Part II
+image: /assets/img/series/binary-tree-problems.png
 series: "Binary Tree Problems"
 categories: ["Algorithms", "Problem Sets"]
 tags: [binary-tree, cpp]
@@ -10,7 +11,6 @@ published: true
 This wiki contains a couple of well-defined problems on Binary Tree.
 
 {% include series-nav.html %}
-
 
 #### Delete Node in a Linked List (372):
 
@@ -29,8 +29,6 @@ This wiki contains a couple of well-defined problems on Binary Tree.
         }
     }
 ```
-
-
 
 ### Construct Binary Tree from Preorder and Inorder Traversal (73):
 
@@ -60,8 +58,6 @@ This wiki contains a couple of well-defined problems on Binary Tree.
         return node;
     }
 ```
-
-
 
 ### Construct Binary Tree from Inorder and Postorder Traversal (72):
 
@@ -93,8 +89,6 @@ This wiki contains a couple of well-defined problems on Binary Tree.
     }
 ```
 
-
-
 ### Binary Tree Maximum Path Sum (94):
 
 ```cpp
@@ -123,8 +117,6 @@ This wiki contains a couple of well-defined problems on Binary Tree.
     }
 ```
 
-
-
 ### Trim a Binary Search Tree (701):
 
 Given the root of a binary search tree and 2 numbers min and max, trim the tree such that all the numbers in the new tree are between min and max (inclusive).
@@ -147,8 +139,6 @@ Given the root of a binary search tree and 2 numbers min and max, trim the tree 
         return root;
     }
 ```
-
-
 
 ### Sum Root to Leaf Numbers (1353):
 
@@ -178,8 +168,6 @@ Given the root of a binary search tree and 2 numbers min and max, trim the tree 
         path.pop_back();
     }
 ```
-
-
 
 ### Verify Preorder Sequence in Binary Search Tree (1307):
 
@@ -218,8 +206,6 @@ Could you do it using only constant space complexity?
             verifyPreorder(preorder, splitIndex, endIndex);
     }
 ```
-
-
 
 ### Equal Tree Partition (864):
 
@@ -263,8 +249,6 @@ Given a binary tree with n nodes, your task is to check if it's possible to part
     }
 ```
 
-
-
 ### Fix Binary Search Tree (3600):
 
 Given the root of a binary tree where exactly two nodes have been swapped.
@@ -307,8 +291,6 @@ Please identify the nodes and swap them back in order to recover the original bi
     }
 ```
 
-
-
 ### Inorder Successor in BST II (3665):
 
 There exists a binary search tree, and the binary tree node holds its parent node parent.
@@ -332,8 +314,6 @@ In this question, you will get any node of the binary search tree. You need to r
         }
     }
 ```
-
-
 
 ### Count Univalue Subtrees (921):
 
@@ -369,8 +349,6 @@ A Uni-value subtree means all nodes of the subtree have the same value.
     }
 ```
 
-
-
 ### Construct Binary Tree from Preorder and Postorder Traversal (1593):
 
 ```cpp
@@ -402,4 +380,3 @@ A Uni-value subtree means all nodes of the subtree have the same value.
         return node;
     }
 ```
-

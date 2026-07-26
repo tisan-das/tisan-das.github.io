@@ -1,6 +1,7 @@
 ---
 layout: post
 title: BFS Problem Sets Part I
+image: /assets/img/series/bfs-problems.png
 series: "BFS Problems"
 categories: ["Algorithms", "Problem Sets"]
 tags: [bfs, graph, cpp]
@@ -11,7 +12,6 @@ This wiki contains a couple of well-defined problems solved via Breadth First Se
 
 {% include series-nav.html %}
 
-
 The following points to be noted while solving traversal problems, especially using BFS with C++:
 - Node is marked as visited only when it's explored fully. This would be useful for especially Dijkstra's shortest-path algorithm
 - Skip the use of set for visited nodes if possible, rather use the original matrix
@@ -20,7 +20,6 @@ The following points to be noted while solving traversal problems, especially us
 Topological sort is useful on Directed Acyclic Graphs. The relationship A->B signifies that B is dependent on A. Topological sort can't be used on undirected graphs, all the edges would inherently create a cycle in an undirected graph.
 
 Problems related to bipartite graphs can also be solved with BFS, with an added layer of 2 color problems. If a node is visited, all the associated nodes would be colored with opposite colors, and if that's not possible, then it's not a bipartite graph.
-
 
 If using online compilers, the following boilerplate code can be used:
 
@@ -87,8 +86,6 @@ private:
 };
 ```
 
-
-
 ### Number of Big Islands (677):
 
 ```cpp
@@ -129,7 +126,6 @@ public:
                 if(!grid[i][j]){
                     continue;
                 }
-
 
                 pair<int,int> rootNode = make_pair(i,j);//isIslandPresent(grid);
                 list<pair<int,int>> que;
@@ -177,8 +173,6 @@ public:
     }
 };
 ```
-
-
 
 ### Walls and Gates (663):
 - Use of BFS to find out shortest path
@@ -250,8 +244,6 @@ private:
     int infVal = 2147483647;
 };
 ```
-
-
 
 ### Surrounded Regions (477):
 
@@ -349,7 +341,6 @@ public:
 };
 ```
 
-
 ### Course Schedule (615):
 - Topological Sort
 
@@ -405,8 +396,6 @@ public:
 };
 ```
 
-
-
 ### Course Schedule II (616):
 
 ```cpp
@@ -456,8 +445,6 @@ public:
     }
 };
 ```
-
-
 
 ### Is Graph Bipartite? (1031):
 
@@ -509,8 +496,6 @@ public:
     }
 };
 ```
-
-
 
 ### Strobogrammatic Number II (776):
 - Corner case
@@ -570,8 +555,6 @@ private:
     map<int,int> rotateNumMapper;
 };
 ```
-
-
 
 ### Knight Shortest Path (611):
 
@@ -681,8 +664,6 @@ public:
 };
 ```
 
-
-
 ### Snakes and Ladders (1732):
 
 ```cpp
@@ -755,8 +736,6 @@ public:
     }
 };
 ```
-
-
 
 ### Minimum Step (1832):
 - Use of unordered map and unordered set to overcome TLE
@@ -864,8 +843,6 @@ public:
 };
 ```
 
-
-
 ### Topological Sorting (127):
 
 ```cpp
@@ -921,8 +898,6 @@ public:
     }
 };
 ```
-
-
 
 ### Sequence Reconstruction (605):
 
@@ -996,8 +971,6 @@ public:
 };
 ```
 
-
-
 ### Parallel Courses (3673):
 
 ```cpp
@@ -1063,8 +1036,6 @@ public:
     }
 };
 ```
-
-
 
 ### As Far from Land as Possible (1911):
 
@@ -1144,8 +1115,6 @@ public:
 };
 ```
 
-
-
 ### Maximum Width of Binary Tree (1101):
 - Trick question on binary search
 
@@ -1210,8 +1179,6 @@ public:
 };
 ```
 
-
-
 ### Push Dominoes (1431):
 
 ```cpp
@@ -1270,8 +1237,6 @@ public:
     }
 };
 ```
-
-
 
 ### The Maze II (788):
 
@@ -1363,8 +1328,6 @@ public:
 };
 ```
 
-
-
 ### Serialize and Deserialize Binary Tree (7):
 
 ```cpp
@@ -1436,8 +1399,6 @@ public:
 };
 ```
 
-
-
 ###  Shortest Path in Undirected Graph (814):
 
 ```cpp
@@ -1489,8 +1450,6 @@ public:
     }
 };
 ```
-
-
 
 ###  Shortest Path in Binary Matrix (3879):
 - Preferred implementation of BFS
@@ -1551,8 +1510,6 @@ public:
     }
 };
 ```
-
-
 
 ### Minimum Path Sum II (1582):
 - Preferred implementation of Dijkstra's shortet path

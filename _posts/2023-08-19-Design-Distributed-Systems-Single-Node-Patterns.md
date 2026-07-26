@@ -11,16 +11,19 @@ Containers and container orchestrators have introduced a great deal of flexibili
 
 {% include series-nav.html %}
 
-
 ### Sidecar Pattern:
 A sidecar container is attached to the application container to add functionalities that might otherwise be difficult to improve.
 
-![Sidecar Pattern: 01.Sidecar Pattern](/images/distributed-system-patterns-single-node/01.SidecarPattern.png)
+![Sidecar Pattern: 01.Sidecar Pattern](/images/distributed-system-patterns-single-node/01.SidecarPattern.png){: .light }
+![Sidecar Pattern: 01.Sidecar Pattern](/images/distributed-system-patterns-single-node/01.SidecarPattern-dark.png){: .dark }
+_Sidecar Pattern: 01.Sidecar Pattern_
 
 ##### Example 01: Adding HTTPS layer to a legacy service:
 New development on legacy applications is significantly more challenging compared to adding an NGINX ingress which terminates the SSL connectivity and redirects the request to the legacy application.
 
-![Example 01: Adding HTTPS layer to a legacy service: 02.HTTPS Sidecar](/images/distributed-system-patterns-single-node/02.HttpsSidecar.png)
+![Example 01: Adding HTTPS layer to a legacy service: 02.HTTPS Sidecar](/images/distributed-system-patterns-single-node/02.HttpsSidecar.png){: .light }
+![Example 01: Adding HTTPS layer to a legacy service: 02.HTTPS Sidecar](/images/distributed-system-patterns-single-node/02.HttpsSidecar-dark.png){: .dark }
+_Example 01: Adding HTTPS layer to a legacy service: 02.HTTPS Sidecar_
 
 ##### Example 02: Dynamic configuration:
 Earlier applications were written with the understanding that the configuration file would reside on the filesystem. However, with the advent of cloud computing, it's easier to use API to update the configuration. This provides a way to do a dynamic push of configuration without the need to log into each node and then update the configuration file through some command. 
@@ -30,12 +33,15 @@ docker run --pid:container:${APP_ID} -p 8080:8080 brendanburns/topz:db0fa58 \
         /server -address=0.0.0.0:8080
 ```
 
-![Example 02: Dynamic configuration: 03.Dynamic Configuration](/images/distributed-system-patterns-single-node/03.DynamicConfiguration.png)
+![Example 02: Dynamic configuration: 03.Dynamic Configuration](/images/distributed-system-patterns-single-node/03.DynamicConfiguration.png){: .light }
+![Example 02: Dynamic configuration: 03.Dynamic Configuration](/images/distributed-system-patterns-single-node/03.DynamicConfiguration-dark.png){: .dark }
+_Example 02: Dynamic configuration: 03.Dynamic Configuration_
 
 ##### Example 03: Building Simple PaaS:
 
-![Example 03: Building Simple Paa S: 04.Sidecar Based Paa S](/images/distributed-system-patterns-single-node/04.SidecarBasedPaaS.png)
-
+![Example 03: Building Simple Paa S: 04.Sidecar Based Paa S](/images/distributed-system-patterns-single-node/04.SidecarBasedPaaS.png){: .light }
+![Example 03: Building Simple Paa S: 04.Sidecar Based Paa S](/images/distributed-system-patterns-single-node/04.SidecarBasedPaaS-dark.png){: .dark }
+_Example 03: Building Simple Paa S: 04.Sidecar Based Paa S_
 
 The sidecar container should be reusable across a wide variety of applications and deployments. During the development, focus on the following areas:
 - Parametrizing the containers
@@ -45,16 +51,19 @@ The sidecar container should be reusable across a wide variety of applications a
 ### Ambassadors:
 Ambassador container brokers interactions between the application container and the rest of the world.
 
-![Ambassadors: 05.ambassador Pattern](/images/distributed-system-patterns-single-node/05.ambassadorPattern.png)
+![Ambassadors: 05.ambassador Pattern](/images/distributed-system-patterns-single-node/05.ambassadorPattern.png){: .light }
+![Ambassadors: 05.ambassador Pattern](/images/distributed-system-patterns-single-node/05.ambassadorPattern-dark.png){: .dark }
+_Ambassadors: 05.ambassador Pattern_
 
 ##### Example 01: Shard a service:
 Sharding splits a layer into multiple disjoint places, each hosted by a different node. Generally, the sharding logic is built into the sharding service itself, and the sharding service uses a stateless load balancer to route the request to the appropriate shard
 
-![Example 01: Shard a service: 06.generic Sharded Service](/images/distributed-system-patterns-single-node/06.genericShardedService.png)
+![Example 01: Shard a service: 06.generic Sharded Service](/images/distributed-system-patterns-single-node/06.genericShardedService.png){: .light }
+![Example 01: Shard a service: 06.generic Sharded Service](/images/distributed-system-patterns-single-node/06.genericShardedService-dark.png){: .dark }
+_Example 01: Shard a service: 06.generic Sharded Service_
 
 ##### Example 02: Service brokering:
 Service discovery is a way for Microservices to discover each other over a network. The process is called service discovery, and the service that performs this discovery and links microservices is called service broker.
-
 
 ```sh
 controlplane $ cat prod-deploy.yaml 
@@ -206,7 +215,9 @@ controlplane $
 ### Adapters:
 Adapter container transforms the output of the application container so that it conforms to the standard other containers are expecting it to be.
 
-![Adapters: 08.Adapter Pattern](/images/distributed-system-patterns-single-node/08.AdapterPattern.png)
+![Adapters: 08.Adapter Pattern](/images/distributed-system-patterns-single-node/08.AdapterPattern.png){: .light }
+![Adapters: 08.Adapter Pattern](/images/distributed-system-patterns-single-node/08.AdapterPattern-dark.png){: .dark }
+_Adapters: 08.Adapter Pattern_
 
 ##### Example 01: Monitoring:
 
@@ -219,8 +230,6 @@ TLS SNI support enabled
 configure arguments: --prefix=/etc/nginx --sbin-path=/usr/sbin/nginx --modules-path=/usr/lib/nginx/modules --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --pid-path=/var/run/nginx.pid --lock-path=/var/run/nginx.lock --http-client-body-temp-path=/var/cache/nginx/client_temp --http-proxy-temp-path=/var/cache/nginx/proxy_temp --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp --http-scgi-temp-path=/var/cache/nginx/scgi_temp --user=nginx --group=nginx --with-compat --with-file-aio --with-threads --with-http_addition_module --with-http_auth_request_module --with-http_dav_module --with-http_flv_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_mp4_module --with-http_random_index_module --with-http_realip_module --with-http_secure_link_module --with-http_slice_module --with-http_ssl_module --with-http_stub_status_module --with-http_sub_module --with-http_v2_module --with-http_v3_module --with-mail --with-mail_ssl_module --with-stream --with-stream_realip_module --with-stream_ssl_module --with-stream_ssl_preread_module --with-cc-opt='-g -O2 -ffile-prefix-map=/data/builder/debuild/nginx-1.25.2/debian/debuild-base/nginx-1.25.2=. -fstack-protector-strong -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fPIC' --with-ld-opt='-Wl,-z,relro -Wl,-z,now -Wl,--as-needed -pie'
 root@log-example-6dd84f84dd-bhssj:/# 
 
-
-
 root@log-example-6dd84f84dd-sp86t:/# cat /etc/nginx/nginx.conf 
 
 user  nginx;
@@ -229,11 +238,9 @@ worker_processes  auto;
 error_log  /var/log/nginx/error.log notice;
 pid        /var/run/nginx.pid;
 
-
 events {
     worker_connections  1024;
 }
-
 
 http {
     include       /etc/nginx/mime.types;
@@ -309,8 +316,6 @@ server {
 }
 
 root@log-example-6dd84f84dd-sp86t:/# 
-
-
 
 controlplane $ ls -l
 total 8

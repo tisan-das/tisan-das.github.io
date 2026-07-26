@@ -8,7 +8,6 @@ published: true
 
 This wiki contains a couple of well-defined problems on Stack.
 
-
 ### Exam Progress (3544):
 
 Given a non-empty integer array nums representing the student's scores for each test, return an equal-length array res, and for each test score nums[i] in nums, find the nearest higher score after it, or keep the original test score if the nearest higher score does not exist.
@@ -32,8 +31,6 @@ Given a non-empty integer array nums representing the student's scores for each 
         return nearHighNumbers;
     }
 ```
-
-
 
 ### N-ary Tree Postorder Traversal (1525):
 
@@ -63,9 +60,6 @@ Given an n-ary tree, return the postorder traversal of its nodes' values.
     }
 ```
 
-
-
-
 ### N-ary Tree Preorder Traversal (1526):
 
 Given an n-ary tree, return the preorder traversal of its nodes' values.
@@ -89,8 +83,6 @@ Given an n-ary tree, return the preorder traversal of its nodes' values.
         return traversal;
     }
 ```
-
-
 
 ### Longest Valid Parentheses (193):
 
@@ -124,8 +116,6 @@ Given a string containing just the characters '(' and ')', find the length of th
         return maxLen;
     }
 ```
-
-
 
 ### Trapping Rain Water (363):
 
@@ -168,8 +158,6 @@ Given n non-negative integers representing an elevation map where the width of e
     }
 ```
 
-
-
 ### Simplify Path (421):
 
 Given an absolute path for a file (Unix-style), simplify it.
@@ -177,7 +165,6 @@ Given an absolute path for a file (Unix-style), simplify it.
 In a UNIX-style file system, a period . refers to the current directory. Furthermore, a double period .. moves the directory up a level.
 
 The result must always begin with /, and there must be only a single / between two directory names. The last directory name (if it exists) must not end with a trailing /. Also, the result must be the shortest string representing the absolute path.
-
 
 ```cpp
     string simplifyPath(string &path) {
@@ -209,8 +196,6 @@ The result must always begin with /, and there must be only a single / between t
         return result.size()==0?"/":result;
     }
 ```
-
-
 
 ### Asteroid Collision (1001):
 
@@ -257,8 +242,6 @@ Find out the state of the asteroids after all collisions. If two asteroids meet,
     }
 ```
 
-
-
 ### Final Discounted Price (1852):
 
 A shopkeeper needs to complete a sales task. He arranges the items for sale in a row.
@@ -285,8 +268,6 @@ You should return the actual selling price of each item. (nearest smaller)
         return result;
     }
 ```
-
-
 
 ### Online Stock Span (1740):
 
@@ -316,12 +297,9 @@ For example, if the price of a stock over the next 7 days were [100, 80, 60, 70,
     }
 ```
 
-
-
 ### Remove Repeated Letters (3599):
 
 Given a string s, remove the duplicate letters in the string so that the letters present in the string appear only once, and return the result with the smallest dictionary order without disrupting the relative positions of the letters in the original string.
-
 
 ```cpp
     string removeDuplicateLetters(string &s) {
@@ -354,15 +332,12 @@ Given a string s, remove the duplicate letters in the string so that the letters
     }
 ```
 
-
-
 ### Parentheses Score (268):
 
 Given a balanced parentheses string S, compute the score of the string based on the following rule:
 - () has score 1
 - AB has score A + B, where A and B are balanced parentheses strings.
 - (A) has score 2 * A, where A is a balanced parentheses string.
-
 
 ```cpp
     int parenthesesScore(string &s) {
@@ -387,8 +362,6 @@ Given a balanced parentheses string S, compute the score of the string based on 
         return -1;// case of imbalanced parenthesis
     }
 ```
-
-
 
 ###  Convert Expression to Reverse Polish Notation (370):
 
@@ -442,9 +415,6 @@ Given a string array representing an expression, and return the Reverse Polish n
     }
 ```
 
-
-
-
 ### Prefix notation to postfix notation (271):
 
 Transform a prefix natation to a postfix notation.
@@ -493,9 +463,6 @@ Transform a prefix natation to a postfix notation.
     }
 ```
 
-
-
-
 ### Remove Digits (693):
 
 Given a non-negative integer num represented as a string, remove k digits from the number so that the new number is the smallest possible.
@@ -533,8 +500,6 @@ Given a non-negative integer num represented as a string, remove k digits from t
     }
 ```
 
-
-
 ### Tall Building (285):
 
 At the weekend, Xiao Q and his friends came to the big city for shopping. There are many tall buildings.There are n tall buildings in a row, whose height is indicated by arr.
@@ -568,5 +533,3 @@ Xiao Q has walked from the first building to the last one. Xiao Q has never seen
         return result;
     }
 ```
-
-

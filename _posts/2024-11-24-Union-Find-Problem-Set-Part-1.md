@@ -70,8 +70,6 @@ This wiki contains a couple of well-defined problems solved via Union-Find data 
     }
 ```
 
-
-
 ### Number of Islands II (434):
 
 ```cpp
@@ -139,8 +137,6 @@ This wiki contains a couple of well-defined problems solved via Union-Find data 
         int groups;
 ```
 
-
-
 ### Accounts Merge (1070):
 
 ```cpp
@@ -176,7 +172,6 @@ This wiki contains a couple of well-defined problems solved via Union-Find data 
             parentArray[i] = i;
         }
 
-
         map<string, int> emailMapper;
         for(int i=0;i<accounts.size();i++){
             string accOwner = accounts[i][0];
@@ -210,8 +205,6 @@ This wiki contains a couple of well-defined problems solved via Union-Find data 
         return result;
     }
 ```
-
-
 
 ### Maximum Connected Area (261):
 
@@ -351,8 +344,6 @@ This wiki contains a couple of well-defined problems solved via Union-Find data 
         map<pair<int,int>, int> groupSizeMap;
 ```
 
-
-
 ### Making A Large Island (1391):
 
 ```cpp
@@ -398,7 +389,6 @@ This wiki contains a couple of well-defined problems solved via Union-Find data 
         }
         return true;
     }
-
 
     int largestIsland(vector<vector<int>> &grid) {
         //
@@ -488,8 +478,6 @@ This wiki contains a couple of well-defined problems solved via Union-Find data 
         map<pair<int,int>, int> rankMap, groupSizeMap; 
 ```
 
-
-
 ### Minimum Number of Visited Lattices in a Matrix (3709):
 
 ```cpp
@@ -540,8 +528,6 @@ This wiki contains a couple of well-defined problems solved via Union-Find data 
         return -1;
     }
 ```
-
-
 
 ### The Minimum String After Swapping (3604):
 
@@ -611,8 +597,6 @@ This wiki contains a couple of well-defined problems solved via Union-Find data 
     private:
         vector<int> parentArray,rankArray;
 ```
-
-
 
 ### Minimize Malware Spread (1718):
 
@@ -686,5 +670,3 @@ This wiki contains a couple of well-defined problems solved via Union-Find data 
     private:
         vector<int> parentArray, rankArray, groupSize;
 ```
-
-

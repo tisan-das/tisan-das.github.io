@@ -9,7 +9,9 @@ published: true
 
 This post contains a couple of well-defined problems solved via sliding window approach.
 
-![Sliding window approach 01](/images/coding_questions/sliding_window_approach_01.png)
+![Sliding window approach 01](/images/coding_questions/sliding_window_approach_01.png){: .light }
+![Sliding window approach 01](/images/coding_questions/sliding_window_approach_01-dark.png){: .dark }
+_Sliding window approach 01_
 
 ### Minimum Swaps to Group All 1's Together (3675):
 
@@ -54,8 +56,6 @@ This post contains a couple of well-defined problems solved via sliding window a
     }
 ```
 
-
-
 ### Max Consecutive Ones III (3811):
 
 ```cpp
@@ -83,8 +83,6 @@ This post contains a couple of well-defined problems solved via sliding window a
         return maxCount;
     }
 ```
-
-
 
 ### Subarray Product Less Than K (1075):
 
@@ -116,8 +114,6 @@ This post contains a couple of well-defined problems solved via sliding window a
     }
 ```
 
-
-
 ### Number of Equal Count Substrings (3751):
 
 ```cpp
@@ -147,8 +143,6 @@ This post contains a couple of well-defined problems solved via sliding window a
         return count;
     }
 ```
-
-
 
 ### Longest Nice Subarray (3603):
 
@@ -191,4 +185,3 @@ This post contains a couple of well-defined problems solved via sliding window a
         return maxLen;
     }
 ```
-

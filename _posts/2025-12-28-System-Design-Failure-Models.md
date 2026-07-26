@@ -9,8 +9,6 @@ published: true
 
 Distributed systems consist of a set of loosely coupled services that end users perceive as a single coherent system. However, due to the loose coupling between components and communication over the network, failures are inevitable. Network congestion, a few instances going down, there can be a multitude of reasons that failure can be introduced in the system.
 
-
-
 ### Timeout Management
 
 Each retry attempt should have a reasonable timeout to prevent hanging indefinitely.
@@ -20,7 +18,6 @@ Without proper request timeouts, the service would consume excessive resources. 
 It's also worth noting that the underlying work on abandoned requests should be canceled once the timeout is hit. Otherwise, the benefit of relinquishing resources will not take place.
 
 A good metric for choosing the timeout value is the latency of the downstream service. Choose an acceptable rate of false timeout (0.01%). We also need to note the latency for both **p99.9** and **p50**. If their latencies are similar, it's better to pad the timeout value to avoid a small latency change causing high timeouts.
-
 
 ```go
 package main
@@ -123,12 +120,9 @@ func main() {
 
 For more examples, please check [here](https://leapcell.io/blog/mastering-go-context-for-robust-concurrency-patterns).
 
-
-
 ### Retries
 
 Follow a strategy to avoid **thundering herds**, where the calls that failed at almost the same time are retried almost at the same time. Utilize **exponential backoff** and **jitter**. Exponential backoff, to wait longer on every retry, giving more time to recover to a potentially overloaded upstream, and jitter to introduce some randomness to avoid thundering herds.
-
 
 ###### Issues with retries:
 
@@ -138,17 +132,19 @@ Follow a strategy to avoid **thundering herds**, where the calls that failed at 
 - **Retriable operations**: Be aware of the potential side effects of the operation
 - **Retry only on one level:**
 
-![Issues with retries: retry one level](/images/sys-design-fundamentals/02-retry/01-retry-one-level.png)
+![Issues with retries: retry one level](/images/sys-design-fundamentals/02-retry/01-retry-one-level.png){: .light }
+![Issues with retries: retry one level](/images/sys-design-fundamentals/02-retry/01-retry-one-level-dark.png){: .dark }
+_Issues with retries: retry one level_
 - **Use Load shedding and backpressure**: Upstream service should shed any additional requests that it can't handle
-
 
 ##### Use Idempotent APIs to make retries safe
 
 The majority of the HTTP requests are idempotent, except for POST and PATCH.
 Incorporate a unique caller-provided **client request identifier** into the API contracts. Requests from the same caller with the same client request identifier can be considered duplicates and handled accordingly.
 
-![Use Idempotent APIs to make retries safe: client request ID](/images/sys-design-fundamentals/02-retry/02-client-request-id.png)
-
+![Use Idempotent APIs to make retries safe: client request ID](/images/sys-design-fundamentals/02-retry/02-client-request-id.png){: .light }
+![Use Idempotent APIs to make retries safe: client request ID](/images/sys-design-fundamentals/02-retry/02-client-request-id-dark.png){: .dark }
+_Use Idempotent APIs to make retries safe: client request ID_
 
 ##### Database Design Adjustments (Upsert Operation)
 
@@ -158,12 +154,10 @@ Prefer to **use upsert operations** (which update a record if it exists or inser
 
 Idempotency can be enforced by storing a log of processed message IDs and checking each incoming message against it.
 
-
 ### Failover Caching
 Most of these outages are temporary. Thanks to self-healing and advanced load balancing, we should be able to keep our service running during these glitches. This is where failover caching can help and provide the necessary data to our application.
 
 Only use failover caching when it serves the outdated data better than nothing.
-
 
 ### Circuit Breaker Pattern
 
@@ -231,7 +225,6 @@ func (r *ResilientPaymentClient) ProcessPayment(ctx context.Context, amount floa
 	return result.(string), nil
 }
 ```
-
 
 ### Load shedding and Backpressure
 
@@ -316,12 +309,13 @@ func (ls *LoadShedder) Release() {
 }
 ```
 
-
 ### Bulkhead Pattern
 
 Partition service instances into different groups, based on **consumer load and availability requirements**. This design helps to isolate failures, and allows you to sustain service functionality for some consumers, even during a failure.
 
-![Bulkhead pattern](/images/sys-design-fundamentals/02-retry/03-bulkhead-pattern.png)
+![Bulkhead pattern](/images/sys-design-fundamentals/02-retry/03-bulkhead-pattern.png){: .light }
+![Bulkhead pattern](/images/sys-design-fundamentals/02-retry/03-bulkhead-pattern-dark.png){: .dark }
+_Bulkhead pattern_
 
 ```go
 
@@ -378,8 +372,6 @@ func (b *Bulkhead) Execute(ctx context.Context, fn func() error) error {
 	}
 }
 ```
-
-
 
 ### References
 1. [The two friends of a distributed systems engineer: timeouts and retries](https://www.contentful.com/blog/the-two-friends-of-a-distributed-systems-engineer-timeouts-and-retries/)
