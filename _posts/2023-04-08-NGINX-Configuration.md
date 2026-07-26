@@ -154,14 +154,14 @@ server {
 The document as referred to by [11] provides a detailed description of different cache parameters supported by NGINX. Would request you to check the page as well to get a firm grasp on different cache configurations.
 
 ### References
-1. [NGINX: Beginner’s Guide](http://nginx.org/en/docs/beginners_guide.html)
-2. [NGINX: Core functionality](http://nginx.org/en/docs/ngx_core_module.html)
-3. [How NGINX process requests](http://nginx.org/en/docs/http/request_processing.html)
+1. [NGINX: Beginner’s Guide](https://nginx.org/en/docs/beginners_guide.html)
+2. [NGINX: Core functionality](https://nginx.org/en/docs/ngx_core_module.html)
+3. [How NGINX process requests](https://nginx.org/en/docs/http/request_processing.html)
 4. [NGINX: Pitfalls and Common Mistakes](https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/)
 5. [NGINX: If is evil](https://www.nginx.com/resources/wiki/start/topics/depth/ifisevil/)
 6. [Understanding Nginx Server and Location Block Selection Algorithms](https://www.digitalocean.com/community/tutorials/understanding-nginx-server-and-location-block-selection-algorithms)
 7. [NGINX: HTTP Load Balancing](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/)
 8. [NGINX: Securing HTTP Traffic](https://docs.nginx.com/nginx/admin-guide/security-controls/securing-http-traffic-upstream/)
 9. [A Guide to Caching with NGINX](https://www.nginx.com/blog/nginx-caching-guide/)
-10. [NGINX module ngx_http_proxy_module](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass)
+10. [NGINX module ngx_http_proxy_module](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass)
 11. [Forward query string parameters with proxy_pass directive in NGINX](https://stackoverflow.com/questions/8130692/how-can-query-string-parameters-be-forwarded-through-a-proxy-pass-with-nginx)
