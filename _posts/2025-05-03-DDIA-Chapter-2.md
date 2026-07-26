@@ -1,7 +1,6 @@
 ---
 layout: post
 title: DDIA - Chap02 - Data Models
-image: /assets/img/series/designing-data-intensive-applications.png
 series: "Designing Data-Intensive Applications"
 categories: ["Databases", "DDIA"]
 tags: [ddia, data-models]

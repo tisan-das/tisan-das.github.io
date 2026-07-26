@@ -1,7 +1,6 @@
 ---
 layout: post
 title: BFS Problem Sets Part I
-image: /assets/img/series/bfs-problems.png
 series: "BFS Problems"
 categories: ["Algorithms", "Problem Sets"]
 tags: [bfs, graph, cpp]

@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Binary Search Problem Sets Part II
-image: /assets/img/series/binary-search-problems.png
 series: "Binary Search Problems"
 categories: ["Algorithms", "Problem Sets"]
 tags: [binary-search, cpp]
