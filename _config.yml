@@ -103,23 +103,19 @@ actions:
     url: "https://github.com/tisan-das/tisan-das.github.io/edit/develop"
 
 comments:
-  # Global switch for the post-comment system. Keeping it empty means disabled.
-  # Set to 'giscus' after enabling GitHub Discussions + installing the giscus app,
-  # and filling in category_id below (see https://giscus.app).
-  provider: # [disqus | utterances | giscus]
-  # The provider options are as follows:
+  # GitHub Discussions via giscus (free on public repos).
+  provider: giscus
   disqus:
     shortname:
-  # utterances settings › https://utteranc.es/
   utterances:
-    repo: # <gh-username>/<repo>
-    issue_term: # < url | pathname | title | ...>
+    repo:
+    issue_term:
   # Giscus options › https://giscus.app
   giscus:
     repo: tisan-das/tisan-das.github.io
     repo_id: R_kgDOId0yPg
     category: Announcements
-    category_id: # fill from https://giscus.app after enabling Discussions
+    category_id: DIC_kwDOId0yPs4DCBB-
     mapping: pathname
     strict: 0
     input_position: bottom
