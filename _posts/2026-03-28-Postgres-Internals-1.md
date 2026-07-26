@@ -22,7 +22,8 @@ SQL, short for Structured Query Language, is a high-level declarative language. 
 
 Database indexes are represented as B-trees or other self-balancing trees. The non-leaf nodes are the keys and child node pointers, and the leaves contain the key and point to the actual location where the row is stored.
 
-![Storage: BTree with slot](/images/postgres/01-internal/BTree%20with%20slot.png)
+![Storage: BTree with slot](/images/postgres/01-internal/BTree%20with%20slot.png){: .light }
+![Storage: BTree with slot](/images/postgres/01-internal/BTree%20with%20slot-dark.png){: .dark }
 _Storage: BTree with slot_
 
 Postgres uses the concept of a page, where each page has a fixed size. Each page can contain a few entries, each specified with a block. The entries are internally identified as the pair of (page, block). This identification is known as ctid in PostgreSQL and can be fetched as part of the SQL query. 
