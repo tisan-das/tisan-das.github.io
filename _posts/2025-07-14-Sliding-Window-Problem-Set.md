@@ -1,12 +1,15 @@
 ---
 layout: post
 title: Problem Sets on Sliding Window
+image: /images/coding_questions/sliding_window_approach_01.png
+categories: ["Algorithms", "Problem Sets"]
+tags: [sliding-window, cpp]
 published: true
 ---
 
 This post contains a couple of well-defined problems solved via sliding window approach.
 
-![](/images/coding_questions/sliding_window_approach_01.png)
+![Sliding window approach 01](/images/coding_questions/sliding_window_approach_01.png)
 
 ### Minimum Swaps to Group All 1's Together (3675):
 

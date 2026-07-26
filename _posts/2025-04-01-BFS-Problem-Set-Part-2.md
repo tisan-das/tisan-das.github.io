@@ -1,10 +1,15 @@
 ---
 layout: post
 title: BFS Problem Sets Part II
+series: "BFS Problems"
+categories: ["Algorithms", "Problem Sets"]
+tags: [bfs, graph, cpp]
 published: true
 ---
 
 This wiki contains a couple of well-defined problems solved via Breadth First Search (BFS) traversal.
+
+{% include series-nav.html %}
 
 
 

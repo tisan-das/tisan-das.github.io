@@ -1,10 +1,16 @@
 ---
 layout: post
 title: Web Application Security - Injection Attack
+image: /images/web-security/injection_sql.png
+series: "Web Security"
+categories: ["Security", "Web Security"]
+tags: [injection, sql-injection]
 published: true
 ---
 
 In this blog, we will explore another type of attack on web applications: injection type attack. SQL Injection is one of the most well-known attacks due to the use of databases with almost all the applications nowadays. However, other types of injection attacks are also possible targeting different internal components. Just like the earlier blogs, we will explore a different type of attacks and how to mitigate them for these types of attacks.
+
+{% include series-nav.html %}
 
 Ideally, the injection attacks have two major components: an interpreter and a payload. The payload is generally provided as an input.
 
@@ -13,7 +19,7 @@ SQL Injection is the most popular kind of injection attack, whether attackers tr
 
 Recently web frameworks started advocating implementation patterns to mitigate these SQL injection attacks.
 
-![](/images/web-security/injection_sql.png)
+![SQL Injection: injection SQL](/images/web-security/injection_sql.png)
 
 
 ### Command Injection:
@@ -21,7 +27,7 @@ With the command injection type of attacks, the user can provide the payload to 
 
 An example can be thought of for some video converters, where the convert operation is generally performed by some other application installed on the server, and based upon a request from the user, the web server triggers the video conversion command meant for the third-party application. Now in case the attacker can exploit certain vulnerabilities in the application code to run its commands, or alter the way the internal video convert application is supposed to be used, that would be an example of command injection.
 
-![](/images/web-security/injection_command.png)
+![Command Injection: injection command](/images/web-security/injection_command.png)
 
 ### Code Injection:
 Code injections are similar to command injection, the only difference is that rather than injecting the command, code is injected in the user payload, which in turn again defers the application from the normal operating process.

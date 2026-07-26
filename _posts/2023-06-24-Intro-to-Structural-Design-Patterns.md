@@ -1,17 +1,23 @@
 ---
 layout: post
 title: Introduction to Structural Design Patterns
+image: /images/structural-design-pattern/adapter.png
+series: "Design Patterns"
+categories: ["Programming", "Design Patterns"]
+tags: [design-patterns, structural]
 published: true
 ---
 
 In the last blog post, we've explored on the creational design patterns. In this blog post, we would explore a different set of design patterns: the structural ones. The structural design patterns are concerned with how classes and objects are composed to form even larger structure. The primary objective here is to compose the components in a flexible and extensible way, so that change can be made in specific parts of the structure without changing the entire structure.
+
+{% include series-nav.html %}
 
 
 ## Adapter Pattern:
 Intent: Covert the interface of a class into another interface clients expect. Adapter lets classes work together that couldn't otherwise due to incompatible interfaces.
 
 ###### Class Diagram:
-![](/images/structural-design-pattern/adapter.png)
+![Class Diagram: adapter](/images/structural-design-pattern/adapter.png)
 
 ###### Implementation:
 ```go
@@ -67,7 +73,7 @@ func (adpt *adapter) Request() {
 Intent: Decouple an abstraction from its implementation so that it can vary independently
 
 ###### Class Diagram:
-![](/images/structural-design-pattern/bridge.png)
+![Class Diagram: bridge](/images/structural-design-pattern/bridge.png)
 
 ###### Implementation:
 ```go
@@ -112,37 +118,37 @@ func (impl *ConcreteImplementorA) OperationImp() {
 Intent: Compose objects into tree structures to represent part-whole hierarchies. Composite lets clients treat individual objects and compositions of objects uniformly.
 
 ###### Class Diagram:
-![](/images/structural-design-pattern/composite.png)
+![Class Diagram: composite](/images/structural-design-pattern/composite.png)
 
 ## Decorator Pattern:
 Intent: Attach additional responsibilities to an object dynamically. Decorator provides a flexible alternative to subclassing for extending functionality.
 
 ###### Class Diagram:
-![](/images/structural-design-pattern/decorator.png)
+![Class Diagram: decorator](/images/structural-design-pattern/decorator.png)
 
 ## Facade Pattern:
 Intent: Provide a unified interface to a set of interfaces in a subsystem. Facade defines a higher-level interface that makes the subsystem easier to use.
 
 ###### Class Diagram:
-![](/images/structural-design-pattern/facade.png)
+![Class Diagram: facade](/images/structural-design-pattern/facade.png)
 
 ## Flyweight Pattern:
 Intent: Use sharing to support large numbers of fine-grained objects efficiently.
 
 ###### Class Diagram:
-![](/images/structural-design-pattern/flyweight.png)
+![Class Diagram: flyweight](/images/structural-design-pattern/flyweight.png)
 
 ###### Object Diagram:
-![](/images/structural-design-pattern/flyweightObject.png)
+![Object Diagram: flyweight Object](/images/structural-design-pattern/flyweightObject.png)
 
 ## Proxy Pattern:
 Intent: Provide a surrogate or placeholder for another object to control access to it.
 
 ###### Class Diagram:
-![](/images/structural-design-pattern/proxy.png)
+![Class Diagram: proxy](/images/structural-design-pattern/proxy.png)
 
 ###### Object Diagram:
-![](/images/structural-design-pattern/proxyObj.png)
+![Object Diagram: proxy Obj](/images/structural-design-pattern/proxyObj.png)
 
 ### References:
 1. Design Patterns: Elements of Reusable Object-oriented Software

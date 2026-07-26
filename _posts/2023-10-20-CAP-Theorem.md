@@ -1,6 +1,8 @@
 ---
 layout: post
 title: CAP Theorem
+categories: ["Distributed Systems", "Fundamentals"]
+tags: [cap-theorem, consistency]
 published: true
 ---
 

@@ -1,18 +1,25 @@
 ---
 published: true
+title: Interesting Concepts of Docker
+image: /images/docker-concept/ContainerLayer.png
+series: "Docker"
+categories: ["Cloud & DevOps", "Containers"]
+tags: [docker, containers]
 ---
 
 This blog post is written to jot down several concepts of Docker, which are generally not needed for day-to-day activities for the majority of the tasks, however, these concepts provide an overview of the working principles of Docker.
 
+{% include series-nav.html %}
+
 #### Concept 01: Docker Image is built with layers
 Dockerfile provides a template, a set of instructions, to create an image. For each instruction that changes the file system, the resultant file system with the change is stored as a layer. It's to be noted that only RUN, ADD, and COPY instructions are the one that makes changes to the file system. 
-![](/images/docker-concept/ContainerLayer.png)
+![Concept 01: Docker Image is built with layers: Container Layer](/images/docker-concept/ContainerLayer.png)
 
 Docker image contains the SHA of the layers:
-![](/images/docker-concept/ImageInspect_FS.png)
+![Concept 01: Docker Image is built with layers: Image Inspect FS](/images/docker-concept/ImageInspect_FS.png)
 
 The instructions that are not updating the filesystem are stored as metadata and are generally can be inspected as part of the config portion of the image.
-![](/images/docker-concept/ImageInspect_Config.png)
+![Concept 01: Docker Image is built with layers: Image Inspect Config](/images/docker-concept/ImageInspect_Config.png)
 
 
 
@@ -21,7 +28,7 @@ Note: Remote images do also contain intermediate steps, however, those intermedi
 Docker ImageIDs are nothing but SHA-256 of the image configuration along with metadata.
 
 Pulling image pulls all the file-system layers used while creating the image:
-![](/images/docker-concept/ImagePull.png)
+![Concept 01: Docker Image is built with layers: Image Pull](/images/docker-concept/ImagePull.png)
 
 
 
@@ -38,7 +45,7 @@ RUN addgroup --gid 10001 --system nonroot \
 
 While building images, docker looks into the cache to check whether the resultant file-system layer is already present. In case it's available, Docker directly uses the layer unless ```--no-cache``` option is specified. Otherwise, the image layer is built using a container.
 
-![](/images/docker-concept/BuildContainer.png)
+![Concept 02: Docker images are built using containers: Build Container](/images/docker-concept/BuildContainer.png)
 
 
 ##### Dangling Image:

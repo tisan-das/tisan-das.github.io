@@ -1,10 +1,16 @@
 ---
 layout: post
 title: System Design - Web Crawler
+image: /images/sys-design-vol1/06-web-crawler-components.png
+series: "System Design Case Studies"
+categories: ["System Design", "Case Studies"]
+tags: [web-crawler, system-design]
 published: true
 ---
 
 In this wiki, we will explore an approach to designing a Web-crawling service.
+
+{% include series-nav.html %}
 
 
 ### Requirements
@@ -31,10 +37,10 @@ In this wiki, we will explore an approach to designing a Web-crawling service.
 
 ### Architecture
 
-![](/images/sys-design-vol1/06-web-crawler-components.png)
+![Architecture: web crawler components](/images/sys-design-vol1/06-web-crawler-components.png)
 
 
-![](/images/sys-design-vol1/06-web-crawler-hld.png)
+![Architecture: web crawler hld](/images/sys-design-vol1/06-web-crawler-hld.png)
 
 **Spider Trap**: Causes the crawler to loop in an infinite loop. Need to handle such edge cases.
 

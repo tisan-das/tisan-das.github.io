@@ -1,10 +1,16 @@
 ---
 layout: post
 title: Amazon DynamoDB - Distributed Transactions 
+image: /images/dynamo-db/highLevelArchitectureTransaction.png
+series: "Distributed Systems Papers"
+categories: ["Databases", "DynamoDB"]
+tags: [dynamodb, transactions]
 published: true
 ---
 
 Amazon DynamoDB is one of the most prominent fully-managemed NoSQL database service offering, which advertises a predictable performance with high availablity and high scalability. Recently DynamoDB has added the support for distributed transactions with the help of timestamp ordering protocol. The transactions are atomic in nature, and combining isolation with this ensures that developers don't have to worry about concurrent requests or any partial execution of transactions. In this blog post, we would explore on the technique that Amazon has employed to support transactions on DynamoDB.
+
+{% include series-nav.html %}
 
 ### Key Natures of Transactions:
 1. DynamoDB transactions contain a set of operations and are submitted as a single request, which either gets succeeded or failed without blocking any requests
@@ -26,7 +32,7 @@ Both TransactGetItems and TransactWriteItems are synchronous and idempotent. If 
 
 ### Transaction Routing
 
-![](/images/dynamo-db/highLevelArchitectureTransaction.png)
+![Transaction Routing: high Level Architecture Transaction](/images/dynamo-db/highLevelArchitectureTransaction.png)
 
 All the DynamoDB operations are sent to a fleet of front-end hosts named request routers. The request route authenticates the requests and redirects the non-transactional requests to the storage node containing the key. The key-range information is stored in the metadata system. The transaction requests have got one extra hop. The request routers forward the transactional request to the transactional coordinator, which then breaks the transaction, and co-ordinates with the associated storage nodes to complete the transaction in a two-phased way.
 

@@ -1,11 +1,14 @@
 ---
 layout: post
 title: Designing Distributed Systems - Ownership Election
+series: "Designing Distributed Systems"
+categories: ["Distributed Systems", "Patterns"]
+tags: [leader-election]
 published: true
 ---
-
-
 In the last couple of blog posts, we've explored serving patterns, where distributing requests in terms of requests per second, or the data size getting loaded, or the time to process. Here in this blog post, we would explore scaling in terms of assignments, to determine which task owns a specific resource. For a single application, well-established in-process lock to ensure only one actor is owning a resource at a particular moment, however this becomes complicated in distributed systems due to inherent nature of such systems. In distributed system, where multiple server can access same resource simultaneously, in certain scenarios there's a need to determine which one owns the resource, and can perform restrictive operations without hinderance of other nodes.
+
+{% include series-nav.html %}
 
 ##### Determining the need of master election:
 Before going on the discussion of how ownership can be established, it's better to look into whether the application ever needs to consider this itself. For majority of the applications, having only one instance is sufficient. And even if the instance crashed, the container orchestrator handles the failure in following way:

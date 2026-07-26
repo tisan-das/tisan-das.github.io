@@ -1,10 +1,16 @@
 ---
 layout: post
 title: System Design - Design Key-Value Store
+image: /images/sys-design-vol1/03-kv-system-cap-theorem.png
+series: "System Design Case Studies"
+categories: ["System Design", "Case Studies"]
+tags: [key-value-store, system-design]
 published: true
 ---
 
 A key-value store, also referred to as a key-value database, is a crucial topic to discuss in system design. Designing a large-scale key-value store addresses a vast majority of the issues that arise in system design, and even a slight change in the requirements of such a key-value store can lead to a completely different design. In this wiki, we will discuss a couple of issues regarding designing a key-value store, and how these are resolved in general.
+
+{% include series-nav.html %}
 
 
 ### Requirements:
@@ -24,7 +30,7 @@ A key-value store, also referred to as a key-value database, is a crucial topic 
 
 CAP Theorem suggests that distributed systems can satisfy two of the above three properties, not all three of them.
 
-![](/images/sys-design-vol1/03-kv-system-cap-theorem.png)
+![CAP Theorem: KV system CAP theorem](/images/sys-design-vol1/03-kv-system-cap-theorem.png)
 
 It's worth noting that distributed systems must be partition-tolerant. Thus, the distributed systems can either be a CP (Consistent & Partition Tolerance) system or an AP (Availability & Partition Tolerance) system. A CA (Consistent & Availability) distributed system is of no use. The type of system we want to design depends on the use case. For example, the banking sector requires strict consistency systems.
 
@@ -78,7 +84,7 @@ Versioning and vector clocks are used to detect inconsistency. We need to explor
 
 **Failure detection:**
 The gossip protocol is generally followed 
-![](/images/sys-design-vol1/03-kv-system-gossip-protocol.png)
+![Handling failures: KV system gossip protocol](/images/sys-design-vol1/03-kv-system-gossip-protocol.png)
 
 **Handling temporary failures:**
 
@@ -92,7 +98,7 @@ Data is migrated from a healthy node to a new node. Migration is performed on di
 
 ##### System architecture diagram
 
-![](/images/sys-design-vol1/03-kv-system-system-design.png)
+![System architecture diagram: KV system system design](/images/sys-design-vol1/03-kv-system-system-design.png)
 
 ### Future study:
 - How a vector clock is used to detect and resolve inconsistency

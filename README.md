@@ -30,19 +30,39 @@ Gemfile                 # Ruby dependencies (jekyll-theme-chirpy)
 
 ## Writing a new post
 
-1. Create `_posts/YYYY-MM-DD-my-title.md` with front matter:
+Use the generator:
 
-   ```yaml
-   ---
-   title: My Title
-   date: YYYY-MM-DD HH:MM:SS +0530
-   categories: [Distributed Systems]
-   tags: [consensus, raft]
-   ---
-   ```
+```sh
+python tools/new_post.py "My Post Title" \
+    --categories "Distributed Systems,Consensus" \
+    --tags raft,consensus \
+    --series "Distributed Systems Papers"   # optional
+```
 
-2. Put images under `images/<topic>/` and reference them absolutely: `![](/images/<topic>/diagram.png)`
-3. Use fenced code blocks with a language tag (```` ```sql ````, ```` ```go ````, ```` ```cpp ````) — Chirpy adds line numbers and a copy button via Rouge.
+Or create `_posts/YYYY-MM-DD-my-title.md` by hand:
+
+```yaml
+---
+title: My Title
+date: YYYY-MM-DD HH:MM:SS +0530
+series: "Distributed Systems Papers"    # optional, must match other parts exactly
+categories: ["Distributed Systems", "Consensus"]
+tags: [raft, consensus]
+image: /images/<topic>/diagram.png      # optional, per-post social preview
+---
+
+Intro paragraph (becomes the home-page excerpt).
+
+{% include series-nav.html %}            # only for series posts, after the intro
+```
+
+### Conventions
+
+- **Images**: store under `images/<topic>/`, reference absolutely, and **always write alt text**:
+  `![Raft leader election timeline](/images/raft/election.png)`
+- **Code**: fenced blocks with a language tag (```` ```sql ````, ```` ```go ````, ```` ```cpp ````) — Chirpy adds line numbers and a copy button
+- **Categories**: pick an existing top-level + subcategory pair where possible (see the Categories tab)
+- **Series**: reuse the exact series name; the nav box builds itself
 
 ## Local development
 
@@ -50,6 +70,17 @@ Gemfile                 # Ruby dependencies (jekyll-theme-chirpy)
 bundle install
 bundle exec jekyll serve --livereload
 ```
+
+## Enabling comments (giscus)
+
+Comments are powered by [giscus](https://giscus.app) (GitHub Discussions). One-time setup:
+
+1. Repo **Settings → General → Features → enable Discussions**
+2. Install the [giscus app](https://github.com/apps/giscus) on this repo
+3. Open [giscus.app](https://giscus.app), enter the repo, category **Announcements**, copy the `data-category-id`
+4. In `_config.yml`: set `comments.giscus.category_id` to that value and `comments.provider` to `giscus`
+
+(`repo` and `repo_id` are already configured.)
 
 ## Deployment
 

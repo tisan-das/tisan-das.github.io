@@ -1,6 +1,9 @@
 ---
 layout: post
 title: Scaling on Queued Messages
+image: /images/distributed-system-patterns-single-node/21.WPA_IAM_Permissions.png
+categories: ["Distributed Systems", "Communication"]
+tags: [message-queue, scaling]
 published: true
 ---
 
@@ -28,7 +31,7 @@ export AWS_SECRET_ACCESS_KEY='<secret_access_key>'
 apt install awscli -y
 aws sqs list-queues --region ap-south-1
 ```
-![](/images/distributed-system-patterns-single-node/21.WPA_IAM_Permissions.png)
+![Step 02: Verify the IAM Auth tokens: 21.WPA IAM Permissions](/images/distributed-system-patterns-single-node/21.WPA_IAM_Permissions.png)
 
 ###### Step 03: Download the Worker Pod Autoscaler & Create the WPA CRD:
 ```sh

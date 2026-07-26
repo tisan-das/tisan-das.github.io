@@ -1,10 +1,16 @@
 ---
 layout: post
 title: System Design - Design a URL Shortener
+image: /images/sys-design-vol1/05-url-shortner-system-design-hld.png
+series: "System Design Case Studies"
+categories: ["System Design", "Case Studies"]
+tags: [url-shortener, system-design]
 published: true
 ---
 
 In this wiki, we will explore an approach to design a URL shortener service.
+
+{% include series-nav.html %}
 
 
 ### Requirements:
@@ -33,5 +39,5 @@ GET api/v1/shortUrl
 
 ### High-level diagram:
 
-![](/images/sys-design-vol1/05-url-shortner-system-design-hld.png)
+![High-level diagram: URL shortner system design hld](/images/sys-design-vol1/05-url-shortner-system-design-hld.png)
 

@@ -1,10 +1,16 @@
 ---
 layout: post
 title: Introduction to Map-Reduce
+image: /images/map-reduce/architecture.png
+series: "Distributed Systems Papers"
+categories: ["Distributed Systems", "Fundamentals"]
+tags: [mapreduce, batch-processing]
 published: true
 ---
 
 MapReduce is a programming model designed to process large amounts of data distributed across thousands of systems. The issues related to distributed computing like how to parallelize the computation, distribute the data, and perform fault tolerance are abstracted from the programmer. 
+
+{% include series-nav.html %}
 
 ### Model:
 The model takes a set of input key-value pairs and produces a set of output key-value pairs. The user of the MapReduce model needs to implement the following two functions:
@@ -21,7 +27,7 @@ Following are some examples of problems that are easily expressed in the MapRedu
 
 ### Execution Overview:
 
-![](/images/map-reduce/architecture.png)
+![Execution Overview: architecture](/images/map-reduce/architecture.png)
 
 Step 01: The MapReduce librarry in user program splits the input file into M pieces of typilcally 16MB to 64MB
 Step 02: The user program spawns multiple worker agents, one among them is assigned as master. Overall there's M map tasks and R reduce tasks to assign. The value of M and R is generally much more higher than the systems available for the cluster of MapReduce.
@@ -45,7 +51,7 @@ Any map tasks currently in-progress on a failed machine is also reverted back to
 ### Combiner Function:
 Combiner function is executed on each system that peforms map operation after it's completed. Combiner function does partial merging on the intermediate files to reduce the networ bandwidth requirement while transferring data through RPC for reduce tasks.
 
-![](/images/map-reduce/mapreduce.png)
+![Combiner Function: mapreduce](/images/map-reduce/mapreduce.png)
 
 ### Example:
 ```go

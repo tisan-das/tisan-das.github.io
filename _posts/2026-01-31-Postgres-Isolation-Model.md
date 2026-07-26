@@ -1,10 +1,15 @@
 ---
 layout: post
 title: PostgreSQL - Isolation Levels
+series: "PostgreSQL"
+categories: ["Databases", "PostgreSQL"]
+tags: [postgres, isolation-levels, mvcc]
 published: true
 ---
 
 The transaction isolation level is one of the vital aspects to understand how transactions influence each other when run concurrently. Isolation level establishes a balance between consistency and performance. Without knowledge of the transaction isolation level, the application might behave differently than expected.
+
+{% include series-nav.html %}
 
 It's to be noted that the discussions here are limited to postgres, however the same concept can be applied to all the relational databases, that rely on **Multi-Version Concurrency Control (MVCC)**. MVCC is a widely used approach that enables high concurrency, allowing transactions to read and write the same data with less blocking.
 

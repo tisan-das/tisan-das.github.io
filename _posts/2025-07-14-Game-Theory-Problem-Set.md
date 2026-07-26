@@ -1,12 +1,15 @@
 ---
 layout: post
 title: Problem Sets on Game Theory
+image: /images/coding_questions/game_theory_01.png
+categories: ["Algorithms", "Problem Sets"]
+tags: [game-theory, cpp]
 published: true
 ---
 
 This post contains a couple of well-defined problems on game theory.
 
-![](/images/coding_questions/game_theory_01.png)
+![Game theory 01](/images/coding_questions/game_theory_01.png)
 
 ### Coins in a Line (394):
 

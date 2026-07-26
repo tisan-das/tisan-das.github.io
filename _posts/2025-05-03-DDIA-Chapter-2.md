@@ -1,10 +1,15 @@
 ---
 layout: post
 title: DDIA - Chap02 - Data Models
+series: "Designing Data-Intensive Applications"
+categories: ["Databases", "DDIA"]
+tags: [ddia, data-models]
 published: true
 ---
 
 The most important aspect of developing web-application is to determine the data model for it. A complext application might have multiple layers, however, ultimately it needs to access previously stored data. Hence it's one of the major decision to take to determine which data model to use.
+
+{% include series-nav.html %}
 
 ### Relational Model:
 

@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Stock Market - Capital Returns
+categories: ["Miscellaneous", "Finance"]
+tags: [stock-market]
 published: false
 ---
 

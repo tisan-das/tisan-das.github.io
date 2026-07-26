@@ -1,21 +1,27 @@
 ---
 layout: post
 title: Web Application Security - Cross-Site Scripting (XSS) Attack
+image: /images/web-security/stored_xss.png
+series: "Web Security"
+categories: ["Security", "Web Security"]
+tags: [xss]
 published: true
 ---
 
 Security is a major aspect while developing any application, and web applications are more prone to attacks. Ideally, the security aspect of the application should be taken into consideration from the ideation process itself, as any security vulnerability detected at the architecture design phase itself would cost much less to resolve compared to the one found during pen-testing, or at worst case the vulnerability is exploited by some black-hat hacker. With this in mind, we will explore a couple of major categories of attacks in the next few blogs, starting with Cross-site scripting in this blog. We will explore how this cross-site script attack works, with some examples, and we will also explore some well-known mitigation techniques.
 
+{% include series-nav.html %}
+
 Cross-site scripting (XSS) attacks, at their core, execute a malicious script on a user's web browser. It uses the fact that all modern web browsers allow the executing of JavaScript on web browsers. Hence, most such attacks are performed with the help of JavaScript.
 
 
 ##### Stored XSS:
-![](/images/web-security/stored_xss.png)
+![Stored XSS](/images/web-security/stored_xss.png)
 
 One issue with stored XSS is that some of the advanced XSS payloads are not even written in plain text, rather they're written in other formats like base64 binary, etc. On top of that, in certain scenarios, the whole payload is split and stored in multiple places and can be dangerous only when combined. Generally, this is handled with the help of a sanitizer library, which detects anomalous scripts stored on the server.
 
 ##### Reflected XSS:
-![](/images/web-security/reflected_xss.png)
+![Reflected XSS](/images/web-security/reflected_xss.png)
 
 Reflected XSS is much more difficult to detect since the payloads are not stored on the server side. This type of attack is directed to hit a set of users, as the malicious payload needs to be distributed separately.
 

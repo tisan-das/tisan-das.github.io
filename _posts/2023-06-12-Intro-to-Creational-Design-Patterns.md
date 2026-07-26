@@ -1,12 +1,18 @@
 ---
 layout: post
 title: Introduction to Creational Design Patterns
+image: /images/creation-design-patterns/singleton.png
+series: "Design Patterns"
+categories: ["Programming", "Design Patterns"]
+tags: [design-patterns, creational]
 published: true
 ---
 
 Creational design pattern handles the object instantiation process. They provide an abstract way to make the client independent of how objects are instantiated, which objects are getting instantiated, and how they're represented. For smaller applications, the objects are instantiated in a hard-coded way, as the type of object has remained fixed. However, as the application gets evolved, there comes the requirement of the same application or client to accommodate different sets of objects to be handled similarly, and thus the need of defining a smaller set of behavior arises, which then can be extended into different types of objects. Here the creational design pattern tries to achieve two goal:
 1. To encapsulate the knowledge of which concrete classes the application uses
 2. How the instances of these concrete classes are created and composed
+
+{% include series-nav.html %}
 
 ## Singleton Pattern:
 Intent: Ensure a class has only one instance, and provide a global point of access to it
@@ -15,7 +21,7 @@ Intent: Ensure a class has only one instance, and provide a global point of acce
 
 ###### Class Diagram:
 
-![](/images/creation-design-patterns/singleton.png)
+![Class Diagram: singleton](/images/creation-design-patterns/singleton.png)
 
 Notes:
 1. Private constructor is used to prevent anybody else to instantiate the singleton class
@@ -81,7 +87,7 @@ Intent: Specify the kinds of objects to create using a prototypical instance, an
 
 ###### Class Diagram:
 
-![](/images/creation-design-patterns/prototype.png)
+![Class Diagram: prototype](/images/creation-design-patterns/prototype.png)
 
 ###### Implementation:
 
@@ -158,7 +164,7 @@ Intent: Separate the construction of a complex object from its representation so
 
 ###### Class Diagram:
 
-![](/images/creation-design-patterns/builder.png)
+![Class Diagram: builder](/images/creation-design-patterns/builder.png)
 
 ###### Implementation:
 
@@ -211,7 +217,7 @@ Intent: Define an interface for creating an object, but let the subclasses decid
 
 ###### Class Diagram:
 
-![](/images/creation-design-patterns/factoryMethod.png)
+![Class Diagram: factory Method](/images/creation-design-patterns/factoryMethod.png)
 
 ###### Implementation:
 
@@ -296,7 +302,7 @@ Intent: Provide an interface for creating families of related or dependent objec
 
 ###### Class Diagram:
 
-![](/images/creation-design-patterns/abstractFactory.png)
+![Class Diagram: abstract Factory](/images/creation-design-patterns/abstractFactory.png)
 
 ###### Implementation:
 

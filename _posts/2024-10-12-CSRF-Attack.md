@@ -1,10 +1,16 @@
 ---
 layout: post
 title: Web Application Security - Cross-Site Request Forgery (CSRF) Attack
+image: /images/web-security/csrf_get_request.png
+series: "Web Security"
+categories: ["Security", "Web Security"]
+tags: [csrf]
 published: true
 ---
 
 In the last blog post, we started exploring web application security, where we explored cross-site scripting attacks. Here in this blog post, we will learn about another different type of attack called Cross-site Request Forgery, which exploits a user with admin or elevated privileges into performing some action without their knowledge. Just like cross-site scripting, these CSRF attacks are also performed majorly through JavaScript code snippets, by taking advantage of the trust relationship between the browser and the web application, to perform such operation unnoticed. Because the JavaScript code snippets are integrated with the web application, they're not easily detectable by the impacted user, making it one of the most stealthy attacks. We will explore different types of CSRF attacks and will touch upon the best practices to mitigate them.
+
+{% include series-nav.html %}
 
 
 The two main identifiers of CSRF attacks are:
@@ -14,7 +20,7 @@ The two main identifiers of CSRF attacks are:
 Hacker initially finds out which APIs the web application supports, and which APIs are responsible for state changes. Even though generally POST, PUT, and PATCH endpoints are supposed to create or update resources, however, there are some web applications which doesn't strictly follow this set of standards, and there might be some specific GET endpoints also which can change the state of the user. These types of attacks can also be initiated without explicitly injecting any script into the target web application directly. Rather the hacker can distribute a link to a similar-looking malicious web application, which internally triggers some API to the target web application. Now if the target user is logged on to the intended web application from a different tab, then the request initiated from the malicious web application to the target API would also contain the same cookies and session, thus essentially would clock themselves as initiated by the user in stealth. 
 
 ##### Query Tampering Technique:
-![](/images/web-security/csrf_get_request.png)
+![Query Tampering Technique: CSRF get request](/images/web-security/csrf_get_request.png)
 
 Query tampering is one such example of CSRF, which utilizes non-standard GET endpoints to change the state of the user.
 This is easier to deploy, as any link with ```<a>``` tag or image with ```<img>``` generates a GET endpoint without any user interaction. Hence the malicious API trigger doesn't need any interaction from the user apart from opening the link.
@@ -22,7 +28,7 @@ This is easier to deploy, as any link with ```<a>``` tag or image with ```<img>`
 Iframe HTML object is also used at certain times, however it only works with GET endpoints.
 
 ##### CSR Against POST endpoint:
-![](/images/web-security/csrf_post_request.png)
+![CSR Against POST endpoint: CSRF post request](/images/web-security/csrf_post_request.png)
 
 Web forms are one such HTML object that can initiate a POST request without any script required.
 

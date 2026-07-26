@@ -1,10 +1,16 @@
 ---
 layout: post
 title: Testing Distributed Systems for Linearizability
+image: /images/raft-consensus/linearizable.png
+series: "Distributed Systems Papers"
+categories: ["Distributed Systems", "Consensus"]
+tags: [linearizability, consistency, jepsen]
 published: true
 ---
 
 Designing a distributed system poses a significant challenge, as need to keep track of a lot of constraints including but not restricted to consistency, fault-tolerance, and performance expectations. However, once such a system is designed, it raises a question about proving the correctness of the system. To provide a foolproof method of correctness, formal methods are widely used, however writing specifications for the overall distributed system requires dedicated effort, as formal methods are more of mathematical models, which is equivalent to the coded models, and needs expertise in formal method specification. The use of formal methods is the best approach in terms of finding some subtle bugs beforehand. In opposing this, another low-effort way is to use linearizibility to test the system.
+
+{% include series-nav.html %}
 
 ### Definition:
 An execution history is supposed to be linearizable if the order of the operation matches real-time for non-concurrent operations, and each read request responds with the most recent write operation. By definition, linearizability ensures strong consistency of the distributed system.
@@ -14,11 +20,11 @@ The general approach to test linearizability is to first capture the execution h
 
 ##### Example of a linearizable execution history:
 
-![](/images/raft-consensus/linearizable.png)
+![Example of a linearizable execution history: linearizable](/images/raft-consensus/linearizable.png)
 
 ##### Example of a non-linearizable execution history:
 
-![](/images/raft-consensus/non-linearizable.png)
+![Example of a non-linearizable execution history: non linearizable](/images/raft-consensus/non-linearizable.png)
 
 ### To be explored:
 - Explore how Knossos and Jespen work, use them in application

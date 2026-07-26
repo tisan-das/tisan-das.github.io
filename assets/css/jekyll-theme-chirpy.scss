@@ -1,0 +1,79 @@
+---
+---
+
+@use 'abstracts/variables' with (
+  $theme: '{{ site.theme_mode }}'
+);
+
+/* prettier-ignore */
+@use 'main
+{%- if jekyll.environment == 'production' -%}
+  .bundle
+{%- endif -%}
+';
+
+/* append your custom style below */
+
+/* Brand accent — logo purple (#44469D) for links, sidebar & TOC highlights.
+   Follows the theme's own light/dark variable pattern. */
+:root {
+  --link-color: #44469d;
+  --link-underline-color: #c6c7ea;
+  --sidebar-active-color: #44469d;
+  --toc-highlight: #44469d;
+}
+
+html[data-mode='dark'] {
+  --link-color: #a5a8e8;
+  --link-underline-color: #565a9e;
+  --sidebar-active-color: #a5a8e8;
+  --toc-highlight: #a5a8e8;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-mode]) {
+    --link-color: #a5a8e8;
+    --link-underline-color: #565a9e;
+    --sidebar-active-color: #a5a8e8;
+    --toc-highlight: #a5a8e8;
+  }
+}
+
+/* Series navigation box (see _includes/series-nav.html) */
+.series-nav {
+  background: rgba(127, 127, 127, 0.08);
+  border-left: 0.25rem solid var(--link-color, #2a9d8f);
+  border-radius: 0.375rem;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+
+  .series-nav-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+
+    i {
+      margin-right: 0.4rem;
+    }
+  }
+
+  ol {
+    margin: 0;
+    padding-left: 1.4rem;
+
+    li {
+      margin: 0.25rem 0;
+
+      &.current {
+        font-weight: 600;
+      }
+    }
+  }
+
+  .you-are-here {
+    font-size: 0.85em;
+    font-weight: 400;
+    opacity: 0.7;
+    margin-left: 0.5rem;
+  }
+}

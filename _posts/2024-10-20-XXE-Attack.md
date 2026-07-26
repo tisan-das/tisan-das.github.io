@@ -1,10 +1,16 @@
 ---
 layout: post
 title: Web Application Security - XML External Entity (XXE) Attack
+image: /images/web-security/XXE_direct.png
+series: "Web Security"
+categories: ["Security", "Web Security"]
+tags: [xxe, xml]
 published: true
 ---
 
 Here in the blog post, we will learn about another type of attack, XML External Entity (XXE), which relies on an improperly configured XML parser on the application code. Even though the mitigation is easier for these sets of attacks, however, once it is uncovered that XXE attack can be successful, the attacker can very well take over the instance also as a result, making it one of the deadliest attacks. Due to such a high-risk nature, even though the use of XML payload is sunsetting now, with more web applications relying upon JSON, it is still ranked as 5th out of OWASP's top 10 most critical security risks to web applications as of today (Nov-2024). In this blog post we will explore different types of XXE attacks, how XXE can be used for system takeover, and how to mitigate such attacks by properly configuring XML parsers.
+
+{% include series-nav.html %}
 
 
 ### Type of XXE attacks:
@@ -20,12 +26,12 @@ Example of such XML payload:
 
 ##### Direct XXE attack:
 
-![](/images/web-security/XXE_direct.png)
+![Direct XXE attack: XXE direct](/images/web-security/XXE_direct.png)
 
 
 ##### Direct XXE attack:
 
-![](/images/web-security/XXE_indirect.png)
+![Direct XXE attack: XXE indirect](/images/web-security/XXE_indirect.png)
 
 
 ##### Out-of-Band Data Exfiltration:

@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Union-Find Problem Sets
+categories: ["Algorithms", "Problem Sets"]
+tags: [union-find, cpp]
 published: true
 ---
 

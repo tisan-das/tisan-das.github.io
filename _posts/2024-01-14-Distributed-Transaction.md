@@ -1,10 +1,16 @@
 ---
 layout: post
 title: Properties of Distributed Transaction
+image: /images/zookeeper/distributedTransactions.png
+series: "Distributed Systems Papers"
+categories: ["Distributed Systems", "Transactions"]
+tags: [distributed-transactions, 2pc, acid]
 published: true
 ---
 
 Each programming language provides support of threading to improve performance of application by concurrently running multiple thread concurrently. However this can also result in incorrect results in case multiple transactions with overlapped objects are performed in parallel. This is solved with the help of locks and semaphore. It is to be noted that even though the working mechanism of lock and semaphore is similar, lock only allows one particular thread to proceed, whereas semaphore restricts the concurrent processing to a specific number of threads. All this are supported by all the major programming languages, and they work well for the applications running on single node. However due to distributed nature of databases, transactions need to communicate with multiple worker nodes where the actual data lies, and co-ordination is needed among them to handle the overall transaction processing. Here in this particular blog we would discuss different aspects of distributed transactions.
+
+{% include series-nav.html %}
 
 
 ### Atomicity:
@@ -28,7 +34,7 @@ Observation suggests that lock set information can be stored in the volative sto
 ### Two Phase Commit:
 Two phase commit is one of the most used distributed transaction protocol, where performs the transaction in two different phases- **voting phase**, where the lower level transactions are either prepared to be committed; and the **commitment phase**, where the lower level transactions are actually committed or aborted.
 
-![](/images/zookeeper/distributedTransactions.png)
+![Two Phase Commit: distributed Transactions](/images/zookeeper/distributedTransactions.png)
 
 In this overall design of two-phase commit protocol, co-ordinator is the single point of failure, and in case that happens, all the worker nodes must wait till it recovers. Also each component of this design is persistent sender, which ensures that even of some of the network communication is lost, eventually they will receive it.
 

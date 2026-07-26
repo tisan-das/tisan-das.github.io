@@ -1,10 +1,15 @@
 ---
 layout: post
 title: DDIA - Chap04 - Enconding and Evolution
+series: "Designing Data-Intensive Applications"
+categories: ["Databases", "DDIA"]
+tags: [ddia, serialization]
 published: true
 ---
 
 All applications change, as do their requirements. With such changes, it's highly likely that the underlying data models also change. In this blog post, we will mainly discuss this.
+
+{% include series-nav.html %}
 
 With the advent of microservices, the changes are generally deployed with canary deployment, i.e., gradually. Due to this,  the following two types of compatibility need to be considered while changing the underlying data model:
 1. **Backward compatibility**: The new code can read the data written by the older code

@@ -1,10 +1,15 @@
 ---
 layout: post
 title: Binary Tree Algorithms - Part I
+series: "Binary Tree Problems"
+categories: ["Algorithms", "Problem Sets"]
+tags: [binary-tree, cpp]
 published: true
 ---
 
 This wiki contains a couple of well-defined problems on Binary Tree.
+
+{% include series-nav.html %}
 
 #### Iterative Post-order Traversal (1783):
 

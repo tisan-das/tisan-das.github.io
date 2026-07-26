@@ -1,10 +1,16 @@
 ---
 layout: post
 title: Introduction to Behavioral Design Patterns
+image: /images/behavioral-design-patterns/chainCommand.png
+series: "Design Patterns"
+categories: ["Programming", "Design Patterns"]
+tags: [design-patterns, behavioral]
 published: true
 ---
 
 In the earlier blog posts, the creational and structural design patterns were explored, and here we would explore the behavioral design patterns. Behavioral design patterns are concerned with algorithms and the arrangement of responsibilities among different sets of classes and objects. The primary objective here is to have the interaction distributed over different sets of objects in such a way that they can communicate with each other while still being loosely coupled.
+
+{% include series-nav.html %}
 
 ## Chain of responsibility:
 Intent: Avoid coupling the sender of a request to its receiver by giving more than an object a chance to handle the request. Chain the receiving objects and pass the request along the chain until an object handles it.
@@ -14,10 +20,10 @@ NB:
 - Object that made the request has no explicit knowledge of what will handle it (Implicit receiver)
 
 ###### Class Diagram:
-![](/images/behavioral-design-patterns/chainCommand.png)
+![Class Diagram: chain Command](/images/behavioral-design-patterns/chainCommand.png)
 
 ###### Object Diagram:
-![](/images/behavioral-design-patterns/chainCommand_objStruct.png)
+![Object Diagram: chain Command obj Struct](/images/behavioral-design-patterns/chainCommand_objStruct.png)
 
 ###### Implementation
 ```go
@@ -122,7 +128,7 @@ func (proc *ShipmentProcessor) Execute(task *Task) {
 Intent: Encapsulate a request as an object, thereby letting you parameterize clients with different requests, queue or log requests, and support undoable operations
 
 ###### Class Diagram:
-![](/images/behavioral-design-patterns/command.png)
+![Class Diagram: command](/images/behavioral-design-patterns/command.png)
 
 ###### Implementation:
 ```go
@@ -168,10 +174,10 @@ func (remoteCon *RemoteController) Execute() {
 Intent: Given a language, define a representation for its grammar along with an interpreter that uses the representation to interpret sentences in the language
 
 ###### Class Diagram:
-![](/images/behavioral-design-patterns/interpreter.png)
+![Class Diagram: interpreter](/images/behavioral-design-patterns/interpreter.png)
 
 ###### Object Diagram:
-![](/images/behavioral-design-patterns/interpreter_objStruct.png)
+![Object Diagram: interpreter obj Struct](/images/behavioral-design-patterns/interpreter_objStruct.png)
 
 ###### Implementation:
 ```go
@@ -226,7 +232,7 @@ func (minus *Minus) Interpret() string {
 Intent: Provide a way to access the elements of an aggregate object sequentially without exposing its underlying representation
 
 ###### Class Diagram:
-![](/images/behavioral-design-patterns/iterator.png)
+![Class Diagram: iterator](/images/behavioral-design-patterns/iterator.png)
 
 ###### Implementation:
 ```go
@@ -280,7 +286,7 @@ func (collection *UserCollection) CreateIterator() Iterator {
 Intent: Without violating encapsulation, capture and externalize an object's internal state so that the object can be restored to this state later.
 
 ###### Class Diagram:
-![](/images/behavioral-design-patterns/memento.png)
+![Class Diagram: memento](/images/behavioral-design-patterns/memento.png)
 
 ###### Implementation:
 ```go
@@ -329,7 +335,7 @@ func (caretaker *Caretaker) GetMementoIndex(index int) *ObserverMemento {
 Intent: Define a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically 
 
 ###### Class Diagram:
-![](/images/behavioral-design-patterns/observer.png)
+![Class Diagram: observer](/images/behavioral-design-patterns/observer.png)
 
 ###### Implementation:
 ```go
@@ -383,7 +389,7 @@ func (obs *ConcreteObserver) Update() {
 Intent: Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from the clients that use it
 
 ###### Class Diagram:
-![](/images/behavioral-design-patterns/strategy.png)
+![Class Diagram: strategy](/images/behavioral-design-patterns/strategy.png)
 
 ###### Implementation:
 ```go
@@ -436,7 +442,7 @@ func (algo *LSTEvictionAlgo) Evict(cache *Cache) {
 Intent: Represent an operation to be performed on the elements of an object structure. Visitor lets you define a new operation without changing the classes of the elements on which it operates
 
 ###### Class Diagram:
-![](/images/behavioral-design-patterns/visitor.png)
+![Class Diagram: visitor](/images/behavioral-design-patterns/visitor.png)
 
 ###### Implementation:
 ```go

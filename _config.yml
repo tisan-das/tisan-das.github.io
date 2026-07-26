@@ -87,7 +87,7 @@ cdn:
 avatar: /images/avatar.svg
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
-social_preview_image: # string, local or CORS resources
+social_preview_image: /assets/img/social-card.png # string, local or CORS resources
 
 # boolean type, the global switch for TOC in posts.
 toc: true
@@ -95,10 +95,13 @@ toc: true
 actions:
   # Display "Edit this post" action on each post page to encourage contributions.
   edit_post:
-    enabled: false
+    enabled: true
+    url: "https://github.com/tisan-das/tisan-das.github.io/edit/develop"
 
 comments:
   # Global switch for the post-comment system. Keeping it empty means disabled.
+  # Set to 'giscus' after enabling GitHub Discussions + installing the giscus app,
+  # and filling in category_id below (see https://giscus.app).
   provider: # [disqus | utterances | giscus]
   # The provider options are as follows:
   disqus:
@@ -109,15 +112,15 @@ comments:
     issue_term: # < url | pathname | title | ...>
   # Giscus options › https://giscus.app
   giscus:
-    repo: # <gh-username>/<repo>
-    repo_id:
-    category:
-    category_id:
-    mapping: # optional, default to 'pathname'
-    strict: # optional, default to '0'
-    input_position: # optional, default to 'bottom'
-    lang: # optional, default to the value of `site.lang`
-    reactions_enabled: # optional, default to the value of `1`
+    repo: tisan-das/tisan-das.github.io
+    repo_id: R_kgDOId0yPg
+    category: Announcements
+    category_id: # fill from https://giscus.app after enabling Discussions
+    mapping: pathname
+    strict: 0
+    input_position: bottom
+    lang: en
+    reactions_enabled: 1
 
 # Self-hosted static assets, optional › https://github.com/cotes2020/chirpy-static-assets
 assets:

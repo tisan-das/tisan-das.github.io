@@ -1,16 +1,22 @@
 ---
 layout: post
 title: Introduction to Google File System
+image: /images/gfs/chunkServerConfig.png
+series: "Distributed Systems Papers"
+categories: ["Distributed Systems", "Storage"]
+tags: [gfs, distributed-file-system]
 published: true
 ---
 
 Google File System (GFS) is one of the first attempt to create a distributed file system built with fault tolerance in mind. The file system is expected to run on top of commodity hardware, and hence there's a gurantee that there would be some system in the network which wouldn't respond, and some systems might not even recover. GFS is the underlying file system for many different products, including the map-reduce designed by Google, which makes this GFS a file system which handles a major load. The paper mentiones the GFS has already supported a load of billions of objects with size around couple of KBs.
 
+{% include series-nav.html %}
+
 There's mainly two type of write operation a distributed filesystem has to support: write at a particular offset, and append write. The GFS is designed specially for the append write operation, though it also has the support for writing at a particular offset also.
 
 ### Architecture:
 
-![](/images/gfs/chunkServerConfig.png)
+![Architecture: chunk Server Config](/images/gfs/chunkServerConfig.png)
 
 ##### Properties:
 - Single master server: Master server contains the metadata of the file system. Each read and write operation would pass through master first
@@ -23,7 +29,7 @@ The master server contains only the metadata of the file-system. Each operaation
 1. **Filename metadata:** Maps a particular filename to a list of chunk-handlers
 2. **Chunkhandler metadata:** Maps a chunk server to list of chunk servers, version number (non-volative, stored in persistent storage), primary chunk server, lease expiry timestamp
 
-![](/images/gfs/architecture.png)
+![Properties: architecture](/images/gfs/architecture.png)
 
 ##### Write Operation:
 - Check if primary chunk server is available, if not then follow the next two steps, otherwise jump to the third step
@@ -45,7 +51,7 @@ The master server contains only the metadata of the file-system. Each operaation
 ##### Relaxed consistency:
 GFS offeres flexible consistency, hence depending upon replica, the client might find different data.
 
-![](/images/gfs/replicaDataMismatch.png)
+![Relaxed consistency: replica Data Mismatch](/images/gfs/replicaDataMismatch.png)
 
 **NB:** Certain times master server might come across with a chunk server with a chunk handler having higher version number than the metadata stored on the master. In that case master assumes that there were some node failure while assigning the version number, and master updates the metadata with the updated version number. Also master doesn't store the list of chunk servers for chunk handler, as it scans the chunk server and updates it metadata when the chunk server joins the network.
 

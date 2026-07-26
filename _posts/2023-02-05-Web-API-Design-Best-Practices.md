@@ -1,5 +1,9 @@
 ---
 published: true
+title: Web API Design Best Practices
+image: /images/REST-intro/httpVerbs.png
+categories: ["Programming", "Web"]
+tags: [api-design, rest]
 ---
 In this blog post, we are going learn about RESTful API design, a principle widely adopted by microservices to design interfaces so much that it became the de-facto standard. Here we will learn basics about REST, standard practices, and how to utilize REST to create an intuitive interface that clients can consume in a meaningful way.
 
@@ -67,7 +71,7 @@ HTTP Status Codes:
     i. 204 (No Content): Deletion completed, no further response is sent
     ii. 404 (Not Found): Requested resource doesn't exist
 
-![](/images/REST-intro/httpVerbs.png)
+![Define API operations in terms of HTTP methods: HTTP Verbs](/images/REST-intro/httpVerbs.png)
 
 
 
