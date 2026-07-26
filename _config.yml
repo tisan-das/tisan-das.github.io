@@ -99,8 +99,7 @@ toc: true
 actions:
   # Display "Edit this post" action on each post page to encourage contributions.
   edit_post:
-    enabled: true
-    url: "https://github.com/tisan-das/tisan-das.github.io/edit/develop"
+    enabled: false
 
 comments:
   # GitHub Discussions via giscus (free on public repos).
