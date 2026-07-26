@@ -188,7 +188,8 @@ LIMIT 10;
 
 DELETE doesn't remove data immediately due to MVCC (Multi-Version Concurrency Control) restrictions. When a row is deleted, other transactions that started before the delete may still need to see the old version of that row. Physically erasing it would break those readers. So PostgreSQL keeps the dead tuple alive until it's guaranteed that no active transaction can see it anymore. Only then can VACUUM safely remove it.
 
-```sql-- You can watch the relfilenode change:
+```sql
+-- You can watch the relfilenode change:
 SELECT relfilenode FROM pg_class WHERE relname = 'orders';
 -- Returns: 24601
 

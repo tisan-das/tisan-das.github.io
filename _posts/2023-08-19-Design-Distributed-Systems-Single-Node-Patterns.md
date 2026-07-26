@@ -204,8 +204,8 @@ Adapter container transforms the output of the application container so that it 
 
 ##### Example 01: Monitoring:
 
-``` sh
-oot@log-example-6dd84f84dd-bhssj:/# nginx -V
+```sh
+root@log-example-6dd84f84dd-bhssj:/# nginx -V
 nginx version: nginx/1.25.2
 built by gcc 12.2.0 (Debian 12.2.0-14) 
 built with OpenSSL 3.0.9 30 May 2023

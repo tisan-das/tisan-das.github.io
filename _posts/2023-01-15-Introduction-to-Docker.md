@@ -100,7 +100,7 @@ Even though docker containers are preferred to be stateless, however there's cer
 ##### 1. Bind mounts:
 In this kind of mount, a directory under the host node is mounted into the container. The filesystem is managed from the host-OS directly, and not by the docker container. 
 
-``` sh
+```sh
  docker run -d --name broken-container \
   --mount type=bind,src=/tmp,dst=/usr \
   nginx:latest

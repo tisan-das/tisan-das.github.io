@@ -155,7 +155,8 @@ If you had persisted some content in a volume, but since then deleted the contai
 
 
 
-```ARG <name>[=<default value>]```
+`ARG <name>[=<default value>]`
+
 The ARG instruction defines a variable that users can pass at build-time to the builder with the docker build command using the ```--build-arg <varname>=<value>``` flag. If a user specifies a build argument that was not defined in the Dockerfile, the build outputs a warning.
 
 A Dockerfile may include one or more ARG instructions. For example, the following is a valid Dockerfile:
