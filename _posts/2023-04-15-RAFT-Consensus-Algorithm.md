@@ -1,7 +1,13 @@
 ---
 published: true
+title: RAFT Consensus Algorithm
+series: "Distributed Systems Papers"
+categories: ["Distributed Systems", "Consensus"]
+tags: [raft, consensus]
 ---
 One of the foundation problems of designing a distributed system is how to store some data in a distributed system. One basic approach is to share or duplicate all the data between the nodes. However the complexity arises when multiple nodes can operate independently, and in case some node goes down the complexity arises by multiple folds. In this blog post, we will learn about Raft: one of the most commonly used consensus algorithms. We would briefly touch on the generic replication technique of the database replication as well.
+
+{% include series-nav.html %}
 
 Each distributed system caters to a large number of requests, which ultimately boils down to either read requests or write requests. The intended use of the write requests is to persist the data so that at a later point in time the same can be fetched and used. Filesystem and Database are the most commonly used persistent storage, however, database wins here by a huge margin, due to the fact that the majority of the data can be thought of as transactional records, and databases provide a certain layer of reliability and robustness over the filesystem. Hence here we will mainly focus on the use of the database.
 

@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Introduction to Hash Table Internals
+categories: ["Programming", "Data Structures"]
+tags: [hashtable, data-structures]
 published: true
 ---
 

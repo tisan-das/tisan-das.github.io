@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Problem Sets on Game Theory
+categories: ["Algorithms", "Problem Sets"]
+tags: [game-theory, cpp]
 published: true
 ---
 

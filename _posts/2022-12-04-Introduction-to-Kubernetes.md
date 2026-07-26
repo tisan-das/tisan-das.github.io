@@ -1,5 +1,8 @@
 ---
 published: true
+title: Introduction to Kubernetes
+categories: ["Cloud & DevOps", "Containers"]
+tags: [kubernetes, containers]
 ---
 
 Kubernetes provides an option to manage containerized workloads. In this document, we will study the components of Kubernetes to get an overview of it, and how it enables us to serve a large number of requests.

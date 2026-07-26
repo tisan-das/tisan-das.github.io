@@ -1,10 +1,15 @@
 ---
 layout: post
 title: Introduction to Deep Learning - Deep Sequence Model
+series: "Deep Learning Fundamentals"
+categories: ["Deep Learning", "Fundamentals"]
+tags: [rnn, sequence-models]
 published: true
 ---
 
 Given an image of a ball, how do we predict where it will go next? The traditional models we've seen previously in the previous part don't have any notion of sequence. Hence, even if we try to use the feedforward network models we've seen previously on a timeseries data, they would treat the data points as a slice of data in a particular timestamp, and wouldn't be able to capture the sequential nature.
+
+{% include series-nav.html %}
 
 The sequential feature can be captured by introducing another set of hidden states to maintain prior history, as we move through the sequence. The primary objective of these hidden states is to serve as a previous memory, updating with each timestamp input. These are also called recurrence relations, and the network is called **Recurrent Neural Network**. 
 

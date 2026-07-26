@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Distributed Filesystem Design
+categories: ["Distributed Systems", "Storage"]
+tags: [distributed-file-system]
 published: true
 ---
 

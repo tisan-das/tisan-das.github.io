@@ -1,10 +1,15 @@
 ---
 layout: post
 title: System Design - Design Key-Value Store
+series: "System Design Case Studies"
+categories: ["System Design", "Case Studies"]
+tags: [key-value-store, system-design]
 published: true
 ---
 
 A key-value store, also referred to as a key-value database, is a crucial topic to discuss in system design. Designing a large-scale key-value store addresses a vast majority of the issues that arise in system design, and even a slight change in the requirements of such a key-value store can lead to a completely different design. In this wiki, we will discuss a couple of issues regarding designing a key-value store, and how these are resolved in general.
+
+{% include series-nav.html %}
 
 
 ### Requirements:

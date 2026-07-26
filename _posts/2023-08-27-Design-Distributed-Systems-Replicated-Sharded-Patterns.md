@@ -1,10 +1,15 @@
 ---
 layout: post
 title: Designing Distributed Systems - Replicated & Sharded Patterns
+series: "Designing Distributed Systems"
+categories: ["Distributed Systems", "Patterns"]
+tags: [sharding, replication]
 published: true
 ---
 
 In the last blog post, we discussed about the generic patterns used to create co-scheduled containers. However, that is only a small portion in designing distributed systems. With the help of container orchestrators, and the API contract between microservices that defines a clear surface area which the microservices agrees upon, the microservices are scaled rapidly across nodes. Here we will discuss two of the most used serving (i.e. multi-node) patterns- replicated load-balanced services and sharded services.
+
+{% include series-nav.html %}
 
 
 ### Replicated Load-balanced Services:

@@ -1,10 +1,15 @@
 ---
 layout: post
 title: Postgres Internals I
+series: "PostgreSQL"
+categories: ["Databases", "PostgreSQL"]
+tags: [postgres, internals]
 published: true
 ---
 
 This document discusses a few high-level concepts of PostgreSQL's internals. It's worth noting that, even though these are not needed in day-to-day activities, knowing them would certainly help understand queries and why some take longer.
+
+{% include series-nav.html %}
 
 SQL, short for Structured Query Language, is a high-level declarative language. Unlike imperative languages, it just specifies what info is needed and doesn't expose the internal details or how they're fetched. Thus, it might be confusing when the database is under load or when queries are not performing as expected.
 

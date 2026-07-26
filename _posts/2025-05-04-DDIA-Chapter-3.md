@@ -1,10 +1,15 @@
 ---
 layout: post
 title: DDIA - Chap03 - Storage and Retrieval
+series: "Designing Data-Intensive Applications"
+categories: ["Databases", "DDIA"]
+tags: [ddia, storage-engines]
 published: true
 ---
 
 Storage and retrieval are also one of the major aspects after selecting the data model. Even though most of the developers are not going to make any changes to the storage engine, however, modern databases do provide the option to select a storage engine. This is where having a working knowledge of the internals of storage engines provides an edge. There's a big difference in the storage engine optimized for different sets of workloads, for example, transaction workload vs analytical workload.
+
+{% include series-nav.html %}
 
 ### Choosing an index:
 

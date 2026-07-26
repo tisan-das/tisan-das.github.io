@@ -1,10 +1,15 @@
 ---
 layout: post
 title: DDIA - Chap05 - Replication
+series: "Designing Data-Intensive Applications"
+categories: ["Databases", "DDIA"]
+tags: [ddia, replication]
 published: true
 ---
 
 In this blog post, we would try to get an overview of how replication works in replicated systems, and different scenarios that we would need to consider while picking up a replication solution. The discussions here would later help us to dig deep into the implementation of such replicated systems.
+
+{% include series-nav.html %}
 
 
 ### Types of distributed systems:

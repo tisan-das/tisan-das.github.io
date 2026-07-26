@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Problem Sets on Sliding Window
+categories: ["Algorithms", "Problem Sets"]
+tags: [sliding-window, cpp]
 published: true
 ---
 

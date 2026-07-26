@@ -1,8 +1,14 @@
 ---
 published: true
+title: Interesting Concepts of Docker
+series: "Docker"
+categories: ["Cloud & DevOps", "Containers"]
+tags: [docker, containers]
 ---
 
 This blog post is written to jot down several concepts of Docker, which are generally not needed for day-to-day activities for the majority of the tasks, however, these concepts provide an overview of the working principles of Docker.
+
+{% include series-nav.html %}
 
 #### Concept 01: Docker Image is built with layers
 Dockerfile provides a template, a set of instructions, to create an image. For each instruction that changes the file system, the resultant file system with the change is stored as a layer. It's to be noted that only RUN, ADD, and COPY instructions are the one that makes changes to the file system. 

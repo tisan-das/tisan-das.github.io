@@ -1,10 +1,15 @@
 ---
 layout: post
 title: Web Application Security - Cross-Site Request Forgery (CSRF) Attack
+series: "Web Security"
+categories: ["Security", "Web Security"]
+tags: [csrf]
 published: true
 ---
 
 In the last blog post, we started exploring web application security, where we explored cross-site scripting attacks. Here in this blog post, we will learn about another different type of attack called Cross-site Request Forgery, which exploits a user with admin or elevated privileges into performing some action without their knowledge. Just like cross-site scripting, these CSRF attacks are also performed majorly through JavaScript code snippets, by taking advantage of the trust relationship between the browser and the web application, to perform such operation unnoticed. Because the JavaScript code snippets are integrated with the web application, they're not easily detectable by the impacted user, making it one of the most stealthy attacks. We will explore different types of CSRF attacks and will touch upon the best practices to mitigate them.
+
+{% include series-nav.html %}
 
 
 The two main identifiers of CSRF attacks are:

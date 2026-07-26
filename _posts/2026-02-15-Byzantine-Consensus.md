@@ -1,10 +1,15 @@
 ---
 layout: post
 title: Byzantine Consensus
+series: "Distributed Systems Papers"
+categories: ["Distributed Systems", "Consensus"]
+tags: [byzantine-fault-tolerance, consensus]
 published: true
 ---
 
 The Byzantine consensus problem is an interesting problem in distributed systems, even though it dates back to medieval times. The idea originates in medieval battle strategy, where all loyal generals must agree on a common battle plan; without it, their defeat is certain. There can be a few traitor generals among them. In large systems, the same set of ideas can be applied to introduce fault tolerance and achieve consensus even in the presence of a few adversarial nodes.
+
+{% include series-nav.html %}
 
 It's worth noting that the primary idea here is that all non-adversarial nodes must agree on a value, and that adversarial nodes are hard to detect. 
 

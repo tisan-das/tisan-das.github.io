@@ -1,10 +1,15 @@
 ---
 layout: post
 title: Web Application Security - Injection Attack
+series: "Web Security"
+categories: ["Security", "Web Security"]
+tags: [injection, sql-injection]
 published: true
 ---
 
 In this blog, we will explore another type of attack on web applications: injection type attack. SQL Injection is one of the most well-known attacks due to the use of databases with almost all the applications nowadays. However, other types of injection attacks are also possible targeting different internal components. Just like the earlier blogs, we will explore a different type of attacks and how to mitigate them for these types of attacks.
+
+{% include series-nav.html %}
 
 Ideally, the injection attacks have two major components: an interpreter and a payload. The payload is generally provided as an input.
 

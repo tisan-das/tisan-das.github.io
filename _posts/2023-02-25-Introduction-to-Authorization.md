@@ -1,5 +1,8 @@
 ---
 published: true
+title: Introduction to Authorization
+categories: ["Security", "Identity"]
+tags: [authorization, oauth2, jwt]
 ---
 Authentication and authorization is one of the corner stones of designing services. As both the terms used together, it gives the idea that both these two terms are exactly same. However it's far from the truth; theoretically they handle two different aspect of security. Authentication verifies the user identity, however, authroization validates the access level. This blog post provides an introduction on the authorization portion, an overview on OAuth, one of the most popular authorization mechanism available today.
 ![](/images/JWT-OAuth/AuthenticationVsAuthorization.png)

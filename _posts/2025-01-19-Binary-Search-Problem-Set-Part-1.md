@@ -1,10 +1,15 @@
 ---
 layout: post
 title: Binary Search Problem Sets Part I
+series: "Binary Search Problems"
+categories: ["Algorithms", "Problem Sets"]
+tags: [binary-search, cpp]
 published: true
 ---
 
 This wiki contains a couple of well-defined problems solved via Binary Search algorithm.
+
+{% include series-nav.html %}
 
 ### Search for a Range (61):
 

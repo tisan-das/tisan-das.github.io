@@ -1,10 +1,15 @@
 ---
 layout: post
 title: Introduction to Structural Design Patterns
+series: "Design Patterns"
+categories: ["Programming", "Design Patterns"]
+tags: [design-patterns, structural]
 published: true
 ---
 
 In the last blog post, we've explored on the creational design patterns. In this blog post, we would explore a different set of design patterns: the structural ones. The structural design patterns are concerned with how classes and objects are composed to form even larger structure. The primary objective here is to compose the components in a flexible and extensible way, so that change can be made in specific parts of the structure without changing the entire structure.
+
+{% include series-nav.html %}
 
 
 ## Adapter Pattern:

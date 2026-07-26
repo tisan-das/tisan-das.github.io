@@ -1,10 +1,15 @@
 ---
 layout: post
 title: Designing Distributed Systems - Scatter-gather & FaaS with event-driven pattern
+series: "Designing Distributed Systems"
+categories: ["Distributed Systems", "Patterns"]
+tags: [scatter-gather, event-driven, faas]
 published: true
 ---
 
 In the last blog post, we have discussed two of the major patterns for designing distributed systems. The replicated load-balanced pattern scales the system in terms of requests processed per second and the sharded data pattern scales the system in terms of size of data. Here we would discuss two more such patterns: the scatter/gather pattern which helps scale the system in terms of computation time needed and the event-driven pattern.
+
+{% include series-nav.html %}
 
 ### Scatter/Gather:
 The root node frames out the incoming requests simultaneously to all the servers. Each server node does a small amount of processing and returns the output to the root node. The root node then combines these partial outputs and returns a response to the end-user. This is helpful in scenarios where each server node can compute the requests independently.

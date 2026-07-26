@@ -1,10 +1,15 @@
 ---
 layout: post
 title: Introduction to Behavioral Design Patterns
+series: "Design Patterns"
+categories: ["Programming", "Design Patterns"]
+tags: [design-patterns, behavioral]
 published: true
 ---
 
 In the earlier blog posts, the creational and structural design patterns were explored, and here we would explore the behavioral design patterns. Behavioral design patterns are concerned with algorithms and the arrangement of responsibilities among different sets of classes and objects. The primary objective here is to have the interaction distributed over different sets of objects in such a way that they can communicate with each other while still being loosely coupled.
+
+{% include series-nav.html %}
 
 ## Chain of responsibility:
 Intent: Avoid coupling the sender of a request to its receiver by giving more than an object a chance to handle the request. Chain the receiving objects and pass the request along the chain until an object handles it.

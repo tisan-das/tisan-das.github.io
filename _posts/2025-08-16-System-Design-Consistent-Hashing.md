@@ -1,10 +1,15 @@
 ---
 layout: post
 title: Introduction to Consistent Hashing
+series: "System Design Case Studies"
+categories: ["System Design", "Case Studies"]
+tags: [consistent-hashing, system-design]
 published: true
 ---
 
 Hashing is one of the most crucial concepts, and has found usage in multiple unconventional places. The distributed systems use hashing to distribute the requests efficiently and evenly across servers. 
+
+{% include series-nav.html %}
 
 ##### Rehashing problem
 

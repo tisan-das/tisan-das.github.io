@@ -1,10 +1,15 @@
 ---
 layout: post
 title: Frangipani - A Scalable Distributed FileSystem
+series: "Distributed Systems Papers"
+categories: ["Distributed Systems", "Storage"]
+tags: [frangipani, distributed-file-system]
 published: true
 ---
 
 Frangipani is one of the intial attempts to create a scalable distributed file-system. This was primarily designed for the earlier generation of computers, which was primarily used on time-sharing basis, where the system is connected by multiple terminals, and different users can access the same file-system through these terminals. Even though the pattern of how systems are getting used is completely different, this Frangipani file-system was designed with certain techniques, which has paved the way to the distributed transactions.
+
+{% include series-nav.html %}
 
 
 ### Architecture Overview:

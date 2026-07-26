@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Scaling on Queued Messages
+categories: ["Distributed Systems", "Communication"]
+tags: [message-queue, scaling]
 published: true
 ---
 

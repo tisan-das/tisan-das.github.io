@@ -1,5 +1,8 @@
 ---
 published: true
+title: Introduction to Go
+categories: ["Programming", "Go"]
+tags: [go]
 ---
 
 Go/Golang is developed and supported by Google to obtain high-performance by having the static typing just like C, alongwith introducing simpler way for concurrent programming to achieve high bandwith throughput. As a result Golang became easier to grasp for a newcomer, and the standard libraries took care of basic http request-response model. More than 80% of codebase for Docker and kubernetes written in Go which popularized it, and Go became the de-facto choice for developing services and products on top of Docker and Kubernetes.

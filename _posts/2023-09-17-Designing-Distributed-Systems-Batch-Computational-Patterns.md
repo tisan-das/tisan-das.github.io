@@ -1,10 +1,15 @@
 ---
 layout: post
 title: Designing Distributed Systems - Batch Computational Patterns
+series: "Designing Distributed Systems"
+categories: ["Distributed Systems", "Patterns"]
+tags: [batch-processing, work-queue]
 published: true
 ---
 
 In the last couple of blog posts, we've explored patterns of distributed systems, and the majority of those pattern works on top of long-running server applications. In contrast, the batch processes are expected to handle large volume data for a short span of time. The batch processes are expected to be active for a very small amount of time, and perform a repetative task on a regualar interval. There are couple of batch processing patterns like MapReduce, which has spawed an industry itself. Here in this blogpost, we would explore batch computational patterns like this, and would also get hands on experience by building prototypes.
+
+{% include series-nav.html %}
 
 ### Event-Driven Batch Processing
 Event driven batch processing can be thought of as workflow systems, where the flow of work is a directed acyclic graph and each node of the graph represents a specific step or task that needs to be performed. This is useful for the scenarios where multiple actions are needed to be performed on the specific event, and depending upon some condition, certain steps can be omitted. This kind of systems can be thought of as output of the processing of the one stream acts as input to another stream, which is then processed by it's consumer. 

@@ -1,10 +1,15 @@
 ---
 layout: post
 title: Web Application Security - Cross-Site Scripting (XSS) Attack
+series: "Web Security"
+categories: ["Security", "Web Security"]
+tags: [xss]
 published: true
 ---
 
 Security is a major aspect while developing any application, and web applications are more prone to attacks. Ideally, the security aspect of the application should be taken into consideration from the ideation process itself, as any security vulnerability detected at the architecture design phase itself would cost much less to resolve compared to the one found during pen-testing, or at worst case the vulnerability is exploited by some black-hat hacker. With this in mind, we will explore a couple of major categories of attacks in the next few blogs, starting with Cross-site scripting in this blog. We will explore how this cross-site script attack works, with some examples, and we will also explore some well-known mitigation techniques.
+
+{% include series-nav.html %}
 
 Cross-site scripting (XSS) attacks, at their core, execute a malicious script on a user's web browser. It uses the fact that all modern web browsers allow the executing of JavaScript on web browsers. Hence, most such attacks are performed with the help of JavaScript.
 

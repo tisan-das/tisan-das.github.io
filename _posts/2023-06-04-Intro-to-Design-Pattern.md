@@ -1,10 +1,15 @@
 ---
 layout: post
 title: Design Patterns Case Study
+series: "Design Patterns"
+categories: ["Programming", "Design Patterns"]
+tags: [design-patterns, gof]
 published: true
 ---
 
 Design patterns are the blueprints of commonly encountered problems in software design and architecture. Each pattern provides a template tailored to solve a specific type of problem with a specific intent. Here, in this blogpost, we would explore on some of the preliminary design patterns with the intention of creating a WYSIWYG(What-You-See-Is-What-You-Get) editor. It's to be noted there's a complete different set of patterns for different aspects of programming like concurrent, distributed programming and real-time programming. Design pattersn from object oriented programming perspective provides a way of communicating classes and objects that are customized to solve a gneric design problem in a particular context. 
+
+{% include series-nav.html %}
 
 
 Let's start with the design aspect of WYSIWYG editor:

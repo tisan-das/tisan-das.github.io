@@ -1,6 +1,8 @@
 ---
 layout: post
 title: SQL Examples
+categories: ["Databases", "SQL"]
+tags: [sql]
 published: true
 ---
 

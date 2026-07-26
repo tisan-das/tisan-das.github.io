@@ -1,10 +1,15 @@
 ---
 layout: post
 title: Amazon DynamoDB - Architecture
+series: "Distributed Systems Papers"
+categories: ["Databases", "DynamoDB"]
+tags: [dynamodb, architecture]
 published: true
 ---
 
 DynamoDB is a fully-managed serverless NoSQL database service provided by Amazon to provide consistent performance across any scale. What makes DynamoDB truly unique is the advertised single-digit millisecond latency withstanding issues like traffic imbalance, monitoring, and automated system-related operations. Here in this blog post, we would explore the architecture of DynamoDB, would understand where this
+
+{% include series-nav.html %}
 
 DynamoDB is a fully-managed multi-tenant service, which denotes that users consume database service without actively managing the service and without regard for where the data is stored. DynamoDB may store data from different customers on the same physical system.
 

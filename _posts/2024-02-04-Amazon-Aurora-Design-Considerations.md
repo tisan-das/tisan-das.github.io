@@ -1,10 +1,15 @@
 ---
 layout: post
 title: Amazon Aurora DB Design Considerations
+series: "Distributed Systems Papers"
+categories: ["Databases", "Aurora"]
+tags: [aws, aurora]
 published: true
 ---
 
 In this blogpost we would discuss about the design considerations taken for Amazon Aurora DB, a fully-managed scalable relational DB service on top of MySQL and Postgres compatible engine. We would go through the history of supporting Databases on the AWS platform and how it evolved to Aurora DB. It would provide us a recent example of how the design principles we've explored earlier got into pieces to support managed scalable service. The selling point of this architecture is that it handles 77x more load compared to traditional replicated DB systems.
+
+{% include series-nav.html %}
 
 ### History of DB on AWS:
 

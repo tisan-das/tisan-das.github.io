@@ -1,10 +1,15 @@
 ---
 layout: post
 title: Use of LLM - Semantic Search
+series: "LLM & RAG"
+categories: ["Deep Learning", "LLM"]
+tags: [rag, semantic-search, llm]
 published: true
 ---
 
 Search is one of the first areas where LLMs got their industrial use. Currently, many organizations started looking into enhancing the user experience with search by introducing LLMs. Multiple startups are formed focusing on this segment. The ability that LLM introduces in the search space is due to its ability to perform semantic search i.e. to search by meaning. So far the search engines were mainly focused on keyword matching with some sort of priority to each web link to understand how frequently people are referring to that web link. However, with the advent of LLMs, traditional search engines also started having the semantic approach as well, i.e. to search the websites not only based on keywords but rather the semantic meaning of the documents. Here in this blog post, we will discuss more about semantic search and also will explore RAG, an approach to perform semantic search.
+
+{% include series-nav.html %}
 
 One of the well-known problems with LLMs is its "hallucination" effect, i.e. in the absence of a proper example, the model would generate its own text, which wouldn't be factual. To handle this, retrieval-based approaches are recommended, where the relevant documents are fetched first, and the LLMs then use the relevant documents to generate factual answers by referring to those documents.
 

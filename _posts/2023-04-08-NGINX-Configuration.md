@@ -1,5 +1,8 @@
 ---
 published: true
+title: NGINX Configuration
+categories: ["Cloud & DevOps", "Networking"]
+tags: [nginx, reverse-proxy]
 ---
 
 NGINX is one of the most used web-server on the Internet. Besides being a web server, NGINX can be used as a proxy server, load-balancer, and cache as well. In this blog, we would explore such use cases of NGINX. We would not only explore the theory behind these, but we would look from the configuration perspective as well.

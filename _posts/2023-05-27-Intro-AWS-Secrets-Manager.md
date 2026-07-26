@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Introduction to AWS Secrets Manager
+categories: ["Cloud & DevOps", "AWS"]
+tags: [aws, secrets-manager]
 published: true
 ---
 

@@ -1,10 +1,15 @@
 ---
 layout: post
 title: Fault-Tolerant Virtual Machines
+series: "Distributed Systems Papers"
+categories: ["Distributed Systems", "Replication"]
+tags: [primary-backup, fault-tolerance]
 published: true
 ---
 
 While designing large scale systems, we would need to take care of disaster scenarios as well, so that in case one of the primary server goes down, the bakcup server can take it's place. The disaster recovery handling services can be broadly catergorized into to types- Warm DR, where the backup server is fully functional along with the primary server, and the cold DR, where the backup server is started and configured only when there's some disaster strikes. Here in this blog post, we would mainly explore a research paper which has proposed a fault-tolerance mechanism for virtual machines, called VMWare FT.
+
+{% include series-nav.html %}
 
 There's two generic way fail-stop scenarios are handled: state transfer and replicated state machine. In the state transfer technique, as the name suggests, the change of the state of the system is transferred. The replicated state machine is based on the concept that each system can be thought of a state machine, depending upon the inputs, the state is changed. In replicated state machine, the input to the system is applied in the same sequence to the backup servers, thus making them replica of the primary server.
 

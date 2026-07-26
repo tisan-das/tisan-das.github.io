@@ -1,6 +1,8 @@
 ---
 layout: post
 title: AWS Glue Internal Working
+categories: ["Cloud & DevOps", "AWS"]
+tags: [aws, glue, etl]
 published: true
 ---
 

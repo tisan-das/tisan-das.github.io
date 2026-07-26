@@ -1,8 +1,14 @@
 ---
 published: true
+title: Introduction to Docker
+series: "Docker"
+categories: ["Cloud & DevOps", "Containers"]
+tags: [docker, containers]
 ---
 
 Docker provides an platform to build and deploy application on an isolated environment. The main technology behind the docker is containerization, which dictates that all the containers are self-sufficient run-time of the application, having it's own filesystem, network stack. The post here covers the fundamentals of docker, the goal here is to understand the basics, to have some experience with the docker client to create, run, inspect containers.
+
+{% include series-nav.html %}
 
 
 #### Comparision with Virtualization:

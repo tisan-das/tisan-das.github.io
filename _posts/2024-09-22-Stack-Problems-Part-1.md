@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Stack Problems - Part I
+categories: ["Algorithms", "Problem Sets"]
+tags: [stack, cpp]
 published: true
 ---
 

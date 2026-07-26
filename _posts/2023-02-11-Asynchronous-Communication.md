@@ -1,5 +1,8 @@
 ---
 published: true
+title: Asynchronous Communication
+categories: ["Distributed Systems", "Communication"]
+tags: [async-messaging, message-queue]
 ---
 The most common way to design loosely coupled components in microservice architectures is to expose a well-designed standardized set of APIs, which will be invoked by the upstream service. REST APIs are generally designed with a synchonous communication approach, where the communication between the services are real-time, and the upstream caller expects reponse for each and every requests triggered. 
 

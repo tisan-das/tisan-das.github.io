@@ -1,12 +1,17 @@
 ---
 layout: post
 title: Introduction to Creational Design Patterns
+series: "Design Patterns"
+categories: ["Programming", "Design Patterns"]
+tags: [design-patterns, creational]
 published: true
 ---
 
 Creational design pattern handles the object instantiation process. They provide an abstract way to make the client independent of how objects are instantiated, which objects are getting instantiated, and how they're represented. For smaller applications, the objects are instantiated in a hard-coded way, as the type of object has remained fixed. However, as the application gets evolved, there comes the requirement of the same application or client to accommodate different sets of objects to be handled similarly, and thus the need of defining a smaller set of behavior arises, which then can be extended into different types of objects. Here the creational design pattern tries to achieve two goal:
 1. To encapsulate the knowledge of which concrete classes the application uses
 2. How the instances of these concrete classes are created and composed
+
+{% include series-nav.html %}
 
 ## Singleton Pattern:
 Intent: Ensure a class has only one instance, and provide a global point of access to it

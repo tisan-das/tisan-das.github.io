@@ -1,10 +1,15 @@
 ---
 layout: post
 title: DDIA - Chap01 - Reliable, Scalable and Maintainable Applications
+series: "Designing Data-Intensive Applications"
+categories: ["Databases", "DDIA"]
+tags: [ddia, reliability, scalability]
 published: true
 ---
 
 A majority portion of web applications are largely data-intensive, and not compute-intensive. The speed of fetching the overall data to process the requests is generally the limiting factor as is a general indication of data-intensive applications. One of the major issues these data-intensive applications face is ensuring data correctness even though the application faces severe issues internally. How can customer requests be served with satisfactory performance, even if a couple of systems are down? This is the question we would be asking ourselves, and will try to explore.
+
+{% include series-nav.html %}
 
 
 From a software architecture perspective, the following three concerns need to be addressed for such applications:

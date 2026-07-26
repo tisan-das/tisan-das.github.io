@@ -1,5 +1,8 @@
 ---
 published: true
+title: Introduction to VPC
+categories: ["Cloud & DevOps", "Networking"]
+tags: [aws, vpc]
 ---
 
 In this blog post, we're going to learn about VPC, a basic building block of creating a network infrastructure in cloud environments. Even though we're going see some examples specific to the AWS platform, this is supported by all the major cloud service providers, including the terminology and nomenclature, however, for sure, depending upon the cloud service providers, there are a couple of restrictions imposed and conditions uplifted here and there. The basic understanding of VPC remains the same across all the platforms.

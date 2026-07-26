@@ -1,9 +1,14 @@
 ---
 layout: post
 title: Designing Distributed Systems - Single Node Patterns
+series: "Designing Distributed Systems"
+categories: ["Distributed Systems", "Patterns"]
+tags: [sidecar, ambassador-pattern, adapter-pattern]
 published: true
 ---
 Containers and container orchestrators have introduced a great deal of flexibility in designing distributed systems. Earlier the programs were developed to be distributed over a handful of nodes, however, with the help of container orchestrators, scaling has become a quite straightforward activity, and within a couple of seconds, the program can be scaled to ten of thousands of instances. And with this, certain specific patterns and practices, which has found usage across organizations. Identifying such patterns provide a common vocabulary to discuss repetitive set of problems, and encourage reuse. Here in this blog post, we would discuss the single node patterns, where multiple containers are needed to be co-scheduled in the same node, with the understanding that the containers need to share resources between containers. Different orchestrators have different names for this type of tightly grouped container. In Kubernetes, it's called a Pod, other orchestrators also have native support, though the term would be different.
+
+{% include series-nav.html %}
 
 
 ### Sidecar Pattern:

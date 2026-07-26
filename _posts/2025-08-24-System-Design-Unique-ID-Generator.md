@@ -1,10 +1,15 @@
 ---
 layout: post
 title: System Design - Design a Unique ID Generator for Distributed Systems
+series: "System Design Case Studies"
+categories: ["System Design", "Case Studies"]
+tags: [unique-id, system-design]
 published: true
 ---
 
 In this wiki, we will explore how various services generate unique IDs. 
+
+{% include series-nav.html %}
 
 ### Requirements:
 1. Characteristics of the unique ID required

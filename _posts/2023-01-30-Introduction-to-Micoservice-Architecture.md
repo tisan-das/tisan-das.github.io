@@ -1,5 +1,8 @@
 ---
 published: true
+title: Introduction to Microservice Architecture
+categories: ["System Design", "Fundamentals"]
+tags: [microservices, architecture]
 ---
 
 In this blog post, we will learn about microservices. We would learn why microservices are evolved and are preferred nowadays over monolithic architecture. We would also learn about a few patterns and useful ideas on microservices.

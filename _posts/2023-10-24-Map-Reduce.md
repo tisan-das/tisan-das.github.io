@@ -1,10 +1,15 @@
 ---
 layout: post
 title: Introduction to Map-Reduce
+series: "Distributed Systems Papers"
+categories: ["Distributed Systems", "Fundamentals"]
+tags: [mapreduce, batch-processing]
 published: true
 ---
 
 MapReduce is a programming model designed to process large amounts of data distributed across thousands of systems. The issues related to distributed computing like how to parallelize the computation, distribute the data, and perform fault tolerance are abstracted from the programmer. 
+
+{% include series-nav.html %}
 
 ### Model:
 The model takes a set of input key-value pairs and produces a set of output key-value pairs. The user of the MapReduce model needs to implement the following two functions:

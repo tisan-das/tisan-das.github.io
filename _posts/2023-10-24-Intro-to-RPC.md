@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Golang Roughwork I for RPC and Concurrency
+categories: ["Distributed Systems", "Communication"]
+tags: [rpc, go, concurrency]
 published: true
 ---
 

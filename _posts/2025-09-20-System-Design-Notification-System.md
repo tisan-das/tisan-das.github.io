@@ -1,10 +1,15 @@
 ---
 layout: post
 title: System Design - Notification System
+series: "System Design Case Studies"
+categories: ["System Design", "Case Studies"]
+tags: [notification-system, system-design]
 published: true
 ---
 
 In this wiki, we will explore an approach to designing a notification service.
+
+{% include series-nav.html %}
 
 
 

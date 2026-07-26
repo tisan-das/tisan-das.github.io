@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Intro to Kafka - Producer & Consumer
+categories: ["Distributed Systems", "Communication"]
+tags: [kafka, messaging]
 published: true
 ---
 

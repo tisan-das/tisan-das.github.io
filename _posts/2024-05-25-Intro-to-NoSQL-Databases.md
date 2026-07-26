@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Introduction to NoSQL Databases
+categories: ["Databases", "NoSQL"]
+tags: [nosql]
 published: true
 ---
 

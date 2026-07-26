@@ -1,10 +1,15 @@
 ---
 layout: post
 title: Web Application Security - Denial of Service Attack
+series: "Web Security"
+categories: ["Security", "Web Security"]
+tags: [denial-of-service, ddos]
 published: true
 ---
 
 In the last couple of blogs, we've learned a couple of different types of attacks on web applications. In this blog, we will learn about DoS attacks i.e. Denial of Service attacks. DoS attacks come in different forms, though the most common one is DDoS (Distributed Denial of Service). However, there are other types of DoS attacks, which exploit the underlying logic of the application. We would know about them and will also explore how to mitigate them.
+
+{% include series-nav.html %}
 
 
 ### Regex DoS:

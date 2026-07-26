@@ -1,10 +1,15 @@
 ---
 layout: post
 title: Introduction to Google File System
+series: "Distributed Systems Papers"
+categories: ["Distributed Systems", "Storage"]
+tags: [gfs, distributed-file-system]
 published: true
 ---
 
 Google File System (GFS) is one of the first attempt to create a distributed file system built with fault tolerance in mind. The file system is expected to run on top of commodity hardware, and hence there's a gurantee that there would be some system in the network which wouldn't respond, and some systems might not even recover. GFS is the underlying file system for many different products, including the map-reduce designed by Google, which makes this GFS a file system which handles a major load. The paper mentiones the GFS has already supported a load of billions of objects with size around couple of KBs.
+
+{% include series-nav.html %}
 
 There's mainly two type of write operation a distributed filesystem has to support: write at a particular offset, and append write. The GFS is designed specially for the append write operation, though it also has the support for writing at a particular offset also.
 

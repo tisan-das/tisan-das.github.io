@@ -1,10 +1,15 @@
 ---
 layout: post
 title: System Design - Rate Limiter
+series: "System Design Case Studies"
+categories: ["System Design", "Case Studies"]
+tags: [rate-limiter, system-design]
 published: true
 ---
 
 Rate limiter is a vital component in large-scale web applications, as it controls traffic to the application servers to ensure a smooth experience for the majority of the users. It has become a critical component due to the rise in DDoS attacks, and it also helps limit computationally intensive operations for users.
+
+{% include series-nav.html %}
 
 
 ### Requirements

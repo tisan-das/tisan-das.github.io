@@ -1,10 +1,15 @@
 ---
 layout: post
 title: System Design - Web Crawler
+series: "System Design Case Studies"
+categories: ["System Design", "Case Studies"]
+tags: [web-crawler, system-design]
 published: true
 ---
 
 In this wiki, we will explore an approach to designing a Web-crawling service.
+
+{% include series-nav.html %}
 
 
 ### Requirements

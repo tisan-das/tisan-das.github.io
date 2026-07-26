@@ -1,10 +1,15 @@
 ---
 layout: post
 title: Binary Tree Algorithms - Part II
+series: "Binary Tree Problems"
+categories: ["Algorithms", "Problem Sets"]
+tags: [binary-tree, cpp]
 published: true
 ---
 
 This wiki contains a couple of well-defined problems on Binary Tree.
+
+{% include series-nav.html %}
 
 
 #### Delete Node in a Linked List (372):

@@ -1,5 +1,8 @@
 ---
 published: true
+title: Web API Design Best Practices
+categories: ["Programming", "Web"]
+tags: [api-design, rest]
 ---
 In this blog post, we are going learn about RESTful API design, a principle widely adopted by microservices to design interfaces so much that it became the de-facto standard. Here we will learn basics about REST, standard practices, and how to utilize REST to create an intuitive interface that clients can consume in a meaningful way.
 

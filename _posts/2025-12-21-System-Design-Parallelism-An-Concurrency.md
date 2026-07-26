@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Fundamentals of System Design - Concurrency and Parallelism
+categories: ["System Design", "Fundamentals"]
+tags: [concurrency, parallelism]
 published: true
 ---
 

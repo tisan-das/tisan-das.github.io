@@ -1,10 +1,15 @@
 ---
 layout: post
 title: Intro to Zookeeper 
+series: "Distributed Systems Papers"
+categories: ["Distributed Systems", "Consensus"]
+tags: [zookeeper, coordination-service]
 published: true
 ---
 
 Apache Zookeeper provides highly reliable distributed co-ordination service. It helps maintain configuration information, synchronize distributed processes, and provide group membership services. Till now we've explored the Raft consensus algorithm, which is a low-level library to provide consensus for operations. Zookeeper is a well-known application built on top of it. Here in this blog post, we will learn the basic usage of Zookeeper along with its internal design and some performance aspects.
+
+{% include series-nav.html %}
 
 Even though Zookeeper is used as a distributed coordination service, it's to be noted that the distributed processes are prone to failure, due to severe issues ranging from network issues to process fault to server power failure. However, while designing such coordination primitives, we would need to ensure that even though the process has failed before it can fully operate the critical portion, another process can take over the workload and proceed to perform the same functionality without any further impact.
 

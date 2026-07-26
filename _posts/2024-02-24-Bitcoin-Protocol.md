@@ -1,10 +1,15 @@
 ---
 layout: post
 title: Introduction to Bitcoin Protocol 
+series: "Distributed Systems Papers"
+categories: ["Distributed Systems", "Consensus"]
+tags: [bitcoin, blockchain, proof-of-work]
 published: true
 ---
 
 Bitcoin is one of the most popular cryptocurrencies. However, we're more interested in Bitcoin, as it's one of the first peer-to-peer electronic cash systems proposed without the use of any trusted entity. Bitcoin uses a blockchain where the transactions are blocked together and a chain of such blocks is maintained.
+
+{% include series-nav.html %}
 
 
 ### Transaction:

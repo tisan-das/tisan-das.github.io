@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Logic in Writing using Pyramid Principle
+categories: ["Miscellaneous", "Writing"]
+tags: [writing, pyramid-principle]
 published: false
 ---
 

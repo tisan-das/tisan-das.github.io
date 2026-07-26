@@ -1,10 +1,15 @@
 ---
 layout: post
 title: Introduction to Large Language Models (LLM)
+series: "LLM & RAG"
+categories: ["Deep Learning", "LLM"]
+tags: [llm]
 published: true
 ---
 
 Recent large language models have opened a portal for different possibilities across domains. From a programmer perspective, it can provide a quick-fix recommendation, and answer generic questions. It's blurring the line to distinguish whether you're chatting with a human or a machine. LLMs are the new frontier of machine learning, and far more optimized LLMs with greater capabilities are getting released within a matter of weeks. Here in this blog post, we will explore the LLMs primarily from an application user perspective. We would gain some basic understanding of what LLMs are, and how they operate, and we will also see some examples on how to use different LLMs.
+
+{% include series-nav.html %}
 
 
 

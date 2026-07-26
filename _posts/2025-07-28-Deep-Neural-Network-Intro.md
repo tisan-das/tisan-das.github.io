@@ -1,11 +1,14 @@
 ---
 layout: post
 title: Introduction to Deep Learning - Deep Neural Network
+series: "Deep Learning Fundamentals"
+categories: ["Deep Learning", "Fundamentals"]
+tags: [neural-networks, deep-learning]
 published: true
 ---
-
-
 The progress of the deep learning field over the last couple of years is astounding. From creating vague images in 2015 to generating realistic videos with just a few minutes of prompts, the changes are truly remarkable. 
+
+{% include series-nav.html %}
 
 ![](/images/deep-learning/01_01_ai_vs_ml_vs_deep_learning.png)
 

@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Introduction to System Design
+categories: ["System Design", "Fundamentals"]
+tags: [system-design]
 published: true
 ---
 

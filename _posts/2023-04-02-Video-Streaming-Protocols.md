@@ -1,5 +1,8 @@
 ---
 published: true
+title: Video Streaming Protocols
+categories: ["System Design", "Fundamentals"]
+tags: [video-streaming, hls]
 ---
 Video streaming has become one of the most popular forms of consuming content on the Internet. Because of this, even though the Internet was started as a method of transferring textual data, the audio-visual segment is currently responsible for the majority of Internet traffic. To handle such traffic efficiently different protocols for video streaming are developed. In this blog, we will learn about some video streaming protocols.
 

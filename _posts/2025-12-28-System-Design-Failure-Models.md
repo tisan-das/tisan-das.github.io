@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Fundamentals of System Design - Failure Models
+categories: ["System Design", "Fundamentals"]
+tags: [failure-models, fault-tolerance]
 published: true
 ---
 

@@ -1,10 +1,15 @@
 ---
 layout: post
 title: Chain Replication
+series: "Distributed Systems Papers"
+categories: ["Distributed Systems", "Replication"]
+tags: [chain-replication]
 published: true
 ---
 
 The majority of distributed systems rely on consensus algorithms for fault tolerance. There's another simple approach to designing distributed systems through chain replication, which supports high throughput and availability without sacrificing strong consistency guarantees.
+
+{% include series-nav.html %}
 
 Chain replication is built for storage service, which generally lies between the database system and the filesystem. Storage services provide support for the following three types of operations:
 - store objects
