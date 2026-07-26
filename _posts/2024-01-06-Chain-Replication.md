@@ -15,7 +15,7 @@ Query operations are generally idempotent, however, update operations might not 
 
 ### Architecture:
 
-![](../images/zookeeper/chainReplication.png)
+![](/images/zookeeper/chainReplication.png)
 
 
 The chain replication model is achieved by connecting couple of replicated state machines through a chain. the query requests are sent to the tail, and the update operations are sent to the head node, which first computes all the necessary updation and propagates the results to the next node. Client receives the reply for both the query and update operation from the tail node. In this way it's ensured that all the nodes contain updated info. For the non-deterministic update operations, the value is computed at the head node, and then propagated through the chain.

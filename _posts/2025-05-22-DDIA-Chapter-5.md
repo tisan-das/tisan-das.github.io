@@ -18,12 +18,12 @@ In this blog post, we would try to get an overview of how replication works in r
 - **Partitioning**: Splitting a big database into smaller subsets, so that each subset is assigned to a different node. This is also known as sharding. This process reduces the performance bottleneck.
 It's to be noted that the above two ways are not mutually exclusive; rather, many distributed systems employ both techniques.
 
-![](../images/ddia/chap_04_replication_parititioning.png)
+![](/images/ddia/chap_04_replication_parititioning.png)
 
 
 ### Single leader replication
 
-![](../images/ddia/chap_04_single_leader_replication.png)
+![](/images/ddia/chap_04_single_leader_replication.png)
 
 This is the most commonly used replication technique, active/passive or master-slave replication, where one replica is designated as the leader. All the clients must send write requests to the leader, as only the leader is allowed to accept written requests. And the rest of the replicas, called followers or slaves, take only the read requests. The leader can accept both read and write requests, and whenever it writes new data to its storage, the same info is propagated to the follower nodes for synchronization.
 
@@ -99,7 +99,7 @@ NB: Pretending that replication is synchronous when infact it's asynchrnous is a
 
 Multi-leader replication generally makes sense with a setup of multi-datacenter operation. In case the replicated system is bounded within a single datacenter, then the multi-leader replication doesn't make sense, as the added complexity generally overwhelms the benefit. However, in case of a replicated system spanning across multiple datacenters, there's a need to have multiple leaders, each leader for each datacenter.
 
-![](../images/ddia/chap_04_multi_leader_replication.png)
+![](/images/ddia/chap_04_multi_leader_replication.png)
 
 The downside of this configuration is that some data maybe concurrently updated on multiple datacenters, and these conflicts must be resolved. Besides, there can be other features which mayn't be exactly replicated in the leader like auto-incrementing keys, triggers, integrity constarains. Due to all these pitfalls, multi-leader replication is generally retro-fitted for specific use-case, and generally recommended to avoid.
 
@@ -111,7 +111,7 @@ The downside of this configuration is that some data maybe concurrently updated 
 
 ##### Handling write conflicts:
 
-![](../images/ddia/chap_04_replication_write_conflict.png)
+![](/images/ddia/chap_04_replication_write_conflict.png)
 
 **Approaches for Converging toward a consistent state:**
 - Each write request is given a unique ID. Pick the write request with the highest ID as the winner and throw away the other writes. If any time-stamp is used, this technique is known as last write wins (LWW)
@@ -165,7 +165,7 @@ The client usually only waits for acknowledgment from a quorum of nodes within i
 
 # Detecting Concurrent Writes:
 
-![](../images/ddia/chap_04_casual_dependencies.png)
+![](/images/ddia/chap_04_casual_dependencies.png)
 
 - Treat the keys as immutable
 - The server maintains a version number for each key

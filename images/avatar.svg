@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- TISAN logo, recreated as vector from avatar.jpg: transparent background,
+       purple disc #44469D, white inner circle, purple center band, white bold-italic wordmark -->
+  <defs>
+    <clipPath id="disc">
+      <circle cx="256" cy="256" r="256"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#disc)">
+    <circle cx="256" cy="256" r="256" fill="#44469D"/>
+    <circle cx="256" cy="256" r="125" fill="#ffffff"/>
+    <rect x="0" y="193" width="512" height="126" fill="#44469D"/>
+  </g>
+  <text x="256" y="299" text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif" font-weight="bold" font-style="italic"
+        font-size="131" fill="#ffffff" textLength="383" lengthAdjust="spacingAndGlyphs">TISAN</text>
+</svg>

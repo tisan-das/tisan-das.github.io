@@ -28,7 +28,7 @@ Observation suggests that lock set information can be stored in the volative sto
 ### Two Phase Commit:
 Two phase commit is one of the most used distributed transaction protocol, where performs the transaction in two different phases- **voting phase**, where the lower level transactions are either prepared to be committed; and the **commitment phase**, where the lower level transactions are actually committed or aborted.
 
-![](../images/zookeeper/distributedTransactions.png)
+![](/images/zookeeper/distributedTransactions.png)
 
 In this overall design of two-phase commit protocol, co-ordinator is the single point of failure, and in case that happens, all the worker nodes must wait till it recovers. Also each component of this design is persistent sender, which ensures that even of some of the network communication is lost, eventually they will receive it.
 

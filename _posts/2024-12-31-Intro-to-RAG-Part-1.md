@@ -31,7 +31,7 @@ There are two caveats to the dense retrieval:
 ##### Phase 02: Reranking:
 This particular step is tasked with changing the order of the search results based on their relevance. This is where even the traditional web-search organizations have also started using LLMs. For example, Microsoft Bing has started using BERT-like models to rerank the web links filtered by their traditional search engine backbone infrastructure.
 
-![](../images/llm/reranker.png)
+![](/images/llm/reranker.png)
 
 
 ##### Phase 03: Retrieval-Augmented Generation (RAG):

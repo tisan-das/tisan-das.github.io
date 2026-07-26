@@ -20,12 +20,12 @@ Example of such XML payload:
 
 ##### Direct XXE attack:
 
-![](../images/web-security/XXE_direct.png)
+![](/images/web-security/XXE_direct.png)
 
 
 ##### Direct XXE attack:
 
-![](../images/web-security/XXE_indirect.png)
+![](/images/web-security/XXE_indirect.png)
 
 
 ##### Out-of-Band Data Exfiltration:

@@ -26,7 +26,7 @@ It can be assumed to be a fairly unique ID generator, though there's a small pro
 
 Due to the nature of UUIDs, multiple web servers can be used in parallel to generate UUIDs, and have seen usage in many micro-services.
 
-![](../images/sys-design-vol1/04-unique-id-system-design-uuid-generation.png)
+![](/images/sys-design-vol1/04-unique-id-system-design-uuid-generation.png)
 
 The drawback with this approach is that it requires more space in the database. Ideally, the UUIDs are supposed to take 128 bits if stored in binary encoded format; however, it's generally preferred to store them as characters to have proper readability.
 
@@ -37,7 +37,7 @@ This might not be suitable for the above use case, as UUIDs are not easily sorta
 
 Ticker server is another way of generating unique numbers by utilizing the auto_increment feature of databases. The principle of this approach lies in using a few server ticket servers to communicate with a separate database system, responsible for generating unique IDs.
 
-![](../images/sys-design-vol1/04-unique-id-system-design-ticket-server.png)
+![](/images/sys-design-vol1/04-unique-id-system-design-ticket-server.png)
 
 
 DDL of a ticket table:
@@ -76,7 +76,7 @@ The drawback of this approach is that the ticket server database is a single poi
 
 A divide-and-conquer approach is taken to generate the unique ID.
 
-![](../images/sys-design-vol1/04-unique-id-system-design-twitter-snowflake.png)
+![](/images/sys-design-vol1/04-unique-id-system-design-twitter-snowflake.png)
 
 Sign bit: It's always set to 0, reserved for future use.
 Timestamp: Milliseconds since the epoch of choice

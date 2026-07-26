@@ -23,7 +23,7 @@ In this wiki, we will explore an approach to designing a notification service.
 
 
 ### Architecture
-![](../images/sys-design-vol1/07-notification-system-hld.png)
+![](/images/sys-design-vol1/07-notification-system-hld.png)
 
 **Tracking:**
 - Monitor queued notifications

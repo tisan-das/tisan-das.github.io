@@ -7,7 +7,7 @@ published: true
 Kafka is one of the most popular distributed open-source event streaming platforms. Kafka was designed specifically to handle the continuous flow (i.e. stream) of data in a centralized way. Being a distributed system, just like databases, Kafka also relies on a distributed commit log.
 
 
-![](../images/kafka/cluster.png)
+![](/images/kafka/cluster.png)
 
 ### Message:
 Messages are simply an array of bytes. Even though there can be serializer and deserializer on the producer and consumer side, Kafka treats all the messages as a sequence of bytes. A message can have an optional key, which is typically used to determine which partition to push the message to. When a large number of messages are getting pushed, Kafka clients generally rely on batching to combine multiple messages to reduce the round-trip latency to the broker. It's to be noted that messages are also sometimes called events and streams. A schema-registry can be used to maintain the list of the schemas used by the producer and consumer, which is useful to serialize and deserialize messages, however, these schema-registries are generally outside the jurisdiction of Kafka even though they are quite useful.
@@ -51,7 +51,7 @@ k -n cloudflow expose service my-cluster-kafka-bootstrap --type=NodePort --port=
 ### Consumers:
 Consumers read messages from topics. Each consumer can subscribe to one or more partitions. Consumers typically work as part of a consumer group to consume messages published on one particular topic. Each partition is exclusively allocated to only one consumer from a group, though the consumer can consume from multiple partitions in case the number of partitions is more than the number of consumers in the consumer group. When a consumer goes into a failure state, in that case, Kafka rebalances the partitions to the available set of consumers in the consumer group. Besides, Kafka keeps track of the messages read by the consumer with the help of offset, and each partition has its offset. The consumers have also a way to inform the partition how much of the messages are consumed, thus effectively committing the offset.
 
-![](../images/kafka/consumerGroup.png)
+![](/images/kafka/consumerGroup.png)
 
 It's expected of Kafka consumers to perform time-consuming operations on the messages. Hence it's required to have multiple consumers to scale the message processing, and essentially it also points to scaling the partitions as well, as that allows adding additional consumers when the need arises. However please keep in mind that the poll() method can be blocked for a maximum of max.poll.interval.ms value, beyond which Kafka would treat the consumer as dead, and trigger a rebalance. 
 Create a new consumer group for each application that needs the overall set of messages from one or more topics. 
@@ -64,7 +64,7 @@ There's a concept of static group membership when the consumer is configured wit
 The handling of commits of the messages read by consumers is handled somewhat differently in Kafka compared to the other messaging systems. In Kafka, the consumers commit offsets on a special _consumers_offsets topic for each partition. Just like producers sending messages, the commits performed by consumers can be performed in both synchronous and asynchronous ways. The commit should be performed only for the offsets which are already processed. If commits are performed even before the corresponding message is processed, then if the consumer terminates abruptly, those unprocessed events will not be sent again.
 
 
-![](../images/kafka/commitOffsetEventReprocessingLost.png)
+![](/images/kafka/commitOffsetEventReprocessingLost.png)
 
 There's also an option to configure automatic commits to periodically commit the offset which is performed internally by the poll() method itself.
 It's to be noted that before terminating a consumer, it's better to invoke the close() method, which internally commits the last polled offset, and informs the broker of its shutdown, which also helps the broker to trigger a rebalance.

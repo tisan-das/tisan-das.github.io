@@ -24,7 +24,7 @@ A key-value store, also referred to as a key-value database, is a crucial topic 
 
 CAP Theorem suggests that distributed systems can satisfy two of the above three properties, not all three of them.
 
-![](../images/sys-design-vol1/03-kv-system-cap-theorem.png)
+![](/images/sys-design-vol1/03-kv-system-cap-theorem.png)
 
 It's worth noting that distributed systems must be partition-tolerant. Thus, the distributed systems can either be a CP (Consistent & Partition Tolerance) system or an AP (Availability & Partition Tolerance) system. A CA (Consistent & Availability) distributed system is of no use. The type of system we want to design depends on the use case. For example, the banking sector requires strict consistency systems.
 
@@ -78,7 +78,7 @@ Versioning and vector clocks are used to detect inconsistency. We need to explor
 
 **Failure detection:**
 The gossip protocol is generally followed 
-![](../images/sys-design-vol1/03-kv-system-gossip-protocol.png)
+![](/images/sys-design-vol1/03-kv-system-gossip-protocol.png)
 
 **Handling temporary failures:**
 
@@ -92,7 +92,7 @@ Data is migrated from a healthy node to a new node. Migration is performed on di
 
 ##### System architecture diagram
 
-![](../images/sys-design-vol1/03-kv-system-system-design.png)
+![](/images/sys-design-vol1/03-kv-system-system-design.png)
 
 ### Future study:
 - How a vector clock is used to detect and resolve inconsistency

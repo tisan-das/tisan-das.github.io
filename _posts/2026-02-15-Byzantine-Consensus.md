@@ -52,7 +52,7 @@ def OM(path):
 ***
 
 The above algorithm is also known as Open Messaging, Exponential Information Gathering (EIG) Algorithm
-![](../images/sys-design-fundamentals/03-byzantine-concensus/EIG.png)
+![](/images/sys-design-fundamentals/03-byzantine-concensus/EIG.png)
 
 
 The signed version of Lamport’s algorithm works as follows:
@@ -72,7 +72,7 @@ All modern Byzantine Fault-Tolerant protocols — PBFT, Tendermint, HotStuff —
 ### Practical Byzantine Fault Tolerance (PBFT) algorithm:
 It introduces the concept of a primary (leader), responsible for ordering client requests, while backups confirm and cross-check. Instead of flooding the system with cascades, PBFT uses quorum-based phases — pre-prepare, prepare, and commit — to reach agreement. It also optimizes cryptography: instead of signing every message, it uses lightweight message authentication codes (MACs) in normal operation, with signatures only during rare view-change events. The result is an ***O(n^2)*** message complexity instead of exponential.
 
-![](../images/sys-design-fundamentals/03-byzantine-concensus/pbft.png)
+![](/images/sys-design-fundamentals/03-byzantine-concensus/pbft.png)
 
 
 ### References

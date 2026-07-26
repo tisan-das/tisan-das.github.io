@@ -14,11 +14,11 @@ The general approach to test linearizability is to first capture the execution h
 
 ##### Example of a linearizable execution history:
 
-![](../images/raft-consensus/linearizable.png)
+![](/images/raft-consensus/linearizable.png)
 
 ##### Example of a non-linearizable execution history:
 
-![](../images/raft-consensus/non-linearizable.png)
+![](/images/raft-consensus/non-linearizable.png)
 
 ### To be explored:
 - Explore how Knossos and Jespen work, use them in application
