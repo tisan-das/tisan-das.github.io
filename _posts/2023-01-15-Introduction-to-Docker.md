@@ -6,19 +6,19 @@ Docker provides an platform to build and deploy application on an isolated envir
 
 
 #### Comparision with Virtualization:
-![Comparision Image](../images/docker-intro/containers-vs-virtual-machines.jpg)
+![Comparision Image](/images/docker-intro/containers-vs-virtual-machines.jpg)
 Virtualization is also a competitive technology compared to containers. However virtualization provides an abstraction on the hardware level, it slices the resources like compute, memory, and filesystem, and then installs a guest OS with the slices resources. Hence each VM has got its boot process. 
 
 On the other hand container usees OS provided features to isolate the run-times on the process level, making it more light-weight to run a container. More on this would be explored as part of another blog post in near future.
 
 
-![Docker Architecture](../images/docker-intro/architecture.png)
+![Docker Architecture](/images/docker-intro/architecture.png)
 
 #### Docker client:
 
 Docker CLI is having a specific set of commands called management commands. Each such command referes to specific resource that the docker daemon manages.
-![](../images/docker-intro/docker.png)
-![](../images/docker-intro/docker_commands.png)
+![](/images/docker-intro/docker.png)
+![](/images/docker-intro/docker_commands.png)
 
 Note: The majority of the docker client commands are legacy, just there for backward compatibility, and generally discouraged for new learners. These commands can be hidden by using the environemnt variable:
 ```sh
@@ -95,7 +95,7 @@ Unlike the shell form, the exec form does not invoke a command shell. This means
 
 #### Persistence Storage:
 Even though docker containers are preferred to be stateless, however there's certain scenarios, where a container might need to access some external data stored on disk drive, or else might need to store some persisting data. Docker provides support for these scenarios as well.
-![Image of the mounts](../images/docker-intro/types-of-mounts-volume.png)
+![Image of the mounts](/images/docker-intro/types-of-mounts-volume.png)
 
 ##### 1. Bind mounts:
 In this kind of mount, a directory under the host node is mounted into the container. The filesystem is managed from the host-OS directly, and not by the docker container. 

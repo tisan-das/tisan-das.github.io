@@ -16,7 +16,7 @@ The most crucial part of any cash transfer system is to restrict the use of doub
 ### Proof-of-Work:
 The discussion in the above paragraph has provided some background on double spending, and why it's important for the nodes on the Bitcoin protocol to agree with a single history. When such a transaction is announced, the nodes take note of the transaction time.
 
-![](../images/aurora/bitcoinChain.png)
+![](/images/aurora/bitcoinChain.png)
 
 Each node starts working to make a new block out of the recently announced transactions, Each new block should have some number of 0 bits in the beginning, and the exact number of 0 bits in the prefix is determined beforehand. Each node starts working on the find out a nonce value, which is appended on the block, which results in the hash of the block satisfying the criteria of a number of 0-bits as a prefix on the hash. When such a block is created, it's announced to the whole network.
 

@@ -14,10 +14,10 @@ NB:
 - Object that made the request has no explicit knowledge of what will handle it (Implicit receiver)
 
 ###### Class Diagram:
-![](../images/behavioral-design-patterns/chainCommand.png)
+![](/images/behavioral-design-patterns/chainCommand.png)
 
 ###### Object Diagram:
-![](../images/behavioral-design-patterns/chainCommand_objStruct.png)
+![](/images/behavioral-design-patterns/chainCommand_objStruct.png)
 
 ###### Implementation
 ```go
@@ -122,7 +122,7 @@ func (proc *ShipmentProcessor) Execute(task *Task) {
 Intent: Encapsulate a request as an object, thereby letting you parameterize clients with different requests, queue or log requests, and support undoable operations
 
 ###### Class Diagram:
-![](../images/behavioral-design-patterns/command.png)
+![](/images/behavioral-design-patterns/command.png)
 
 ###### Implementation:
 ```go
@@ -168,10 +168,10 @@ func (remoteCon *RemoteController) Execute() {
 Intent: Given a language, define a representation for its grammar along with an interpreter that uses the representation to interpret sentences in the language
 
 ###### Class Diagram:
-![](../images/behavioral-design-patterns/interpreter.png)
+![](/images/behavioral-design-patterns/interpreter.png)
 
 ###### Object Diagram:
-![](../images/behavioral-design-patterns/interpreter_objStruct.png)
+![](/images/behavioral-design-patterns/interpreter_objStruct.png)
 
 ###### Implementation:
 ```go
@@ -226,7 +226,7 @@ func (minus *Minus) Interpret() string {
 Intent: Provide a way to access the elements of an aggregate object sequentially without exposing its underlying representation
 
 ###### Class Diagram:
-![](../images/behavioral-design-patterns/iterator.png)
+![](/images/behavioral-design-patterns/iterator.png)
 
 ###### Implementation:
 ```go
@@ -280,7 +280,7 @@ func (collection *UserCollection) CreateIterator() Iterator {
 Intent: Without violating encapsulation, capture and externalize an object's internal state so that the object can be restored to this state later.
 
 ###### Class Diagram:
-![](../images/behavioral-design-patterns/memento.png)
+![](/images/behavioral-design-patterns/memento.png)
 
 ###### Implementation:
 ```go
@@ -329,7 +329,7 @@ func (caretaker *Caretaker) GetMementoIndex(index int) *ObserverMemento {
 Intent: Define a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically 
 
 ###### Class Diagram:
-![](../images/behavioral-design-patterns/observer.png)
+![](/images/behavioral-design-patterns/observer.png)
 
 ###### Implementation:
 ```go
@@ -383,7 +383,7 @@ func (obs *ConcreteObserver) Update() {
 Intent: Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from the clients that use it
 
 ###### Class Diagram:
-![](../images/behavioral-design-patterns/strategy.png)
+![](/images/behavioral-design-patterns/strategy.png)
 
 ###### Implementation:
 ```go
@@ -436,7 +436,7 @@ func (algo *LSTEvictionAlgo) Evict(cache *Cache) {
 Intent: Represent an operation to be performed on the elements of an object structure. Visitor lets you define a new operation without changing the classes of the elements on which it operates
 
 ###### Class Diagram:
-![](../images/behavioral-design-patterns/visitor.png)
+![](/images/behavioral-design-patterns/visitor.png)
 
 ###### Implementation:
 ```go

@@ -67,7 +67,7 @@ HTTP Status Codes:
     i. 204 (No Content): Deletion completed, no further response is sent
     ii. 404 (Not Found): Requested resource doesn't exist
 
-![](../images/REST-intro/httpVerbs.png)
+![](/images/REST-intro/httpVerbs.png)
 
 
 

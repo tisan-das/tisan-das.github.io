@@ -3,7 +3,7 @@ published: true
 ---
 With the advent of microservices, the networking got more complicated. Earlier, with the monolithic approach, the vertical scalability was pretty much simplistic. The applications were viewed as 3-tier applications and a majority of the traffic flow was north-south, i.e. majority of the data flow consisted of client requests and responses, which may be in the form of browser requests or may be in the form of direct API requests. Event the networking configuration was also simpler due to the nature of these 3 tiers, where the network flow was allowed from the downstream layer to the immediate upstream layer, and there a load balancer is usually placed, which works as a reverse proxy server to the external users.
 
-![](../images/consul-overview/network_traffic.png)
+![](/images/consul-overview/network_traffic.png)
 
 However, with the advent of microservices, the complexity of the deployment infrastructure is only increased. The first issue with microservices lies in the deployment portion itself, which can spread across multiple regions, and multiple instances of the service can be online or go down, which makes networking harder. The load balancing also needs to be dynamic. Thus it produces three distinct categories of problems which service mesh tries to neutralize:
 1. Service Discovery: How to discover the services over the network, so that the intended services can connect to them without much overhead
@@ -25,7 +25,7 @@ Consul consists of two planes:
         - forwards the actual data packets
         - handles the communication between services
 
-![](../images/consul-overview/overview.svg)
+![](/images/consul-overview/overview.svg)
 
 ##### Consul agents:
 Consul control place consists of two types of agents- server agent and client agent. The server agent initializes a data center, which consists of only one leader server agent, and the rest of the server agents are marked as followers. The server agents are the ones that store all the service-related info and do the heavy lifting operations of enforcing service discovery and access rules. It's generally advised to have 3 or 5 server agents, beyond which the overhead for consensus might negatively impact the performance. To improve the resiliency of the Consul cluster, it's advised to have the server agents distributed across multiple availability zones, and also to have a backup server agent ready, so that in case one server agent goes down, the backup server agent in the same availability zone can take its place.
@@ -34,11 +34,11 @@ However, there's no such restriction on the client agents, large no of organizat
 
 The leader among the server agents is selected based on a specific consensus algorithm. All the queries and transactions are processed by the leader, the followers forward the requests received from the client agents to the leader, and the leader in-turn replicates all the updations to the followers.
 
-![](../images/consul-overview/replication.svg)
+![](/images/consul-overview/replication.svg)
 
 ##### LAN gossip pool:
 All the server and client agents participate in a LAN gossip pool. Agents in the pool propagate the health check information across the cluster. Agent gossip communication occurs on port 8301 using UDP. Agent gossip falls back to TCP if UDP is not available. 
-![](../images/consul-overview/gossipPool.svg)
+![](/images/consul-overview/gossipPool.svg)
 
 
 ##### Zero trust network policy:
@@ -47,9 +47,9 @@ Consul service mesh follows a zero trust network policy. No network communicatio
 Intentions on the consul controls traffic communication between services. The L4 traffic intentions can control network traffic based on the identity encoded in mTLS certificates, and the L7 traffic intentions can enforce access based on application aware request attributes along with the usual identity based access. The proxy or natively-integrated application enforces intentions on inbound connections or requests. Only one intention can control authorization between a pair of services at any single point in time.
 
 All the consul agents cahches the intentions for the registered services. The client agents have a long polling connection established to the server agent, which allows to propagagte any change in intention immediately. Even certain proxies also locally caches the same. This provides additional layer of resiliency. This allows the proxies directly allow or deny the incoming requests, without connecting to the server agent each and every time. It's to be noted that any change in intention is applicable to only the new requests, already established or serving requests are not terminated. The intentions are processed depending upon precedence and match order. The intentions can have both allow and deny policies.
-![](../images/consul-overview/intention.svg)
+![](/images/consul-overview/intention.svg)
 
-![](../images/consul-overview/sidecarProxy.png)
+![](/images/consul-overview/sidecarProxy.png)
 
 ### Consul useful commands
 ##### Initialize a consul cluster:

@@ -4,7 +4,7 @@ published: true
 
 In this blog post, we will learn about microservices. We would learn why microservices are evolved and are preferred nowadays over monolithic architecture. We would also learn about a few patterns and useful ideas on microservices.
 
-![](../images/REST-intro/monolithMicroservice.png)
+![](/images/REST-intro/monolithMicroservice.png)
 
 #### Microservice Architecture
 Microservice is an architectural approach to software development, where the overall software is broken down into multiple independent and loosely coupled services, communicating over a well-defined interface. Microservices are typically structured around business needs and are owned by a small team.
@@ -63,7 +63,7 @@ i. Monitoring: How to trace the cross-service view of a request passing through 
 - how every server is doing? => CPU, memory, disk consumption
 - how every service is doing? => health check
 
-![](../images/REST-intro/microserviceMonitoring.png)    
+![](/images/REST-intro/microserviceMonitoring.png)    
 Data Collection:
 - Collect metrics: CPU, RAM, Disk, N/w
 - Collect logs: Application, Process, User log, SSH, OS

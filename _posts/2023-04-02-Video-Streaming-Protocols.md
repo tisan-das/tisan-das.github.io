@@ -5,19 +5,19 @@ Video streaming has become one of the most popular forms of consuming content on
 
 ### Audio Concept:
 Audio or sound is a natural phenomenon. The sound travels through a medium as the particles in the medium vibrate and the vibration of one particle causes the next particle also to vibrate, thus creating a wave through the medium. Like any kind of wave, the sound wave also can be thought of as a function of two parameters: the amplitude, which denotes how further the particle vibrates, and the frequency, which denotes how many times they vibrate in a time unit. Computers however being digital, need to convert this natural sound phenomenon in analog form to a digital signal using an A/D converter. The main principle here is sampling, where the audio is sampled at a periodic interval:
-![](../images/video-streaming-protocols/audio-waveform-samples1.svg)
+![](/images/video-streaming-protocols/audio-waveform-samples1.svg)
 
 One of the main properties of sampling is the sample rate, which denotes the number of times the audio is sampled in a second. And each such sample denotes the amplitude of the signal at that specific time, each sample is stored using an integer or floating data type, and a stream of samples creates a channel. There can be multiple channels, for eg majority of the audio sources contain 2 sources: left and right; 5.1 type of another popular one, having a total of 6 channels.
 
 The human ear operates on the frequency range of 20-20000 Hz, and based on the Nyquist-Shannon sampling theorem, the audio should be sampled at at-least 40kHz frequency to accurately recreate. Also having some more frequency bandwidth helps to avoid distortion, hence 44.1 kHz is the most popular sample rate. 
 
-![](../images/video-streaming-protocols/audio-sample-bandwidth.png)
+![](/images/video-streaming-protocols/audio-sample-bandwidth.png)
 
 Thus based on the above calculation, 192KBps only for single audio is too huge and thus needs compression and decompression techniques(codec). It's to be noted that once codecs are used, we need to ensure the erroneous or dropped packets are recovered, otherwise the decompression might get failed. Due to this TCP connections are preferred over UDP ones for the majority of the codec.
 
 ### Video Concept:
 The following calculation shows the massive requirement of bandwidth if the videos are transmitted uncompressed
-![](../images/video-streaming-protocols/video-bandwidth.png)
+![](/images/video-streaming-protocols/video-bandwidth.png)
 
 Also, this is the same reason why lossy compression algorithms are preferred over lossless compression ones, at least for video media types.
 

@@ -4,7 +4,7 @@ title: Golang Roughwork I for RPC and Concurrency
 published: true
 ---
 
-![](../images/map-reduce/rpc.png)
+![](/images/map-reduce/rpc.png)
 
 ### RPC Server:
 ```go

@@ -6,7 +6,7 @@ published: true
 
 This post contains a couple of well-defined problems solved via sliding window approach.
 
-![](../images/coding_questions/sliding_window_approach_01.png)
+![](/images/coding_questions/sliding_window_approach_01.png)
 
 ### Minimum Swaps to Group All 1's Together (3675):
 

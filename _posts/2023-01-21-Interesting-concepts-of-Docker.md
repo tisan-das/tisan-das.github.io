@@ -6,13 +6,13 @@ This blog post is written to jot down several concepts of Docker, which are gene
 
 #### Concept 01: Docker Image is built with layers
 Dockerfile provides a template, a set of instructions, to create an image. For each instruction that changes the file system, the resultant file system with the change is stored as a layer. It's to be noted that only RUN, ADD, and COPY instructions are the one that makes changes to the file system. 
-![](../images/docker-concept/ContainerLayer.png)
+![](/images/docker-concept/ContainerLayer.png)
 
 Docker image contains the SHA of the layers:
-![](../images/docker-concept/ImageInspect_FS.png)
+![](/images/docker-concept/ImageInspect_FS.png)
 
 The instructions that are not updating the filesystem are stored as metadata and are generally can be inspected as part of the config portion of the image.
-![](../images/docker-concept/ImageInspect_Config.png)
+![](/images/docker-concept/ImageInspect_Config.png)
 
 
 
@@ -21,7 +21,7 @@ Note: Remote images do also contain intermediate steps, however, those intermedi
 Docker ImageIDs are nothing but SHA-256 of the image configuration along with metadata.
 
 Pulling image pulls all the file-system layers used while creating the image:
-![](../images/docker-concept/ImagePull.png)
+![](/images/docker-concept/ImagePull.png)
 
 
 
@@ -38,7 +38,7 @@ RUN addgroup --gid 10001 --system nonroot \
 
 While building images, docker looks into the cache to check whether the resultant file-system layer is already present. In case it's available, Docker directly uses the layer unless ```--no-cache``` option is specified. Otherwise, the image layer is built using a container.
 
-![](../images/docker-concept/BuildContainer.png)
+![](/images/docker-concept/BuildContainer.png)
 
 
 ##### Dangling Image:

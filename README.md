@@ -4,7 +4,7 @@ Personal tech blog of Tisan Das — notes on designing large-scale distributed s
 
 **Live at [gemsofcoding.com](https://gemsofcoding.com)**
 
-Built with [Jekyll](https://jekyllrb.com/) and hosted on GitHub Pages.
+Built with [Jekyll](https://jekyllrb.com/) and the [Chirpy theme](https://github.com/cotes2020/jekyll-theme-chirpy), hosted on GitHub Pages (built via GitHub Actions).
 
 ## Topics covered
 
@@ -19,12 +19,13 @@ Built with [Jekyll](https://jekyllrb.com/) and hosted on GitHub Pages.
 ## Repository structure
 
 ```
-_posts/       # blog posts, named YYYY-MM-DD-title.md
-images/       # post images, organized by topic folder
-_layouts/     # page templates
-_includes/    # analytics, meta, icons
-_sass/        # stylesheets
-_config.yml   # site configuration
+_posts/                 # blog posts, named YYYY-MM-DD-title.md
+_tabs/                  # sidebar pages (about, archives, categories, tags)
+images/                 # post images, organized by topic folder
+assets/img/favicons/    # favicon set generated from images/avatar.svg
+_config.yml             # site configuration (Chirpy)
+Gemfile                 # Ruby dependencies (jekyll-theme-chirpy)
+.github/workflows/      # GitHub Actions build & deploy
 ```
 
 ## Writing a new post
@@ -33,15 +34,27 @@ _config.yml   # site configuration
 
    ```yaml
    ---
-   layout: post
    title: My Title
+   date: YYYY-MM-DD HH:MM:SS +0530
+   categories: [Distributed Systems]
+   tags: [consensus, raft]
    ---
    ```
 
-2. Put images under `images/<topic>/` and reference them relatively: `![](../images/<topic>/diagram.png)`
-3. Use fenced code blocks with a language tag (```` ```sql ````, ```` ```go ````, ```` ```cpp ````) for syntax highlighting via Rouge.
-4. Push to GitHub — Pages builds and deploys automatically.
+2. Put images under `images/<topic>/` and reference them absolutely: `![](/images/<topic>/diagram.png)`
+3. Use fenced code blocks with a language tag (```` ```sql ````, ```` ```go ````, ```` ```cpp ````) — Chirpy adds line numbers and a copy button via Rouge.
+
+## Local development
+
+```sh
+bundle install
+bundle exec jekyll serve --livereload
+```
+
+## Deployment
+
+Pushes to `master` build via GitHub Actions and deploy to GitHub Pages. Pushes to `develop` run the build as a check only.
 
 ## License
 
-Content © Tisan Das. Theme structure originally based on [Jekyll Now](https://github.com/barryclark/jekyll-now) (MIT).
+Content © Tisan Das. Theme: [Chirpy](https://github.com/cotes2020/jekyll-theme-chirpy) (MIT).

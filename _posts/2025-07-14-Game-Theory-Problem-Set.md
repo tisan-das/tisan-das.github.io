@@ -6,7 +6,7 @@ published: true
 
 This post contains a couple of well-defined problems on game theory.
 
-![](../images/coding_questions/game_theory_01.png)
+![](/images/coding_questions/game_theory_01.png)
 
 ### Coins in a Line (394):
 

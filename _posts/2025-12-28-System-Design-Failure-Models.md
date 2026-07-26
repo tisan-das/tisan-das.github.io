@@ -135,7 +135,7 @@ Follow a strategy to avoid **thundering herds**, where the calls that failed at 
 - **Retriable operations**: Be aware of the potential side effects of the operation
 - **Retry only on one level:**
 
-![](../images/sys-design-fundamentals/02-retry/01-retry-one-level.png)
+![](/images/sys-design-fundamentals/02-retry/01-retry-one-level.png)
 - **Use Load shedding and backpressure**: Upstream service should shed any additional requests that it can't handle
 
 
@@ -144,7 +144,7 @@ Follow a strategy to avoid **thundering herds**, where the calls that failed at 
 The majority of the HTTP requests are idempotent, except for POST and PATCH.
 Incorporate a unique caller-provided **client request identifier** into the API contracts. Requests from the same caller with the same client request identifier can be considered duplicates and handled accordingly.
 
-![](../images/sys-design-fundamentals/02-retry/02-client-request-id.png)
+![](/images/sys-design-fundamentals/02-retry/02-client-request-id.png)
 
 
 ##### Database Design Adjustments (Upsert Operation)
@@ -318,7 +318,7 @@ func (ls *LoadShedder) Release() {
 
 Partition service instances into different groups, based on **consumer load and availability requirements**. This design helps to isolate failures, and allows you to sustain service functionality for some consumers, even during a failure.
 
-![](../images/sys-design-fundamentals/02-retry/03-bulkhead-pattern.png)
+![](/images/sys-design-fundamentals/02-retry/03-bulkhead-pattern.png)
 
 ```go
 

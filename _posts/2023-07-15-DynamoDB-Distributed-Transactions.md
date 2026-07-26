@@ -26,7 +26,7 @@ Both TransactGetItems and TransactWriteItems are synchronous and idempotent. If 
 
 ### Transaction Routing
 
-![](../images/dynamo-db/highLevelArchitectureTransaction.png)
+![](/images/dynamo-db/highLevelArchitectureTransaction.png)
 
 All the DynamoDB operations are sent to a fleet of front-end hosts named request routers. The request route authenticates the requests and redirects the non-transactional requests to the storage node containing the key. The key-range information is stored in the metadata system. The transaction requests have got one extra hop. The request routers forward the transactional request to the transactional coordinator, which then breaks the transaction, and co-ordinates with the associated storage nodes to complete the transaction in a two-phased way.
 

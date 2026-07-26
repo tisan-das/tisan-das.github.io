@@ -33,5 +33,5 @@ GET api/v1/shortUrl
 
 ### High-level diagram:
 
-![](../images/sys-design-vol1/05-url-shortner-system-design-hld.png)
+![](/images/sys-design-vol1/05-url-shortner-system-design-hld.png)
 

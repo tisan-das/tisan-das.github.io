@@ -31,10 +31,10 @@ In this wiki, we will explore an approach to designing a Web-crawling service.
 
 ### Architecture
 
-![](../images/sys-design-vol1/06-web-crawler-components.png)
+![](/images/sys-design-vol1/06-web-crawler-components.png)
 
 
-![](../images/sys-design-vol1/06-web-crawler-hld.png)
+![](/images/sys-design-vol1/06-web-crawler-hld.png)
 
 **Spider Trap**: Causes the crawler to loop in an infinite loop. Need to handle such edge cases.
 
