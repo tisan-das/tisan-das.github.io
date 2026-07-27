@@ -297,7 +297,48 @@ html[data-mode='dark'] {
   }
 }
 
-/* Series navigation box (see _includes/series-nav.html) */
+/* ---- Dark/Light mode images ---- */
+
+/* Default (light mode): hide dark images, show light images */
+.popup.img-link.dark,
+img.dark {
+  display: none;
+}
+
+.popup.img-link.light,
+img.light {
+  display: inline-block;
+}
+
+/* Explicit dark mode */
+html[data-mode='dark'] {
+  .popup.img-link.light,
+  img.light {
+    display: none;
+  }
+
+  .popup.img-link.dark,
+  img.dark {
+    display: inline-block;
+  }
+}
+
+/* System dark mode preference (when no explicit mode is set) */
+@media (prefers-color-scheme: dark) {
+  html:not([data-mode]) {
+    .popup.img-link.light,
+    img.light {
+      display: none;
+    }
+
+    .popup.img-link.dark,
+    img.dark {
+      display: inline-block;
+    }
+  }
+}
+
+/* ---- Series navigation box (see _includes/series-nav.html) ---- */
 .series-nav {
   background: rgba(127, 127, 127, 0.08);
   border-left: 0.25rem solid var(--link-color, #2a9d8f);
