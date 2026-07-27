@@ -144,6 +144,8 @@ Maintain a heading stack with one extra bit per frame — `inheritable bool`, se
 
 `maxChunkChars` (1,800 is a reasonable default), `chunkOverlapChars` (150), and the runt floor (200 characters, or 25% of max). Log the chunk-length distribution after every ingestion run — a sudden shift in that histogram is either a corpus change or a regression, and you want to know which one before your users do.
 
+## What comes next
+
 The [next post](/Production-RAG-Hybrid-Search/) moves to the query side: what these chunks actually get compared against, and why you need two retrievers plus a reranker rather than one very good one.
 
 ## References

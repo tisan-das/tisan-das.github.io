@@ -87,6 +87,8 @@ The failure is silent, and worse than useless: the output looks like a plausible
 
 The practical consequence is that you should measure the pixel dimensions of every image at ingest and log the distribution, the same way you log chunk lengths. A corpus where 5% of images exceed the vision cap is a corpus where 5% of your image transcriptions are fiction, and no metric downstream will tell you which 5%.
 
+## What comes next
+
 The [next post](/Production-RAG-Entities-And-Graphs/) covers the two retrieval failures that no amount of better chunking or better reranking can fix — and the entity and graph machinery that does.
 
 ## References

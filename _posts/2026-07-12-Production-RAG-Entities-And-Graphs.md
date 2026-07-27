@@ -146,6 +146,8 @@ An LLM extracts entities and relations with no predefined schema and builds the 
 > GraphRAG's cost lives at *indexing* time, and it is steep — a published worked example prices a twenty-document sample at roughly $6, extrapolating past $500 for eighteen hundred documents, before a single query is asked. Reserve it for corpora where global questions are genuinely asked. For entity-anchored questions, the graph-hybrid retrieval above answers at a fraction of the cost. The two are complements, not competitors.
 {: .prompt-warning }
 
+## What comes next
+
 The [next post](/Production-RAG-Grounded-Generation/) assumes retrieval finally works, and asks the question that then becomes urgent: is the answer actually supported by what was retrieved?
 
 ## References

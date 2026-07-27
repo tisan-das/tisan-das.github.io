@@ -86,6 +86,8 @@ Three things to get right:
 > Every one of the three failures above returns a fast, fluent, plausible answer. A cache is the one component in a RAG stack that can be simultaneously the biggest latency win and the most quietly dangerous, because it bypasses every guardrail you built in the rest of this post.
 {: .prompt-warning }
 
+## What comes next
+
 The [final post](/Production-RAG-Evaluation-And-Operations/) covers how you know any of this is working: retrieval metrics and their asymmetries, offline and online evaluation, agentic RAG, permission filtering, and the consolidated list of failures that produce no error.
 
 ## References

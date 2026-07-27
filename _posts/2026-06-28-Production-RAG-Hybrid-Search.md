@@ -155,6 +155,8 @@ def rerank(body: dict):
 
 The tokenizer-drift risk in the ONNX path is worth spelling out: if your Go tokenizer disagrees with the one the model was trained with — on a subword split, on Unicode normalization, on how it handles an unknown character — scores degrade quietly and only on the inputs where they disagree. The sidecar costs one hop and removes the entire class of problem.
 
+## What comes next
+
 The [next post](/Production-RAG-Multimodal/) leaves text behind and looks at images, tables screenshotted into PDFs, and why the architecture that is cheapest to ingest is usually the most expensive to run.
 
 ## References

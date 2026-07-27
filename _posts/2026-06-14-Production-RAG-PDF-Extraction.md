@@ -180,7 +180,11 @@ How a table gets extracted depends entirely on where it came from, and it is wor
 | Born-digital PDF | Layout-aware parser | GFM pipe table |
 | Raster image or garbled font | Vision OCR | `Header: value` rows, by prompt design |
 
-Normalising these into one schema means re-parsing structure you have either already lost or already have. The chunker in the [next post](/Production-RAG-Chunking/) does not care which of the three it receives — it recognises "this is a table" from the text itself. Keeping extraction and chunking decoupled through plain text, rather than a shared typed schema, is precisely what lets the OCR path participate at all, since a vision model produces prose and nothing else.
+Normalising these into one schema means re-parsing structure you have either already lost or already have. Keeping extraction and chunking decoupled through plain text, rather than a shared typed schema, is precisely what lets the OCR path participate at all, since a vision model produces prose and nothing else.
+
+## What comes next
+
+The chunker in the [next post](/Production-RAG-Chunking/) does not care which of the three representations it receives — it recognises "this is a table" from the text itself.
 
 ## References
 
