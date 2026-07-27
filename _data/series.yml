@@ -49,17 +49,22 @@
   description: "Large language models and retrieval-augmented generation for semantic search."
   order: 10
 
+- name: "Production RAG"
+  slug: production-rag
+  description: "An eight-part build guide — from PDF extraction and chunking through hybrid search, multimodal, knowledge graphs, grounded generation, and production operations."
+  order: 11
+
 - name: "Binary Tree Problems"
   slug: binary-tree-problems
   description: "C++ problem sets on binary tree traversals and classic tree algorithms."
-  order: 11
+  order: 12
 
 - name: "Binary Search Problems"
   slug: binary-search-problems
   description: "C++ problem sets on binary search over answers, rotated arrays, and variants."
-  order: 12
+  order: 13
 
 - name: "BFS Problems"
   slug: bfs-problems
   description: "C++ graph BFS problem sets — shortest paths, grids, and multi-source search."
-  order: 13
+  order: 14
