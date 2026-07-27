@@ -10,11 +10,7 @@ published: true
 
 Retrieval-augmented generation looks deceptively simple. Split the documents, embed the pieces, search for the closest ones, paste them into a prompt. A working prototype takes an afternoon. What takes considerably longer is the gap between that prototype and a system that stays accurate when the corpus grows from a hundred documents to a hundred thousand, when the PDFs stop being clean, and when someone asks a question whose answer is spread across three documents. This series walks through that gap, in build order.
 
-> **Production RAG series** — **1. Anatomy of the pipeline** · [2. Extracting text from PDFs](/Production-RAG-PDF-Extraction/) · [3. Chunking for retrieval](/Production-RAG-Chunking/) · [4. Hybrid search and reranking](/Production-RAG-Hybrid-Search/) · [5. Images and multimodal](/Production-RAG-Multimodal/) · [6. Entities and knowledge graphs](/Production-RAG-Entities-And-Graphs/) · [7. Grounded generation](/Production-RAG-Grounded-Generation/) · [8. Evaluation and operations](/Production-RAG-Evaluation-And-Operations/)
-{: .prompt-info }
-
-> Once all parts are live, this block will be replaced by `{% raw %}{% include series-nav.html %}{% endraw %}` for automatic linking.
-{: .prompt-tip }
+{% include series-nav.html %}
 
 > **Reference stack.** The reference implementation assumed throughout is a Go service using [sqlite-vec](https://github.com/asg017/sqlite-vec) for dense vectors, SQLite's [FTS5](https://www.sqlite.org/fts5.html) for BM25 keyword search, and a hosted model provider for embeddings, vision transcription and generation. None of the ideas are specific to that stack, but having a concrete one keeps the discussion honest about cost and failure modes.
 {: .prompt-info }
