@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Production RAG - Evaluation and Operations
-image: /images/rag/08-evaluation-ops/01-retrieval-confusion-matrix.png
+image: /images/rag/08-evaluation-ops/01-retrieval-confusion-matrix.webp
 series: "Production RAG"
 categories: ["Deep Learning", "RAG"]
 tags: [rag, evaluation, observability, security, agents, llm]
@@ -16,7 +16,7 @@ Seven posts of machinery, and none of it is trustworthy until you can answer one
 
 For a given query, each chunk is either relevant or not, and either retrieved or not. Everything else is a ratio over those four boxes.
 
-![The retrieval confusion matrix](/images/rag/08-evaluation-ops/01-retrieval-confusion-matrix.png)
+![The retrieval confusion matrix](/images/rag/08-evaluation-ops/01-retrieval-confusion-matrix.webp)
 _A chunk that is never retrieved cannot be rescued by any later stage in the pipeline._
 
 - **Recall@k** — of everything relevant, how much did the top-k contain? This is the retrieval-stage metric that matters most.
@@ -128,7 +128,7 @@ Every entry below appeared somewhere in this series. Together they are the reaso
 
 If you are starting from scratch, this ordering keeps every stage shippable and — critically — puts the measurement infrastructure before the sophistication that needs measuring.
 
-![Recommended build order for a production RAG system](/images/rag/08-evaluation-ops/02-build-order.png)
+![Recommended build order for a production RAG system](/images/rag/08-evaluation-ops/02-build-order.webp)
 _Stage 4 is the one people skip. It is also the one that makes stages 5 through 12 anything other than guesswork._
 
 Resist building stage 9 before stage 4 exists to tell you whether it helped. Graph retrieval and chunk enrichment are answers to *specific observed failures*, and without an evaluation set you cannot tell which failure you have — which takes you right back to [part 6](/Production-RAG-Entities-And-Graphs/), where the two failures look identical from outside and want opposite fixes.

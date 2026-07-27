@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Production RAG - Entities and Knowledge Graphs
-image: /images/rag/06-entities-graphs/01-two-retrieval-failures.png
+image: /images/rag/06-entities-graphs/01-two-retrieval-failures.webp
 series: "Production RAG"
 categories: ["Deep Learning", "RAG"]
 tags: [rag, knowledge-graph, ner, graphrag, entity-resolution]
@@ -12,7 +12,7 @@ At some point in every RAG project, a category of question stops working and no 
 
 {% include series-nav.html %}
 
-![Matching failure versus reachability failure](/images/rag/06-entities-graphs/01-two-retrieval-failures.png)
+![Matching failure versus reachability failure](/images/rag/06-entities-graphs/01-two-retrieval-failures.webp)
 _Two failures, identical symptoms, opposite fixes. Diagnosing which one you have is the decision point for everything below._
 
 **Matching failure.** The answer sits inside one chunk, but the chunk shares no vocabulary with the query — *"who can approve prod deploys?"* against a chunk titled "release sign-off authority". Retrieval never surfaces it. The fix is **chunk enrichment**.
@@ -41,7 +41,7 @@ Extraction runs in two places with very asymmetric budgets. At **ingest**, per c
 | Zero-shot span models | GLiNER family | Arbitrary type labels at inference, no training | **Sweet spot for custom domains** |
 | LLM extraction | Small hosted models | Best judgment; slow, priced per token | Relations, hard cases, teaching |
 
-![Entity extraction cost per 100,000 chunks](/images/rag/06-entities-graphs/02-ner-extraction-cost.png)
+![Entity extraction cost per 100,000 chunks](/images/rag/06-entities-graphs/02-ner-extraction-cost.webp)
 _Log scale. Self-hosted tiers sit one to three orders of magnitude below hosted LLM extraction._
 
 > The pattern that captures most of the value: **use an LLM once as a teacher, not forever as a worker.** Have a hosted model label 5–20k chunks, fine-tune a small span model on those labels, then run the student self-hosted across the corpus and at query time. You pay LLM prices for a bounded labelling job instead of an unbounded extraction bill.
@@ -53,7 +53,7 @@ A small span model exported to ONNX with int8 quantization runs comfortably on C
 
 Raw extractions are surface forms. Retrieval needs identities.
 
-![Entity alias collapse](/images/rag/06-entities-graphs/03-entity-linking.png)
+![Entity alias collapse](/images/rag/06-entities-graphs/03-entity-linking.webp)
 _The query-time extractor must land on the same canonical ID, whichever surface form the user happened to type._
 
 ```sql
@@ -113,7 +113,7 @@ Before committing to typed edges, try the cheap middle ground: **co-occurrence l
 
 Hand-building a graph does not scale. Extracting triples with an LLM and trusting them does not survive contact with reality. The pipeline that works has five stages — and the emphasis is misplaced in most write-ups, because **linking, not extraction, is where graphs die**.
 
-![Reachable facts versus hop count under fragmentation](/images/rag/06-entities-graphs/05-graph-coverage-vs-hops.png)
+![Reachable facts versus hop count under fragmentation](/images/rag/06-entities-graphs/05-graph-coverage-vs-hops.webp)
 _With entities fragmented across surface forms, reachable facts collapse geometrically with hop count. At four forms per entity, a three-hop question sees under 2% of the graph._
 
 **1 — Ontology first.** A small typed schema — node types, relation types, domain and range constraints — written *before* extraction. Constrained output is dramatically cleaner than "extract entities and relationships".
@@ -122,7 +122,7 @@ _With entities fragmented across surface forms, reachable facts collapse geometr
 
 **3 — Blocking.** Entity resolution is pairwise-quadratic, so you never compare all pairs.
 
-![Pairwise comparisons with and without blocking](/images/rag/06-entities-graphs/04-blocking-comparisons.png)
+![Pairwise comparisons with and without blocking](/images/rag/06-entities-graphs/04-blocking-comparisons.webp)
 _Blocking turns five billion comparisons into single-digit millions._
 
 **4 — Scoring and union-find.** Score candidate pairs on name similarity, type agreement, alias overlap, embedding similarity and shared neighbours. Merge above a high bar using union-find so merges are transitive. Route the uncertain middle band to human review; below the band, leave them split.
@@ -138,7 +138,7 @@ Build order for the whole entity and graph investment, cheapest first — and st
 
 Everything above answers *local* questions: facts near identifiable entities. A different class of query defeats chunk retrieval entirely — **global, sensemaking questions** such as *"what are the dominant failure themes across this corpus?"* No chunk contains the answer, because the answer is a property of the corpus as a whole.
 
-![The GraphRAG indexing and query pipeline](/images/rag/06-entities-graphs/06-graphrag-stages.png)
+![The GraphRAG indexing and query pipeline](/images/rag/06-entities-graphs/06-graphrag-stages.webp)
 _An LLM builds the graph, communities are detected, summaries are written per community, and answering is map-reduce over relevant summaries._
 
 An LLM extracts entities and relations with no predefined schema and builds the graph. Community-detection algorithms find clusters of densely connected entities. An LLM writes summaries for each community at multiple hierarchy levels, from narrow subtopics up to broad themes. At query time the engine selects the relevant community summaries, generates a partial answer from each, and a final call synthesizes them.

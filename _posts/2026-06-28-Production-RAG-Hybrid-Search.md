@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Production RAG - Hybrid Search, Fusion and Reranking
-image: /images/rag/04-hybrid-search/01-cosine-unit-circle.png
+image: /images/rag/04-hybrid-search/01-cosine-unit-circle.webp
 series: "Production RAG"
 categories: ["Deep Learning", "RAG"]
 tags: [rag, embeddings, bm25, hnsw, reranking, vector-search]
@@ -16,7 +16,7 @@ Ask a RAG system *"how do I shut down an instance"* and keyword search returns n
 
 An embedding maps text to a dense vector so that semantic proximity becomes geometric proximity. Retrieval ranks by cosine similarity — the angle between two vectors, ignoring magnitude.
 
-![Cosine similarity on the unit circle](/images/rag/04-hybrid-search/01-cosine-unit-circle.png)
+![Cosine similarity on the unit circle](/images/rag/04-hybrid-search/01-cosine-unit-circle.webp)
 _When vectors are normalized to unit length, the dot product is the cosine._
 
 The identity `a·b = |a||b|cos θ` means that if both vectors have length 1, the dot product *is* the cosine. This is why production embedding models ship unit vectors: similarity becomes a bare dot product, which enables fast maximum-inner-product search, and magnitude noise disappears so only direction — meaning — matters.
@@ -80,7 +80,7 @@ Reciprocal Rank Fusion:
 score(d) = SUM over lists L of  1 / (k + rank_L(d))       # k ≈ 60
 ```
 
-![Reciprocal Rank Fusion across two ranked lists](/images/rag/04-hybrid-search/02-rrf-fusion.png)
+![Reciprocal Rank Fusion across two ranked lists](/images/rag/04-hybrid-search/02-rrf-fusion.webp)
 _RRF uses ranks only. Documents found by both retrievers rise, without any score normalization._
 
 | | RRF | Weighted average |
@@ -98,7 +98,7 @@ RRF rewards consensus and handles a single-list find gracefully — an additive 
 
 A reranker re-scores one candidate list using a stronger, independent judgment. Unlike fusion, it generates a genuinely new signal by re-reading the query against each document — and it uses the opposite architecture from the retriever.
 
-![Bi-encoder versus cross-encoder](/images/rag/04-hybrid-search/03-bi-vs-cross-encoder.png)
+![Bi-encoder versus cross-encoder](/images/rag/04-hybrid-search/03-bi-vs-cross-encoder.webp)
 _Bi-encoder: encode separately, compare with cosine — scalable. Cross-encoder: encode jointly, read a score off [CLS] — accurate._
 
 The cross-encoder concatenates `[CLS] query [SEP] doc [SEP]` into a single sequence, so every query token attends to every document token, and a linear head emits one relevance score. That token-level interaction catches exactly what a bi-encoder cannot: "stop" contradicting "start", a qualifier that inverts a claim, a date that does not match.
@@ -113,7 +113,7 @@ Maximum marginal relevance dates to 1998 — redundancy in search results long p
 MMR(d) = λ · sim(d, q)  -  (1 - λ) · max sim(d, d_selected)
 ```
 
-![Top-k versus MMR selection](/images/rag/04-hybrid-search/04-mmr-diversity.png)
+![Top-k versus MMR selection](/images/rag/04-hybrid-search/04-mmr-diversity.webp)
 _Top-k clusters near-duplicates around the query; MMR spreads its selections across the candidate cloud._
 
 This matters more than it looks. Five chunks saying the same thing waste your context budget and give the generator no new information, while a sixth chunk holding the qualifier that changes the answer sits just below the cutoff.

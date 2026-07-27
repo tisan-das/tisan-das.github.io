@@ -338,6 +338,30 @@ html[data-mode='dark'] {
   }
 }
 
+/* ---- Diagram images in dark mode ---- */
+
+/* Give content images a subtle light backing in dark mode so
+   diagrams, charts, and screenshots with transparent or white
+   backgrounds remain legible against dark surfaces. Does not
+   apply to images that already have .light / .dark variants. */
+html[data-mode='dark'] {
+  .content img:not(.light):not(.dark) {
+    background-color: rgba(255, 255, 255, 0.92);
+    border-radius: 6px;
+    padding: 2px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-mode]) {
+    .content img:not(.light):not(.dark) {
+      background-color: rgba(255, 255, 255, 0.92);
+      border-radius: 6px;
+      padding: 2px;
+    }
+  }
+}
+
 /* ---- Series navigation box (see _includes/series-nav.html) ---- */
 .series-nav {
   background: rgba(127, 127, 127, 0.08);

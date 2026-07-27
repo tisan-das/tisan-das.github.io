@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Production RAG - Images and Multimodal Retrieval
-image: /images/rag/05-multimodal/01-image-ingest-cost.png
+image: /images/rag/05-multimodal/01-image-ingest-cost.webp
 series: "Production RAG"
 categories: ["Deep Learning", "RAG"]
 tags: [rag, multimodal, vision, embeddings, cost-optimization]
@@ -43,13 +43,13 @@ The `type` column is what lets the query flow decide, *per hit*, whether pixels 
 
 Three buckets decide the architecture, and they pull in different directions. Getting this wrong is easy because the bucket that is easiest to measure is the one that matters least.
 
-![Ingest cost per 1,000 images](/images/rag/05-multimodal/01-image-ingest-cost.png)
+![Ingest cost per 1,000 images](/images/rag/05-multimodal/01-image-ingest-cost.webp)
 _Shared-space embedding is the cheapest way in — which is exactly the trap._
 
-![Cost of re-indexing after an embedding model change](/images/rag/05-multimodal/02-reindex-cost.png)
+![Cost of re-indexing after an embedding model change](/images/rag/05-multimodal/02-reindex-cost.webp)
 _The reversal: the summarize path re-embeds stored text for pennies; the shared-space path reprocesses every image from pixels._
 
-![Annual query-side cost by answering mode](/images/rag/05-multimodal/03-annual-query-cost.png)
+![Annual query-side cost by answering mode](/images/rag/05-multimodal/03-annual-query-cost.webp)
 _Mode choice at answer time dwarfs every ingest-side difference._
 
 Read the three together. The shared-embedding path wins on ingest by roughly $0.50 per thousand images, then loses that back around sixtyfold on the query side — because retrieval-by-similarity gives the answering model no *text* to answer from. It must re-read the pixels on every single question, forever, at vision rates. Transcription costs more once, and in exchange makes the cheap text-only answering mode possible for the life of the system.

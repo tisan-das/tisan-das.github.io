@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Production RAG - Chunking for Retrieval
-image: /images/rag/03-chunking/01-chunk-boundary-failure.png
+image: /images/rag/03-chunking/01-chunk-boundary-failure.webp
 series: "Production RAG"
 categories: ["Deep Learning", "RAG"]
 tags: [rag, chunking, bm25, retrieval, ingestion]
@@ -12,7 +12,7 @@ A chunk is the smallest thing retrieval can return. You never get half a chunk, 
 
 {% include series-nav.html %}
 
-![A chunk boundary that destroys the answer](/images/rag/03-chunking/01-chunk-boundary-failure.png)
+![A chunk boundary that destroys the answer](/images/rag/03-chunking/01-chunk-boundary-failure.webp)
 _Neither chunk can answer the question. The information was in the corpus; the boundary removed it._
 
 The goal of a chunker is therefore not "pieces of roughly 1,800 characters". It is that **every piece can stand alone**.
@@ -25,7 +25,7 @@ Chunks are selected by two mechanisms that look at completely different properti
 
 **BM25** counts matching terms and divides by length. The length correction is necessary — otherwise long documents would always win — but it overshoots at the extremes. With FTS5's defaults, the `dl / avgdl` term swings the denominator roughly fivefold between a 42-character fragment and a 1,780-character table.
 
-![BM25 length normalization across chunk sizes](/images/rag/03-chunking/02-bm25-length-normalization.png)
+![BM25 length normalization across chunk sizes](/images/rag/03-chunking/02-bm25-length-normalization.webp)
 _Relative BM25 score for one identical term match at four chunk lengths. The orphan fragment nearly doubles the score of the full table it was cut from._
 
 > The intuition worth carrying: BM25 is asking *"what fraction of this chunk is about your query?"* A 42-character chunk entirely about `32x` beats a 1,780-character chunk that is two percent about `32x`. This single mechanism is behind two of the three chunking rules below.

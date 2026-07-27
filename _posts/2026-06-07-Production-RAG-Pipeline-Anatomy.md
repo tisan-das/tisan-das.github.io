@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Production RAG - Anatomy of the Pipeline
-image: /images/rag/01-foundations/01-rag-pipeline.png
+image: /images/rag/01-foundations/01-rag-pipeline.webp
 series: "Production RAG"
 categories: ["Deep Learning", "RAG"]
 tags: [rag, llm, retrieval, vector-search, system-design, embeddings]
@@ -19,7 +19,7 @@ Retrieval-augmented generation looks deceptively simple. Split the documents, em
 
 The first question worth settling is why the knowledge should live in an index rather than in the model's weights. Fine-tuning — continuing a pre-trained model's training on private data — is the alternative most teams evaluate first, and it has three structural problems when used as a knowledge store.
 
-![RAG compared with fine-tuning](/images/rag/01-foundations/02-rag-vs-finetuning.png)
+![RAG compared with fine-tuning](/images/rag/01-foundations/02-rag-vs-finetuning.webp)
 _Fine-tuning puts knowledge in weights; RAG puts it in an index. The consequences show up in updates, access control and provenance._
 
 **Expertise and risk.** Fine-tuning is genuinely difficult. It risks overfitting, regressions in the model's general competence, and interference with the vendor's own post-training (SFT, RLHF). Many teams also discover their data is neither large enough nor clean enough for it to work.
@@ -37,7 +37,7 @@ The same reasoning applies to the "long context kills RAG" argument. Dumping an 
 
 Everything in this series hangs off one pipeline with two halves. **Ingestion** runs once per document: parse, chunk, embed, index. **Query** runs per request: retrieve, fuse, rerank, generate.
 
-![The end-to-end RAG pipeline](/images/rag/01-foundations/01-rag-pipeline.png)
+![The end-to-end RAG pipeline](/images/rag/01-foundations/01-rag-pipeline.webp)
 _A single query flows left to right. Each stage narrows and improves the candidate set produced by the stage before it._
 
 Two details about the query flow are worth fixing in mind early, because they get skipped in most introductions.

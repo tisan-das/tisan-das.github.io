@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Production RAG - Grounded Generation
-image: /images/rag/07-grounded-generation/01-correction-loop.png
+image: /images/rag/07-grounded-generation/01-correction-loop.webp
 series: "Production RAG"
 categories: ["Deep Learning", "RAG"]
 tags: [rag, hallucination, llm, guardrails, caching]
@@ -39,7 +39,7 @@ Reasonable starting thresholds: 0.8 and above passes, 0.5–0.8 warns or trigger
 
 Detection tells you an answer is bad. Correction repairs it, and it is worth doing properly rather than simply regenerating — regeneration re-rolls the dice and can produce *new* hallucinations, in a loop that has no reason to terminate.
 
-![The claim-level hallucination correction loop](/images/rag/07-grounded-generation/01-correction-loop.png)
+![The claim-level hallucination correction loop](/images/rag/07-grounded-generation/01-correction-loop.webp)
 _Each claim is kept, minimally edited, or dropped. Every edit is re-verified before it replaces the original._
 
 - **Decompose** the answer into atomic claims — one checkable fact each. Decomposition quality bounds everything downstream, so this step deserves more attention than it usually gets.
@@ -56,7 +56,7 @@ A correct refusal outranks a fluent fabrication. This is easy to agree with and 
 
 Not every query needs the frontier model. A router classifies difficulty and dispatches accordingly — cheap model for simple lookups, expensive model for genuinely hard synthesis — with an escalation path for when the cheap model's answer looks unreliable.
 
-![Cascading LLM router with escalation](/images/rag/07-grounded-generation/02-llm-router-cascade.png)
+![Cascading LLM router with escalation](/images/rag/07-grounded-generation/02-llm-router-cascade.webp)
 _The escalation edge is what makes router misclassification recoverable rather than permanent._
 
 | Confidence signal | Cost | Note |

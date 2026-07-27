@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Production RAG - Extracting Trustworthy Text from PDFs
-image: /images/rag/02-pdf-extraction/01-two-reader-architecture.png
+image: /images/rag/02-pdf-extraction/01-two-reader-architecture.webp
 series: "Production RAG"
 categories: ["Deep Learning", "RAG"]
 tags: [rag, pdf, ocr, text-extraction, ingestion]
@@ -29,7 +29,7 @@ VLM parsing is the newest and the most tempting. It handles complex layouts that
 
 The core architectural move is to run two independent PDF readers over the same file and let each do what only it can do. This is not redundancy — each reader can see something the other structurally cannot.
 
-![Two-reader extraction architecture](/images/rag/02-pdf-extraction/01-two-reader-architecture.png)
+![Two-reader extraction architecture](/images/rag/02-pdf-extraction/01-two-reader-architecture.webp)
 _Both readers converge on one per-page interface. The mode decision downstream needs a signal from each of them._
 
 A layout-aware Python reader such as `pymupdf4llm` gives you the preferred text: headings recovered from font size and weight, and tables emitted as GitHub-flavoured markdown. What it does not give you is a reliable answer to *"is there a big raster image on this page?"* A Go PDF library walking `Resources → XObject` gives you exactly that, plus a flat-text fallback.
@@ -88,7 +88,7 @@ There are four distinct ways a text layer betrays you, and they have different s
 
 A bad-rune ratio catches only the first. A scan has no runes at all, and a shifted CMap produces perfectly legal ASCII. So the detector is a cascade of cheap tests where any single one can condemn the page.
 
-![The five-tier gibberish detection cascade](/images/rag/02-pdf-extraction/02-gibberish-cascade.png)
+![The five-tier gibberish detection cascade](/images/rag/02-pdf-extraction/02-gibberish-cascade.webp)
 _Tiers run cheapest first, and any one of them can route the page to full-page OCR._
 
 ```go
@@ -145,7 +145,7 @@ The real gap is domain vocabulary, and the permutation's own properties give you
 
 This tier earns its complexity because the two populations separate unusually well. Permuted text does not score somewhat lower than English; it scores near zero.
 
-![Lexicon hit-rate score bands](/images/rag/02-pdf-extraction/03-lexicon-score-bands.png)
+![Lexicon hit-rate score bands](/images/rag/02-pdf-extraction/03-lexicon-score-bands.webp)
 _When the threshold sits in a wide empty valley, its exact value barely matters._
 
 Expect clean *technical* prose to land lower than general English — roughly 0.50–0.80 with a 20k-word lexicon, against 0.80+ for a novel. That gap is domain vocabulary, which is why the harvest step matters. If your own measurements show the two bands overlapping, the preprocessing is wrong — usually tables leaking into the token stream — and no threshold will save you.
@@ -156,7 +156,7 @@ Do not guess thresholds. Dump per-page signals as JSONL during ingestion, histog
 
 Two signals — the gibberish verdict and the image area — classify each page into one of three modes.
 
-![Per-page transcription mode decision](/images/rag/02-pdf-extraction/04-page-mode-decision.png)
+![Per-page transcription mode decision](/images/rag/02-pdf-extraction/04-page-mode-decision.webp)
 _The expensive vision path is gated behind this decision, so you pay vision rates only on pages that need them._
 
 `FIGURES` mode is where the two readers combine on a single page, and it is the scenario the design was tuned for. On a pricing page, the Python reader extracts the surrounding prose cleanly, but the actual rate numbers are baked into a large raster image it cannot read. The Go reader reports the image, `FIGURES` fires, and the output carries both: clean prose under `## Page N`, plus a figures-only transcription appended under `## Page N (transcribed figures)`. `REPLACE` is the harsher relative — when the text layer itself is garbage, OCR replaces the whole page.
