@@ -42,13 +42,13 @@ _A single query flows left to right. Each stage narrows and improves the candida
 
 Two details about the query flow are worth fixing in mind early, because they get skipped in most introductions.
 
-##### The retrieval query is not the user query
+### The retrieval query is not the user query
 
 Consider the request *"Write a poem based on my travels in 2025."* It contains a command (*write a poem*) and a context need (*my travels in 2025*). If you embed the whole string and search with it, you retrieve poems — documents that look like the command — rather than travel notes. The system then writes a poem based on other poems.
 
 The fix is **query rewriting**: transform the user query into a *retrieval query* that contains only the part that should hit the index, and leave the command in the generation prompt. This is one of the cheapest wins available on the query side, and it is the only query-side lever that changes *what gets retrieved at all*. Everything else — fusion, reranking — merely reorders candidates the retrievers already produced.
 
-##### Metadata travels with every chunk
+### Metadata travels with every chunk
 
 Query rewriting can also emit a **metadata filter**: a structural constraint applied as a database predicate, entirely separate from similarity scoring. Suppose a chat log is ingested with each message tagged `{"who": "user"}` or `{"who": "AI"}`. The question *"According to the AI, where does the President of France live?"* splits into a semantic query plus a filter `who = "AI"`. User messages are excluded before scoring even begins.
 
