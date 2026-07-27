@@ -1,0 +1,106 @@
+<!-- https://giscus.app/ -->
+{% comment %}
+  Site override: click-to-load comments.
+  The theme injects giscus.app/client.js on every post page, which costs
+  ~15-30MB of RAM (GitHub iframe) even for readers who never look at the
+  comments. Here the script is only injected when the reader explicitly
+  asks for it.
+{% endcomment %}
+<div id="giscus-placeholder" class="d-flex justify-content-center pt-1 pb-5">
+  <button id="giscus-load-btn" type="button" class="btn btn-outline-primary">
+    <i class="far fa-comments fa-fw me-1"></i>Load comments
+  </button>
+</div>
+
+<script>
+  (function () {
+    const themeMap = Theme.newThemeMap('light', 'dark_dimmed');
+
+    let lang = '{{ site.comments.giscus.lang | default: lang }}';
+    {%- comment -%} https://github.com/giscus/giscus/tree/main/locales {%- endcomment -%}
+    if (lang.length > 2 && !lang.startsWith('zh')) {
+      lang = lang.slice(0, 2);
+    }
+
+    let giscusLoaded = false;
+
+    function loadGiscus() {
+      if (giscusLoaded) {
+        return;
+      }
+      giscusLoaded = true;
+
+      const btn = document.getElementById('giscus-load-btn');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Loading comments…';
+      }
+
+      let giscusAttributes = {
+        src: 'https://giscus.app/client.js',
+        'data-repo': '{{ site.comments.giscus.repo}}',
+        'data-repo-id': '{{ site.comments.giscus.repo_id }}',
+        'data-category': '{{ site.comments.giscus.category }}',
+        'data-category-id': '{{ site.comments.giscus.category_id }}',
+        'data-mapping': '{{ site.comments.giscus.mapping | default: 'pathname' }}',
+        'data-strict' : '{{ site.comments.giscus.strict | default: '0' }}',
+        'data-reactions-enabled': '{{ site.comments.giscus.reactions_enabled | default: '1' }}',
+        'data-emit-metadata': '0',
+        'data-theme': themeMap[Theme.resolvedTheme],
+        'data-input-position': '{{ site.comments.giscus.input_position | default: 'bottom' }}',
+        'data-lang': lang,
+        'data-loading': 'lazy',
+        crossorigin: 'anonymous',
+        async: ''
+      };
+
+      let giscusNode = document.createElement('script');
+      Object.entries(giscusAttributes).forEach(([key, value]) =>
+        giscusNode.setAttribute(key, value)
+      );
+
+      const placeholder = document.getElementById('giscus-placeholder');
+      placeholder.insertAdjacentElement('afterend', giscusNode);
+
+      /* Remove the placeholder once the comments iframe shows up. */
+      const observer = new MutationObserver(() => {
+        if (document.querySelector('.giscus-frame, giscus-widget iframe')) {
+          placeholder.remove();
+          observer.disconnect();
+        }
+      });
+      observer.observe(document.body, { childList: true, subtree: true });
+    }
+
+    document
+      .getElementById('giscus-load-btn')
+      .addEventListener('click', loadGiscus);
+
+    /* Keep the theme in sync if the reader toggles dark/light mode. */
+    addEventListener('message', (event) => {
+      if (event.source === window && event.data && event.data.id === Theme.eventId) {
+        const newTheme = themeMap[Theme.resolvedTheme];
+
+        const message = {
+          setConfig: {
+            theme: newTheme
+          }
+        };
+
+        const iframe = document.querySelector('.giscus-frame');
+
+        if (!iframe) {
+          return;
+        }
+
+        if (iframe.classList.contains('giscus-frame--loading')) {
+          let url = new URL(iframe.src);
+          url.searchParams.set('theme', newTheme);
+          iframe.src = url.toString();
+        }
+
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+    });
+  })();
+</script>

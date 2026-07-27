@@ -6,7 +6,6 @@ series: "System Design Case Studies"
 categories: ["System Design", "Case Studies"]
 tags: [consistent-hashing, system-design]
 math: true
-mermaid: true
 published: true
 ---
 
@@ -32,13 +31,8 @@ The consistent hashing works based on the following two principles:
 - Map servers and keys to the ring using a uniformly distributed hash function
 - To find out which server a key is mapped to, go clockwise from the key position until the first partition on the ring is found
 
-```mermaid
-flowchart LR
-  K["Key k"] --> H["h(k) on ring"]
-  H --> CW["Walk clockwise"]
-  CW --> S["First server / vnode"]
-  S --> R["Route request to that node"]
-```
+![Consistent Hashing: request routing on the ring](/images/sys-design-vol1/02-consistent-hashing-routing.svg){: .w-75 .light }
+![Consistent Hashing: request routing on the ring](/images/sys-design-vol1/02-consistent-hashing-routing-dark.svg){: .w-75 .dark }
 
 ##### Virtual node
 

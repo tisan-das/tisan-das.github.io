@@ -6,7 +6,6 @@ image: /images/raft-consensus/dataReplication.png
 series: "Distributed Systems Papers"
 categories: ["Distributed Systems", "Consensus"]
 tags: [raft, consensus]
-mermaid: true
 ---
 One of the foundation problems of designing a distributed system is how to store some data in a distributed system. One basic approach is to share or duplicate all the data between the nodes. However the complexity arises when multiple nodes can operate independently, and in case some node goes down the complexity arises by multiple folds. In this blog post, we will learn about Raft: one of the most commonly used consensus algorithms. We would briefly touch on the generic replication technique of the database replication as well.
 
@@ -46,15 +45,8 @@ The primary concept behind the Raft algorithm is that each node can either be a 
 ![Raft: State Transition of nodes: raft Transition Diagram](/images/raft-consensus/raftTransitionDiagram-dark.png){: .w-75 .dark }
 _Raft: State Transition of nodes: raft Transition Diagram_
 
-```mermaid
-stateDiagram-v2
-  [*] --> Follower
-  Follower --> Candidate: election timeout
-  Candidate --> Candidate: split vote / new election
-  Candidate --> Leader: majority of votes
-  Candidate --> Follower: discover higher term / valid leader
-  Leader --> Follower: step down (higher term seen)
-```
+![Raft: state transitions](/images/raft-consensus/raft-state-transitions.svg){: .w-75 .light }
+![Raft: state transitions](/images/raft-consensus/raft-state-transitions-dark.svg){: .w-75 .dark }
 
 The transition rules are pretty much self-evident. When the system is initialized, an external force is needed to select the initial leader. However, once the leader is elected, it remains the leader until it goes down, or gets disconnected from the majority of the servers, which denotes a partitioned network. The leader node periodically sends a heartbeat signal to the rest of the nodes. 
 
@@ -67,22 +59,8 @@ Now, leader selection is a vital process. To ensure that not all the nodes becom
 ![Raft: Leader Election: request Votes RPC](/images/raft-consensus/requestVotesRPC-dark.png){: .dark }
 _Raft: Leader Election: request Votes RPC_
 
-```mermaid
-sequenceDiagram
-  participant F1 as Follower A
-  participant C as Candidate B
-  participant F2 as Follower C
-
-  Note over F1,F2: election timeout fires on B
-  C->>C: become Candidate, term = term + 1
-  C->>F1: RequestVote(term, lastLogIndex, lastLogTerm)
-  C->>F2: RequestVote(term, lastLogIndex, lastLogTerm)
-  F1-->>C: vote granted (up-to-date log)
-  F2-->>C: vote granted
-  Note over C: majority reached → become Leader
-  C->>F1: AppendEntries heartbeat (term)
-  C->>F2: AppendEntries heartbeat (term)
-```
+![Raft: leader election sequence](/images/raft-consensus/raft-leader-election-sequence.svg){: .light }
+![Raft: leader election sequence](/images/raft-consensus/raft-leader-election-sequence-dark.svg){: .dark }
 
 ### Raft: Append Logs:
 The appendLog is the second type of message broadcasted by the leader. Now, as only append operation is allowed on the logs i.e. the data modification, the out-of-sync appending isn't allowed. It's always assumed that logs are appended in the same order leader is having. To enforce this, prevLogIndex value is maintained along with prevLogTerm, which denotes the index and the term of the latest updated log. And in case the node gets some logs that are out-of-sync, i.e. more recent logs, the node discards them and waits to get the intended logs. These arguments are sent by the leader node, and the follower verifies whether needs to append the logs or reject and wait for older messages to get appended or in case of conflicting entries with the leader node specific to the current term, then update it. Now from the above discussion, it's clear that the leader node has to broadcast the entries multiple times, and is generally broadcasted periodically.
