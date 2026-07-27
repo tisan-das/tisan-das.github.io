@@ -16,6 +16,15 @@
   (function () {
     const themeMap = Theme.newThemeMap('light', 'dark_dimmed');
 
+    /* `comment` is a `script_includes` entry, so this markup lands at the end
+       of <body> (after the footer). Move the placeholder to where comments
+       belong: right before <footer> (same trick the theme's giscus loader uses). */
+    const placeholder = document.getElementById('giscus-placeholder');
+    const footer = document.querySelector('footer');
+    if (placeholder && footer) {
+      footer.insertAdjacentElement('beforebegin', placeholder);
+    }
+
     let lang = '{{ site.comments.giscus.lang | default: lang }}';
     {%- comment -%} https://github.com/giscus/giscus/tree/main/locales {%- endcomment -%}
     if (lang.length > 2 && !lang.startsWith('zh')) {
@@ -33,7 +42,8 @@
       const btn = document.getElementById('giscus-load-btn');
       if (btn) {
         btn.disabled = true;
-        btn.textContent = 'Loading comments…';
+        btn.innerHTML =
+          '<span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>Loading comments…';
       }
 
       let giscusAttributes = {
@@ -59,7 +69,6 @@
         giscusNode.setAttribute(key, value)
       );
 
-      const placeholder = document.getElementById('giscus-placeholder');
       placeholder.insertAdjacentElement('afterend', giscusNode);
 
       /* Remove the placeholder once the comments iframe shows up. */
