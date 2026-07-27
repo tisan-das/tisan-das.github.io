@@ -12,6 +12,9 @@ Text retrieval works because both sides of the comparison are text living in one
 
 {% include series-nav.html %}
 
+> **Disclaimer.** This post was drafted with assistance from large language models (Claude Opus 4.8 and DeepSeek V4 Pro) based on conversations exploring production RAG concepts. All content has been reviewed, edited, and verified by a human author.
+{: .prompt-info }
+
 ## Two architectures
 
 | Approach | How it works | Trade-off |

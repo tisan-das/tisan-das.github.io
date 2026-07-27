@@ -12,6 +12,9 @@ A PDF is not a document in any structured sense. Rooted in PostScript, it is a l
 
 {% include series-nav.html %}
 
+> **Disclaimer.** This post was drafted with assistance from large language models (Claude Opus 4.8 and DeepSeek V4 Pro) based on conversations exploring production RAG concepts. All content has been reviewed, edited, and verified by a human author.
+{: .prompt-info }
+
 ## The parser landscape
 
 Four families of tooling exist, and the right policy is a cascade rather than a choice.

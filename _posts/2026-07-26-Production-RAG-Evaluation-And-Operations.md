@@ -12,6 +12,9 @@ Seven posts of machinery, and none of it is trustworthy until you can answer one
 
 {% include series-nav.html %}
 
+> **Disclaimer.** This post was drafted with assistance from large language models (Claude Opus 4.8 and DeepSeek V4 Pro) based on conversations exploring production RAG concepts. All content has been reviewed, edited, and verified by a human author.
+{: .prompt-info }
+
 ## Every retrieval metric is one confusion matrix
 
 For a given query, each chunk is either relevant or not, and either retrieved or not. Everything else is a ratio over those four boxes.

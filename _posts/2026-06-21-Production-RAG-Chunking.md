@@ -12,6 +12,9 @@ A chunk is the smallest thing retrieval can return. You never get half a chunk, 
 
 {% include series-nav.html %}
 
+> **Disclaimer.** This post was drafted with assistance from large language models (Claude Opus 4.8 and DeepSeek V4 Pro) based on conversations exploring production RAG concepts. All content has been reviewed, edited, and verified by a human author.
+{: .prompt-info }
+
 ![A chunk boundary that destroys the answer](/images/rag/03-chunking/01-chunk-boundary-failure.webp)
 _Neither chunk can answer the question. The information was in the corpus; the boundary removed it._
 

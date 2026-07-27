@@ -12,6 +12,9 @@ Ask a RAG system *"how do I shut down an instance"* and keyword search returns n
 
 {% include series-nav.html %}
 
+> **Disclaimer.** This post was drafted with assistance from large language models (Claude Opus 4.8 and DeepSeek V4 Pro) based on conversations exploring production RAG concepts. All content has been reviewed, edited, and verified by a human author.
+{: .prompt-info }
+
 ## Embeddings and the dot product
 
 An embedding maps text to a dense vector so that semantic proximity becomes geometric proximity. Retrieval ranks by cosine similarity — the angle between two vectors, ignoring magnitude.
