@@ -56,9 +56,12 @@ webmaster_verifications:
 # The end of `jekyll-seo-tag` settings
 
 # Web Analytics Settings
+# Google Analytics intentionally removed (saves ~470KB + ~8MB RAM per page).
+# To use GoatCounter instead: sign up at goatcounter.com, set the id below
+# to your site code (the subdomain, e.g. 'gemsofcoding').
 analytics:
   google:
-    id: G-R7CEYBEH4F
+    id:
   goatcounter:
     id: # fill in your GoatCounter ID
   umami:
