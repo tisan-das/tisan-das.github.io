@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Production RAG - Anatomy of the Pipeline
+title: "Production RAG - Part 1: Anatomy of the Pipeline"
 image: /images/rag/01-foundations/01-rag-pipeline.webp
 series: "Production RAG"
-categories: ["Deep Learning", "RAG"]
+categories: ["LLM", "RAG"]
 tags: [rag, llm, retrieval, vector-search, system-design, embeddings]
 published: true
 ---

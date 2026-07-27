@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Production RAG - Images and Multimodal Retrieval
+title: "Production RAG - Part 5: Images and Multimodal Retrieval"
 image: /images/rag/05-multimodal/01-image-ingest-cost.webp
 series: "Production RAG"
-categories: ["Deep Learning", "RAG"]
+categories: ["LLM", "RAG"]
 tags: [rag, multimodal, vision, embeddings, cost-optimization]
 published: true
 ---

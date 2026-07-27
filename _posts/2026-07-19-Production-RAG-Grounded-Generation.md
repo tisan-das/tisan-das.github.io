@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Production RAG - Grounded Generation
+title: "Production RAG - Part 7: Grounded Generation"
 image: /images/rag/07-grounded-generation/01-correction-loop.webp
 series: "Production RAG"
-categories: ["Deep Learning", "RAG"]
+categories: ["LLM", "RAG"]
 tags: [rag, hallucination, llm, guardrails, caching]
 published: true
 ---

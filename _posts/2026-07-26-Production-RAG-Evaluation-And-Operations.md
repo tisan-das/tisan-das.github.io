@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Production RAG - Evaluation and Operations
+title: "Production RAG - Part 8: Evaluation and Operations"
 image: /images/rag/08-evaluation-ops/01-retrieval-confusion-matrix.webp
 series: "Production RAG"
-categories: ["Deep Learning", "RAG"]
+categories: ["LLM", "RAG"]
 tags: [rag, evaluation, observability, security, agents, llm]
 published: true
 ---

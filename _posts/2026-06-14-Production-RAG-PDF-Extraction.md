@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Production RAG - Extracting Trustworthy Text from PDFs
+title: "Production RAG - Part 2: Extracting Trustworthy Text from PDFs"
 image: /images/rag/02-pdf-extraction/01-two-reader-architecture.webp
 series: "Production RAG"
-categories: ["Deep Learning", "RAG"]
+categories: ["LLM", "RAG"]
 tags: [rag, pdf, ocr, text-extraction, ingestion]
 published: true
 ---

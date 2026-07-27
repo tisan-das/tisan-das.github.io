@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Production RAG - Entities and Knowledge Graphs
+title: "Production RAG - Part 6: Entities and Knowledge Graphs"
 image: /images/rag/06-entities-graphs/01-two-retrieval-failures.webp
 series: "Production RAG"
-categories: ["Deep Learning", "RAG"]
+categories: ["LLM", "RAG"]
 tags: [rag, knowledge-graph, ner, graphrag, entity-resolution]
 published: true
 ---

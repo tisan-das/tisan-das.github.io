@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Production RAG - Chunking for Retrieval
+title: "Production RAG - Part 3: Chunking for Retrieval"
 image: /images/rag/03-chunking/01-chunk-boundary-failure.webp
 series: "Production RAG"
-categories: ["Deep Learning", "RAG"]
+categories: ["LLM", "RAG"]
 tags: [rag, chunking, bm25, retrieval, ingestion]
 published: true
 ---

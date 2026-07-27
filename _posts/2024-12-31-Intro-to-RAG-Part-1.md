@@ -3,7 +3,7 @@ layout: post
 title: Use of LLM - Semantic Search
 image: /images/llm/reranker.webp
 series: "LLM & RAG"
-categories: ["Deep Learning", "LLM"]
+categories: ["LLM", "RAG"]
 tags: [rag, semantic-search, llm]
 published: true
 ---

@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Production RAG - Hybrid Search, Fusion and Reranking
+title: "Production RAG - Part 4: Hybrid Search, Fusion and Reranking"
 image: /images/rag/04-hybrid-search/01-cosine-unit-circle.webp
 series: "Production RAG"
-categories: ["Deep Learning", "RAG"]
+categories: ["LLM", "RAG"]
 tags: [rag, embeddings, bm25, hnsw, reranking, vector-search]
 published: true
 ---
