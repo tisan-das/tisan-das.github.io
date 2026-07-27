@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Introduction to Consistent Hashing
-image: /images/sys-design-vol1/02-consistent-hashing-hash-ring.png
+image: /images/sys-design-vol1/02-consistent-hashing-hash-ring.webp
 series: "System Design Case Studies"
 categories: ["System Design", "Case Studies"]
 tags: [consistent-hashing, system-design]
@@ -23,8 +23,8 @@ Consistent hashing is a commonly used technique for this rehashing problem: only
 
 All the cryptographic hashes used have a mathematical lower and upper value. For example, SHA-1 has a lower bound of $0$ and an upper bound of $2^{160}-1$. Logically, a hash ring can be thought of as a ring by connecting both ends of the possible values of the cryptographic hash.
 
-![Hash ring and consistent hashing: consistent hashing hash ring](/images/sys-design-vol1/02-consistent-hashing-hash-ring.png){: .light }
-![Hash ring and consistent hashing: consistent hashing hash ring](/images/sys-design-vol1/02-consistent-hashing-hash-ring-dark.png){: .dark }
+![Hash ring and consistent hashing: consistent hashing hash ring](/images/sys-design-vol1/02-consistent-hashing-hash-ring.webp){: .light }
+![Hash ring and consistent hashing: consistent hashing hash ring](/images/sys-design-vol1/02-consistent-hashing-hash-ring-dark.webp){: .dark }
 _Hash ring and consistent hashing: consistent hashing hash ring_
 
 The consistent hashing works based on the following two principles:

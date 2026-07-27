@@ -2,7 +2,7 @@
 layout: post
 title: System Design - Rate Limiter
 pin: true
-image: /images/sys-design-vol1/01-rate-limiter-hld.png
+image: /images/sys-design-vol1/01-rate-limiter-hld.webp
 series: "System Design Case Studies"
 categories: ["System Design", "Case Studies"]
 tags: [rate-limiter, system-design]
@@ -26,8 +26,8 @@ Rate limiter is a vital component in large-scale web applications, as it control
 - **Client-side:** Generally, client requests can be easily tampered with and bypassed, so it's better not to place an important component like rate-limiting on the client side
 - **Server-side:** 
 
-![Where to put the rate limiter?: rate limiter hld](/images/sys-design-vol1/01-rate-limiter-hld.png){: .w-75 .light }
-![Where to put the rate limiter?: rate limiter hld](/images/sys-design-vol1/01-rate-limiter-hld-dark.png){: .w-75 .dark }
+![Where to put the rate limiter?: rate limiter hld](/images/sys-design-vol1/01-rate-limiter-hld.webp){: .w-75 .light }
+![Where to put the rate limiter?: rate limiter hld](/images/sys-design-vol1/01-rate-limiter-hld-dark.webp){: .w-75 .dark }
 _Where to put the rate limiter?: rate limiter hld_
 
 ##### Rate-limiting Algorithm
@@ -40,20 +40,20 @@ It involves two parameters:
 ![Rate-limiting Algorithm: token bucket flow](/images/sys-design-vol1/01-rate-limiter-token-bucket-flow.svg){: .w-75 .light }
 ![Rate-limiting Algorithm: token bucket flow](/images/sys-design-vol1/01-rate-limiter-token-bucket-flow-dark.svg){: .w-75 .dark }
 
-![Rate-limiting Algorithm: rate limiter tokrn bucket algo](/images/sys-design-vol1/01-rate-limiter-tokrn-bucket-algo.png){: .light }
-![Rate-limiting Algorithm: rate limiter tokrn bucket algo](/images/sys-design-vol1/01-rate-limiter-tokrn-bucket-algo-dark.png){: .dark }
+![Rate-limiting Algorithm: rate limiter tokrn bucket algo](/images/sys-design-vol1/01-rate-limiter-tokrn-bucket-algo.webp){: .light }
+![Rate-limiting Algorithm: rate limiter tokrn bucket algo](/images/sys-design-vol1/01-rate-limiter-tokrn-bucket-algo-dark.webp){: .dark }
 _Rate-limiting Algorithm: rate limiter tokrn bucket algo_
 
 Using a database to store the token bucket-specific parameter isn't advisable, as it requires disk access. Instead, it would be better to use an in-memory cache.
 
-![Rate-limiting Algorithm: rate limiter hld2](/images/sys-design-vol1/01-rate-limiter-hld2.png){: .light }
-![Rate-limiting Algorithm: rate limiter hld2](/images/sys-design-vol1/01-rate-limiter-hld2-dark.png){: .dark }
+![Rate-limiting Algorithm: rate limiter hld2](/images/sys-design-vol1/01-rate-limiter-hld2.webp){: .light }
+![Rate-limiting Algorithm: rate limiter hld2](/images/sys-design-vol1/01-rate-limiter-hld2-dark.webp){: .dark }
 _Rate-limiting Algorithm: rate limiter hld2_
 
 ### Detailed Design
 
-![Detailed Design: rate limiter hld3](/images/sys-design-vol1/01-rate-limiter-hld3.png){: .w-75 .light }
-![Detailed Design: rate limiter hld3](/images/sys-design-vol1/01-rate-limiter-hld3-dark.png){: .w-75 .dark }
+![Detailed Design: rate limiter hld3](/images/sys-design-vol1/01-rate-limiter-hld3.webp){: .w-75 .light }
+![Detailed Design: rate limiter hld3](/images/sys-design-vol1/01-rate-limiter-hld3-dark.webp){: .w-75 .dark }
 _Detailed Design: rate limiter hld3_
 
 ##### Handling Race Condition

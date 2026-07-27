@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Web Application Security - Injection Attack
-image: /images/web-security/injection_sql.png
+image: /images/web-security/injection_sql.webp
 series: "Web Security"
 categories: ["Security", "Web Security"]
 tags: [injection, sql-injection]
@@ -19,8 +19,8 @@ SQL Injection is the most popular kind of injection attack, whether attackers tr
 
 Recently web frameworks started advocating implementation patterns to mitigate these SQL injection attacks.
 
-![SQL Injection: injection SQL](/images/web-security/injection_sql.png){: .light }
-![SQL Injection: injection SQL](/images/web-security/injection_sql-dark.png){: .dark }
+![SQL Injection: injection SQL](/images/web-security/injection_sql.webp){: .light }
+![SQL Injection: injection SQL](/images/web-security/injection_sql-dark.webp){: .dark }
 _SQL Injection: injection SQL_
 
 ### Command Injection:
@@ -28,8 +28,8 @@ With the command injection type of attacks, the user can provide the payload to 
 
 An example can be thought of for some video converters, where the convert operation is generally performed by some other application installed on the server, and based upon a request from the user, the web server triggers the video conversion command meant for the third-party application. Now in case the attacker can exploit certain vulnerabilities in the application code to run its commands, or alter the way the internal video convert application is supposed to be used, that would be an example of command injection.
 
-![Command Injection: injection command](/images/web-security/injection_command.png){: .w-75 .light }
-![Command Injection: injection command](/images/web-security/injection_command-dark.png){: .w-75 .dark }
+![Command Injection: injection command](/images/web-security/injection_command.webp){: .w-75 .light }
+![Command Injection: injection command](/images/web-security/injection_command-dark.webp){: .w-75 .dark }
 _Command Injection: injection command_
 
 ### Code Injection:

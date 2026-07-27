@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Testing Distributed Systems for Linearizability
-image: /images/raft-consensus/linearizable.png
+image: /images/raft-consensus/linearizable.webp
 series: "Distributed Systems Papers"
 categories: ["Distributed Systems", "Consensus"]
 tags: [linearizability, consistency, jepsen]
@@ -20,14 +20,14 @@ The general approach to test linearizability is to first capture the execution h
 
 ##### Example of a linearizable execution history:
 
-![Example of a linearizable execution history: linearizable](/images/raft-consensus/linearizable.png){: .light }
-![Example of a linearizable execution history: linearizable](/images/raft-consensus/linearizable-dark.png){: .dark }
+![Example of a linearizable execution history: linearizable](/images/raft-consensus/linearizable.webp){: .light }
+![Example of a linearizable execution history: linearizable](/images/raft-consensus/linearizable-dark.webp){: .dark }
 _Example of a linearizable execution history: linearizable_
 
 ##### Example of a non-linearizable execution history:
 
-![Example of a non-linearizable execution history: non linearizable](/images/raft-consensus/non-linearizable.png){: .light }
-![Example of a non-linearizable execution history: non linearizable](/images/raft-consensus/non-linearizable-dark.png){: .dark }
+![Example of a non-linearizable execution history: non linearizable](/images/raft-consensus/non-linearizable.webp){: .light }
+![Example of a non-linearizable execution history: non linearizable](/images/raft-consensus/non-linearizable-dark.webp){: .dark }
 _Example of a non-linearizable execution history: non linearizable_
 
 ### To be explored:

@@ -1,12 +1,12 @@
 ---
 published: true
 title: Introduction to Authorization
-image: /images/JWT-OAuth/AuthenticationVsAuthorization.png
+image: /images/JWT-OAuth/AuthenticationVsAuthorization.webp
 categories: ["Security", "Identity"]
 tags: [authorization, oauth2, jwt]
 ---
 Authentication and authorization is one of the corner stones of designing services. As both the terms used together, it gives the idea that both these two terms are exactly same. However it's far from the truth; theoretically they handle two different aspect of security. Authentication verifies the user identity, however, authroization validates the access level. This blog post provides an introduction on the authorization portion, an overview on OAuth, one of the most popular authorization mechanism available today.
-![Authentication Vs Authorization](/images/JWT-OAuth/AuthenticationVsAuthorization.png)
+![Authentication Vs Authorization](/images/JWT-OAuth/AuthenticationVsAuthorization.webp)
 _Authentication Vs Authorization_
 
   
@@ -32,8 +32,8 @@ Different servers have different sets of mechanisms for implementing HTTP Basic 
     auth_basic_user_file /etc/apache2/.htpasswd; 
   }
 ```
-![HTTP Basic Auth: HTTP Basic Auth Flow](/images/JWT-OAuth/httpBasicAuthFlow.png){: .light }
-![HTTP Basic Auth: HTTP Basic Auth Flow](/images/JWT-OAuth/httpBasicAuthFlow-dark.png){: .dark }
+![HTTP Basic Auth: HTTP Basic Auth Flow](/images/JWT-OAuth/httpBasicAuthFlow.webp){: .light }
+![HTTP Basic Auth: HTTP Basic Auth Flow](/images/JWT-OAuth/httpBasicAuthFlow-dark.webp){: .dark }
 _HTTP Basic Auth: HTTP Basic Auth Flow_
 
 It's to be noted that as credentials are transferred over a network call in this case, a secure layer like HTTPS is needed to ensure the credentials are safe from eavesdropping or man-in-the-middle attack.
@@ -92,8 +92,8 @@ Also, the lifetime can be changed depending on the type of user also:
 There are several reasons why an access token is needed to be revoked and invalidated. Operations like account deactivation, user revoking permission for application, updating the password, and updating token lifetime; are a few of the examples for which the OAuth server needs to revoke the active token. It's the responsibility of the API to validate the access tokens. Even though the local validation provides speed and efficiency, however, it still needs to use the Token Introspection Endpoint to validate that the access token is not invalidated.
 It's to be noted that the OAuth server provides a Revocation Endpoint, to revoke the access token from the application side as well.
 
-![Handling Revoked and Invalidated Access Token: Access Token Validation Framework](/images/JWT-OAuth/AccessTokenValidationFramework.png){: .light }
-![Handling Revoked and Invalidated Access Token: Access Token Validation Framework](/images/JWT-OAuth/AccessTokenValidationFramework-dark.png){: .dark }
+![Handling Revoked and Invalidated Access Token: Access Token Validation Framework](/images/JWT-OAuth/AccessTokenValidationFramework.webp){: .light }
+![Handling Revoked and Invalidated Access Token: Access Token Validation Framework](/images/JWT-OAuth/AccessTokenValidationFramework-dark.webp){: .dark }
 _Handling Revoked and Invalidated Access Token: Access Token Validation Framework_
 
 ### Local Validation of JWT Access token:
@@ -112,8 +112,8 @@ OAuth specification doesn't recommend any particular values for scope, however, 
 It's recommended to have at least two different scopes for a read-only and a read-write mode to be available. Also, these scope details are shown on the user consent screen.
   
 ### Authorization Code Flow:
-![Authorization Code Flow: OAuth Code Flow](/images/JWT-OAuth/OAuthCodeFlow.png){: .light }
-![Authorization Code Flow: OAuth Code Flow](/images/JWT-OAuth/OAuthCodeFlow-dark.png){: .dark }
+![Authorization Code Flow: OAuth Code Flow](/images/JWT-OAuth/OAuthCodeFlow.webp){: .light }
+![Authorization Code Flow: OAuth Code Flow](/images/JWT-OAuth/OAuthCodeFlow-dark.webp){: .dark }
 _Authorization Code Flow: OAuth Code Flow_
 
 ### Client Credentials Grant Flow:

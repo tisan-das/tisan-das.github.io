@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Frangipani - A Scalable Distributed FileSystem
-image: /images/frangipani/architecture.png
+image: /images/frangipani/architecture.webp
 series: "Distributed Systems Papers"
 categories: ["Distributed Systems", "Storage"]
 tags: [frangipani, distributed-file-system]
@@ -15,8 +15,8 @@ Frangipani is one of the intial attempts to create a scalable distributed file-s
 ### Architecture Overview:
 Frangipani file-system is built on top of Petal, a distributed storage system that manages the underlying virtual disks, and Frangipani provides the file-system abstraction on top of the disk service. Besides that Frangipani also uses a lock service for cache coherance and atomicity.
 
-![Architecture Overview: architecture](/images/frangipani/architecture.png){: .light }
-![Architecture Overview: architecture](/images/frangipani/architecture-dark.png){: .dark }
+![Architecture Overview: architecture](/images/frangipani/architecture.webp){: .light }
+![Architecture Overview: architecture](/images/frangipani/architecture-dark.webp){: .dark }
 _Architecture Overview: architecture_
 
 It's to be noted that, even though the lock server is shown as residing over the same Petal disk devices in the above diagram, it's completely decoupled.
@@ -39,8 +39,8 @@ In order to ensure cache coherance, Frangipani dictates all operations on indivi
 
 Each Frangipani client maintains it's own lock status as well. When a lock is acquired, after the work is completed, the lock is not immediately released, rather the Frangipani client continue to hold the lock and mentions it as IDLE in it's own ledger.
 
-![Cache Coherance: lock Sequence](/images/frangipani/lockSequence.png){: .light }
-![Cache Coherance: lock Sequence](/images/frangipani/lockSequence-dark.png){: .dark }
+![Cache Coherance: lock Sequence](/images/frangipani/lockSequence.webp){: .light }
+![Cache Coherance: lock Sequence](/images/frangipani/lockSequence-dark.webp){: .dark }
 _Cache Coherance: lock Sequence_
 
 Also in order to handle deadlock scenario with lock service, Frangipani first lists down all the locks needed for a particular operation, and then starts to acquire the locks in the order of the i-node address.
@@ -50,8 +50,8 @@ It's to be noted that Frangipani uses locks with two different modes: shared mod
 ### Crash Recovery:
 Frangipani uses write-ahead logging of metadata to simplify failure recovery. Log records are written to the petal disk servers describing the operation it needs to be performed with all the associated details. Each Frangipani client maintains it's own log records, and an operation is performed only after the log entry is updated.
 
-![Crash Recovery: wal Log Entry](/images/frangipani/walLogEntry.png){: .light }
-![Crash Recovery: wal Log Entry](/images/frangipani/walLogEntry-dark.png){: .dark }
+![Crash Recovery: wal Log Entry](/images/frangipani/walLogEntry.webp){: .light }
+![Crash Recovery: wal Log Entry](/images/frangipani/walLogEntry-dark.webp){: .dark }
 _Crash Recovery: wal Log Entry_
 
 When a server crash is detected, either by Frangipani client itself, or by the lock server while requesting to release the lock, the recovery demon is kicked in. The recovery demon takes responsibility of executing the remainting log entries and releasing all the logs. To ensure that no log entry is executed twice, Frangipani stamps the block with a monotonically increasing version number once operation is done, and also maintains the same version number when the log entry is written.

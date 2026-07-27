@@ -2,7 +2,7 @@
 published: true
 title: RAFT Consensus Algorithm
 pin: true
-image: /images/raft-consensus/dataReplication.png
+image: /images/raft-consensus/dataReplication.webp
 series: "Distributed Systems Papers"
 categories: ["Distributed Systems", "Consensus"]
 tags: [raft, consensus]
@@ -20,14 +20,14 @@ One of the most commonly used approaches here is to use a single leader replicat
 1. Synchronous replication: Wait for acknowledgment from the follower nodes first, before committing data
 2. Asynchronous replication: Trigger replication, however not to wait for acknowledgment from the follower nodes before committing data
 
-![Single-leader replication: data Replication](/images/raft-consensus/dataReplication.png){: .light }
-![Single-leader replication: data Replication](/images/raft-consensus/dataReplication-dark.png){: .dark }
+![Single-leader replication: data Replication](/images/raft-consensus/dataReplication.webp){: .light }
+![Single-leader replication: data Replication](/images/raft-consensus/dataReplication-dark.webp){: .dark }
 _Single-leader replication: data Replication_
 
 The asynchronous replication technique has one drawback: the consistency for read-after-write requests can't be guaranteed. 
 
-![Single-leader replication: async Read Issue](/images/raft-consensus/asyncReadIssue.png){: .light }
-![Single-leader replication: async Read Issue](/images/raft-consensus/asyncReadIssue-dark.png){: .dark }
+![Single-leader replication: async Read Issue](/images/raft-consensus/asyncReadIssue.webp){: .light }
+![Single-leader replication: async Read Issue](/images/raft-consensus/asyncReadIssue-dark.webp){: .dark }
 _Single-leader replication: async Read Issue_
 
 There are certain workarounds to this issue, for example storing updated timestamps on the client side to read the updated data after the specific timestamp, or utilizing sticky routing, however, none of them still guarantees strong consistency. So distributed systems not requiring strong consistency can take this approach. However, based on the CAP theorem, which we would explore in a later post, the CP and CA systems wouldn't be able to rely on the async data replication technique.
@@ -41,8 +41,8 @@ This is where a consensus algorithm like Raft comes into the picture. The consen
 ### Raft: State Transition of nodes:
 The primary concept behind the Raft algorithm is that each node can either be a leader, follower, or candidate node during an election:
 
-![Raft: State Transition of nodes: raft Transition Diagram](/images/raft-consensus/raftTransitionDiagram.png){: .w-75 .light }
-![Raft: State Transition of nodes: raft Transition Diagram](/images/raft-consensus/raftTransitionDiagram-dark.png){: .w-75 .dark }
+![Raft: State Transition of nodes: raft Transition Diagram](/images/raft-consensus/raftTransitionDiagram.webp){: .w-75 .light }
+![Raft: State Transition of nodes: raft Transition Diagram](/images/raft-consensus/raftTransitionDiagram-dark.webp){: .w-75 .dark }
 _Raft: State Transition of nodes: raft Transition Diagram_
 
 ![Raft: state transitions](/images/raft-consensus/raft-state-transitions.svg){: .w-75 .light }
@@ -55,8 +55,8 @@ If one of the nodes sees that it's not receiving any heartbeat from the leader n
 
 Now, leader selection is a vital process. To ensure that not all the nodes become a candidate at the same time, a randomized election timeout is used. Also, there's one more vital issue for the leader election. The leader node should have all the entries updated, hence before casting vote, the follower node check whether the candidate node is up-to-date both in terms of the term number, and the log index of the previous term and also returns these values to the leader. If the leader finds out it's missing an updated log, then it cancels the election and goes back to being a follower node. Also, a follower node can cast its vote for only one node for a given term. The candidate node becomes the leader if it has got the votes for the majority of the nodes.
 
-![Raft: Leader Election: request Votes RPC](/images/raft-consensus/requestVotesRPC.png){: .light }
-![Raft: Leader Election: request Votes RPC](/images/raft-consensus/requestVotesRPC-dark.png){: .dark }
+![Raft: Leader Election: request Votes RPC](/images/raft-consensus/requestVotesRPC.webp){: .light }
+![Raft: Leader Election: request Votes RPC](/images/raft-consensus/requestVotesRPC-dark.webp){: .dark }
 _Raft: Leader Election: request Votes RPC_
 
 ![Raft: leader election sequence](/images/raft-consensus/raft-leader-election-sequence.svg){: .light }
@@ -67,8 +67,8 @@ The appendLog is the second type of message broadcasted by the leader. Now, as o
 
 Following are the arguments to the appendEntry/appendLog command:
 
-![Raft: Append Logs: log Append RPC](/images/raft-consensus/logAppendRPC.png){: .light }
-![Raft: Append Logs: log Append RPC](/images/raft-consensus/logAppendRPC-dark.png){: .dark }
+![Raft: Append Logs: log Append RPC](/images/raft-consensus/logAppendRPC.webp){: .light }
+![Raft: Append Logs: log Append RPC](/images/raft-consensus/logAppendRPC-dark.webp){: .dark }
 _Raft: Append Logs: log Append RPC_
 
 Once the leader gets acknowledgment from the majority of the nodes for a specific logIndex, it updates the commitIndex, denoting that the logs or transactions till that index is already committed. This is a way to let the higher-level application know that the transaction is already committed. Now in case the leader goes down abruptly, the client will know that the rest of the data isn't committed to the system.

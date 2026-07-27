@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Amazon DynamoDB - Distributed Transactions 
-image: /images/dynamo-db/highLevelArchitectureTransaction.png
+image: /images/dynamo-db/highLevelArchitectureTransaction.webp
 series: "Distributed Systems Papers"
 categories: ["Databases", "DynamoDB"]
 tags: [dynamodb, transactions]
@@ -30,8 +30,8 @@ Both TransactGetItems and TransactWriteItems are synchronous and idempotent. If 
 
 ### Transaction Routing
 
-![Transaction Routing: high Level Architecture Transaction](/images/dynamo-db/highLevelArchitectureTransaction.png){: .light }
-![Transaction Routing: high Level Architecture Transaction](/images/dynamo-db/highLevelArchitectureTransaction-dark.png){: .dark }
+![Transaction Routing: high Level Architecture Transaction](/images/dynamo-db/highLevelArchitectureTransaction.webp){: .light }
+![Transaction Routing: high Level Architecture Transaction](/images/dynamo-db/highLevelArchitectureTransaction-dark.webp){: .dark }
 _Transaction Routing: high Level Architecture Transaction_
 
 All the DynamoDB operations are sent to a fleet of front-end hosts named request routers. The request route authenticates the requests and redirects the non-transactional requests to the storage node containing the key. The key-range information is stored in the metadata system. The transaction requests have got one extra hop. The request routers forward the transactional request to the transactional coordinator, which then breaks the transaction, and co-ordinates with the associated storage nodes to complete the transaction in a two-phased way.

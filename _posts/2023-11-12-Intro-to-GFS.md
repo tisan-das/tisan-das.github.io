@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Introduction to Google File System
-image: /images/gfs/chunkServerConfig.png
+image: /images/gfs/chunkServerConfig.webp
 series: "Distributed Systems Papers"
 categories: ["Distributed Systems", "Storage"]
 tags: [gfs, distributed-file-system]
@@ -16,8 +16,8 @@ There's mainly two type of write operation a distributed filesystem has to suppo
 
 ### Architecture:
 
-![Architecture: chunk Server Config](/images/gfs/chunkServerConfig.png){: .light }
-![Architecture: chunk Server Config](/images/gfs/chunkServerConfig-dark.png){: .dark }
+![Architecture: chunk Server Config](/images/gfs/chunkServerConfig.webp){: .light }
+![Architecture: chunk Server Config](/images/gfs/chunkServerConfig-dark.webp){: .dark }
 _Architecture: chunk Server Config_
 
 ##### Properties:
@@ -31,8 +31,8 @@ The master server contains only the metadata of the file-system. Each operaation
 1. **Filename metadata:** Maps a particular filename to a list of chunk-handlers
 2. **Chunkhandler metadata:** Maps a chunk server to list of chunk servers, version number (non-volative, stored in persistent storage), primary chunk server, lease expiry timestamp
 
-![Properties: architecture](/images/gfs/architecture.png){: .w-75 .light }
-![Properties: architecture](/images/gfs/architecture-dark.png){: .w-75 .dark }
+![Properties: architecture](/images/gfs/architecture.webp){: .w-75 .light }
+![Properties: architecture](/images/gfs/architecture-dark.webp){: .w-75 .dark }
 _Properties: architecture_
 
 ##### Write Operation:
@@ -53,8 +53,8 @@ _Properties: architecture_
 ##### Relaxed consistency:
 GFS offeres flexible consistency, hence depending upon replica, the client might find different data.
 
-![Relaxed consistency: replica Data Mismatch](/images/gfs/replicaDataMismatch.png){: .light }
-![Relaxed consistency: replica Data Mismatch](/images/gfs/replicaDataMismatch-dark.png){: .dark }
+![Relaxed consistency: replica Data Mismatch](/images/gfs/replicaDataMismatch.webp){: .light }
+![Relaxed consistency: replica Data Mismatch](/images/gfs/replicaDataMismatch-dark.webp){: .dark }
 _Relaxed consistency: replica Data Mismatch_
 
 **NB:** Certain times master server might come across with a chunk server with a chunk handler having higher version number than the metadata stored on the master. In that case master assumes that there were some node failure while assigning the version number, and master updates the metadata with the updated version number. Also master doesn't store the list of chunk servers for chunk handler, as it scans the chunk server and updates it metadata when the chunk server joins the network.

@@ -1,15 +1,15 @@
 ---
 published: true
 title: Introduction to Microservice Architecture
-image: /images/REST-intro/monolithMicroservice.png
+image: /images/REST-intro/monolithMicroservice.webp
 categories: ["System Design", "Fundamentals"]
 tags: [microservices, architecture]
 ---
 
 In this blog post, we will learn about microservices. We would learn why microservices are evolved and are preferred nowadays over monolithic architecture. We would also learn about a few patterns and useful ideas on microservices.
 
-![Monolith Microservice](/images/REST-intro/monolithMicroservice.png){: .light }
-![Monolith Microservice](/images/REST-intro/monolithMicroservice-dark.png){: .dark }
+![Monolith Microservice](/images/REST-intro/monolithMicroservice.webp){: .light }
+![Monolith Microservice](/images/REST-intro/monolithMicroservice-dark.webp){: .dark }
 _Monolith Microservice_
 
 #### Microservice Architecture
@@ -68,8 +68,8 @@ i. Monitoring: How to trace the cross-service view of a request passing through 
 - how every server is doing? => CPU, memory, disk consumption
 - how every service is doing? => health check
 
-![Standardizing Microservices: microservice Monitoring](/images/REST-intro/microserviceMonitoring.png){: .light }
-![Standardizing Microservices: microservice Monitoring](/images/REST-intro/microserviceMonitoring-dark.png){: .dark }
+![Standardizing Microservices: microservice Monitoring](/images/REST-intro/microserviceMonitoring.webp){: .light }
+![Standardizing Microservices: microservice Monitoring](/images/REST-intro/microserviceMonitoring-dark.webp){: .dark }
 _Standardizing Microservices: microservice Monitoring_
 Data Collection:
 - Collect metrics: CPU, RAM, Disk, N/w

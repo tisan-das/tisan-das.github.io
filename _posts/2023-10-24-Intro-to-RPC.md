@@ -1,14 +1,14 @@
 ---
 layout: post
 title: Golang Roughwork I for RPC and Concurrency
-image: /images/map-reduce/rpc.png
+image: /images/map-reduce/rpc.webp
 categories: ["Distributed Systems", "Communication"]
 tags: [rpc, go, concurrency]
 published: true
 ---
 
-![RPC](/images/map-reduce/rpc.png){: .light }
-![RPC](/images/map-reduce/rpc-dark.png){: .dark }
+![RPC](/images/map-reduce/rpc.webp){: .light }
+![RPC](/images/map-reduce/rpc-dark.webp){: .dark }
 _RPC_
 
 ### RPC Server:

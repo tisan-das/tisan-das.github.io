@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Fundamentals of System Design - Failure Models
-image: /images/sys-design-fundamentals/02-retry/01-retry-one-level.png
+image: /images/sys-design-fundamentals/02-retry/01-retry-one-level.webp
 categories: ["System Design", "Fundamentals"]
 tags: [failure-models, fault-tolerance]
 published: true
@@ -134,8 +134,8 @@ Follow a strategy to avoid **thundering herds**, where the calls that failed at 
 - **Retriable operations**: Be aware of the potential side effects of the operation
 - **Retry only on one level:**
 
-![Issues with retries: retry one level](/images/sys-design-fundamentals/02-retry/01-retry-one-level.png){: .light }
-![Issues with retries: retry one level](/images/sys-design-fundamentals/02-retry/01-retry-one-level-dark.png){: .dark }
+![Issues with retries: retry one level](/images/sys-design-fundamentals/02-retry/01-retry-one-level.webp){: .light }
+![Issues with retries: retry one level](/images/sys-design-fundamentals/02-retry/01-retry-one-level-dark.webp){: .dark }
 _Issues with retries: retry one level_
 - **Use Load shedding and backpressure**: Upstream service should shed any additional requests that it can't handle
 
@@ -144,8 +144,8 @@ _Issues with retries: retry one level_
 The majority of the HTTP requests are idempotent, except for POST and PATCH.
 Incorporate a unique caller-provided **client request identifier** into the API contracts. Requests from the same caller with the same client request identifier can be considered duplicates and handled accordingly.
 
-![Use Idempotent APIs to make retries safe: client request ID](/images/sys-design-fundamentals/02-retry/02-client-request-id.png){: .light }
-![Use Idempotent APIs to make retries safe: client request ID](/images/sys-design-fundamentals/02-retry/02-client-request-id-dark.png){: .dark }
+![Use Idempotent APIs to make retries safe: client request ID](/images/sys-design-fundamentals/02-retry/02-client-request-id.webp){: .light }
+![Use Idempotent APIs to make retries safe: client request ID](/images/sys-design-fundamentals/02-retry/02-client-request-id-dark.webp){: .dark }
 _Use Idempotent APIs to make retries safe: client request ID_
 
 ##### Database Design Adjustments (Upsert Operation)
@@ -315,8 +315,8 @@ func (ls *LoadShedder) Release() {
 
 Partition service instances into different groups, based on **consumer load and availability requirements**. This design helps to isolate failures, and allows you to sustain service functionality for some consumers, even during a failure.
 
-![Bulkhead pattern](/images/sys-design-fundamentals/02-retry/03-bulkhead-pattern.png){: .light }
-![Bulkhead pattern](/images/sys-design-fundamentals/02-retry/03-bulkhead-pattern-dark.png){: .dark }
+![Bulkhead pattern](/images/sys-design-fundamentals/02-retry/03-bulkhead-pattern.webp){: .light }
+![Bulkhead pattern](/images/sys-design-fundamentals/02-retry/03-bulkhead-pattern-dark.webp){: .dark }
 _Bulkhead pattern_
 
 ```go

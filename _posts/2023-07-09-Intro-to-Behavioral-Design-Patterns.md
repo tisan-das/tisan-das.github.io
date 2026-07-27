@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Introduction to Behavioral Design Patterns
-image: /images/behavioral-design-patterns/chainCommand.png
+image: /images/behavioral-design-patterns/chainCommand.webp
 series: "Design Patterns"
 categories: ["Programming", "Design Patterns"]
 tags: [design-patterns, behavioral]
@@ -22,13 +22,13 @@ Intent: Avoid coupling the sender of a request to its receiver by giving more th
 
 
 ###### Class Diagram:
-![Class Diagram: chain Command](/images/behavioral-design-patterns/chainCommand.png){: .light }
-![Class Diagram: chain Command](/images/behavioral-design-patterns/chainCommand-dark.png){: .dark }
+![Class Diagram: chain Command](/images/behavioral-design-patterns/chainCommand.webp){: .light }
+![Class Diagram: chain Command](/images/behavioral-design-patterns/chainCommand-dark.webp){: .dark }
 _Class Diagram: chain Command_
 
 ###### Object Diagram:
-![Object Diagram: chain Command obj Struct](/images/behavioral-design-patterns/chainCommand_objStruct.png){: .light }
-![Object Diagram: chain Command obj Struct](/images/behavioral-design-patterns/chainCommand_objStruct-dark.png){: .dark }
+![Object Diagram: chain Command obj Struct](/images/behavioral-design-patterns/chainCommand_objStruct.webp){: .light }
+![Object Diagram: chain Command obj Struct](/images/behavioral-design-patterns/chainCommand_objStruct-dark.webp){: .dark }
 _Object Diagram: chain Command obj Struct_
 
 ###### Implementation
@@ -134,8 +134,8 @@ func (proc *ShipmentProcessor) Execute(task *Task) {
 Intent: Encapsulate a request as an object, thereby letting you parameterize clients with different requests, queue or log requests, and support undoable operations
 
 ###### Class Diagram:
-![Class Diagram: command](/images/behavioral-design-patterns/command.png){: .light }
-![Class Diagram: command](/images/behavioral-design-patterns/command-dark.png){: .dark }
+![Class Diagram: command](/images/behavioral-design-patterns/command.webp){: .light }
+![Class Diagram: command](/images/behavioral-design-patterns/command-dark.webp){: .dark }
 _Class Diagram: command_
 
 ###### Implementation:
@@ -182,13 +182,13 @@ func (remoteCon *RemoteController) Execute() {
 Intent: Given a language, define a representation for its grammar along with an interpreter that uses the representation to interpret sentences in the language
 
 ###### Class Diagram:
-![Class Diagram: interpreter](/images/behavioral-design-patterns/interpreter.png){: .light }
-![Class Diagram: interpreter](/images/behavioral-design-patterns/interpreter-dark.png){: .dark }
+![Class Diagram: interpreter](/images/behavioral-design-patterns/interpreter.webp){: .light }
+![Class Diagram: interpreter](/images/behavioral-design-patterns/interpreter-dark.webp){: .dark }
 _Class Diagram: interpreter_
 
 ###### Object Diagram:
-![Object Diagram: interpreter obj Struct](/images/behavioral-design-patterns/interpreter_objStruct.png){: .w-75 .light }
-![Object Diagram: interpreter obj Struct](/images/behavioral-design-patterns/interpreter_objStruct-dark.png){: .w-75 .dark }
+![Object Diagram: interpreter obj Struct](/images/behavioral-design-patterns/interpreter_objStruct.webp){: .w-75 .light }
+![Object Diagram: interpreter obj Struct](/images/behavioral-design-patterns/interpreter_objStruct-dark.webp){: .w-75 .dark }
 _Object Diagram: interpreter obj Struct_
 
 ###### Implementation:
@@ -244,8 +244,8 @@ func (minus *Minus) Interpret() string {
 Intent: Provide a way to access the elements of an aggregate object sequentially without exposing its underlying representation
 
 ###### Class Diagram:
-![Class Diagram: iterator](/images/behavioral-design-patterns/iterator.png){: .light }
-![Class Diagram: iterator](/images/behavioral-design-patterns/iterator-dark.png){: .dark }
+![Class Diagram: iterator](/images/behavioral-design-patterns/iterator.webp){: .light }
+![Class Diagram: iterator](/images/behavioral-design-patterns/iterator-dark.webp){: .dark }
 _Class Diagram: iterator_
 
 ###### Implementation:
@@ -300,8 +300,8 @@ func (collection *UserCollection) CreateIterator() Iterator {
 Intent: Without violating encapsulation, capture and externalize an object's internal state so that the object can be restored to this state later.
 
 ###### Class Diagram:
-![Class Diagram: memento](/images/behavioral-design-patterns/memento.png){: .w-75 .light }
-![Class Diagram: memento](/images/behavioral-design-patterns/memento-dark.png){: .w-75 .dark }
+![Class Diagram: memento](/images/behavioral-design-patterns/memento.webp){: .w-75 .light }
+![Class Diagram: memento](/images/behavioral-design-patterns/memento-dark.webp){: .w-75 .dark }
 _Class Diagram: memento_
 
 ###### Implementation:
@@ -351,8 +351,8 @@ func (caretaker *Caretaker) GetMementoIndex(index int) *ObserverMemento {
 Intent: Define a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically 
 
 ###### Class Diagram:
-![Class Diagram: observer](/images/behavioral-design-patterns/observer.png){: .light }
-![Class Diagram: observer](/images/behavioral-design-patterns/observer-dark.png){: .dark }
+![Class Diagram: observer](/images/behavioral-design-patterns/observer.webp){: .light }
+![Class Diagram: observer](/images/behavioral-design-patterns/observer-dark.webp){: .dark }
 _Class Diagram: observer_
 
 ###### Implementation:
@@ -407,8 +407,8 @@ func (obs *ConcreteObserver) Update() {
 Intent: Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from the clients that use it
 
 ###### Class Diagram:
-![Class Diagram: strategy](/images/behavioral-design-patterns/strategy.png){: .light }
-![Class Diagram: strategy](/images/behavioral-design-patterns/strategy-dark.png){: .dark }
+![Class Diagram: strategy](/images/behavioral-design-patterns/strategy.webp){: .light }
+![Class Diagram: strategy](/images/behavioral-design-patterns/strategy-dark.webp){: .dark }
 _Class Diagram: strategy_
 
 ###### Implementation:
@@ -462,7 +462,7 @@ func (algo *LSTEvictionAlgo) Evict(cache *Cache) {
 Intent: Represent an operation to be performed on the elements of an object structure. Visitor lets you define a new operation without changing the classes of the elements on which it operates
 
 ###### Class Diagram:
-![Class Diagram: visitor](/images/behavioral-design-patterns/visitor.png)
+![Class Diagram: visitor](/images/behavioral-design-patterns/visitor.webp)
 _Class Diagram: visitor_
 
 ###### Implementation:

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Introduction to Hash Table Internals
-image: /images/hash-internals/HashTableProcess.png
+image: /images/hash-internals/HashTableProcess.webp
 categories: ["Programming", "Data Structures"]
 tags: [hashtable, data-structures]
 math: true
@@ -11,7 +11,7 @@ published: true
 The hash table is one of the most important data structures, which is used for fast insertion, retrieval, and deletion of key-value pairs. We get introduced to this Hash data structure pretty early in our engineering journey, however, the internal designing of the hash table is quite entangled with multiple designs to choose from depending upon application-specific behavior. The full extent of the hash table implementation may be grasped by the fact that even the programming language runtime also depends on it, as it's quite extensively used for classes and member attribute lookup for languages supporting OOPS, and variable lookup table in case of procedural languages. In this blog post, we would explore the fundamental concepts behind the hash table, how collisions are resolved, performance, and certain optimizations.
 
 ### Ideas:
-![Ideas: Hash Table Process](/images/hash-internals/HashTableProcess.png)
+![Ideas: Hash Table Process](/images/hash-internals/HashTableProcess.webp)
 _Ideas: Hash Table Process_
 ##### Idea 01: Application key to hash key [0,N):
 We can't put anything as a key in the hash table. It's limited to a set of a specific set of types eg. string, int, tuple, etc. We can also use custom types as keys if they implement a hash function that provides an integer corresponding to the custom type or object. For some native types, the hash function is implicitly defined.
@@ -24,8 +24,8 @@ In case different objects map to the same application key, or a different applic
 ##### Chaining:
 The collided keys are placed in a data structure pointed by the hash table key. The basic implementation is to form a chain of keys with the use of a linked list that is mapped to the same hash table key.
 
-![Chaining](/images/hash-internals/chaining.png){: .light }
-![Chaining](/images/hash-internals/chaining-dark.png){: .dark }
+![Chaining](/images/hash-internals/chaining.webp){: .light }
+![Chaining](/images/hash-internals/chaining-dark.webp){: .dark }
 _Chaining_
 
 Chaining with linked list:
@@ -43,8 +43,8 @@ Probing: function for finding the next available slot. A good probing function s
 For adding or lookup, we need to continuously probe until an empty slot is encountered or all the slots are checked. Hence while deleting a key, it needs to be a soft delete, otherwise, the lookup would miss existing keys.
 
 ###### Linear probing:
-![Linear probing: linear Probing](/images/hash-internals/linearProbing.png){: .light }
-![Linear probing: linear Probing](/images/hash-internals/linearProbing-dark.png){: .dark }
+![Linear probing: linear Probing](/images/hash-internals/linearProbing.webp){: .light }
+![Linear probing: linear Probing](/images/hash-internals/linearProbing-dark.webp){: .dark }
 _Linear probing: linear Probing_
 - Search linearly from the hash index until the end of the table, then wrap from the start
 - If empty slot, then the key is not present
@@ -52,23 +52,23 @@ _Linear probing: linear Probing_
 - Challenges:
     - Bad hash function would make linear probing a full table search
     - Linear probing suffers from clustered collision
-![Linear probing: linear Probing Resolution](/images/hash-internals/linearProbingResolution.png){: .light }
-![Linear probing: linear Probing Resolution](/images/hash-internals/linearProbingResolution-dark.png){: .dark }
+![Linear probing: linear Probing Resolution](/images/hash-internals/linearProbingResolution.webp){: .light }
+![Linear probing: linear Probing Resolution](/images/hash-internals/linearProbingResolution-dark.webp){: .dark }
 _Linear probing: linear Probing Resolution_
 
 ###### Quadratic probing:
-![Quadratic probing: quadratic Probing](/images/hash-internals/quadraticProbing.png){: .light }
-![Quadratic probing: quadratic Probing](/images/hash-internals/quadraticProbing-dark.png){: .dark }
+![Quadratic probing: quadratic Probing](/images/hash-internals/quadraticProbing.webp){: .light }
+![Quadratic probing: quadratic Probing](/images/hash-internals/quadraticProbing-dark.webp){: .dark }
 _Quadratic probing: quadratic Probing_
 - Clustered and cascaded collisions are reduced as collided keys are placed further away from each other
 - Offset is increased quadratically
-![Quadratic probing: quadratic Probing](/images/hash-internals/quadraticProbing.png){: .light }
-![Quadratic probing: quadratic Probing](/images/hash-internals/quadraticProbing-dark.png){: .dark }
+![Quadratic probing: quadratic Probing](/images/hash-internals/quadraticProbing.webp){: .light }
+![Quadratic probing: quadratic Probing](/images/hash-internals/quadraticProbing-dark.webp){: .dark }
 _Quadratic probing: quadratic Probing_
 
 ###### Double hashing:
-![Double hashing: double Hashing](/images/hash-internals/doubleHashing.png){: .light }
-![Double hashing: double Hashing](/images/hash-internals/doubleHashing-dark.png){: .dark }
+![Double hashing: double Hashing](/images/hash-internals/doubleHashing.webp){: .light }
+![Double hashing: double Hashing](/images/hash-internals/doubleHashing-dark.webp){: .dark }
 _Double hashing: double Hashing_
 - Use a secondary hash function to offset collision 
 - Unlike quadratic probing, offset for double hashing follows a linear pattern
@@ -90,8 +90,8 @@ $$
 $$
 
 ##### One of the major optimization over chaining to introduce localized access:
-![One of the major optimization over chaining to introduce localized access: chaining Optimization](/images/hash-internals/chainingOptimization.png){: .light }
-![One of the major optimization over chaining to introduce localized access: chaining Optimization](/images/hash-internals/chainingOptimization-dark.png){: .dark }
+![One of the major optimization over chaining to introduce localized access: chaining Optimization](/images/hash-internals/chainingOptimization.webp){: .light }
+![One of the major optimization over chaining to introduce localized access: chaining Optimization](/images/hash-internals/chainingOptimization-dark.webp){: .dark }
 _One of the major optimization over chaining to introduce localized access: chaining Optimization_
 - To use an array of linked list for chaining, rather than adding one node at a time for each time new key is encountered
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Intro to Kafka - Producer & Consumer
-image: /images/kafka/cluster.png
+image: /images/kafka/cluster.webp
 categories: ["Distributed Systems", "Communication"]
 tags: [kafka, messaging]
 published: true
@@ -9,8 +9,8 @@ published: true
 
 Kafka is one of the most popular distributed open-source event streaming platforms. Kafka was designed specifically to handle the continuous flow (i.e. stream) of data in a centralized way. Being a distributed system, just like databases, Kafka also relies on a distributed commit log.
 
-![Cluster](/images/kafka/cluster.png){: .light }
-![Cluster](/images/kafka/cluster-dark.png){: .dark }
+![Cluster](/images/kafka/cluster.webp){: .light }
+![Cluster](/images/kafka/cluster-dark.webp){: .dark }
 _Cluster_
 
 ### Message:
@@ -52,8 +52,8 @@ k -n cloudflow expose service my-cluster-kafka-bootstrap --type=NodePort --port=
 ### Consumers:
 Consumers read messages from topics. Each consumer can subscribe to one or more partitions. Consumers typically work as part of a consumer group to consume messages published on one particular topic. Each partition is exclusively allocated to only one consumer from a group, though the consumer can consume from multiple partitions in case the number of partitions is more than the number of consumers in the consumer group. When a consumer goes into a failure state, in that case, Kafka rebalances the partitions to the available set of consumers in the consumer group. Besides, Kafka keeps track of the messages read by the consumer with the help of offset, and each partition has its offset. The consumers have also a way to inform the partition how much of the messages are consumed, thus effectively committing the offset.
 
-![Consumers: consumer Group](/images/kafka/consumerGroup.png){: .light }
-![Consumers: consumer Group](/images/kafka/consumerGroup-dark.png){: .dark }
+![Consumers: consumer Group](/images/kafka/consumerGroup.webp){: .light }
+![Consumers: consumer Group](/images/kafka/consumerGroup-dark.webp){: .dark }
 _Consumers: consumer Group_
 
 It's expected of Kafka consumers to perform time-consuming operations on the messages. Hence it's required to have multiple consumers to scale the message processing, and essentially it also points to scaling the partitions as well, as that allows adding additional consumers when the need arises. However please keep in mind that the poll() method can be blocked for a maximum of max.poll.interval.ms value, beyond which Kafka would treat the consumer as dead, and trigger a rebalance. 
@@ -64,8 +64,8 @@ There's a concept of static group membership when the consumer is configured wit
 ##### Commits & Offsets:
 The handling of commits of the messages read by consumers is handled somewhat differently in Kafka compared to the other messaging systems. In Kafka, the consumers commit offsets on a special _consumers_offsets topic for each partition. Just like producers sending messages, the commits performed by consumers can be performed in both synchronous and asynchronous ways. The commit should be performed only for the offsets which are already processed. If commits are performed even before the corresponding message is processed, then if the consumer terminates abruptly, those unprocessed events will not be sent again.
 
-![Commits & Offsets: commit Offset Event Reprocessing Lost](/images/kafka/commitOffsetEventReprocessingLost.png){: .light }
-![Commits & Offsets: commit Offset Event Reprocessing Lost](/images/kafka/commitOffsetEventReprocessingLost-dark.png){: .dark }
+![Commits & Offsets: commit Offset Event Reprocessing Lost](/images/kafka/commitOffsetEventReprocessingLost.webp){: .light }
+![Commits & Offsets: commit Offset Event Reprocessing Lost](/images/kafka/commitOffsetEventReprocessingLost-dark.webp){: .dark }
 _Commits & Offsets: commit Offset Event Reprocessing Lost_
 
 There's also an option to configure automatic commits to periodically commit the offset which is performed internally by the poll() method itself.

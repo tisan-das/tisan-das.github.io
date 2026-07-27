@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Designing Distributed Systems - Single Node Patterns
-image: /images/distributed-system-patterns-single-node/01.SidecarPattern.png
+image: /images/distributed-system-patterns-single-node/01.SidecarPattern.webp
 series: "Designing Distributed Systems"
 categories: ["Distributed Systems", "Patterns"]
 tags: [sidecar, ambassador-pattern, adapter-pattern]
@@ -14,15 +14,15 @@ Containers and container orchestrators have introduced a great deal of flexibili
 ### Sidecar Pattern:
 A sidecar container is attached to the application container to add functionalities that might otherwise be difficult to improve.
 
-![Sidecar Pattern: 01.Sidecar Pattern](/images/distributed-system-patterns-single-node/01.SidecarPattern.png){: .light }
-![Sidecar Pattern: 01.Sidecar Pattern](/images/distributed-system-patterns-single-node/01.SidecarPattern-dark.png){: .dark }
+![Sidecar Pattern: 01.Sidecar Pattern](/images/distributed-system-patterns-single-node/01.SidecarPattern.webp){: .light }
+![Sidecar Pattern: 01.Sidecar Pattern](/images/distributed-system-patterns-single-node/01.SidecarPattern-dark.webp){: .dark }
 _Sidecar Pattern: 01.Sidecar Pattern_
 
 ##### Example 01: Adding HTTPS layer to a legacy service:
 New development on legacy applications is significantly more challenging compared to adding an NGINX ingress which terminates the SSL connectivity and redirects the request to the legacy application.
 
-![Example 01: Adding HTTPS layer to a legacy service: 02.HTTPS Sidecar](/images/distributed-system-patterns-single-node/02.HttpsSidecar.png){: .light }
-![Example 01: Adding HTTPS layer to a legacy service: 02.HTTPS Sidecar](/images/distributed-system-patterns-single-node/02.HttpsSidecar-dark.png){: .dark }
+![Example 01: Adding HTTPS layer to a legacy service: 02.HTTPS Sidecar](/images/distributed-system-patterns-single-node/02.HttpsSidecar.webp){: .light }
+![Example 01: Adding HTTPS layer to a legacy service: 02.HTTPS Sidecar](/images/distributed-system-patterns-single-node/02.HttpsSidecar-dark.webp){: .dark }
 _Example 01: Adding HTTPS layer to a legacy service: 02.HTTPS Sidecar_
 
 ##### Example 02: Dynamic configuration:
@@ -33,14 +33,14 @@ docker run --pid:container:${APP_ID} -p 8080:8080 brendanburns/topz:db0fa58 \
         /server -address=0.0.0.0:8080
 ```
 
-![Example 02: Dynamic configuration: 03.Dynamic Configuration](/images/distributed-system-patterns-single-node/03.DynamicConfiguration.png){: .light }
-![Example 02: Dynamic configuration: 03.Dynamic Configuration](/images/distributed-system-patterns-single-node/03.DynamicConfiguration-dark.png){: .dark }
+![Example 02: Dynamic configuration: 03.Dynamic Configuration](/images/distributed-system-patterns-single-node/03.DynamicConfiguration.webp){: .light }
+![Example 02: Dynamic configuration: 03.Dynamic Configuration](/images/distributed-system-patterns-single-node/03.DynamicConfiguration-dark.webp){: .dark }
 _Example 02: Dynamic configuration: 03.Dynamic Configuration_
 
 ##### Example 03: Building Simple PaaS:
 
-![Example 03: Building Simple Paa S: 04.Sidecar Based Paa S](/images/distributed-system-patterns-single-node/04.SidecarBasedPaaS.png){: .light }
-![Example 03: Building Simple Paa S: 04.Sidecar Based Paa S](/images/distributed-system-patterns-single-node/04.SidecarBasedPaaS-dark.png){: .dark }
+![Example 03: Building Simple Paa S: 04.Sidecar Based Paa S](/images/distributed-system-patterns-single-node/04.SidecarBasedPaaS.webp){: .light }
+![Example 03: Building Simple Paa S: 04.Sidecar Based Paa S](/images/distributed-system-patterns-single-node/04.SidecarBasedPaaS-dark.webp){: .dark }
 _Example 03: Building Simple Paa S: 04.Sidecar Based Paa S_
 
 The sidecar container should be reusable across a wide variety of applications and deployments. During the development, focus on the following areas:
@@ -51,15 +51,15 @@ The sidecar container should be reusable across a wide variety of applications a
 ### Ambassadors:
 Ambassador container brokers interactions between the application container and the rest of the world.
 
-![Ambassadors: 05.ambassador Pattern](/images/distributed-system-patterns-single-node/05.ambassadorPattern.png){: .light }
-![Ambassadors: 05.ambassador Pattern](/images/distributed-system-patterns-single-node/05.ambassadorPattern-dark.png){: .dark }
+![Ambassadors: 05.ambassador Pattern](/images/distributed-system-patterns-single-node/05.ambassadorPattern.webp){: .light }
+![Ambassadors: 05.ambassador Pattern](/images/distributed-system-patterns-single-node/05.ambassadorPattern-dark.webp){: .dark }
 _Ambassadors: 05.ambassador Pattern_
 
 ##### Example 01: Shard a service:
 Sharding splits a layer into multiple disjoint places, each hosted by a different node. Generally, the sharding logic is built into the sharding service itself, and the sharding service uses a stateless load balancer to route the request to the appropriate shard
 
-![Example 01: Shard a service: 06.generic Sharded Service](/images/distributed-system-patterns-single-node/06.genericShardedService.png){: .light }
-![Example 01: Shard a service: 06.generic Sharded Service](/images/distributed-system-patterns-single-node/06.genericShardedService-dark.png){: .dark }
+![Example 01: Shard a service: 06.generic Sharded Service](/images/distributed-system-patterns-single-node/06.genericShardedService.webp){: .light }
+![Example 01: Shard a service: 06.generic Sharded Service](/images/distributed-system-patterns-single-node/06.genericShardedService-dark.webp){: .dark }
 _Example 01: Shard a service: 06.generic Sharded Service_
 
 ##### Example 02: Service brokering:
@@ -215,8 +215,8 @@ controlplane $
 ### Adapters:
 Adapter container transforms the output of the application container so that it conforms to the standard other containers are expecting it to be.
 
-![Adapters: 08.Adapter Pattern](/images/distributed-system-patterns-single-node/08.AdapterPattern.png){: .light }
-![Adapters: 08.Adapter Pattern](/images/distributed-system-patterns-single-node/08.AdapterPattern-dark.png){: .dark }
+![Adapters: 08.Adapter Pattern](/images/distributed-system-patterns-single-node/08.AdapterPattern.webp){: .light }
+![Adapters: 08.Adapter Pattern](/images/distributed-system-patterns-single-node/08.AdapterPattern-dark.webp){: .dark }
 _Adapters: 08.Adapter Pattern_
 
 ##### Example 01: Monitoring:

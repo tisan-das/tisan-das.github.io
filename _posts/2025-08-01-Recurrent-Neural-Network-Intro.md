@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Introduction to Deep Learning - Deep Sequence Model
-image: /images/deep-learning/02_01_recurrence_network.png
+image: /images/deep-learning/02_01_recurrence_network.webp
 series: "Deep Learning Fundamentals"
 categories: ["Deep Learning", "Fundamentals"]
 tags: [rnn, sequence-models]
@@ -24,11 +24,11 @@ $$
 
 where $f$ and $g$ are activation functions (e.g. $\tanh$, softmax), and the $W_{\cdot}$ matrices are shared across all timesteps.
 
-![Recurrence network](/images/deep-learning/02_01_recurrence_network.png){: .w-75 .light }
-![Recurrence network](/images/deep-learning/02_01_recurrence_network-dark.png){: .w-75 .dark }
+![Recurrence network](/images/deep-learning/02_01_recurrence_network.webp){: .w-75 .light }
+![Recurrence network](/images/deep-learning/02_01_recurrence_network-dark.webp){: .w-75 .dark }
 _Recurrence network_
-![Recurrence network calc](/images/deep-learning/02_02_recurrence_network_calc.png){: .w-75 .light }
-![Recurrence network calc](/images/deep-learning/02_02_recurrence_network_calc-dark.png){: .w-75 .dark }
+![Recurrence network calc](/images/deep-learning/02_02_recurrence_network_calc.webp){: .w-75 .light }
+![Recurrence network calc](/images/deep-learning/02_02_recurrence_network_calc-dark.webp){: .w-75 .dark }
 _Recurrence network calc_
 
 Compute the loss of the network at the individual slice, and then the total loss by summing over all the timestamps in our sequence of length $T$:
@@ -37,8 +37,8 @@ $$
 \mathcal{L} = \sum_{t=1}^{T}\mathcal{L}_t\bigl(y_t, \hat{y}_t\bigr)
 $$
 
-![Recurrence network loss](/images/deep-learning/02_03_recurrence_network_loss.png){: .w-75 .light }
-![Recurrence network loss](/images/deep-learning/02_03_recurrence_network_loss-dark.png){: .w-75 .dark }
+![Recurrence network loss](/images/deep-learning/02_03_recurrence_network_loss.webp){: .w-75 .light }
+![Recurrence network loss](/images/deep-learning/02_03_recurrence_network_loss-dark.webp){: .w-75 .dark }
 _Recurrence network loss_
 
 #### Design criteria of sequence models:
@@ -57,16 +57,16 @@ Real-life example: Predict the next word
 
 In order to handle the time-dependence, the backpropagation algorithm also needs to aggregate the loss over the individual time slices. This is also known as Backpropagation Through Time.
 
-![Encoding language for a Neural Network: recurrence network backpropagation](/images/deep-learning/02_04_recurrence_network_backpropagation.png){: .w-75 .light }
-![Encoding language for a Neural Network: recurrence network backpropagation](/images/deep-learning/02_04_recurrence_network_backpropagation-dark.png){: .w-75 .dark }
+![Encoding language for a Neural Network: recurrence network backpropagation](/images/deep-learning/02_04_recurrence_network_backpropagation.webp){: .w-75 .light }
+![Encoding language for a Neural Network: recurrence network backpropagation](/images/deep-learning/02_04_recurrence_network_backpropagation-dark.webp){: .w-75 .dark }
 _Encoding language for a Neural Network: recurrence network backpropagation_
 
 The issue with this type of backpropagation algorithm is that the gradient multiplies through many timesteps, so the product of Jacobians can grow or shrink exponentially:
 - **Exploding gradients**: many factors $\lvert\partial h_t/\partial h_{t-1}\rvert > 1$
 - **Vanishing gradients**: many factors $\lvert\partial h_t/\partial h_{t-1}\rvert < 1$
 
-![Encoding language for a Neural Network: recurrence network vaishing gradients](/images/deep-learning/02_05_recurrence_network_vaishing_gradients.png){: .w-75 .light }
-![Encoding language for a Neural Network: recurrence network vaishing gradients](/images/deep-learning/02_05_recurrence_network_vaishing_gradients-dark.png){: .w-75 .dark }
+![Encoding language for a Neural Network: recurrence network vaishing gradients](/images/deep-learning/02_05_recurrence_network_vaishing_gradients.webp){: .w-75 .light }
+![Encoding language for a Neural Network: recurrence network vaishing gradients](/images/deep-learning/02_05_recurrence_network_vaishing_gradients-dark.webp){: .w-75 .dark }
 _Encoding language for a Neural Network: recurrence network vaishing gradients_
 
 One way to handle the issue of exploding and vanishing gradients is to use gates to selectively add or remove information within each recurrent unit. 

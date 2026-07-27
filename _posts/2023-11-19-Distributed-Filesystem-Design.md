@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Distributed Filesystem Design
-image: /images/gfs/copyOnWrite.png
+image: /images/gfs/copyOnWrite.webp
 categories: ["Distributed Systems", "Storage"]
 tags: [distributed-file-system]
 published: true
@@ -32,23 +32,23 @@ There's three classical aprroaches to take snapshot:
 - **Split mirror**: Copies every byte of the file-system
 - **Changed blocks**: Employes copy-on-write strategy
 
-![Snapshot of Filesystem: copy On Write](/images/gfs/copyOnWrite.png){: .light }
-![Snapshot of Filesystem: copy On Write](/images/gfs/copyOnWrite-dark.png){: .dark }
+![Snapshot of Filesystem: copy On Write](/images/gfs/copyOnWrite.webp){: .light }
+![Snapshot of Filesystem: copy On Write](/images/gfs/copyOnWrite-dark.webp){: .dark }
 _Snapshot of Filesystem: copy On Write_
 
 The snapshot node logs the changes since the last snapshot. The snapshot system can recover the file-system from the referenced snapshots and an array of patch object. Each patch object represents a file or directory, and contains the list of changegs on top of the previous snapshot. 
 There's a special snapshot called head snapshot which is a writable snapshot and is essentially the current file-structure. Each branch points to a writable snapshot.
 
-![Snapshot of Filesystem: snapshot Patch](/images/gfs/snapshotPatch.png){: .light }
-![Snapshot of Filesystem: snapshot Patch](/images/gfs/snapshotPatch-dark.png){: .dark }
+![Snapshot of Filesystem: snapshot Patch](/images/gfs/snapshotPatch.webp){: .light }
+![Snapshot of Filesystem: snapshot Patch](/images/gfs/snapshotPatch-dark.webp){: .dark }
 _Snapshot of Filesystem: snapshot Patch_
 
 - **Concurrent IO**: Redirects the IO to a different location
 
 ### File-system entities:
 
-![File-system entities: file System Attributes](/images/gfs/fileSystemAttributes.png){: .light }
-![File-system entities: file System Attributes](/images/gfs/fileSystemAttributes-dark.png){: .dark }
+![File-system entities: file System Attributes](/images/gfs/fileSystemAttributes.webp){: .light }
+![File-system entities: file System Attributes](/images/gfs/fileSystemAttributes-dark.webp){: .dark }
 _File-system entities: file System Attributes_
 
 ### References:

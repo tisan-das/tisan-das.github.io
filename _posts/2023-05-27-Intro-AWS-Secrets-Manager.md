@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Introduction to AWS Secrets Manager
-image: /images/secrets-manager/keyVersion.png
+image: /images/secrets-manager/keyVersion.webp
 categories: ["Cloud & DevOps", "AWS"]
 tags: [aws, secrets-manager]
 published: true
@@ -59,8 +59,8 @@ C:\Users\Tisan>aws secretsmanager get-secret-value --secret-id sample-secret
 
 C:\Users\Tisan>
 ```
-![Version: key Version](/images/secrets-manager/keyVersion.png){: .light }
-![Version: key Version](/images/secrets-manager/keyVersion-dark.png){: .dark }
+![Version: key Version](/images/secrets-manager/keyVersion.webp){: .light }
+![Version: key Version](/images/secrets-manager/keyVersion-dark.webp){: .dark }
 _Version: key Version_
 
 #### Deletion:
@@ -78,8 +78,8 @@ Rotation is the process of updating the secret. The rotation procedure takes car
 
 It's to be noted that the auto-rotation schedule considers manual rotation as well, and schedules the next rotation based on it.
 
-![Secrets Rotation: configure Rotation](/images/secrets-manager/configureRotation.png){: .w-75 .light }
-![Secrets Rotation: configure Rotation](/images/secrets-manager/configureRotation-dark.png){: .w-75 .dark }
+![Secrets Rotation: configure Rotation](/images/secrets-manager/configureRotation.webp){: .w-75 .light }
+![Secrets Rotation: configure Rotation](/images/secrets-manager/configureRotation-dark.webp){: .w-75 .dark }
 _Secrets Rotation: configure Rotation_
 
 Certain AWS services like RDS and Aurora offers managed rotation, where the service itself rotates the secret. The primary advantage is, the service manages the lambda function for secret rotation.
@@ -90,8 +90,8 @@ The Lambda rotation function consists of four distinct steps:
 3. test_secret: verify the newly created credential is working by using it to access the service
 4. finish_secret: AWSCURRENT staging label is applied to the one with AWSPENDING and AWSPREVIOUS version is associated with the previous version of secret
 
-![Secrets Rotation: lambda Rotation Function](/images/secrets-manager/lambdaRotationFunction.png){: .w-75 .light }
-![Secrets Rotation: lambda Rotation Function](/images/secrets-manager/lambdaRotationFunction-dark.png){: .w-75 .dark }
+![Secrets Rotation: lambda Rotation Function](/images/secrets-manager/lambdaRotationFunction.webp){: .w-75 .light }
+![Secrets Rotation: lambda Rotation Function](/images/secrets-manager/lambdaRotationFunction-dark.webp){: .w-75 .dark }
 _Secrets Rotation: lambda Rotation Function_
 
 If any step is failed, the entire rotation process is retried multiple times. On a successful rotation the AWSPENDING staging label might be allocated to the same version getting pointed by the staging label AWSCURRENT, or the AWSPENDING staging label might not be attached to any version. Otherwise, the lambda rotation function assumes that the previous rotation request is still under-progress, and hence returns an error. For managed rotation, no need to specify the lambda function, as the corresponding AWS service takes care of the whole rotation process.

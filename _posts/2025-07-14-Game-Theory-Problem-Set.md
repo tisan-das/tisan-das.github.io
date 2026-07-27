@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Problem Sets on Game Theory
-image: /images/coding_questions/game_theory_01.png
+image: /images/coding_questions/game_theory_01.webp
 categories: ["Algorithms", "Problem Sets"]
 tags: [game-theory, cpp]
 published: true
@@ -9,8 +9,8 @@ published: true
 
 This post contains a couple of well-defined problems on game theory.
 
-![Game theory 01](/images/coding_questions/game_theory_01.png){: .w-75 .light }
-![Game theory 01](/images/coding_questions/game_theory_01-dark.png){: .w-75 .dark }
+![Game theory 01](/images/coding_questions/game_theory_01.webp){: .w-75 .light }
+![Game theory 01](/images/coding_questions/game_theory_01-dark.webp){: .w-75 .dark }
 _Game theory 01_
 
 ### Coins in a Line (394):

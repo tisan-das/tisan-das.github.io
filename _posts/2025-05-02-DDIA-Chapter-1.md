@@ -2,7 +2,7 @@
 layout: post
 title: DDIA - Chap01 - Reliable, Scalable and Maintainable Applications
 pin: true
-image: /images/ddia/chap01_intro.png
+image: /images/ddia/chap01_intro.webp
 series: "Designing Data-Intensive Applications"
 categories: ["Databases", "DDIA"]
 tags: [ddia, reliability, scalability]
@@ -15,8 +15,8 @@ A majority portion of web applications are largely data-intensive, and not compu
 
 From a software architecture perspective, the following three concerns need to be addressed for such applications:
 
-![Chap01 intro](/images/ddia/chap01_intro.png){: .light }
-![Chap01 intro](/images/ddia/chap01_intro-dark.png){: .dark }
+![Chap01 intro](/images/ddia/chap01_intro.webp){: .light }
+![Chap01 intro](/images/ddia/chap01_intro-dark.webp){: .dark }
 _Chap01 intro_
 
 ### 1. Reliability: 

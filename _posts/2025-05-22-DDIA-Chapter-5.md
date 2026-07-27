@@ -1,7 +1,7 @@
 ---
 layout: post
 title: DDIA - Chap05 - Replication
-image: /images/ddia/chap_04_replication_parititioning.png
+image: /images/ddia/chap_04_replication_parititioning.webp
 series: "Designing Data-Intensive Applications"
 categories: ["Databases", "DDIA"]
 tags: [ddia, replication]
@@ -22,14 +22,14 @@ In this blog post, we would try to get an overview of how replication works in r
 - **Partitioning**: Splitting a big database into smaller subsets, so that each subset is assigned to a different node. This is also known as sharding. This process reduces the performance bottleneck.
 It's to be noted that the above two ways are not mutually exclusive; rather, many distributed systems employ both techniques.
 
-![Ways to distribute data across multiple nodes: chap 04 replication parititioning](/images/ddia/chap_04_replication_parititioning.png){: .light }
-![Ways to distribute data across multiple nodes: chap 04 replication parititioning](/images/ddia/chap_04_replication_parititioning-dark.png){: .dark }
+![Ways to distribute data across multiple nodes: chap 04 replication parititioning](/images/ddia/chap_04_replication_parititioning.webp){: .light }
+![Ways to distribute data across multiple nodes: chap 04 replication parititioning](/images/ddia/chap_04_replication_parititioning-dark.webp){: .dark }
 _Ways to distribute data across multiple nodes: chap 04 replication parititioning_
 
 ### Single leader replication
 
-![Single leader replication: chap 04 single leader replication](/images/ddia/chap_04_single_leader_replication.png){: .light }
-![Single leader replication: chap 04 single leader replication](/images/ddia/chap_04_single_leader_replication-dark.png){: .dark }
+![Single leader replication: chap 04 single leader replication](/images/ddia/chap_04_single_leader_replication.webp){: .light }
+![Single leader replication: chap 04 single leader replication](/images/ddia/chap_04_single_leader_replication-dark.webp){: .dark }
 _Single leader replication: chap 04 single leader replication_
 
 This is the most commonly used replication technique, active/passive or master-slave replication, where one replica is designated as the leader. All the clients must send write requests to the leader, as only the leader is allowed to accept written requests. And the rest of the replicas, called followers or slaves, take only the read requests. The leader can accept both read and write requests, and whenever it writes new data to its storage, the same info is propagated to the follower nodes for synchronization.
@@ -98,8 +98,8 @@ Consistent prefix reads guarantee that if a sequence of writes happens in a part
 
 Multi-leader replication generally makes sense with a setup of multi-datacenter operation. In case the replicated system is bounded within a single datacenter, then the multi-leader replication doesn't make sense, as the added complexity generally overwhelms the benefit. However, in case of a replicated system spanning across multiple datacenters, there's a need to have multiple leaders, each leader for each datacenter.
 
-![Multi-leader replication: chap 04 multi leader replication](/images/ddia/chap_04_multi_leader_replication.png){: .light }
-![Multi-leader replication: chap 04 multi leader replication](/images/ddia/chap_04_multi_leader_replication-dark.png){: .dark }
+![Multi-leader replication: chap 04 multi leader replication](/images/ddia/chap_04_multi_leader_replication.webp){: .light }
+![Multi-leader replication: chap 04 multi leader replication](/images/ddia/chap_04_multi_leader_replication-dark.webp){: .dark }
 _Multi-leader replication: chap 04 multi leader replication_
 
 The downside of this configuration is that some data maybe concurrently updated on multiple datacenters, and these conflicts must be resolved. Besides, there can be other features which mayn't be exactly replicated in the leader like auto-incrementing keys, triggers, integrity constarains. Due to all these pitfalls, multi-leader replication is generally retro-fitted for specific use-case, and generally recommended to avoid.
@@ -110,8 +110,8 @@ The downside of this configuration is that some data maybe concurrently updated 
 
 ##### Handling write conflicts:
 
-![Handling write conflicts: chap 04 replication write conflict](/images/ddia/chap_04_replication_write_conflict.png){: .light }
-![Handling write conflicts: chap 04 replication write conflict](/images/ddia/chap_04_replication_write_conflict-dark.png){: .dark }
+![Handling write conflicts: chap 04 replication write conflict](/images/ddia/chap_04_replication_write_conflict.webp){: .light }
+![Handling write conflicts: chap 04 replication write conflict](/images/ddia/chap_04_replication_write_conflict-dark.webp){: .dark }
 _Handling write conflicts: chap 04 replication write conflict_
 
 **Approaches for Converging toward a consistent state:**
@@ -158,8 +158,8 @@ The client usually only waits for acknowledgment from a quorum of nodes within i
 
 # Detecting Concurrent Writes:
 
-![Multi-datecenter operations: chap 04 casual dependencies](/images/ddia/chap_04_casual_dependencies.png){: .light }
-![Multi-datecenter operations: chap 04 casual dependencies](/images/ddia/chap_04_casual_dependencies-dark.png){: .dark }
+![Multi-datecenter operations: chap 04 casual dependencies](/images/ddia/chap_04_casual_dependencies.webp){: .light }
+![Multi-datecenter operations: chap 04 casual dependencies](/images/ddia/chap_04_casual_dependencies-dark.webp){: .dark }
 _Multi-datecenter operations: chap 04 casual dependencies_
 
 - Treat the keys as immutable

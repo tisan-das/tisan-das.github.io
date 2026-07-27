@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Web Application Security - Denial of Service Attack
-image: /images/web-security/dos_logical.png
+image: /images/web-security/dos_logical.webp
 series: "Web Security"
 categories: ["Security", "Web Security"]
 tags: [denial-of-service, ddos]
@@ -22,8 +22,8 @@ Regular expressions are often used in web applications to validate the input tex
 ### Logical DoS Vulnerability:
 Logical DoS vulnerabilities are among the hardest to find and exploit, as they require some experience with how the application behaves in certain scenarios.
 
-![Logical Do S Vulnerability: DOS logical](/images/web-security/dos_logical.png){: .light }
-![Logical Do S Vulnerability: DOS logical](/images/web-security/dos_logical-dark.png){: .dark }
+![Logical Do S Vulnerability: DOS logical](/images/web-security/dos_logical.webp){: .light }
+![Logical Do S Vulnerability: DOS logical](/images/web-security/dos_logical-dark.webp){: .dark }
 _Logical Do S Vulnerability: DOS logical_
 
 **Mitigation:**
@@ -39,8 +39,8 @@ Introducing a rate limit, or allocating more resources depending upon the type o
 ### DDoS Attacks:
 DDoS attacks are generally initiated by a network of a large number of nodes flooding a service with requests, thus overloading the servers and rendering the service useless to the actual users. 
 
-![DDo S Attacks: DOS DDOS](/images/web-security/dos_ddos.png){: .w-75 .light }
-![DDo S Attacks: DOS DDOS](/images/web-security/dos_ddos-dark.png){: .w-75 .dark }
+![DDo S Attacks: DOS DDOS](/images/web-security/dos_ddos.webp){: .w-75 .light }
+![DDo S Attacks: DOS DDOS](/images/web-security/dos_ddos-dark.webp){: .w-75 .dark }
 _DDo S Attacks: DOS DDOS_
 
 **Yoyo Attack**
@@ -52,8 +52,8 @@ As DDoS requires significant compute resources, at certain times the DDoS attack
 **Mitigation**
 DDoS attacks can't be prevented. However, the easiest way to handle this is to invest in a bandwidth management service. These services are capable of intercepting large quantities of network requests and filtering out against the known botnet networks.
 
-![DDo S Attacks: DOS blackhole](/images/web-security/dos_blackhole.png){: .w-75 .light }
-![DDo S Attacks: DOS blackhole](/images/web-security/dos_blackhole-dark.png){: .w-75 .dark }
+![DDo S Attacks: DOS blackhole](/images/web-security/dos_blackhole.webp){: .w-75 .light }
+![DDo S Attacks: DOS blackhole](/images/web-security/dos_blackhole-dark.webp){: .w-75 .dark }
 _DDo S Attacks: DOS blackhole_
 
 Further study:

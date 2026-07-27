@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Web Application Security - XML External Entity (XXE) Attack
-image: /images/web-security/XXE_direct.png
+image: /images/web-security/XXE_direct.webp
 series: "Web Security"
 categories: ["Security", "Web Security"]
 tags: [xxe, xml]
@@ -25,14 +25,14 @@ Example of such XML payload:
 
 ##### Direct XXE attack:
 
-![Direct XXE attack: XXE direct](/images/web-security/XXE_direct.png){: .light }
-![Direct XXE attack: XXE direct](/images/web-security/XXE_direct-dark.png){: .dark }
+![Direct XXE attack: XXE direct](/images/web-security/XXE_direct.webp){: .light }
+![Direct XXE attack: XXE direct](/images/web-security/XXE_direct-dark.webp){: .dark }
 _Direct XXE attack: XXE direct_
 
 ##### Direct XXE attack:
 
-![Direct XXE attack: XXE indirect](/images/web-security/XXE_indirect.png){: .light }
-![Direct XXE attack: XXE indirect](/images/web-security/XXE_indirect-dark.png){: .dark }
+![Direct XXE attack: XXE indirect](/images/web-security/XXE_indirect.webp){: .light }
+![Direct XXE attack: XXE indirect](/images/web-security/XXE_indirect-dark.webp){: .dark }
 _Direct XXE attack: XXE indirect_
 
 ##### Out-of-Band Data Exfiltration:

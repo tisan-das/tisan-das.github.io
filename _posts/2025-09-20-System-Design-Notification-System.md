@@ -1,7 +1,7 @@
 ---
 layout: post
 title: System Design - Notification System
-image: /images/sys-design-vol1/07-notification-system-hld.png
+image: /images/sys-design-vol1/07-notification-system-hld.webp
 series: "System Design Case Studies"
 categories: ["System Design", "Case Studies"]
 tags: [notification-system, system-design]
@@ -23,8 +23,8 @@ In this wiki, we will explore an approach to designing a notification service.
 - 10 million mobile push notifications, 1 million SMS, and 5 million Email notifications
 
 ### Architecture
-![Architecture: notification system hld](/images/sys-design-vol1/07-notification-system-hld.png){: .w-75 .light }
-![Architecture: notification system hld](/images/sys-design-vol1/07-notification-system-hld-dark.png){: .w-75 .dark }
+![Architecture: notification system hld](/images/sys-design-vol1/07-notification-system-hld.webp){: .w-75 .light }
+![Architecture: notification system hld](/images/sys-design-vol1/07-notification-system-hld-dark.webp){: .w-75 .dark }
 _Architecture: notification system hld_
 
 **Tracking:**

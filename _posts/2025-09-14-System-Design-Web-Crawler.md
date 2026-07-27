@@ -1,7 +1,7 @@
 ---
 layout: post
 title: System Design - Web Crawler
-image: /images/sys-design-vol1/06-web-crawler-components.png
+image: /images/sys-design-vol1/06-web-crawler-components.webp
 series: "System Design Case Studies"
 categories: ["System Design", "Case Studies"]
 tags: [web-crawler, system-design]
@@ -32,12 +32,12 @@ In this wiki, we will explore an approach to designing a Web-crawling service.
 
 ### Architecture
 
-![Architecture: web crawler components](/images/sys-design-vol1/06-web-crawler-components.png){: .w-75 .light }
-![Architecture: web crawler components](/images/sys-design-vol1/06-web-crawler-components-dark.png){: .w-75 .dark }
+![Architecture: web crawler components](/images/sys-design-vol1/06-web-crawler-components.webp){: .w-75 .light }
+![Architecture: web crawler components](/images/sys-design-vol1/06-web-crawler-components-dark.webp){: .w-75 .dark }
 _Architecture: web crawler components_
 
-![Architecture: web crawler hld](/images/sys-design-vol1/06-web-crawler-hld.png){: .w-75 .light }
-![Architecture: web crawler hld](/images/sys-design-vol1/06-web-crawler-hld-dark.png){: .w-75 .dark }
+![Architecture: web crawler hld](/images/sys-design-vol1/06-web-crawler-hld.webp){: .w-75 .light }
+![Architecture: web crawler hld](/images/sys-design-vol1/06-web-crawler-hld-dark.webp){: .w-75 .dark }
 _Architecture: web crawler hld_
 
 **Spider Trap**: Causes the crawler to loop in an infinite loop. Need to handle such edge cases.

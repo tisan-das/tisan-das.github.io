@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Chain Replication
-image: /images/zookeeper/chainReplication.png
+image: /images/zookeeper/chainReplication.webp
 series: "Distributed Systems Papers"
 categories: ["Distributed Systems", "Replication"]
 tags: [chain-replication]
@@ -20,8 +20,8 @@ Query operations are generally idempotent, however, update operations might not 
 
 ### Architecture:
 
-![Architecture: chain Replication](/images/zookeeper/chainReplication.png){: .light }
-![Architecture: chain Replication](/images/zookeeper/chainReplication-dark.png){: .dark }
+![Architecture: chain Replication](/images/zookeeper/chainReplication.webp){: .light }
+![Architecture: chain Replication](/images/zookeeper/chainReplication-dark.webp){: .dark }
 _Architecture: chain Replication_
 
 The chain replication model is achieved by connecting couple of replicated state machines through a chain. the query requests are sent to the tail, and the update operations are sent to the head node, which first computes all the necessary updation and propagates the results to the next node. Client receives the reply for both the query and update operation from the tail node. In this way it's ensured that all the nodes contain updated info. For the non-deterministic update operations, the value is computed at the head node, and then propagated through the chain.

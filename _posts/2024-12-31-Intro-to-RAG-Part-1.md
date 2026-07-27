@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Use of LLM - Semantic Search
-image: /images/llm/reranker.png
+image: /images/llm/reranker.webp
 series: "LLM & RAG"
 categories: ["Deep Learning", "LLM"]
 tags: [rag, semantic-search, llm]
@@ -35,7 +35,7 @@ There are two caveats to the dense retrieval:
 ##### Phase 02: Reranking:
 This particular step is tasked with changing the order of the search results based on their relevance. This is where even the traditional web-search organizations have also started using LLMs. For example, Microsoft Bing has started using BERT-like models to rerank the web links filtered by their traditional search engine backbone infrastructure.
 
-![Phase 02: Reranking: reranker](/images/llm/reranker.png){: .w-75 }
+![Phase 02: Reranking: reranker](/images/llm/reranker.webp){: .w-75 }
 _Phase 02: Reranking: reranker_
 
 ##### Phase 03: Retrieval-Augmented Generation (RAG):

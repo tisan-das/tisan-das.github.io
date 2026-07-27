@@ -1,7 +1,7 @@
 ---
 layout: post
 title: System Design - Design a Unique ID Generator for Distributed Systems
-image: /images/sys-design-vol1/04-unique-id-system-design-uuid-generation.png
+image: /images/sys-design-vol1/04-unique-id-system-design-uuid-generation.webp
 series: "System Design Case Studies"
 categories: ["System Design", "Case Studies"]
 tags: [unique-id, system-design]
@@ -32,8 +32,8 @@ It can be assumed to be a fairly unique ID generator, though there's a small pro
 
 Due to the nature of UUIDs, multiple web servers can be used in parallel to generate UUIDs, and have seen usage in many micro-services.
 
-![UUID: unique ID system design uuid generation](/images/sys-design-vol1/04-unique-id-system-design-uuid-generation.png){: .light }
-![UUID: unique ID system design uuid generation](/images/sys-design-vol1/04-unique-id-system-design-uuid-generation-dark.png){: .dark }
+![UUID: unique ID system design uuid generation](/images/sys-design-vol1/04-unique-id-system-design-uuid-generation.webp){: .light }
+![UUID: unique ID system design uuid generation](/images/sys-design-vol1/04-unique-id-system-design-uuid-generation-dark.webp){: .dark }
 _UUID: unique ID system design uuid generation_
 
 The drawback with this approach is that it requires more space in the database. Ideally, the UUIDs are supposed to take 128 bits if stored in binary encoded format; however, it's generally preferred to store them as characters to have proper readability.
@@ -44,8 +44,8 @@ This might not be suitable for the above use case, as UUIDs are not easily sorta
 
 Ticker server is another way of generating unique numbers by utilizing the auto_increment feature of databases. The principle of this approach lies in using a few server ticket servers to communicate with a separate database system, responsible for generating unique IDs.
 
-![Ticket Server: unique ID system design ticket server](/images/sys-design-vol1/04-unique-id-system-design-ticket-server.png){: .light }
-![Ticket Server: unique ID system design ticket server](/images/sys-design-vol1/04-unique-id-system-design-ticket-server-dark.png){: .dark }
+![Ticket Server: unique ID system design ticket server](/images/sys-design-vol1/04-unique-id-system-design-ticket-server.webp){: .light }
+![Ticket Server: unique ID system design ticket server](/images/sys-design-vol1/04-unique-id-system-design-ticket-server-dark.webp){: .dark }
 _Ticket Server: unique ID system design ticket server_
 
 DDL of a ticket table:
@@ -82,8 +82,8 @@ The drawback of this approach is that the ticket server database is a single poi
 
 A divide-and-conquer approach is taken to generate the unique ID.
 
-![Twitter Snowflake Approach: unique ID system design twitter snowflake](/images/sys-design-vol1/04-unique-id-system-design-twitter-snowflake.png){: .light }
-![Twitter Snowflake Approach: unique ID system design twitter snowflake](/images/sys-design-vol1/04-unique-id-system-design-twitter-snowflake-dark.png){: .dark }
+![Twitter Snowflake Approach: unique ID system design twitter snowflake](/images/sys-design-vol1/04-unique-id-system-design-twitter-snowflake.webp){: .light }
+![Twitter Snowflake Approach: unique ID system design twitter snowflake](/images/sys-design-vol1/04-unique-id-system-design-twitter-snowflake-dark.webp){: .dark }
 _Twitter Snowflake Approach: unique ID system design twitter snowflake_
 
 Sign bit: It's always set to 0, reserved for future use.

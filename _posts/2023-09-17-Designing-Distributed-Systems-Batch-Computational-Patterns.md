@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Designing Distributed Systems - Batch Computational Patterns
-image: /images/distributed-system-patterns-single-node/17.eventBatchProcessingPatterns.png
+image: /images/distributed-system-patterns-single-node/17.eventBatchProcessingPatterns.webp
 series: "Designing Distributed Systems"
 categories: ["Distributed Systems", "Patterns"]
 tags: [batch-processing, work-queue]
@@ -15,8 +15,8 @@ In the last couple of blog posts, we've explored patterns of distributed systems
 ### Event-Driven Batch Processing
 Event driven batch processing can be thought of as workflow systems, where the flow of work is a directed acyclic graph and each node of the graph represents a specific step or task that needs to be performed. This is useful for the scenarios where multiple actions are needed to be performed on the specific event, and depending upon some condition, certain steps can be omitted. This kind of systems can be thought of as output of the processing of the one stream acts as input to another stream, which is then processed by it's consumer. 
 
-![Event-Driven Batch Processing: 17.event Batch Processing Patterns](/images/distributed-system-patterns-single-node/17.eventBatchProcessingPatterns.png){: .w-75 .light }
-![Event-Driven Batch Processing: 17.event Batch Processing Patterns](/images/distributed-system-patterns-single-node/17.eventBatchProcessingPatterns-dark.png){: .w-75 .dark }
+![Event-Driven Batch Processing: 17.event Batch Processing Patterns](/images/distributed-system-patterns-single-node/17.eventBatchProcessingPatterns.webp){: .w-75 .light }
+![Event-Driven Batch Processing: 17.event Batch Processing Patterns](/images/distributed-system-patterns-single-node/17.eventBatchProcessingPatterns-dark.webp){: .w-75 .dark }
 _Event-Driven Batch Processing: 17.event Batch Processing Patterns_
 
 ##### Copier:
@@ -34,14 +34,14 @@ More generic form of sharder. Divide a workstream into multiple streams based up
 ##### Merger:
 Take multiple workstreams and turn them into a single workstream
 
-![Merger: 18.event Batch Processing Merger Pattern](/images/distributed-system-patterns-single-node/18.eventBatchProcessingMergerPattern.png){: .light }
-![Merger: 18.event Batch Processing Merger Pattern](/images/distributed-system-patterns-single-node/18.eventBatchProcessingMergerPattern-dark.png){: .dark }
+![Merger: 18.event Batch Processing Merger Pattern](/images/distributed-system-patterns-single-node/18.eventBatchProcessingMergerPattern.webp){: .light }
+![Merger: 18.event Batch Processing Merger Pattern](/images/distributed-system-patterns-single-node/18.eventBatchProcessingMergerPattern-dark.webp){: .dark }
 _Merger: 18.event Batch Processing Merger Pattern_
 
 ##### Example 01: Building an Event-Driven Flow for New User Sign-up:
 
-![Example 01: Building an Event-Driven Flow for New User Sign-up: 19.event Batch Processing Example](/images/distributed-system-patterns-single-node/19.eventBatchProcessingExample.png){: .w-75 .light }
-![Example 01: Building an Event-Driven Flow for New User Sign-up: 19.event Batch Processing Example](/images/distributed-system-patterns-single-node/19.eventBatchProcessingExample-dark.png){: .w-75 .dark }
+![Example 01: Building an Event-Driven Flow for New User Sign-up: 19.event Batch Processing Example](/images/distributed-system-patterns-single-node/19.eventBatchProcessingExample.webp){: .w-75 .light }
+![Example 01: Building an Event-Driven Flow for New User Sign-up: 19.event Batch Processing Example](/images/distributed-system-patterns-single-node/19.eventBatchProcessingExample-dark.webp){: .w-75 .dark }
 _Example 01: Building an Event-Driven Flow for New User Sign-up: 19.event Batch Processing Example_
 
 #### Hands On: Produce & Consume events:
@@ -80,8 +80,8 @@ controlplane $
 ##### Join (Barrier Synchronizaztion):
 Join is having more strict co-ordinated primitive compared to merger. Just like the join in thread, even though work items are processed in parallel, they are released only when all the processing is completed.
 
-![Join (Barrier Synchronizaztion): 20.event Batch Processing Join](/images/distributed-system-patterns-single-node/20.eventBatchProcessingJoin.png){: .light }
-![Join (Barrier Synchronizaztion): 20.event Batch Processing Join](/images/distributed-system-patterns-single-node/20.eventBatchProcessingJoin-dark.png){: .dark }
+![Join (Barrier Synchronizaztion): 20.event Batch Processing Join](/images/distributed-system-patterns-single-node/20.eventBatchProcessingJoin.webp){: .light }
+![Join (Barrier Synchronizaztion): 20.event Batch Processing Join](/images/distributed-system-patterns-single-node/20.eventBatchProcessingJoin-dark.webp){: .dark }
 _Join (Barrier Synchronizaztion): 20.event Batch Processing Join_
 
 ##### Reduce:

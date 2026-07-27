@@ -1,7 +1,7 @@
 ---
 published: true
 title: Interesting Concepts of Docker
-image: /images/docker-concept/ContainerLayer.png
+image: /images/docker-concept/ContainerLayer.webp
 series: "Docker"
 categories: ["Cloud & DevOps", "Containers"]
 tags: [docker, containers]
@@ -13,18 +13,18 @@ This blog post is written to jot down several concepts of Docker, which are gene
 
 #### Concept 01: Docker Image is built with layers
 Dockerfile provides a template, a set of instructions, to create an image. For each instruction that changes the file system, the resultant file system with the change is stored as a layer. It's to be noted that only RUN, ADD, and COPY instructions are the one that makes changes to the file system. 
-![Concept 01: Docker Image is built with layers: Container Layer](/images/docker-concept/ContainerLayer.png){: .light }
-![Concept 01: Docker Image is built with layers: Container Layer](/images/docker-concept/ContainerLayer-dark.png){: .dark }
+![Concept 01: Docker Image is built with layers: Container Layer](/images/docker-concept/ContainerLayer.webp){: .light }
+![Concept 01: Docker Image is built with layers: Container Layer](/images/docker-concept/ContainerLayer-dark.webp){: .dark }
 _Concept 01: Docker Image is built with layers: Container Layer_
 
 Docker image contains the SHA of the layers:
-![Concept 01: Docker Image is built with layers: Image Inspect FS](/images/docker-concept/ImageInspect_FS.png){: .w-75 .light }
-![Concept 01: Docker Image is built with layers: Image Inspect FS](/images/docker-concept/ImageInspect_FS-dark.png){: .w-75 .dark }
+![Concept 01: Docker Image is built with layers: Image Inspect FS](/images/docker-concept/ImageInspect_FS.webp){: .w-75 .light }
+![Concept 01: Docker Image is built with layers: Image Inspect FS](/images/docker-concept/ImageInspect_FS-dark.webp){: .w-75 .dark }
 _Concept 01: Docker Image is built with layers: Image Inspect FS_
 
 The instructions that are not updating the filesystem are stored as metadata and are generally can be inspected as part of the config portion of the image.
-![Concept 01: Docker Image is built with layers: Image Inspect Config](/images/docker-concept/ImageInspect_Config.png){: .light }
-![Concept 01: Docker Image is built with layers: Image Inspect Config](/images/docker-concept/ImageInspect_Config-dark.png){: .dark }
+![Concept 01: Docker Image is built with layers: Image Inspect Config](/images/docker-concept/ImageInspect_Config.webp){: .light }
+![Concept 01: Docker Image is built with layers: Image Inspect Config](/images/docker-concept/ImageInspect_Config-dark.webp){: .dark }
 _Concept 01: Docker Image is built with layers: Image Inspect Config_
 
 > Remote images do also contain intermediate steps, however, those intermediate layers aren't generally pulled from the repository.
@@ -34,8 +34,8 @@ _Concept 01: Docker Image is built with layers: Image Inspect Config_
 Docker ImageIDs are nothing but SHA-256 of the image configuration along with metadata.
 
 Pulling image pulls all the file-system layers used while creating the image:
-![Concept 01: Docker Image is built with layers: Image Pull](/images/docker-concept/ImagePull.png){: .light }
-![Concept 01: Docker Image is built with layers: Image Pull](/images/docker-concept/ImagePull-dark.png){: .dark }
+![Concept 01: Docker Image is built with layers: Image Pull](/images/docker-concept/ImagePull.webp){: .light }
+![Concept 01: Docker Image is built with layers: Image Pull](/images/docker-concept/ImagePull-dark.webp){: .dark }
 _Concept 01: Docker Image is built with layers: Image Pull_
 
 ##### Chaining Instruction:
@@ -50,8 +50,8 @@ RUN addgroup --gid 10001 --system nonroot \
 
 While building images, docker looks into the cache to check whether the resultant file-system layer is already present. In case it's available, Docker directly uses the layer unless ```--no-cache``` option is specified. Otherwise, the image layer is built using a container.
 
-![Concept 02: Docker images are built using containers: Build Container](/images/docker-concept/BuildContainer.png){: .light }
-![Concept 02: Docker images are built using containers: Build Container](/images/docker-concept/BuildContainer-dark.png){: .dark }
+![Concept 02: Docker images are built using containers: Build Container](/images/docker-concept/BuildContainer.webp){: .light }
+![Concept 02: Docker images are built using containers: Build Container](/images/docker-concept/BuildContainer-dark.webp){: .dark }
 _Concept 02: Docker images are built using containers: Build Container_
 
 ##### Dangling Image:

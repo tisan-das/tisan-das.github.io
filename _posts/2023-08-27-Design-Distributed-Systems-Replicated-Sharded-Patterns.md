@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Designing Distributed Systems - Replicated & Sharded Patterns
-image: /images/distributed-system-patterns-single-node/09.basicReplicatedStatelessService.png
+image: /images/distributed-system-patterns-single-node/09.basicReplicatedStatelessService.webp
 series: "Designing Distributed Systems"
 categories: ["Distributed Systems", "Patterns"]
 tags: [sharding, replication]
@@ -16,8 +16,8 @@ In the last blog post, we discussed about the generic patterns used to create co
 
 The simplest of the serving design patterns is the replicated load-balanced service, where every server is identical and capable of serving traffic, and the requests are routed through a load-balancer placed in front of the servers.
 
-![Replicated Load-balanced Services: 09.basic Replicated Stateless Service](/images/distributed-system-patterns-single-node/09.basicReplicatedStatelessService.png){: .light }
-![Replicated Load-balanced Services: 09.basic Replicated Stateless Service](/images/distributed-system-patterns-single-node/09.basicReplicatedStatelessService-dark.png){: .dark }
+![Replicated Load-balanced Services: 09.basic Replicated Stateless Service](/images/distributed-system-patterns-single-node/09.basicReplicatedStatelessService.webp){: .light }
+![Replicated Load-balanced Services: 09.basic Replicated Stateless Service](/images/distributed-system-patterns-single-node/09.basicReplicatedStatelessService-dark.webp){: .dark }
 _Replicated Load-balanced Services: 09.basic Replicated Stateless Service_
 
 ##### Probes:
@@ -216,8 +216,8 @@ Another common usage of HTTP reverse proxy is for SSL termination, where the inc
 
 ##### Hands On: SSL Termination through NGINX:
 
-![Hands On: SSL Termination through NGINX: 10.Hands On Replicated Service](/images/distributed-system-patterns-single-node/10.HandsOnReplicatedService.png){: .w-75 .light }
-![Hands On: SSL Termination through NGINX: 10.Hands On Replicated Service](/images/distributed-system-patterns-single-node/10.HandsOnReplicatedService-dark.png){: .w-75 .dark }
+![Hands On: SSL Termination through NGINX: 10.Hands On Replicated Service](/images/distributed-system-patterns-single-node/10.HandsOnReplicatedService.webp){: .w-75 .light }
+![Hands On: SSL Termination through NGINX: 10.Hands On Replicated Service](/images/distributed-system-patterns-single-node/10.HandsOnReplicatedService-dark.webp){: .w-75 .dark }
 _Hands On: SSL Termination through NGINX: 10.Hands On Replicated Service_
 
 ```sh
@@ -495,8 +495,8 @@ controlplane $ curl http://localhost:32705 -k
 ### Sharded Services:
 In the sharded service, the replicas are not identical, they aren't homogeneous and is capable of serving only a specific subset of requests. The load-balancing node, termed root is responsible for routing the requests to the appropriate shard. The replicas are called shard. Sharded services are stateful in nature. 
 
-![Sharded Services: 11.sharded Service](/images/distributed-system-patterns-single-node/11.shardedService.png){: .light }
-![Sharded Services: 11.sharded Service](/images/distributed-system-patterns-single-node/11.shardedService-dark.png){: .dark }
+![Sharded Services: 11.sharded Service](/images/distributed-system-patterns-single-node/11.shardedService.webp){: .light }
+![Sharded Services: 11.sharded Service](/images/distributed-system-patterns-single-node/11.shardedService-dark.webp){: .dark }
 _Sharded Services: 11.sharded Service_
 
 ##### Sharded Cache:

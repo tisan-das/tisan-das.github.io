@@ -1,7 +1,7 @@
 ---
 layout: post
 title: System Design - Design Key-Value Store
-image: /images/sys-design-vol1/03-kv-system-cap-theorem.png
+image: /images/sys-design-vol1/03-kv-system-cap-theorem.webp
 series: "System Design Case Studies"
 categories: ["System Design", "Case Studies"]
 tags: [key-value-store, system-design]
@@ -28,8 +28,8 @@ A key-value store, also referred to as a key-value database, is a crucial topic 
 
 CAP Theorem suggests that distributed systems can satisfy two of the above three properties, not all three of them.
 
-![CAP Theorem: KV system CAP theorem](/images/sys-design-vol1/03-kv-system-cap-theorem.png){: .light }
-![CAP Theorem: KV system CAP theorem](/images/sys-design-vol1/03-kv-system-cap-theorem-dark.png){: .dark }
+![CAP Theorem: KV system CAP theorem](/images/sys-design-vol1/03-kv-system-cap-theorem.webp){: .light }
+![CAP Theorem: KV system CAP theorem](/images/sys-design-vol1/03-kv-system-cap-theorem-dark.webp){: .dark }
 _CAP Theorem: KV system CAP theorem_
 
 > distributed systems must be partition-tolerant. Thus, the distributed systems can either be a CP (Consistent & Partition Tolerance) system or an AP (Availability & Partition Tolerance) system. A CA (Consistent & Availability) distributed system is of no use. The type of system we want to design depends on the use case. For example, the banking sector requires strict consistency systems.
@@ -78,8 +78,8 @@ Versioning and vector clocks are used to detect inconsistency. We need to explor
 
 **Failure detection:**
 The gossip protocol is generally followed 
-![Handling failures: KV system gossip protocol](/images/sys-design-vol1/03-kv-system-gossip-protocol.png){: .light }
-![Handling failures: KV system gossip protocol](/images/sys-design-vol1/03-kv-system-gossip-protocol-dark.png){: .dark }
+![Handling failures: KV system gossip protocol](/images/sys-design-vol1/03-kv-system-gossip-protocol.webp){: .light }
+![Handling failures: KV system gossip protocol](/images/sys-design-vol1/03-kv-system-gossip-protocol-dark.webp){: .dark }
 _Handling failures: KV system gossip protocol_
 
 **Handling temporary failures:**
@@ -93,8 +93,8 @@ Data is migrated from a healthy node to a new node. Migration is performed on di
 
 ##### System architecture diagram
 
-![System architecture diagram: KV system system design](/images/sys-design-vol1/03-kv-system-system-design.png){: .light }
-![System architecture diagram: KV system system design](/images/sys-design-vol1/03-kv-system-system-design-dark.png){: .dark }
+![System architecture diagram: KV system system design](/images/sys-design-vol1/03-kv-system-system-design.webp){: .light }
+![System architecture diagram: KV system system design](/images/sys-design-vol1/03-kv-system-system-design-dark.webp){: .dark }
 _System architecture diagram: KV system system design_
 
 ### Future study:

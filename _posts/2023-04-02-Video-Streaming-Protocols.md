@@ -16,16 +16,16 @@ One of the main properties of sampling is the sample rate, which denotes the num
 
 The human ear operates on the frequency range of 20-20000 Hz, and based on the Nyquist-Shannon sampling theorem, the audio should be sampled at at-least 40kHz frequency to accurately recreate. Also having some more frequency bandwidth helps to avoid distortion, hence 44.1 kHz is the most popular sample rate. 
 
-![Audio Concept: audio sample bandwidth](/images/video-streaming-protocols/audio-sample-bandwidth.png){: .light }
-![Audio Concept: audio sample bandwidth](/images/video-streaming-protocols/audio-sample-bandwidth-dark.png){: .dark }
+![Audio Concept: audio sample bandwidth](/images/video-streaming-protocols/audio-sample-bandwidth.webp){: .light }
+![Audio Concept: audio sample bandwidth](/images/video-streaming-protocols/audio-sample-bandwidth-dark.webp){: .dark }
 _Audio Concept: audio sample bandwidth_
 
 Thus based on the above calculation, 192KBps only for single audio is too huge and thus needs compression and decompression techniques(codec). It's to be noted that once codecs are used, we need to ensure the erroneous or dropped packets are recovered, otherwise the decompression might get failed. Due to this TCP connections are preferred over UDP ones for the majority of the codec.
 
 ### Video Concept:
 The following calculation shows the massive requirement of bandwidth if the videos are transmitted uncompressed
-![Video Concept: video bandwidth](/images/video-streaming-protocols/video-bandwidth.png){: .light }
-![Video Concept: video bandwidth](/images/video-streaming-protocols/video-bandwidth-dark.png){: .dark }
+![Video Concept: video bandwidth](/images/video-streaming-protocols/video-bandwidth.webp){: .light }
+![Video Concept: video bandwidth](/images/video-streaming-protocols/video-bandwidth-dark.webp){: .dark }
 _Video Concept: video bandwidth_
 
 Also, this is the same reason why lossy compression algorithms are preferred over lossless compression ones, at least for video media types.

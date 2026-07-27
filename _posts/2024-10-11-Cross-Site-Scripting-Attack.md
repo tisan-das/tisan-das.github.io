@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Web Application Security - Cross-Site Scripting (XSS) Attack
-image: /images/web-security/stored_xss.png
+image: /images/web-security/stored_xss.webp
 series: "Web Security"
 categories: ["Security", "Web Security"]
 tags: [xss]
@@ -15,15 +15,15 @@ Security is a major aspect while developing any application, and web application
 Cross-site scripting (XSS) attacks, at their core, execute a malicious script on a user's web browser. It uses the fact that all modern web browsers allow the executing of JavaScript on web browsers. Hence, most such attacks are performed with the help of JavaScript.
 
 ##### Stored XSS:
-![Stored XSS](/images/web-security/stored_xss.png){: .light }
-![Stored XSS](/images/web-security/stored_xss-dark.png){: .dark }
+![Stored XSS](/images/web-security/stored_xss.webp){: .light }
+![Stored XSS](/images/web-security/stored_xss-dark.webp){: .dark }
 _Stored XSS_
 
 One issue with stored XSS is that some of the advanced XSS payloads are not even written in plain text, rather they're written in other formats like base64 binary, etc. On top of that, in certain scenarios, the whole payload is split and stored in multiple places and can be dangerous only when combined. Generally, this is handled with the help of a sanitizer library, which detects anomalous scripts stored on the server.
 
 ##### Reflected XSS:
-![Reflected XSS](/images/web-security/reflected_xss.png){: .light }
-![Reflected XSS](/images/web-security/reflected_xss-dark.png){: .dark }
+![Reflected XSS](/images/web-security/reflected_xss.webp){: .light }
+![Reflected XSS](/images/web-security/reflected_xss-dark.webp){: .dark }
 _Reflected XSS_
 
 Reflected XSS is much more difficult to detect since the payloads are not stored on the server side. This type of attack is directed to hit a set of users, as the malicious payload needs to be distributed separately.

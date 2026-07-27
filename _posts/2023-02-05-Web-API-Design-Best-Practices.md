@@ -1,7 +1,7 @@
 ---
 published: true
 title: Web API Design Best Practices
-image: /images/REST-intro/httpVerbs.png
+image: /images/REST-intro/httpVerbs.webp
 categories: ["Programming", "Web"]
 tags: [api-design, rest]
 ---
@@ -71,8 +71,8 @@ HTTP Status Codes:
     i. 204 (No Content): Deletion completed, no further response is sent
     ii. 404 (Not Found): Requested resource doesn't exist
 
-![Define API operations in terms of HTTP methods: HTTP Verbs](/images/REST-intro/httpVerbs.png){: .light }
-![Define API operations in terms of HTTP methods: HTTP Verbs](/images/REST-intro/httpVerbs-dark.png){: .dark }
+![Define API operations in terms of HTTP methods: HTTP Verbs](/images/REST-intro/httpVerbs.webp){: .light }
+![Define API operations in terms of HTTP methods: HTTP Verbs](/images/REST-intro/httpVerbs-dark.webp){: .dark }
 _Define API operations in terms of HTTP methods: HTTP Verbs_
 
 ### Conform to HTTP semantics

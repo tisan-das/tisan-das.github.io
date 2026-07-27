@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Introduction to Creational Design Patterns
-image: /images/creation-design-patterns/singleton.png
+image: /images/creation-design-patterns/singleton.webp
 series: "Design Patterns"
 categories: ["Programming", "Design Patterns"]
 tags: [design-patterns, creational]
@@ -21,8 +21,8 @@ Intent: Ensure a class has only one instance, and provide a global point of acce
 
 ###### Class Diagram:
 
-![Class Diagram: singleton](/images/creation-design-patterns/singleton.png){: .light }
-![Class Diagram: singleton](/images/creation-design-patterns/singleton-dark.png){: .dark }
+![Class Diagram: singleton](/images/creation-design-patterns/singleton.webp){: .light }
+![Class Diagram: singleton](/images/creation-design-patterns/singleton-dark.webp){: .dark }
 _Class Diagram: singleton_
 
 > **Note**
@@ -91,8 +91,8 @@ Intent: Specify the kinds of objects to create using a prototypical instance, an
 
 ###### Class Diagram:
 
-![Class Diagram: prototype](/images/creation-design-patterns/prototype.png){: .w-75 .light }
-![Class Diagram: prototype](/images/creation-design-patterns/prototype-dark.png){: .w-75 .dark }
+![Class Diagram: prototype](/images/creation-design-patterns/prototype.webp){: .w-75 .light }
+![Class Diagram: prototype](/images/creation-design-patterns/prototype-dark.webp){: .w-75 .dark }
 _Class Diagram: prototype_
 
 ###### Implementation:
@@ -169,8 +169,8 @@ Intent: Separate the construction of a complex object from its representation so
 
 ###### Class Diagram:
 
-![Class Diagram: builder](/images/creation-design-patterns/builder.png){: .light }
-![Class Diagram: builder](/images/creation-design-patterns/builder-dark.png){: .dark }
+![Class Diagram: builder](/images/creation-design-patterns/builder.webp){: .light }
+![Class Diagram: builder](/images/creation-design-patterns/builder-dark.webp){: .dark }
 _Class Diagram: builder_
 
 ###### Implementation:
@@ -224,8 +224,8 @@ Intent: Define an interface for creating an object, but let the subclasses decid
 
 ###### Class Diagram:
 
-![Class Diagram: factory Method](/images/creation-design-patterns/factoryMethod.png){: .w-75 .light }
-![Class Diagram: factory Method](/images/creation-design-patterns/factoryMethod-dark.png){: .w-75 .dark }
+![Class Diagram: factory Method](/images/creation-design-patterns/factoryMethod.webp){: .w-75 .light }
+![Class Diagram: factory Method](/images/creation-design-patterns/factoryMethod-dark.webp){: .w-75 .dark }
 _Class Diagram: factory Method_
 
 ###### Implementation:
@@ -311,8 +311,8 @@ Intent: Provide an interface for creating families of related or dependent objec
 
 ###### Class Diagram:
 
-![Class Diagram: abstract Factory](/images/creation-design-patterns/abstractFactory.png){: .w-75 .light }
-![Class Diagram: abstract Factory](/images/creation-design-patterns/abstractFactory-dark.png){: .w-75 .dark }
+![Class Diagram: abstract Factory](/images/creation-design-patterns/abstractFactory.webp){: .w-75 .light }
+![Class Diagram: abstract Factory](/images/creation-design-patterns/abstractFactory-dark.webp){: .w-75 .dark }
 _Class Diagram: abstract Factory_
 
 ###### Implementation:

@@ -1,7 +1,7 @@
 ---
 published: true
 title: Introduction to Kubernetes
-image: /images/kubernetes-intro/deployment_history.png
+image: /images/kubernetes-intro/deployment_history.webp
 categories: ["Cloud & DevOps", "Containers"]
 tags: [kubernetes, containers]
 ---
@@ -11,16 +11,16 @@ Kubernetes provides an option to manage containerized workloads. In this documen
 ## Background:
 Earlier in the traditional deployment era, all the applications were used to run on the same physical server, thus all applications were using the same set of libraries, and in case there was some issue with the dependencies or one application can hog the system resources thus restricting rest of the application from serving requests. Virtualized deployment provided a solution to this, by spreading applications throughout multiple VMs. Containerization of applications provides another layer of optimization, where the need to use different OS is diminished, thus using the same Operating System for all the containerized applications. The containerized application contains only the package's code and dependencies.
 
-![Image info](/images/kubernetes-intro/deployment_history.png){: .light }
-![Image info](/images/kubernetes-intro/deployment_history-dark.png){: .dark }
+![Image info](/images/kubernetes-intro/deployment_history.webp){: .light }
+![Image info](/images/kubernetes-intro/deployment_history-dark.webp){: .dark }
 
 ## Kubernetes Components
 Kubernetes cluster consists of a **Control plane** and **worker nodes**. Worker nodes host the PODs, unit of containerization, and consist of one or multiple containers. The control plane manages the worker nodes and can run in multiple nodes for fault tolerance and high availability.
 
 Each container executes a container image that contains the application binary along with the libraries and runtime needed to execute the application.
 
-![Kubernetes Components: components](/images/kubernetes-intro/components.png){: .w-75 .light }
-![Kubernetes Components: components](/images/kubernetes-intro/components-dark.png){: .w-75 .dark }
+![Kubernetes Components: components](/images/kubernetes-intro/components.webp){: .w-75 .light }
+![Kubernetes Components: components](/images/kubernetes-intro/components-dark.webp){: .w-75 .dark }
 _Kubernetes Components: components_
 
 Two ways to interact with Kubernetes:
@@ -106,8 +106,8 @@ A Pod (as in a pod of whales or pea pod) is a group of one or more containers, w
 
 Rather than creating pods individually, it's better to use a controller. The controller handles the replication and rollout mechanisms. For example, in case a node goes down, the replication rule will ensure the required number of PODs is up. For example, you might have a container that acts as a web server for files in a shared volume, and a separate "sidecar" container that updates those files from a remote source, as in the following diagram:
 
-![POD: multi container pod](/images/kubernetes-intro/multi_container_pod.png){: .light }
-![POD: multi container pod](/images/kubernetes-intro/multi_container_pod-dark.png){: .dark }
+![POD: multi container pod](/images/kubernetes-intro/multi_container_pod.webp){: .light }
+![POD: multi container pod](/images/kubernetes-intro/multi_container_pod-dark.webp){: .dark }
 _POD: multi container pod_
 
 ##### Question: How containers inside POD can comminucate with each other?

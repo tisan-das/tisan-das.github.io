@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Introduction to Map-Reduce
-image: /images/map-reduce/architecture.png
+image: /images/map-reduce/architecture.webp
 series: "Distributed Systems Papers"
 categories: ["Distributed Systems", "Fundamentals"]
 tags: [mapreduce, batch-processing]
@@ -27,8 +27,8 @@ Following are some examples of problems that are easily expressed in the MapRedu
 
 ### Execution Overview:
 
-![Execution Overview: architecture](/images/map-reduce/architecture.png){: .w-75 .light }
-![Execution Overview: architecture](/images/map-reduce/architecture-dark.png){: .w-75 .dark }
+![Execution Overview: architecture](/images/map-reduce/architecture.webp){: .w-75 .light }
+![Execution Overview: architecture](/images/map-reduce/architecture-dark.webp){: .w-75 .dark }
 _Execution Overview: architecture_
 
 Step 01: The MapReduce librarry in user program splits the input file into M pieces of typilcally 16MB to 64MB
@@ -52,8 +52,8 @@ Any map tasks currently in-progress on a failed machine is also reverted back to
 ### Combiner Function:
 Combiner function is executed on each system that peforms map operation after it's completed. Combiner function does partial merging on the intermediate files to reduce the networ bandwidth requirement while transferring data through RPC for reduce tasks.
 
-![Combiner Function: mapreduce](/images/map-reduce/mapreduce.png){: .light }
-![Combiner Function: mapreduce](/images/map-reduce/mapreduce-dark.png){: .dark }
+![Combiner Function: mapreduce](/images/map-reduce/mapreduce.webp){: .light }
+![Combiner Function: mapreduce](/images/map-reduce/mapreduce-dark.webp){: .dark }
 _Combiner Function: mapreduce_
 
 ### Example:
