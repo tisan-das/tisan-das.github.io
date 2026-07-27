@@ -12,7 +12,7 @@ At some point in every RAG project, a category of question stops working and no 
 
 {% include series-nav.html %}
 
-> **Disclaimer.** This post was drafted with assistance from large language models (Claude Opus 4.8 and DeepSeek V4 Pro) based on conversations exploring production RAG concepts. All content has been reviewed, edited, and verified by a human author.
+> **Disclaimer.** This post is drafted with assistance from large language models (Claude Opus 4.8 and DeepSeek V4 Pro) based on conversations exploring production RAG concepts. All content has been reviewed, edited, and verified by a human author.
 {: .prompt-info }
 
 ![Matching failure versus reachability failure](/images/rag/06-entities-graphs/01-two-retrieval-failures.webp)

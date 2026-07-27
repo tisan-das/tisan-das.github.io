@@ -12,7 +12,7 @@ Retrieval-augmented generation looks deceptively simple. Split the documents, em
 
 {% include series-nav.html %}
 
-> **Disclaimer.** This post was drafted with assistance from large language models (Claude Opus 4.8 and DeepSeek V4 Pro) based on conversations exploring production RAG concepts. All content has been reviewed, edited, and verified by a human author.
+> **Disclaimer.** This post is drafted with assistance from large language models (Claude Opus 4.8 and DeepSeek V4 Pro) based on conversations exploring production RAG concepts. All content has been reviewed, edited, and verified by a human author.
 {: .prompt-info }
 
 > **Reference stack.** The reference implementation assumed throughout is a Go service using [sqlite-vec](https://github.com/asg017/sqlite-vec) for dense vectors, SQLite's [FTS5](https://www.sqlite.org/fts5.html) for BM25 keyword search, and a hosted model provider for embeddings, vision transcription and generation. None of the ideas are specific to that stack, but having a concrete one keeps the discussion honest about cost and failure modes.
