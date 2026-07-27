@@ -203,7 +203,6 @@ exclude:
   - purgecss.js
   - "*.config.js"
   - "package*.json"
-  - rag-related-docs
 
 jekyll-archives:
   enabled: [categories, tags]

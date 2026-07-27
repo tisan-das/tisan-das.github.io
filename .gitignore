@@ -26,9 +26,6 @@ package-lock.json
 _sass/vendors
 assets/js/dist
 
-# Downloaded source materials (integrated into the site manually)
-rag-related-docs/
-
 # Hidden system files
 *~
 .DS_Store
