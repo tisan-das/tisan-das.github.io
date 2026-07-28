@@ -33,8 +33,8 @@ Store the transcription in the retrieval index, store the original image in a bl
 
 ```sql
 CREATE TABLE chunks(
-  id INTEGER PRIMARY KEY, doc_id TEXT, text TEXT,
-  type TEXT DEFAULT 'text',    -- 'text' | 'image_transcript'
+  id INTEGER PRIMARY KEY, doc_id TEXT, page INTEGER, text TEXT,
+  type TEXT DEFAULT 'text',    -- 'text' | 'table' | 'image_transcript'
   source_ref TEXT,             -- s3://bucket/img/fig_042.png when type='image_transcript'
   transcriber_version TEXT     -- lets you re-transcribe selectively after a prompt change
 );

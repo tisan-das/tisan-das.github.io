@@ -82,12 +82,19 @@ For matching failures, enrichment appends synthetic retrieval handles to a chunk
 
 ```sql
 -- index_text is what retrieval sees.  display_text is what the user sees.
-UPDATE chunks SET index_text =
-  heading_path || x'0a' || enrichment || x'0a' || overlap_prefix || x'0a' || body;
+ALTER TABLE chunks ADD COLUMN index_text TEXT;
+ALTER TABLE chunks ADD COLUMN display_text TEXT;
 
--- Column weights keep synthetic text from outbidding real text:
--- bm25(chunks_fts, 4.0 /* body */, 1.5 /* enrichment */, 2.0 /* heading */)
+UPDATE chunks SET
+  index_text  = heading_path || x'0a' || enrichment || x'0a' || overlap_prefix || x'0a' || body,
+  display_text = body;
+
+-- the FTS5 from part 4 indexed `text`; rebuild it on the enriched column
+DROP TABLE IF EXISTS chunks_fts;
+CREATE VIRTUAL TABLE chunks_fts USING fts5(index_text, tokenize='porter unicode61');
 ```
+
+If your enrichment is heavy — many synthetic questions, long alias expansions — consider splitting `index_text` into separate FTS5 columns (body, enrichment, heading) so you can apply column weights in `bm25()` and keep synthetic text from outbidding the original prose.
 
 > **Index text and display text must be different columns.** Every synthetic addition — overlap, heading ancestry, enrichment — improves retrieval and pollutes citation. The moment you concatenate them into one stored string, users start seeing repeated sentences and machine-written questions inside quoted evidence. This is the load-bearing schema decision of the entire ingest side, and it is nearly free if you make it early and painful to retrofit if you do not.
 {: .prompt-tip }

@@ -95,7 +95,7 @@ func coalesceRunts(chunks []chunk, max int) []chunk {
 }
 ```
 
-> Accept a slightly oversized chunk rather than a runt. Then generalise the rule: enforce a hard minimum chunk size of around 200 characters everywhere, with the single exception of a document that produces exactly one chunk. Any chunk below that floor is a length-normalization hazard regardless of what produced it.
+> Accept a slightly oversized chunk rather than a runt. Then generalise the rule: enforce the 25%-of-max floor everywhere, with the single exception of a document that produces exactly one chunk. Any chunk below that floor is a length-normalization hazard regardless of what produced it.
 {: .prompt-tip }
 
 Note the loop runs **backward over the whole chunk list**, not forward and not per-section. A mid-section table can shed a runt too, and merging one runt can make the previous chunk newly eligible.
@@ -145,7 +145,7 @@ Maintain a heading stack with one extra bit per frame — `inheritable bool`, se
 
 ## Three numbers to keep in config
 
-`maxChunkChars` (1,800 is a reasonable default), `chunkOverlapChars` (150), and the runt floor (200 characters, or 25% of max). Log the chunk-length distribution after every ingestion run — a sudden shift in that histogram is either a corpus change or a regression, and you want to know which one before your users do.
+`maxChunkChars` (1,800 is a reasonable default), `chunkOverlapChars` (150), and the runt floor (25% of max — 450 characters at the default). Log the chunk-length distribution after every ingestion run — a sudden shift in that histogram is either a corpus change or a regression, and you want to know which one before your users do.
 
 ## What comes next
 
