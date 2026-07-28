@@ -119,11 +119,14 @@ Every entry below appeared somewhere in this series. Together they are the reaso
 | Embedding model changed, index not re-embedded | 4 | `embedder_version` mismatch check |
 | BM25 sign confusion — FTS5 scores are negative | 4 | Unit test on a known ranking |
 | Both retrievers share a blind spot; RRF amplifies it | 4 | Reranker disagreement rate |
+| Embedding model silently truncates long chunks | 4 | Assert chunk token count < model max before embedding |
 | Image exceeds the vision cap, transcription is invented | 5 | Log image dimension distribution at ingest |
 | Entity filter matches nothing, producing empty answers | 6 | Empty-after-filter fallback and counter |
 | Hub node floods two-hop traversal | 6 | Fan-out cap and degree monitoring |
 | Wrong entity merge corrupts every traversal through it | 6 | High auto-merge bar; human review band |
 | Semantic cache serves the negated query | 7 | Tight threshold; cache-hit audit sample |
+| Stale cache after document re-ingestion | 7 | Key by document-set version; flush on re-ingest |
+| Cache shared across permission scopes leaks data | 7 | Cache key must include permission scope or be per-principal |
 | Confused deputy — service identity, not user identity | 8 | Principal propagated on every trace |
 | ACL drift — index remembers old permissions | 8 | Staleness SLO and sync alerts |
 
