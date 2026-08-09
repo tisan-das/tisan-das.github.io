@@ -34,6 +34,42 @@ _Relative BM25 score for one identical term match at four chunk lengths. The orp
 > The intuition worth carrying: BM25 is asking *"what fraction of this chunk is about your query?"* A 42-character chunk entirely about `32x` beats a 1,780-character chunk that is two percent about `32x`. This single mechanism is behind two of the three chunking rules below.
 {: .prompt-tip }
 
+### The arithmetic behind the chart
+
+With `tf = 1` everywhere, IDF constant, and `k1 = 1.2`, `b = 0.75`, `avgdl = 1200` ([part 4](/Production-RAG-Hybrid-Search/) derives the formula these come from):
+
+| chunk | length | \|D\|/avgdl | relative score |
+|---|---|---|---|
+| orphaned table row | 42 | 0.035 | **1.65** |
+| figure caption | 400 | 0.333 | **1.38** |
+| prose paragraph | 1,200 (average) | 1.000 | **1.00** |
+| full table | 1,780 | 1.483 | **0.83** |
+
+The entire 2x spread comes from length normalisation alone. Make it concrete: a report produces four chunks, each containing `Mumbai` once. The orphan is `| Mumbai | FY24 | 18,412 | 4.2% |` — one severed row with no header, no units, no caption. The full table has twelve data rows and a header telling you 18,412 is in crores. Ask *"what was Mumbai's FY24 revenue?"* and BM25 puts the only chunk that can answer it last.
+
+### The hidden assumption
+
+Length normalisation makes BM25 ask *what share of this chunk is the query term?* That is a good proxy for aboutness **when a human decided how long the text would be.** Robertson and Zaragoza identified two reasons a document is long — **verbosity** (same content, more words) and **scope** (genuinely covers more ground) — and both point the same direction. The standard `b = 0.75` was tuned on TREC collections: news wire, web pages, abstracts. Real documents with lengths their authors chose.
+
+In a chunked corpus, length is a property of your splitter, not the author. Short chunks are usually the *least* useful — leftovers, split artifacts, rows orphaned at a boundary — and BM25 gives them the biggest bonus.
+
+### Saturation cannot rescue a long chunk
+
+Can more matches make up the deficit? Hold length at 1,780 and vary the count:
+
+| matches | relative score |
+|---|---|
+| 1 | 0.83 |
+| 2 | 1.21 |
+| 3 | 1.42 |
+| **5** | **1.66** |
+
+The full table needs **five** occurrences to edge past a single occurrence in the 42-character fragment. The ceiling is 2.2 and the orphan already sits at 1.65 — 75% of the theoretical maximum, from one match.
+
+### The compounding effect on avgdl
+
+`avgdl` is computed over your index. Every orphan pulls it down, which makes ordinary chunks look proportionally longer, which penalises them harder. A chunker producing many fragments poisons the normaliser for everything else.
+
 ## The strategy landscape
 
 Five families, in rough order of sophistication:
@@ -68,7 +104,7 @@ Prose, tables and OCR text each violate "every chunk must stand alone" for a dif
 
 - **Snap to a word boundary.** Slicing at exactly 150 bytes cuts mid-word and mid-rune. A truncated token becomes a real FTS5 token that matches nothing. Walk back to the nearest space, and decode the last rune properly so multi-byte characters never split.
 - **Never overlap into a table.** A tail landing inside a table prepends half a pipe row, which is broken markdown. Skip the overlap for that pair — a table chunk is already self-contained.
-- **Store the overlap separately from the body.** Index `heading_path + overlap_prefix + body`, but display and cite only `body`. Retrieval gets the context benefit; the user never sees the same sentence twice.
+- **Store the overlap separately from the body.** Index `heading_path`, `overlap_prefix` and `body` — each in its own column, so [part 6](/Production-RAG-Entities-And-Graphs/) can weight them differently — but display and cite only `body`. Retrieval gets the context benefit; the user never sees the same sentence twice.
 
 ### Tables: two rules prose does not need
 
@@ -100,6 +136,17 @@ func coalesceRunts(chunks []chunk, max int) []chunk {
 
 Note the loop runs **backward over the whole chunk list**, not forward and not per-section. A mid-section table can shed a runt too, and merging one runt can make the previous chunk newly eligible.
 
+Why backward matters: given chunks `[1800, 1800, 300, 200]`, a forward sweep merges 300 into the preceding 1,800 to give `[1800, 2100, 200]`, and then stalls. Absorbing the trailing 200 would take that chunk to 2,300, past the 2,250 overflow ceiling, so the guard refuses — and the runt survives the pass that exists to remove it. A backward sweep merges 200 into 300 first, giving `[1800, 1800, 500]`, and 500 clears the floor. Backward lets the small pieces coalesce with *each other* before either one reaches for a full-size neighbour.
+
+![Forward and backward runt-coalescing sweeps over the same chunk list](/images/rag/03-chunking/03-runt-coalescing-direction.webp)
+_The forward sweep spends its merge budget on a chunk that did not need one. Sweep direction is not a style choice._
+
+Re-check happens naturally: `[1800, 100, 100]` backward — the last 100 merges into the previous 100 giving 200, still under the floor, so it merges again into 1,800. Backward iteration handles this for free since you merge into position `i-1` and examine it next.
+
+The single exception is a document that produces exactly one chunk — an 80-character document has nowhere to merge to. Emit it, or you silently drop content.
+
+The floor means `maxChunkChars` stops being a hard limit. Worst case, a full chunk absorbs a runt one character under the floor: `1,800 + 449 = 2,249`. That is the real ceiling — both the embedder's token limit and the per-chunk context budget need to tolerate it.
+
 ### OCR text: quarantine, not repair
 
 Prose and table chunks contain text *read* from the PDF. An OCR chunk contains text a vision model *guessed* from a picture. The risk is not incompleteness but wrongness — and overlap and heading inheritance are precisely the channels that would spread that wrongness into content you trust.
@@ -109,6 +156,16 @@ Prose and table chunks contain text *read* from the PDF. An OCR chunk contains t
 | OCR text bleeds into a clean neighbour | No overlap into or out of transcribed sections |
 | An invented heading becomes an ancestor | Transcribed headings are never carried forward |
 | Page number lost from the citation | Headings demoted so `## Page N` survives |
+
+**Channel 1 — overlap.** Overlap copies a tail of one chunk onto the head of the next so a severed sentence is whole somewhere. When the source is guessed text, the copy lands in a trusted chunk — BM25 now scores that chunk on guessed tokens, and a citation points at a page that never said the thing. The rule blocks both directions: copying clean prose *into* the OCR chunk would make an `image_transcript` row partly untrue about its own type.
+
+**Channel 2 — heading inheritance.** Overlap poisons one neighbour; a heading poisons everything beneath it. If the chunker prefixes each chunk with its section path, a heading the vision model invented is copied onto every chunk in the subtree — one bad guess, repeated N times, in the field that shapes both BM25 tokens and the embedding.
+
+**Channel 3 — page-anchor displacement.** `## Page N` carries citation provenance. If a transcribed heading is emitted at the same Markdown level, it *closes* the page section and becomes the nearest ancestor, displacing the page anchor. The chunk stays accurate and simply loses its page number. The fix is one line on the extractor side — force transcribed headings to at least one level below the page anchor:
+
+```python
+level = max(PAGE_HEADING_LEVEL + 1, guessed_level)
+```
 
 > The through-line across all three rules: reconstructed content is welcome in the index, but it is never allowed to contaminate the retrieval signals of content you trust. A single marker string — `"(transcribed"` — carries this from the extractor, through normalization, into the chunker, into the database row, and out to the answering prompt, where it lets the model hedge instead of stating a possibly-misread number as fact. One string, four consumers, no shared schema.
 {: .prompt-tip }
@@ -143,9 +200,17 @@ Prefixing each chunk with its heading ancestry is one of the cheapest large wins
 
 Maintain a heading stack with one extra bit per frame — `inheritable bool`, set false for transcribed headings. An OCR-synthesized heading labels its own chunks perfectly well, but a vision model's invented heading for page 12 has no authority over native text on page 13.
 
-## Three numbers to keep in config
+## Configuration and monitoring
 
-`maxChunkChars` (1,800 is a reasonable default), `chunkOverlapChars` (150), and the runt floor (25% of max — 450 characters at the default). Log the chunk-length distribution after every ingestion run — a sudden shift in that histogram is either a corpus change or a regression, and you want to know which one before your users do.
+| knob | value | why |
+|---|---|---|
+| `maxChunkChars` | 1,800 | packing target, not a hard limit |
+| `chunkOverlapChars` | 150 | enough to rejoin a severed sentence |
+| runt floor | 25% of max (450) | caps score inflation at 1.34x instead of 1.69x |
+| effective max chunk size | 2,249 | `max + floor - 1`; assert on it |
+| `avgdl` | ~1,200 | emergent, not configured — watch it drift |
+
+Log the chunk-length distribution after every ingestion run. Mean chunk length is nearly useless — if 3% of chunks are runts the mean barely moves. Track the **p1 and p5** of the distribution, and separately the **count of chunks below the floor**. That count is an invariant: it should be exactly zero, except for single-chunk documents. If it goes positive, either the merge loop has a bug or a new document shape is defeating it.
 
 ## What comes next
 
@@ -158,3 +223,4 @@ The [next post](/Production-RAG-Hybrid-Search/) moves to the query side: what th
 3. Liu et al., *Lost in the Middle: How Language Models Use Long Contexts*, TACL 2024
 4. Thakur et al., *BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models*, NeurIPS 2021
 5. [SQLite FTS5 — the BM25 implementation](https://www.sqlite.org/fts5.html#the_bm25_function)
+6. Robertson, S. and Zaragoza, H. "The Probabilistic Relevance Framework: BM25 and Beyond." *Foundations and Trends in Information Retrieval*, 2009

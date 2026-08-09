@@ -80,24 +80,57 @@ Wire entities into retrieval in increasing order of aggression: **boost** (add s
 
 For matching failures, enrichment appends synthetic retrieval handles to a chunk at ingest time: a one-line summary, likely user questions, alias expansions, canonical entity names. The handles are indexed. They are never displayed.
 
+Concatenating the handles into the chunk's one stored string works, and then pollutes citation. Concatenating them into one *indexed column* fixes citation and moves the damage into ranking, where a machine-written question outbids the prose that actually answers the question. Split at the schema level instead, and give each part its own column:
+
 ```sql
--- index_text is what retrieval sees.  display_text is what the user sees.
-ALTER TABLE chunks ADD COLUMN index_text TEXT;
-ALTER TABLE chunks ADD COLUMN display_text TEXT;
+ALTER TABLE chunks ADD COLUMN display_text   TEXT;  -- verbatim, user-facing
+ALTER TABLE chunks ADD COLUMN heading_path   TEXT;  -- deterministic
+ALTER TABLE chunks ADD COLUMN overlap_prefix TEXT;  -- deterministic
+ALTER TABLE chunks ADD COLUMN enrichment     JSON;  -- {summary, questions, aliases}
+ALTER TABLE chunks ADD COLUMN enrichment_fts TEXT;  -- the same, flattened for FTS5
 
-UPDATE chunks SET
-  index_text  = heading_path || x'0a' || enrichment || x'0a' || overlap_prefix || x'0a' || body,
-  display_text = body;
+UPDATE chunks SET display_text = text WHERE display_text IS NULL;
 
--- the FTS5 from part 4 indexed `text`; rebuild it on the enriched column
+-- the FTS5 from part 4 indexed one column; rebuild it with one column per source
 DROP TABLE IF EXISTS chunks_fts;
-CREATE VIRTUAL TABLE chunks_fts USING fts5(index_text, tokenize='porter unicode61');
+CREATE VIRTUAL TABLE chunks_fts USING fts5(
+  body,              -- fed from display_text
+  enrichment,        -- fed from enrichment_fts
+  heading_path,
+  overlap_prefix,
+  tokenize = "porter unicode61 tokenchars '-_'"
+);
 ```
 
-If your enrichment is heavy — many synthetic questions, long alias expansions — consider splitting `index_text` into separate FTS5 columns (body, enrichment, heading) so you can apply column weights in `bm25()` and keep synthetic text from outbidding the original prose.
+Enrichment is stored twice on purpose: the FTS insert wants one flat string, while the embedding step below needs to pull the summary back out on its own.
+
+Separate columns exist so that `bm25()`'s arguments — the per-column weights from [part 4](/Production-RAG-Hybrid-Search/) — can hold synthetic text in its place:
+
+```sql
+-- still ORDER BY ascending: FTS5 scores are negated, as in part 4
+SELECT rowid, bm25(chunks_fts, 1.0, 0.35, 0.6, 0.15) AS score
+FROM chunks_fts WHERE chunks_fts MATCH ? ORDER BY score LIMIT 50;
+```
+
+| Column | Weight | Reasoning |
+|---|---|---|
+| `body` | 1.00 | Real prose is the baseline |
+| `heading_path` | 0.60 | Strong topical signal, very few tokens |
+| `enrichment` | 0.35 | Enough to rescue, not enough to outbid |
+| `overlap_prefix` | 0.15 | Duplicated from a neighbour; suppresses double-hits |
+
+Enrichment's 0.35 is the knob that matters. A synthetic question contributes about a third of what real prose does — enough to surface a chunk that would otherwise never appear, not enough to beat a chunk that genuinely contains the user's words.
 
 > **Index text and display text must be different columns.** Every synthetic addition — overlap, heading ancestry, enrichment — improves retrieval and pollutes citation. The moment you concatenate them into one stored string, users start seeing repeated sentences and machine-written questions inside quoted evidence. This is the load-bearing schema decision of the entire ingest side, and it is nearly free if you make it early and painful to retrofit if you do not.
 {: .prompt-tip }
+
+### The dense leg does not get the same input
+
+All of the above is the lexical arm. The embedding is a string you assemble in code and hand to the model — it never exists as a column — and it should *not* be the same string. Feed it the heading path, the summary and the body. **The questions and aliases stay out.**
+
+Aliases are exact-match fodder; a list of surface forms means nothing to an embedding model and only adds noise. Questions are worse. Three of them plus a paragraph of prose produce a vector that is part *what a user might ask* and part *what the document says*, and matches nothing especially well — you have made the chunk slightly wrong for everything.
+
+If matching failures really are your dominant loss, the answer is to keep the questions apart rather than blend them in: embed the body once and each question once, all rows pointing at the same chunk id, then deduplicate by chunk id after the search. That is one extra vector per question on top of the body — three to four times the rows, and the same multiple on index size — in exchange for preserving each vector's precision, which concatenating them destroys all at once.
 
 ## Graph-hybrid retrieval
 
