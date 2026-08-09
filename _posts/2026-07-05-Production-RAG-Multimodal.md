@@ -22,10 +22,24 @@ Text retrieval works because both sides of the comparison are text living in one
 | Multimodal embeddings | One model maps text and images into a shared space; query text lands near relevant images | Elegant — but every downstream question needs a vision-capable model re-reading pixels |
 | Summarize then index | A vision model describes the image once at ingest; the *description* is embedded as ordinary text | Two model calls at ingest; downstream, everything is text |
 
-A third variant is rising: embed **entire rendered pages** using late-interaction models in the ColPali family, and hand the page images to a multimodal LLM at answer time. For visually dense documents this is powerful — the page layout itself carries meaning that no linearization preserves. The cost is storage: late-interaction embeddings typically require on the order of fifty times the storage of a single-vector embedding, which prices them out of most self-hosted stacks today.
-
 > If your corpus is mostly **tables screenshotted into PDFs** — which describes an enormous amount of real enterprise documentation — summarize-then-index deserves a stronger twist. Do not write a *description*; write a full **transcription**, as `Header: value | Header: value` rows. A description tells you what a table is about. A transcription lets you answer from it without ever looking at pixels again.
 {: .prompt-tip }
+
+## The third architecture: late interaction
+
+A third variant is rising: embed **entire rendered pages** with late-interaction models in the ColPali family, and hand the page images to a multimodal LLM at answer time. *Late* refers to when the query and the page are first allowed to touch — not to anything late in the model.
+
+![Three retrieval interaction regimes](/images/rag/05-multimodal/04-interaction-regimes.webp)
+_Late interaction buys a precomputable index and token-level matching at the same time. The thousand-odd vectors per page are the price of having both._
+
+Layout survives for a more specific reason than *the model sees a picture*. The vision transformer chops the rendered page into a fixed 32×32 grid and attends across the whole grid before projecting each patch down, so spatial adjacency survives into the embeddings — the patch covering a bar's top edge carries the axis label 400 pixels away. Linearization has to *choose* a reading order; a patch grid never chooses. The entire fragile ingestion layer goes with it: no table detection, no reading-order heuristics, no OCR fallback.
+
+The cost is storage, and it is **count-driven, not dimension-driven**. ColPali's vectors are *smaller* than a typical text embedding — 128 dimensions against 768 or more — there are simply about a thousand of them per page. Flat fp16 lands near 258 KB per page against roughly 6 KB for two text chunks, which is where the usual "fifty times" figure comes from. That number is the ceiling of a range rather than a property of the method: hierarchical pooling and int8 quantization are orthogonal to each other and compose, reaching around 7×.
+
+> The constraint is therefore architectural, not budgetary — which matters, because feasibility claims age badly and architectural ones do not. Late interaction prices itself out as a **first-stage index**, which is why credible deployments run it as a second stage: cheap recall over the whole corpus, MaxSim over fifty candidates, page images for the top five. Storage is not even the cost that bites first — MaxSim is a matrix multiply per candidate page, you want those vectors resident in RAM, and most embedded stores, `sqlite-vec` included, have no native multi-vector scoring.
+{: .prompt-warning }
+
+Stated plainly: **you pay storage to avoid ever writing a chunker.** The two architectures in the table above make the opposite trade — they keep the ingestion pipeline and spend on it — which is why the rest of this post is about making that spend pay off.
 
 ## The multi-vector pattern
 

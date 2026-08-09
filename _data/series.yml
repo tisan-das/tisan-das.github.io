@@ -51,7 +51,7 @@
 
 - name: "Production RAG"
   slug: production-rag
-  description: "An eight-part build guide — from PDF extraction and chunking through hybrid search, multimodal, knowledge graphs, grounded generation, and production operations."
+  description: "A build guide, then deeper dives — PDF extraction, chunking, hybrid search, multimodal, knowledge graphs, grounded generation, operations, and the hard parts revisited."
   order: 11
 
 - name: "Binary Tree Problems"
