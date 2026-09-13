@@ -198,6 +198,7 @@ exclude:
   - "*.gemspec"
   - docs
   - tools
+  - review # internal source notes and series plans - must never be published
   - README.md
   - LICENSE
   - purgecss.js
