@@ -1,11 +1,17 @@
 {% comment %}
   Series navigation box.
   Rendered inside posts that define `series: <name>` in front matter.
-  Lists every post sharing the same series name, oldest first,
-  highlighting the current post.
+  Lists every post sharing the same series name, highlighting the current one.
+
+  Order: posts that declare `series_part: <n>` are sorted by that number, so a
+  series reads correctly no matter what publish dates its parts carry. Any post
+  without the field falls back to date order, which keeps every other series on
+  this site behaving exactly as before.
 {% endcomment %}
 {% if page.series %}
-{% assign series_posts = site.posts | where: "series", page.series | sort: "date" %}
+{% assign series_keyed = site.posts | where: "series", page.series | where_exp: "p", "p.series_part" | sort: "series_part" %}
+{% assign series_dated = site.posts | where: "series", page.series | where_exp: "p", "p.series_part == nil" | sort: "date" %}
+{% assign series_posts = series_keyed | concat: series_dated %}
 {% assign series_size = series_posts | size %}
 {% if series_size > 1 %}
 <div class="series-nav">

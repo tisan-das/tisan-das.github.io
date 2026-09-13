@@ -26,7 +26,7 @@
 
 - name: "PostgreSQL"
   slug: postgresql
-  description: "Isolation levels, MVCC, and storage/index internals for day-to-day performance intuition."
+  description: "Isolation levels, MVCC, storage and index internals, and using exclusion constraints to make bad states unrepresentable."
   order: 6
 
 - name: "Design Patterns"
@@ -57,14 +57,19 @@
 - name: "Binary Tree Problems"
   slug: binary-tree-problems
   description: "C++ problem sets on binary tree traversals and classic tree algorithms."
-  order: 12
+  order: 13
 
 - name: "Binary Search Problems"
   slug: binary-search-problems
   description: "C++ problem sets on binary search over answers, rotated arrays, and variants."
-  order: 13
+  order: 14
 
 - name: "BFS Problems"
   slug: bfs-problems
   description: "C++ graph BFS problem sets — shortest paths, grids, and multi-source search."
-  order: 14
+  order: 15
+
+- name: "Inference Engineering"
+  slug: inference-engineering
+  description: "A first-principles tour of how LLMs are built and actually run - training stages, the serving stack, the roofline, attention kernels and sampling."
+  order: 12
