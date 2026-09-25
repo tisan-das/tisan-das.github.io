@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: editorial
 title: "Production RAG - Part 7: Grounded Generation"
 image: /images/rag/07-grounded-generation/01-correction-loop.webp
 series: "Production RAG"

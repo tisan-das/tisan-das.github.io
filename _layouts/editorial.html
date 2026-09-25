@@ -1,0 +1,154 @@
+{% comment %}
+  Editorial post layout — standalone (does not extend Chirpy's default).
+  Opt a post in with `layout: editorial`. Not yet included: comments, search.
+{% endcomment %}
+{% if page.series %}
+  {% include series-posts.html %}
+  {% for sp in series_posts %}
+    {% if sp.url == page.url %}
+      {% assign part = forloop.index %}
+      {% unless forloop.first %}{% assign i = forloop.index0 | minus: 1 %}{% assign prev_post = series_posts[i] %}{% endunless %}
+      {% unless forloop.last %}{% assign next_post = series_posts[forloop.index] %}{% endunless %}
+    {% endif %}
+  {% endfor %}
+  {% assign title_parts = page.title | split: ': ' %}
+  {% if title_parts.size > 1 %}
+    {% assign display_title = page.title | remove_first: title_parts[0] | remove_first: ': ' %}
+  {% endif %}
+{% else %}
+  {% assign prev_post = page.previous %}
+  {% assign next_post = page.next %}
+{% endif %}
+<!doctype html>
+<html lang="{{ site.lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    (function () {
+      var t = localStorage.getItem('theme');
+      if (t) document.documentElement.setAttribute('data-bs-theme', t);
+    })();
+  </script>
+  {% seo %}
+  {% include favicons.html %}
+  <link rel="preload" href="/assets/fonts/source-serif-4-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ '/assets/css/editorial.css' | relative_url }}">
+  <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}">
+  {% if page.math %}
+    <script src="{{ '/assets/js/data/mathjax.js' | relative_url }}"></script>
+    <script id="MathJax-script" async src="{{ site.data.origin.cors.mathjax.js }}"></script>
+  {% endif %}
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="{{ '/' | relative_url }}">
+      <img src="{{ site.avatar | relative_url }}" alt="" width="32" height="32">
+      <span>{{ site.title }}</span>
+    </a>
+    <nav>
+      <a href="{{ '/series/' | relative_url }}">Series</a>
+      <a href="{{ '/archives/' | relative_url }}">Archive</a>
+      <a href="{{ '/about/' | relative_url }}">About</a>
+      <button class="mode-toggle" type="button" aria-label="Toggle dark mode">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <article class="post">
+      <header class="post-header">
+        {% if part %}
+          <p class="kicker"><a href="{{ '/series/' | relative_url }}">{{ page.series }}</a> · Part {{ part }} of {{ series_posts.size }}</p>
+        {% endif %}
+        <h1>{{ display_title | default: page.title }}</h1>
+        <p class="meta">
+          {{ site.social.name }} ·
+          <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%b %-d, %Y' }}</time> ·
+          {{ content | strip_html | number_of_words | divided_by: 180 | plus: 1 }} min read
+        </p>
+      </header>
+
+      {% if page.image %}
+        <figure class="hero">
+          <img src="{{ page.image.path | default: page.image | relative_url }}" alt="{{ page.image.alt | default: '' }}">
+        </figure>
+      {% endif %}
+
+      {% if page.toc != false %}
+        <details class="toc">
+          <summary>Contents</summary>
+          <ol></ol>
+        </details>
+      {% endif %}
+
+      {{ content }}
+
+      {% if prev_post or next_post %}
+        <nav class="series-pager">
+          {% if prev_post %}
+            <a class="prev" href="{{ prev_post.url | relative_url }}"><span>← {% if part %}Previous part{% else %}Older{% endif %}</span>{{ prev_post.title }}</a>
+          {% endif %}
+          {% if next_post %}
+            <a class="next" href="{{ next_post.url | relative_url }}"><span>{% if part %}Next part{% else %}Newer{% endif %} →</span>{{ next_post.title }}</a>
+          {% endif %}
+        </nav>
+      {% endif %}
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <span>© {{ 'now' | date: '%Y' }} {{ site.social.name }}</span>
+    <nav>
+      <a href="https://github.com/{{ site.github.username }}">GitHub</a>
+      <a href="https://twitter.com/{{ site.twitter.username }}">X</a>
+      <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+    </nav>
+  </footer>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      document.querySelector('.mode-toggle').addEventListener('click', function () {
+        var cur = root.getAttribute('data-bs-theme') ||
+          (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        var next = cur === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-bs-theme', next);
+        localStorage.setItem('theme', next);
+      });
+
+      var toc = document.querySelector('.toc');
+      if (!toc) return;
+      var heads = document.querySelectorAll('.post > h2[id], .post > h3[id]');
+      if (heads.length < 2) { toc.remove(); return; }
+
+      var list = toc.querySelector('ol');
+      heads.forEach(function (h) {
+        var li = document.createElement('li');
+        var a = document.createElement('a');
+        li.className = h.tagName.toLowerCase();
+        a.href = '#' + h.id;
+        a.textContent = h.textContent;
+        li.appendChild(a);
+        list.appendChild(li);
+      });
+
+      var wide = matchMedia('(min-width: 80rem)');
+      var sync = function () { toc.open = wide.matches; };
+      sync();
+      wide.addEventListener('change', sync);
+
+      var links = list.querySelectorAll('a');
+      var mark = function () {
+        var cur = -1;
+        heads.forEach(function (h, i) { if (h.getBoundingClientRect().top < 120) cur = i; });
+        links.forEach(function (a, i) { a.classList.toggle('active', i === cur); });
+      };
+      addEventListener('scroll', mark, { passive: true });
+      mark();
+    })();
+  </script>
+</body>
+</html>

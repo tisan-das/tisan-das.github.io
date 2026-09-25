@@ -1,0 +1,638 @@
+---
+---
+
+/* Editorial layout (see _layouts/editorial.html): one reading column,
+   serif body, figures and code allowed to run wider than the text. */
+
+@use 'brand/fonts' as *;
+@use 'brand/syntax';
+
+@mixin light {
+  --bg: #fbfaf7;
+  --surface: #f2f0ea;
+  --text: #24242b;
+  --muted: #6b6b76;
+  --rule: #e4e1d8;
+  --accent: #44469d;
+  --accent-soft: rgba(68, 70, 157, 0.1);
+  --info: #44469d;
+  --tip: #2a9d8f;
+  --warning: #c98a0b;
+  --danger: #c0392b;
+  color-scheme: light;
+}
+
+@mixin dark {
+  --bg: #14161f;
+  --surface: #1c1f2b;
+  --text: #d9dbe4;
+  --muted: #8c90a3;
+  --rule: #2a2e3d;
+  --accent: #a5a8e8;
+  --accent-soft: rgba(165, 168, 232, 0.12);
+  --info: #a5a8e8;
+  --tip: #5cc5b7;
+  --warning: #e0b04a;
+  --danger: #e57366;
+  color-scheme: dark;
+}
+
+:root[data-bs-theme='light'],
+:root:not([data-bs-theme]) {
+  @include light;
+}
+
+:root[data-bs-theme='dark'] {
+  @include dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-bs-theme]) {
+    @include dark;
+  }
+}
+
+/* ---- base ---- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 2rem;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 1.1875rem/1.7 $serif;
+  -webkit-font-smoothing: antialiased;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+::selection {
+  background: var(--accent-soft);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ---- site header & footer ---- */
+
+.site-header,
+.site-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 1.25rem 1.5rem;
+  font: 500 0.9375rem/1.4 $inter;
+}
+
+.site-header {
+  border-bottom: 1px solid var(--rule);
+
+  a {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+
+    a {
+      color: var(--muted);
+    }
+
+    a:hover {
+      color: var(--accent);
+    }
+  }
+}
+
+.brand {
+  display: flex;
+  white-space: nowrap;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.mode-toggle {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+}
+
+.site-footer {
+  margin-top: 5rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.875rem;
+
+  a {
+    color: inherit;
+  }
+
+  nav {
+    display: flex;
+    gap: 1.25rem;
+  }
+}
+
+/* ---- post grid: text column, with a wider track for figures & code ---- */
+
+.post {
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(1.25rem, 1fr)
+    [wide-start] minmax(0, 4rem)
+    [text-start] min(40rem, 100% - 2.5rem)
+    [text-end] minmax(0, 4rem)
+    [wide-end] minmax(1.25rem, 1fr)
+    [full-end];
+
+  > * {
+    grid-column: text;
+  }
+
+  > .hero,
+  > p:has(> img),
+  > div.highlighter-rouge,
+  > .table-wrapper,
+  > table,
+  > .series-pager {
+    grid-column: wide;
+  }
+}
+
+/* ---- post header ---- */
+
+.post-header {
+  padding: 4rem 0 2rem;
+}
+
+.post-header .kicker {
+  margin: 0 0 1rem;
+  font: 600 0.8125rem/1.4 $inter;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.post-header h1 {
+  margin: 0;
+  font: 700 clamp(2.1rem, 1.4rem + 3vw, 3.25rem)/1.1 $inter;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.post-header .meta {
+  margin: 1.25rem 0 0;
+  font: 400 0.9375rem/1.5 $inter;
+  color: var(--muted);
+}
+
+.hero {
+  margin: 0 0 2.5rem;
+
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+/* ---- table of contents: in-flow <details> on narrow screens,
+        fixed in the left margin on wide ones (JS keeps it open) ---- */
+
+.toc {
+  margin: 0 0 2rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.5rem;
+  font: 400 0.875rem/1.45 $inter;
+
+  summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  ol {
+    list-style: none;
+    margin: 0.75rem 0 0;
+    padding: 0;
+  }
+
+  li {
+    margin: 0.4rem 0;
+  }
+
+  li.h3 {
+    padding-left: 0.9rem;
+  }
+
+  a {
+    display: block;
+    color: var(--muted);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    padding-left: 0.6rem;
+    margin-left: -0.6rem;
+  }
+
+  a:hover,
+  a.active {
+    color: var(--accent);
+  }
+
+  a.active {
+    border-left-color: var(--accent);
+  }
+}
+
+@media (min-width: 80rem) {
+  .toc {
+    /* right edge sits 1.5rem outside the wide track (48rem, centered) */
+    position: fixed;
+    top: 7rem;
+    right: calc(50vw + 24rem + 1.5rem);
+    width: min(16rem, calc(50vw - 24rem - 3rem));
+    max-height: calc(100vh - 9rem);
+    overflow-y: auto;
+    margin: 0;
+    padding: 0;
+    border: 0;
+
+    summary {
+      list-style: none;
+      pointer-events: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+  }
+}
+
+/* ---- body copy ---- */
+
+.post {
+  p,
+  ul,
+  ol,
+  blockquote,
+  > table {
+    margin: 0 0 1.4rem;
+  }
+
+  h2,
+  h3,
+  h4 {
+    font-family: $inter;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    text-wrap: balance;
+  }
+
+  h2 {
+    margin: 3.5rem 0 1rem;
+    font-size: 1.625rem;
+    font-weight: 700;
+  }
+
+  h3 {
+    margin: 2.5rem 0 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  h4 {
+    margin: 2rem 0 0.5rem;
+    font-size: 1.0625rem;
+    font-weight: 600;
+  }
+
+  strong {
+    font-weight: 600;
+  }
+
+  li + li {
+    margin-top: 0.35rem;
+  }
+
+  hr {
+    width: 6rem;
+    margin: 3rem auto;
+    border: 0;
+    border-top: 1px solid var(--rule);
+  }
+}
+
+/* figure = paragraph holding an image, optionally followed by an _italic_ caption */
+.post > p:has(> img) {
+  margin: 2.5rem 0;
+  text-align: center;
+
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+
+  em {
+    display: block;
+    max-width: 40rem;
+    margin: 0.9rem auto 0;
+    font: italic 400 0.9375rem/1.5 $serif;
+    color: var(--muted);
+  }
+}
+
+/* Diagrams are drawn for a white page; give them one in dark mode, as a card. */
+:root[data-bs-theme='dark'] .post img:not(.light):not(.dark) {
+  background: #f4f3ef;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-bs-theme]) .post img:not(.light):not(.dark) {
+    background: #f4f3ef;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+  }
+}
+
+img.dark {
+  display: none;
+}
+
+:root[data-bs-theme='dark'] {
+  img.light {
+    display: none;
+  }
+
+  img.dark {
+    display: block;
+  }
+}
+
+/* ---- blockquotes & prompt callouts ---- */
+
+.post blockquote {
+  padding: 0 0 0 1.25rem;
+  margin-left: 0;
+  border-left: 3px solid var(--rule);
+  color: var(--muted);
+  font-style: italic;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.post blockquote[class^='prompt-'] {
+  padding: 1rem 1.25rem;
+  border-left-color: var(--info);
+  border-radius: 0 0.5rem 0.5rem 0;
+  background: var(--surface);
+  color: var(--text);
+  font: normal 400 0.9375rem/1.6 $inter;
+}
+
+.post blockquote.prompt-tip {
+  border-left-color: var(--tip);
+}
+
+.post blockquote.prompt-warning {
+  border-left-color: var(--warning);
+}
+
+.post blockquote.prompt-danger {
+  border-left-color: var(--danger);
+}
+
+/* ---- code ---- */
+
+code,
+pre {
+  font-family: $jb-mono;
+  font-feature-settings: 'liga' 1, 'calt' 1;
+}
+
+:not(pre) > code {
+  padding: 0.1em 0.35em;
+  border-radius: 0.3rem;
+  background: var(--surface);
+  font-size: 0.85em;
+}
+
+.post div.highlighter-rouge {
+  margin: 1.75rem 0 2rem;
+}
+
+.highlight {
+  overflow-x: auto;
+  border: 1px solid var(--rule);
+  border-radius: 0.5rem;
+  background: var(--surface);
+
+  /* Rouge nests a <pre> per column inside the outer one when line numbers are on */
+  pre {
+    margin: 0;
+    padding: 0;
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  > pre {
+    padding: 1rem 1.25rem;
+  }
+
+  table,
+  td,
+  pre {
+    border: 0;
+  }
+
+  table {
+    margin: 0;
+    border-collapse: collapse;
+  }
+
+  td {
+    padding: 0;
+    vertical-align: top;
+  }
+
+  .rouge-gutter pre {
+    padding-right: 1.25rem;
+    color: var(--muted);
+    opacity: 0.6;
+    text-align: right;
+    user-select: none;
+  }
+}
+
+/* ---- tables (article tables only; Rouge renders line numbers as a table too) ---- */
+
+.post > table,
+.table-wrapper > table {
+  width: 100%;
+  border-collapse: collapse;
+  font: 400 0.9375rem/1.5 $inter;
+
+  th,
+  td {
+    padding: 0.55rem 0.75rem;
+    border-bottom: 1px solid var(--rule);
+    text-align: left;
+  }
+
+  th {
+    font-weight: 600;
+  }
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+/* ---- series ---- */
+
+/* The in-post list (series-nav include) collapses to a quiet box; the
+   pager at the end of the post does the navigating. */
+.series-nav {
+  margin: 0 0 2rem;
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+  background: var(--surface);
+  font: 400 0.9375rem/1.5 $inter;
+
+  i {
+    display: none;
+  }
+
+  ol {
+    margin: 0.6rem 0 0;
+    padding-left: 1.4rem;
+  }
+
+  li + li {
+    margin-top: 0.2rem;
+  }
+
+  .current {
+    font-weight: 600;
+  }
+
+  .you-are-here {
+    color: var(--muted);
+    font-weight: 400;
+    margin-left: 0.4rem;
+  }
+}
+
+.series-pager {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 4rem;
+  font-family: $inter;
+
+  a {
+    display: block;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--rule);
+    border-radius: 0.5rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+    line-height: 1.4;
+
+    &:hover {
+      border-color: var(--accent);
+    }
+  }
+
+  span {
+    display: block;
+    margin-bottom: 0.3rem;
+    color: var(--muted);
+    font-size: 0.8125rem;
+    font-weight: 500;
+  }
+
+  .next {
+    grid-column: 2;
+    text-align: right;
+  }
+}
+
+@media (max-width: 40rem) {
+  body {
+    font-size: 1.0625rem;
+  }
+
+  .site-header nav {
+    gap: 1rem;
+  }
+
+  .brand span {
+    display: none;
+  }
+
+  .post-header {
+    padding-top: 2.5rem;
+  }
+
+  .series-pager {
+    grid-template-columns: 1fr;
+
+    .next {
+      grid-column: 1;
+    }
+  }
+}
