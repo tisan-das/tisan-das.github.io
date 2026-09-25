@@ -2,7 +2,7 @@
 ---
 
 /* Editorial layout (see _layouts/editorial.html): one reading column,
-   serif body, figures and code allowed to run wider than the text. */
+   figures and code allowed to run wider than the text. */
 
 @use 'brand/fonts' as *;
 @use 'brand/syntax';
@@ -69,7 +69,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font: 400 1.1875rem/1.7 $serif;
+  font: 400 1.0625rem/1.75 $inter;
   -webkit-font-smoothing: antialiased;
   font-kerning: normal;
   text-rendering: optimizeLegibility;
@@ -385,7 +385,7 @@ img {
     display: block;
     max-width: 40rem;
     margin: 0.9rem auto 0;
-    font: italic 400 0.9375rem/1.5 $serif;
+    font: italic 400 0.9375rem/1.5 $inter;
     color: var(--muted);
   }
 }
@@ -613,7 +613,7 @@ pre {
 
 @media (max-width: 40rem) {
   body {
-    font-size: 1.0625rem;
+    font-size: 1rem;
   }
 
   .site-header nav {
