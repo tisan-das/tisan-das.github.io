@@ -94,54 +94,118 @@ img {
   height: auto;
 }
 
-/* ---- site header & footer ---- */
+/* ---- sidebar: fixed column on desktop, top bar + drop-down menu below 64rem ---- */
 
-.site-header,
-.site-footer {
+$sidebar: 15rem;
+
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 10;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  max-width: 72rem;
-  margin: 0 auto;
-  padding: 1.25rem 1.5rem;
-  font: 500 0.9375rem/1.4 $inter;
-}
-
-.site-header {
-  border-bottom: 1px solid var(--rule);
-
-  a {
-    color: var(--text);
-    text-decoration: none;
-  }
-
-  nav {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-
-    a {
-      color: var(--muted);
-    }
-
-    a:hover {
-      color: var(--accent);
-    }
-  }
+  flex-direction: column;
+  width: $sidebar;
+  padding: 2rem 1rem 1.25rem;
+  border-right: 1px solid var(--rule);
+  background: var(--bg);
+  overflow-y: auto;
+  font-family: $inter;
 }
 
 .brand {
   display: flex;
-  white-space: nowrap;
   align-items: center;
-  gap: 0.6rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  gap: 0.75rem;
+  padding: 0 0.5rem;
+  color: var(--text);
+  text-decoration: none;
+
+  img {
+    flex: none;
+    border-radius: 50%;
+  }
+
+  strong {
+    display: block;
+    font-size: 1.0625rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+
+  small {
+    display: block;
+    margin-top: 0.2rem;
+    color: var(--muted);
+    font-size: 0.75rem;
+    line-height: 1.35;
+  }
 }
 
-.mode-toggle {
-  display: grid;
+.menu-toggle {
+  display: none;
+}
+
+.site-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-top: 2.25rem;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.55rem 0.75rem;
+    border-radius: 0.5rem;
+    color: var(--muted);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    text-decoration: none;
+
+    &:hover {
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    &[aria-current='page'] {
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 600;
+    }
+  }
+
+  .icon {
+    flex: none;
+    opacity: 0.85;
+  }
+}
+
+.sidebar-foot {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: auto;
+  padding: 1.25rem 0.75rem 0;
+  border-top: 1px solid var(--rule);
+  font-size: 0.8125rem;
+
+  a {
+    color: var(--muted);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--accent);
+    }
+  }
+
+  .mode-toggle {
+    margin-left: auto;
+  }
+}
+
+.mode-toggle,
+.menu-toggle {
   place-items: center;
   width: 2rem;
   height: 2rem;
@@ -158,20 +222,80 @@ img {
   }
 }
 
+.mode-toggle {
+  display: grid;
+}
+
+.main-col {
+  margin-left: $sidebar;
+}
+
 .site-footer {
-  margin-top: 5rem;
+  max-width: 48rem;
+  margin: 5rem auto 0;
+  padding: 1.5rem 1.25rem 2rem;
   border-top: 1px solid var(--rule);
   color: var(--muted);
-  font-weight: 400;
-  font-size: 0.875rem;
+  font: 400 0.875rem/1.4 $inter;
+}
 
-  a {
-    color: inherit;
+@media (max-width: 63.99rem) {
+  .sidebar {
+    position: sticky;
+    inset: 0 0 auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    width: auto;
+    padding: 0.75rem 1.25rem;
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+    overflow: visible;
   }
 
-  nav {
-    display: flex;
-    gap: 1.25rem;
+  .brand {
+    padding: 0;
+
+    img {
+      width: 32px;
+      height: 32px;
+    }
+
+    small {
+      display: none;
+    }
+  }
+
+  .menu-toggle {
+    display: grid;
+    margin-left: auto;
+    border-radius: 0.5rem;
+  }
+
+  .site-nav,
+  .sidebar-foot {
+    display: none;
+    flex-basis: 100%;
+  }
+
+  .sidebar.open {
+    .site-nav,
+    .sidebar-foot {
+      display: flex;
+    }
+
+    .site-nav {
+      margin-top: 1rem;
+    }
+
+    .sidebar-foot {
+      margin-top: 0.75rem;
+      padding: 0.75rem 0.75rem 0.25rem;
+    }
+  }
+
+  .main-col {
+    margin-left: 0;
   }
 }
 
@@ -242,7 +366,7 @@ img {
 }
 
 /* ---- table of contents: in-flow <details> on narrow screens,
-        fixed in the left margin on wide ones (JS keeps it open) ---- */
+        a sticky right-hand column on wide ones (JS keeps it open) ---- */
 
 .toc {
   margin: 0 0 2rem;
@@ -290,16 +414,30 @@ img {
   }
 }
 
-@media (min-width: 80rem) {
+/* Wide screens: the post grid gains a column on the right for the TOC,
+   which spans every row so it can stick while the article scrolls. */
+@media (min-width: 75rem) {
+  .post {
+    grid-template-columns:
+      [wide-start] minmax(0, 4rem)
+      [text-start] minmax(0, 40rem)
+      [text-end] minmax(0, 4rem)
+      [wide-end] 3rem
+      [toc-start] 13rem
+      [toc-end];
+    justify-content: center;
+    padding: 0 2.5rem;
+  }
+
   .toc {
-    /* right edge sits 1.5rem outside the wide track (48rem, centered) */
-    position: fixed;
-    top: 7rem;
-    right: calc(50vw + 24rem + 1.5rem);
-    width: min(16rem, calc(50vw - 24rem - 3rem));
-    max-height: calc(100vh - 9rem);
+    grid-column: toc;
+    grid-row: 1 / span 999;
+    align-self: start;
+    position: sticky;
+    top: 2rem;
+    max-height: calc(100vh - 4rem);
     overflow-y: auto;
-    margin: 0;
+    margin: 4.5rem 0 0;
     padding: 0;
     border: 0;
 
@@ -614,14 +752,6 @@ pre {
 @media (max-width: 40rem) {
   body {
     font-size: 1rem;
-  }
-
-  .site-header nav {
-    gap: 1rem;
-  }
-
-  .brand span {
-    display: none;
   }
 
   .post-header {

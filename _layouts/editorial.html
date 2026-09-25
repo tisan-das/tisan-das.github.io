@@ -42,21 +42,34 @@
   {% endif %}
 </head>
 <body>
-  <header class="site-header">
+  <aside class="sidebar">
     <a class="brand" href="{{ '/' | relative_url }}">
-      <img src="{{ site.avatar | relative_url }}" alt="" width="32" height="32">
-      <span>{{ site.title }}</span>
+      <img src="{{ site.avatar | relative_url }}" alt="" width="44" height="44">
+      <span>
+        <strong>{{ site.title }}</strong>
+        <small>{{ site.tagline }}</small>
+      </span>
     </a>
-    <nav>
-      <a href="{{ '/series/' | relative_url }}">Series</a>
-      <a href="{{ '/archives/' | relative_url }}">Archive</a>
-      <a href="{{ '/about/' | relative_url }}">About</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav id="site-nav" class="site-nav">
+      <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>{% include editorial-icon.html fa='home' %}Home</a>
+      {% for tab in site.tabs %}
+        <a href="{{ tab.url | relative_url }}"{% if page.url == tab.url %} aria-current="page"{% endif %}>{% include editorial-icon.html fa=tab.icon %}{{ tab.title }}</a>
+      {% endfor %}
+    </nav>
+    <div class="sidebar-foot">
+      <a href="https://github.com/{{ site.github.username }}">GitHub</a>
+      <a href="https://twitter.com/{{ site.twitter.username }}">X</a>
+      <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
       <button class="mode-toggle" type="button" aria-label="Toggle dark mode">
         <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>
       </button>
-    </nav>
-  </header>
+    </div>
+  </aside>
 
+  <div class="main-col">
   <main>
     <article class="post">
       <header class="post-header">
@@ -101,12 +114,8 @@
 
   <footer class="site-footer">
     <span>© {{ 'now' | date: '%Y' }} {{ site.social.name }}</span>
-    <nav>
-      <a href="https://github.com/{{ site.github.username }}">GitHub</a>
-      <a href="https://twitter.com/{{ site.twitter.username }}">X</a>
-      <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
-    </nav>
   </footer>
+  </div>
 
   <script>
     (function () {
@@ -117,6 +126,13 @@
         var next = cur === 'dark' ? 'light' : 'dark';
         root.setAttribute('data-bs-theme', next);
         localStorage.setItem('theme', next);
+      });
+
+      var menu = document.querySelector('.menu-toggle');
+      menu.addEventListener('click', function () {
+        var open = menu.getAttribute('aria-expanded') !== 'true';
+        menu.setAttribute('aria-expanded', open);
+        document.querySelector('.sidebar').classList.toggle('open', open);
       });
 
       var toc = document.querySelector('.toc');
@@ -135,7 +151,7 @@
         list.appendChild(li);
       });
 
-      var wide = matchMedia('(min-width: 80rem)');
+      var wide = matchMedia('(min-width: 75rem)');
       var sync = function () { toc.open = wide.matches; };
       sync();
       wide.addEventListener('change', sync);
