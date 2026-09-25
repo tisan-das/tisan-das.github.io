@@ -1,7 +1,6 @@
 ---
 layout: post
 title: System Design - Rate Limiter
-pin: true
 image: /images/sys-design-vol1/01-rate-limiter-hld.webp
 series: "System Design Case Studies"
 categories: ["System Design", "Case Studies"]

@@ -15,27 +15,36 @@
 /* append your custom style below */
 
 /* Brand accent — logo purple (#44469D) for links, sidebar & TOC highlights.
-   Follows the theme's own light/dark variable pattern. */
-:root {
+   Chirpy 7 marks the resolved mode with `data-bs-theme` on <html> and scopes
+   its colors (including syntax colors) under `:root[data-bs-theme=...]`.
+   Every mode-specific rule in this file uses the same selectors so it ties
+   on specificity and wins by source order. */
+@mixin brand-light {
   --link-color: #44469d;
   --link-underline-color: #c6c7ea;
   --sidebar-active-color: #44469d;
   --toc-highlight: #44469d;
 }
 
-html[data-mode='dark'] {
+@mixin brand-dark {
   --link-color: #a5a8e8;
   --link-underline-color: #565a9e;
   --sidebar-active-color: #a5a8e8;
   --toc-highlight: #a5a8e8;
 }
 
+:root[data-bs-theme='light'],
+:root:not([data-bs-theme]) {
+  @include brand-light;
+}
+
+:root[data-bs-theme='dark'] {
+  @include brand-dark;
+}
+
 @media (prefers-color-scheme: dark) {
-  html:not([data-mode]) {
-    --link-color: #a5a8e8;
-    --link-underline-color: #565a9e;
-    --sidebar-active-color: #a5a8e8;
-    --toc-highlight: #a5a8e8;
+  :root:not([data-bs-theme]) {
+    @include brand-dark;
   }
 }
 
@@ -102,12 +111,12 @@ blockquote {
   color: inherit;
 }
 
-html[data-mode='dark'] ::selection {
+:root[data-bs-theme='dark'] ::selection {
   background: rgba(165, 168, 232, 0.35);
 }
 
 @media (prefers-color-scheme: dark) {
-  html:not([data-mode]) ::selection {
+  :root:not([data-bs-theme]) ::selection {
     background: rgba(165, 168, 232, 0.35);
   }
 }
@@ -123,7 +132,7 @@ div.prompt-tip,
   border-left-color: #2a9d8f !important; /* readable teal, pairs with purple brand */
 }
 
-html[data-mode='dark'] {
+:root[data-bs-theme='dark'] {
   div.prompt-info,
   .prompt-info {
     border-left-color: #a5a8e8 !important;
@@ -131,7 +140,7 @@ html[data-mode='dark'] {
 }
 
 @media (prefers-color-scheme: dark) {
-  html:not([data-mode]) {
+  :root:not([data-bs-theme]) {
     div.prompt-info,
     .prompt-info {
       border-left-color: #a5a8e8 !important;
@@ -148,12 +157,12 @@ details.solution {
   background: rgba(68, 70, 157, 0.05);
 }
 
-html[data-mode='dark'] details.solution {
+:root[data-bs-theme='dark'] details.solution {
   background: rgba(165, 168, 232, 0.08);
 }
 
 @media (prefers-color-scheme: dark) {
-  html:not([data-mode]) details.solution {
+  :root:not([data-bs-theme]) details.solution {
     background: rgba(165, 168, 232, 0.08);
   }
 }
@@ -234,35 +243,38 @@ code {
 }
 
 /* Syntax palette — light mode (GitHub-light-inspired) */
-.highlight {
-  /* comments */
-  .c, .c1, .cm, .cs, .cd { color: #6a737d; font-style: italic; }
-  /* keywords + preprocessor */
-  .k, .kc, .kd, .kn, .kp, .kr, .kv, .cp { color: #d73a49; }
-  /* strings & chars */
-  .s, .s1, .s2, .sa, .sb, .sc, .sd, .sh, .si, .sr, .sx { color: #032f62; }
-  /* escapes & symbols */
-  .se, .ss { color: #005cc5; }
-  /* numbers */
-  .m, .mb, .mf, .mh, .mi, .il, .mo, .mx { color: #005cc5; }
-  /* functions */
-  .nf, .fm { color: #6f42c1; }
-  /* types, classes, namespaces, exceptions */
-  .nc, .kt, .no, .ne, .ni, .nl, .nn { color: #005cc5; }
-  /* builtins */
-  .nb { color: #005cc5; }
-  .bp { color: #6f42c1; }
-  /* attributes */
-  .na { color: #6f42c1; }
-  /* variables */
-  .nv, .vc, .vg, .vi, .vm { color: #e36209; }
-  /* operators */
-  .o, .ow { color: #d73a49; }
-  /* diff */
-  .gi { color: #22863a; background-color: #e6ffed; }
-  .gd { color: #b31d28; background-color: #ffeef0; }
-  .gh { color: #005cc5; font-weight: 600; }
-  .go { color: #6a737d; }
+:root[data-bs-theme='light'],
+:root:not([data-bs-theme]) {
+  .highlight {
+    /* comments */
+    .c, .c1, .cm, .cs, .cd { color: #6a737d; font-style: italic; }
+    /* keywords + preprocessor */
+    .k, .kc, .kd, .kn, .kp, .kr, .kv, .cp { color: #d73a49; }
+    /* strings & chars */
+    .s, .s1, .s2, .sa, .sb, .sc, .sd, .sh, .si, .sr, .sx { color: #032f62; }
+    /* escapes & symbols */
+    .se, .ss { color: #005cc5; }
+    /* numbers */
+    .m, .mb, .mf, .mh, .mi, .il, .mo, .mx { color: #005cc5; }
+    /* functions */
+    .nf, .fm { color: #6f42c1; }
+    /* types, classes, namespaces, exceptions */
+    .nc, .kt, .no, .ne, .ni, .nl, .nn { color: #005cc5; }
+    /* builtins */
+    .nb { color: #005cc5; }
+    .bp { color: #6f42c1; }
+    /* attributes */
+    .na { color: #6f42c1; }
+    /* variables */
+    .nv, .vc, .vg, .vi, .vm { color: #e36209; }
+    /* operators */
+    .o, .ow { color: #d73a49; }
+    /* diff */
+    .gi { color: #22863a; background-color: #e6ffed; }
+    .gd { color: #b31d28; background-color: #ffeef0; }
+    .gh { color: #005cc5; font-weight: 600; }
+    .go { color: #6a737d; }
+  }
 }
 
 /* Syntax palette — dark mode (One-Dark-inspired) */
@@ -287,12 +299,12 @@ code {
   }
 }
 
-html[data-mode='dark'] {
+:root[data-bs-theme='dark'] {
   @include syntax-dark;
 }
 
 @media (prefers-color-scheme: dark) {
-  html:not([data-mode]) {
+  :root:not([data-bs-theme]) {
     @include syntax-dark;
   }
 }
@@ -311,7 +323,7 @@ img.light {
 }
 
 /* Explicit dark mode */
-html[data-mode='dark'] {
+:root[data-bs-theme='dark'] {
   .popup.img-link.light,
   img.light {
     display: none;
@@ -325,7 +337,7 @@ html[data-mode='dark'] {
 
 /* System dark mode preference (when no explicit mode is set) */
 @media (prefers-color-scheme: dark) {
-  html:not([data-mode]) {
+  :root:not([data-bs-theme]) {
     .popup.img-link.light,
     img.light {
       display: none;
@@ -344,7 +356,7 @@ html[data-mode='dark'] {
    diagrams, charts, and screenshots with transparent or white
    backgrounds remain legible against dark surfaces. Does not
    apply to images that already have .light / .dark variants. */
-html[data-mode='dark'] {
+:root[data-bs-theme='dark'] {
   .content img:not(.light):not(.dark) {
     background-color: rgba(255, 255, 255, 0.92);
     border-radius: 6px;
@@ -353,7 +365,7 @@ html[data-mode='dark'] {
 }
 
 @media (prefers-color-scheme: dark) {
-  html:not([data-mode]) {
+  :root:not([data-bs-theme]) {
     .content img:not(.light):not(.dark) {
       background-color: rgba(255, 255, 255, 0.92);
       border-radius: 6px;

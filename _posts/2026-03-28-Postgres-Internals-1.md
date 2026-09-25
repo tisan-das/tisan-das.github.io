@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Postgres Internals I
-pin: true
 image: /images/postgres/01-internal/BTree%20with%20slot.webp
 series: "PostgreSQL"
 categories: ["Databases", "PostgreSQL"]
