@@ -1,0 +1,63 @@
+---
+layout: compress
+permalink: /feed.xml
+# Atom Feed, reference: https://validator.w3.org/feed/docs/atom.html
+# Chirpy's feed (assets/feed.xml in the gem) plus, for people who open it in a
+# browser, a stylesheet and a note on what the page is. The note is XHTML, an
+# extension element feed readers skip. CSS, not XSLT: browsers are removing XSLT.
+---
+
+{% capture source %}
+<?xml-stylesheet type="text/css" href="{{ '/assets/css/feed.css' | relative_url }}"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <html:div xmlns:html="http://www.w3.org/1999/xhtml" class="about-feed">
+    <html:p><html:strong>This is the web feed for {{ site.title }}.</html:strong>
+      To follow new posts, copy this page's address into a feed reader.</html:p>
+    <html:p><html:a href="{{ '/' | relative_url }}">← Back to the blog</html:a></html:p>
+  </html:div>
+  <id>{{ "/" | absolute_url }}</id>
+  <title>{{ site.title }}</title>
+  <subtitle>{{ site.description }}</subtitle>
+  <updated>{{ site.time | date_to_xmlschema }}</updated>
+  <author>
+    <name>{{ site.social.name }}</name>
+    <uri>{{ "/" | absolute_url }}</uri>
+  </author>
+  <link rel="self" type="application/atom+xml" href="{{ page.url | absolute_url }}"/>
+  <link rel="alternate" type="text/html" hreflang="{{ site.alt_lang | default: site.lang }}"
+    href="{{ '/' | absolute_url }}"/>
+  <generator uri="https://jekyllrb.com/" version="{{ jekyll.version }}">Jekyll</generator>
+  <rights> © {{ 'now' | date: '%Y' }} {{ site.social.name }} </rights>
+  <icon>{{ site.baseurl }}/assets/img/favicons/favicon.ico</icon>
+  <logo>{{ site.baseurl }}/assets/img/favicons/favicon-96x96.png</logo>
+
+{% for post in site.posts limit: 5 %}
+  {% assign post_absolute_url = post.url | absolute_url %}
+  <entry>
+    <title>{{ post.title }}</title>
+    <link href="{{ post_absolute_url }}" rel="alternate" type="text/html" title="{{ post.title | xml_escape }}" />
+    <published>{{ post.date | date_to_xmlschema }}</published>
+  {% if post.last_modified_at %}
+    <updated>{{ post.last_modified_at | date_to_xmlschema }}</updated>
+  {% else %}
+    <updated>{{ post.date | date_to_xmlschema }}</updated>
+  {% endif %}
+    <id>{{ post_absolute_url }}</id>
+    <content type="text/html" src="{{ post_absolute_url }}" />
+    <author>
+      <name>{{ post.author | default: site.social.name }}</name>
+    </author>
+
+  {% if post.categories %}
+    {% for category in post.categories %}
+    <category term="{{ category }}" />
+    {% endfor %}
+  {% endif %}
+
+  <summary>{% include post-summary.html max_length=400 %}</summary>
+
+  </entry>
+{% endfor %}
+</feed>
+{% endcapture %}
+{{ source | replace: '&', '&amp;' }}
