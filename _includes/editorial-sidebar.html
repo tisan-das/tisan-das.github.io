@@ -70,10 +70,19 @@
           {% assign name = 'X' %}
         {% when 'email' %}
           {% if site.social.email %}
-            {% comment %} Assembled on click, as Chirpy does, so the address isn't in the page for scrapers. {% endcomment %}
+            {% comment %}
+              A button and a panel rather than a mailto: link, which silently does
+              nothing when no mail app is set up. The panel offers the mail app,
+              Gmail, Outlook and copying the address; it lives in
+              editorial-shell.html, outside the sidebar, which is hidden on
+              phones until the menu opens. As Chirpy does, the address is only
+              assembled on click, not in the page for scrapers.
+            {% endcomment %}
             {% assign email = site.social.email | split: '@' %}
-            {% capture url %}javascript:void(location.href = 'mailto:' + ['{{ email[0] }}','{{ email[1] }}'].join('@')){% endcapture %}
-            {% assign name = 'Email' %}
+            <button class="foot-icon mail-toggle" type="button" popovertarget="mail-panel" aria-label="Email" title="Email"
+              data-user="{{ email[0] }}" data-domain="{{ email[1] }}">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"/></svg>
+            </button>
           {% endif %}
         {% when 'rss' %}
           {% assign url = '/feed.xml' | relative_url %}
@@ -87,7 +96,6 @@
           {% case entry.type %}
             {% when 'github' %}<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg>
             {% when 'twitter' %}<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            {% when 'email' %}<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"/></svg>
             {% when 'rss' %}<svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><circle cx="3" cy="13" r="1.75" fill="currentColor"/><path d="M1.5 7.5a7 7 0 0 1 7 7M1.5 2A12.5 12.5 0 0 1 14 14.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
             {% else %}<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3" fill="currentColor"/></svg>
           {% endcase %}

@@ -26,4 +26,4 @@ Prefer a guided path? Start on the **[Series]({{ '/series/' | relative_url }})**
 
 - GitHub: [tisan-das](https://github.com/tisan-das)
 - Twitter/X: [@tisan_das](https://twitter.com/tisan_das)
-- Email: [tisandas2011@gmail.com](mailto:tisandas2011@gmail.com)
+- Email: <button class="mail-inline" type="button" popovertarget="mail-panel">show address</button>
