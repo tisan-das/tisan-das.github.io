@@ -5,36 +5,44 @@ permalink: /feed.xml
 # Chirpy's feed (assets/feed.xml in the gem) plus, for people who open it in a
 # browser, a stylesheet and a note on what the page is. The note is XHTML, an
 # extension element feed readers skip. CSS, not XSLT: browsers are removing XSLT.
+# Text is escaped field by field with xml_escape. Chirpy instead replaced every
+# & in the output, which double-escaped the entities in summaries (&amp;gt;).
 ---
 
-{% capture source %}
 <?xml-stylesheet type="text/css" href="{{ '/assets/css/feed.css' | relative_url }}"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <html:div xmlns:html="http://www.w3.org/1999/xhtml" class="about-feed">
-    <html:p><html:strong>This is the web feed for {{ site.title }}.</html:strong>
+    <html:p><html:strong>This is the web feed for {{ site.title | xml_escape }}.</html:strong>
       To follow new posts, copy this page's address into a feed reader.</html:p>
     <html:p><html:a href="{{ '/' | relative_url }}">← Back to the blog</html:a></html:p>
   </html:div>
   <id>{{ "/" | absolute_url }}</id>
-  <title>{{ site.title }}</title>
-  <subtitle>{{ site.description }}</subtitle>
+  <title>{{ site.title | xml_escape }}</title>
+  <subtitle>{{ site.description | xml_escape }}</subtitle>
   <updated>{{ site.time | date_to_xmlschema }}</updated>
   <author>
-    <name>{{ site.social.name }}</name>
+    <name>{{ site.social.name | xml_escape }}</name>
     <uri>{{ "/" | absolute_url }}</uri>
   </author>
   <link rel="self" type="application/atom+xml" href="{{ page.url | absolute_url }}"/>
   <link rel="alternate" type="text/html" hreflang="{{ site.alt_lang | default: site.lang }}"
     href="{{ '/' | absolute_url }}"/>
   <generator uri="https://jekyllrb.com/" version="{{ jekyll.version }}">Jekyll</generator>
-  <rights> © {{ 'now' | date: '%Y' }} {{ site.social.name }} </rights>
+  <rights> © {{ 'now' | date: '%Y' }} {{ site.social.name | xml_escape }} </rights>
   <icon>{{ site.baseurl }}/assets/img/favicons/favicon.ico</icon>
   <logo>{{ site.baseurl }}/assets/img/favicons/favicon-96x96.png</logo>
 
 {% for post in site.posts limit: 5 %}
   {% assign post_absolute_url = post.url | absolute_url %}
+  {% if post.description %}
+    {% assign summary = post.description | html_unescape %}
+  {% else %}
+    {% capture summary %}{% include post-summary.html full_text=true %}{% endcapture %}
+    {% comment %} decoded before truncating, so the cut can't land inside an entity {% endcomment %}
+    {% assign summary = summary | html_unescape | truncate: 400 %}
+  {% endif %}
   <entry>
-    <title>{{ post.title }}</title>
+    <title>{{ post.title | xml_escape }}</title>
     <link href="{{ post_absolute_url }}" rel="alternate" type="text/html" title="{{ post.title | xml_escape }}" />
     <published>{{ post.date | date_to_xmlschema }}</published>
   {% if post.last_modified_at %}
@@ -45,19 +53,17 @@ permalink: /feed.xml
     <id>{{ post_absolute_url }}</id>
     <content type="text/html" src="{{ post_absolute_url }}" />
     <author>
-      <name>{{ post.author | default: site.social.name }}</name>
+      <name>{{ post.author | default: site.social.name | xml_escape }}</name>
     </author>
 
   {% if post.categories %}
     {% for category in post.categories %}
-    <category term="{{ category }}" />
+    <category term="{{ category | xml_escape }}" />
     {% endfor %}
   {% endif %}
 
-  <summary>{% include post-summary.html max_length=400 %}</summary>
+  <summary>{{ summary | xml_escape }}</summary>
 
   </entry>
 {% endfor %}
 </feed>
-{% endcapture %}
-{{ source | replace: '&', '&amp;' }}

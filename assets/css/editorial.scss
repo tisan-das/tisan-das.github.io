@@ -101,8 +101,10 @@ $sidebar: 15rem;
 // content width shared by posts, pages and home; $measure-lg on 100rem+ screens
 $measure: 52rem;
 $measure-lg: 60rem;
-// a post's text column (~70 characters); its figures and code use the full $measure
-$text: 40rem;
+// a post's text column; its figures and code use the full $measure, overhanging
+// the text by 3rem a side ($text-lg: 5rem a side on 100rem+ screens)
+$text: 46rem;
+$text-lg: 50rem;
 $rail: 4.25rem;
 
 .sidebar {
@@ -796,7 +798,7 @@ html:root {
   .post {
     grid-template-columns:
       [wide-start] minmax(0, ($measure - $text) * 0.5)
-      [text-start] $text
+      [text-start] min($text, 100% - 16rem)
       [text-end] minmax(0, ($measure - $text) * 0.5)
       [wide-end] 3rem
       [toc-start] 13rem
@@ -1663,14 +1665,14 @@ dialog.zoom {
 }
 
 /* Large screens (1600px+): the page grows with the screen instead of leaving
-   empty bands either side. In posts only figures and code widen, and the
-   text keeps its size and line length; pages scale their type up too. */
+   empty bands either side. In posts the text column widens a little and
+   figures and code more; pages scale their type up too. */
 @media (min-width: 100rem) {
   .post {
     grid-template-columns:
-      [wide-start] minmax(0, ($measure-lg - $text) * 0.5)
-      [text-start] $text
-      [text-end] minmax(0, ($measure-lg - $text) * 0.5)
+      [wide-start] minmax(0, ($measure-lg - $text-lg) * 0.5)
+      [text-start] min($text-lg, 100% - 19rem)
+      [text-end] minmax(0, ($measure-lg - $text-lg) * 0.5)
       [wide-end] 4rem
       [toc-start] 15rem
       [toc-end];
