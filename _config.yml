@@ -33,7 +33,9 @@ social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
   name: Tisan Das
-  email: tisandas2011@gmail.com
+  # The email address, split at the @ so it never appears whole in the repo
+  # for scrapers; the sidebar's email panel joins the parts in the browser.
+  email_parts: [tisandas2011, gmail.com]
   links:
     # The first element serves as the copyright owner's link
     - https://twitter.com/tisan_das
