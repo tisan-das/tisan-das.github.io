@@ -66,8 +66,15 @@ module EditorialContent
 
     def image(tag, source)
       tag = tag.gsub(/\s(w|h)=(["'])/) { " #{$1 == 'w' ? 'width' : 'height'}=#{$2}" }
-      width = tag[/\swidth=["']?(\d+)/, 1]
-      height = tag[/\sheight=["']?(\d+)/, 1]
+      # A percentage isn't a size in pixels: it moves to CSS, and the attributes
+      # get the file's real size so the browser still knows the ratio.
+      css = +''
+      tag = tag.gsub(/\s(width|height)=(["']?)([\d.]+%)\2/) { css << "#{$1}:#{$3};"; '' }
+      unless css.empty?
+        tag = tag.include?(' style="') ? tag.sub(' style="', %( style="#{css})) : tag.sub(/<img\b/, %(<img style="#{css}"))
+      end
+      width = tag[/\swidth=["']?(\d+)(?:px)?(?=["'\s\/>])/, 1]
+      height = tag[/\sheight=["']?(\d+)(?:px)?(?=["'\s\/>])/, 1]
       unless width && height
         size = size_of(tag[/\ssrc="([^"]+)"/, 1], source)
         if size
@@ -76,7 +83,7 @@ module EditorialContent
           elsif height then width = height.to_i * size[0] / size[1]
           else width, height = size
           end
-          tag = tag.gsub(/\s(?:width|height)=["']?\w+["']?/, '')
+          tag = tag.gsub(/\s(?:width|height)=["']?[\w.]+["']?/, '')
                    .sub(/<img\b/) { %(<img width="#{width}" height="#{height}") }
         end
       end

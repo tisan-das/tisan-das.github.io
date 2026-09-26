@@ -87,6 +87,9 @@
     // Offline cache: Chirpy's service worker (one per site, so every layout
     // shares it). A new deploy waits until the reader chooses to refresh.
     if ('serviceWorker' in navigator) {
+      // Only the tab whose Refresh was clicked reloads. The new worker takes
+      // over every open tab at once; the others keep the page they're on.
+      var refreshing = false;
       navigator.serviceWorker.register('{{ "/sw.min.js" | relative_url }}').then(function (reg) {
         if (!reg) return;
         var toast = document.querySelector('.update-toast');
@@ -98,13 +101,29 @@
           reg.installing.addEventListener('statechange', offer);
         });
         toast.querySelector('button').addEventListener('click', function () {
-          if (reg.waiting) reg.waiting.postMessage('SKIP_WAITING');
+          toast.hidden = true;
+          if (reg.waiting) {
+            refreshing = true;
+            reg.waiting.postMessage('SKIP_WAITING');
+          } else {
+            location.reload(); // another tab already switched to the new version
+          }
         });
       }).catch(function () {}); // refused, e.g. in some private-browsing modes
-      var reloaded = false;
       navigator.serviceWorker.addEventListener('controllerchange', function () {
-        if (!reloaded) { reloaded = true; location.reload(); }
+        if (refreshing) {
+          refreshing = false;
+          location.reload();
+        }
       });
+    }
+    {% else %}
+    // Offline cache off: remove a worker left by an earlier visit, so it stops
+    // serving old pages from its cache.
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function (regs) {
+        regs.forEach(function (reg) { reg.unregister(); });
+      }).catch(function () {});
     }
     {% endif %}
   })();

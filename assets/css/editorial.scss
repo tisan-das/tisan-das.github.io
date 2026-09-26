@@ -548,6 +548,36 @@ $rail: 4.25rem;
   }
 }
 
+/* Desktop and rail: when the sidebar is taller than the window (a short
+   screen, or an open series list) only the nav scrolls, so the logo, search
+   and the theme/contact buttons stay in view. */
+@media (min-width: 64rem) {
+  .site-nav {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden auto;
+    scrollbar-width: thin;
+  }
+
+  .brand,
+  .search-toggle,
+  .sidebar-foot {
+    flex-shrink: 0;
+  }
+}
+
+/* Short desktop windows: a smaller logo leaves the nav more room. */
+@media (min-width: 80rem) and (max-height: 45rem) {
+  .sidebar {
+    padding-top: 1.25rem;
+  }
+
+  .brand img {
+    width: 72px;
+    height: 72px;
+  }
+}
+
 /* Pagefind's components reset inherited styles; its --pf-* variables are the
    only way in. Mapping them onto ours covers both themes. `html:root` outranks
    Pagefind's own `:root` defaults, whose stylesheet loads later. */
@@ -841,9 +871,9 @@ html:root {
 }
 
 /* Light/dark pairs ({: .light } / {: .dark }): show the one matching the
-   theme, whether chosen with the toggle or taken from the system. The .post
-   prefix outranks the figure rule's display: block. */
-.post img.dark,
+   theme, whether chosen with the toggle or taken from the system. The :root
+   prefix outranks the figure rule's display: block (.post > p.figure img). */
+:root .post img.dark,
 :root[data-bs-theme='dark'] .post img.light {
   display: none;
 }
