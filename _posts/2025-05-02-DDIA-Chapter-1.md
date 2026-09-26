@@ -1,7 +1,6 @@
 ---
 layout: post
 title: DDIA - Chap01 - Reliable, Scalable and Maintainable Applications
-pin: true
 image: /images/ddia/chap01_intro.webp
 series: "Designing Data-Intensive Applications"
 categories: ["Databases", "DDIA"]

@@ -61,16 +61,27 @@ Intro paragraph (becomes the home-page excerpt).
 - **Images**: store under `images/<topic>/`, reference absolutely, and **always write alt text**:
   `![Raft leader election timeline](/images/raft/election.webp)`
 - **Code**: fenced blocks with a language tag (```` ```sql ````, ```` ```go ````, ```` ```cpp ````) — Chirpy adds line numbers and a copy button. Add `{: file='name.ext' }` right after a fence for a filename label; use ```` ```diff ```` for before/after snippets
-- **Math**: set `math: true` in front matter, then `$$...$$` blocks and `$...$` inline (MathJax)
+- **Math**: set `math: true` in front matter, then `$$...$$` blocks and `$...$` inline. KaTeX renders it at build time (`_plugins/katex-prerender.rb`), so building needs Node
 - **Diagrams**: set `mermaid: true` in front matter and use ```` ```mermaid ```` fences for sequence/flow/state diagrams — they follow dark mode automatically. Use PNGs for pictorial figures
 - **Categories**: pick an existing top-level + subcategory pair where possible (see the Categories tab)
-- **Series**: reuse the exact series name; the nav box builds itself
+- **Series**: reuse the exact series name; the sidebar lists the parts and the post gets previous/next links
+- **"Updated" date**: shown when a later commit changes a post's text. Commits that only touch front matter don't count; for a site-wide edit of post text (a format conversion, a styling pass), add its SHA to `.lastmod-ignore-revs`
 
 ## Local development
 
 ```sh
 bundle install
 bundle exec jekyll serve --livereload
+```
+
+Search on posts is [Pagefind](https://pagefind.app), which indexes
+the built site (CI does this after `jekyll build`). To try it locally, index once
+and then serve; re-run the first two lines when post text changes:
+
+```sh
+bundle exec jekyll build
+npx -y pagefind@1.5.2 --site _site
+bundle exec jekyll serve
 ```
 
 ## Enabling comments (giscus)

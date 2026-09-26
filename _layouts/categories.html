@@ -1,0 +1,43 @@
+---
+layout: shell
+---
+{% comment %}
+  All categories — replaces Chirpy's. A post's first category is its
+  top-level one and the second, if any, a sub-category, as in Chirpy.
+{% endcomment %}
+<article class="post page">
+  <header class="post-header">
+    <h1>{{ page.title }}</h1>
+    <p class="meta">{{ site.posts.size }} posts in {{ site.categories.size }} categories</p>
+  </header>
+
+  <ul class="term-list">
+    {% assign sorted = site.categories | sort %}
+    {% for category in sorted %}
+      {% assign name = category | first %}
+      {% assign posts = category | last %}
+      {% if name == posts.first.categories[0] %}
+        {% assign subs = '' | split: '' %}
+        {% for post in posts %}
+          {% assign sub = post.categories[1] %}
+          {% if sub %}{% unless subs contains sub %}{% assign subs = subs | push: sub %}{% endunless %}{% endif %}
+        {% endfor %}
+        <li>
+          <a class="term" href="{{ name | slugify | url_encode | prepend: '/categories/' | append: '/' | relative_url }}">{{ name }}</a>
+          <span class="count">{{ posts.size }}</span>
+          {% if subs.size > 0 %}
+            <ul>
+              {% assign subs = subs | sort %}
+              {% for sub in subs %}
+                <li>
+                  <a href="{{ sub | slugify | url_encode | prepend: '/categories/' | append: '/' | relative_url }}">{{ sub }}</a>
+                  <span class="count">{{ site.categories[sub].size }}</span>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</article>

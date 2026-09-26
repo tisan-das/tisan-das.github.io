@@ -1,0 +1,27 @@
+{% comment %}
+  Page shell for everything that isn't a post: the sidebar, theme and search
+  shared with the post layout (_includes/editorial-*.html), around a main
+  column. Used by home, page (About, Series, 404), categories, category,
+  tags, tag and archives — all of which replace Chirpy's layouts.
+{% endcomment %}
+<!doctype html>
+<html lang="{{ site.lang }}">
+<head>
+  {% include editorial-head.html %}
+</head>
+<body>
+  {% include editorial-sidebar.html %}
+
+  <div class="main-col">
+  <main>
+    {{ content }}
+  </main>
+
+  <footer class="site-footer">
+    <span>© {{ 'now' | date: '%Y' }} {{ site.social.name }}</span>
+  </footer>
+  </div>
+
+  {% include editorial-shell.html %}
+</body>
+</html>

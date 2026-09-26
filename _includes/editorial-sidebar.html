@@ -1,0 +1,97 @@
+{% comment %}
+  Sidebar shared by the editorial layouts. On a series post the layout has
+  assigned `part` and `series_posts` (includes share its variables), which
+  adds the collapsible list of parts under Series.
+  Footer links come from _data/contact.yml, as in Chirpy.
+{% endcomment %}
+{% assign on_home = false %}
+{% if page.url == '/' or paginator.page > 1 %}{% assign on_home = true %}{% endif %}
+<aside class="sidebar">
+  <a class="brand" href="{{ '/' | relative_url }}">
+    <img src="{{ site.avatar | relative_url }}" alt="" width="128" height="128">
+    <span>
+      <strong>{{ site.title }}</strong>
+      <small>{{ site.tagline }}</small>
+    </span>
+  </a>
+  <button class="search-toggle" type="button" aria-label="Search" aria-keyshortcuts="Control+K Meta+K">
+    <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <span class="label">Search</span>
+    <kbd>Ctrl K</kbd>
+  </button>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <nav id="site-nav" class="site-nav">
+    <a href="{{ '/' | relative_url }}"{% if on_home %} aria-current="page"{% endif %}>{% include editorial-icon.html fa='home' %}<span class="label">Home</span></a>
+    {% for tab in site.tabs %}
+      {% assign in_series = false %}
+      {% if part and tab.url == '/series/' %}{% assign in_series = true %}{% endif %}
+      {% if in_series %}
+        {% comment %} Series is highlighted on a series post; its parts stay collapsed until the reader opens them. {% endcomment %}
+        <div class="nav-group active">
+          <a href="{{ tab.url | relative_url }}">{% include editorial-icon.html fa=tab.icon %}<span class="label">{{ tab.title }}</span></a>
+          <button class="nav-expand" type="button" aria-expanded="false" aria-controls="series-parts" aria-label="Show all parts of {{ page.series }}">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+          </button>
+        </div>
+        <div class="series-parts" id="series-parts" hidden>
+          <p id="series-parts-name">{{ page.series }}</p>
+          <ol aria-labelledby="series-parts-name">
+            {% for sp in series_posts %}
+              {% assign sp_parts = sp.title | split: ': ' %}
+              <li><a href="{{ sp.url | relative_url }}"{% if sp.url == page.url %} aria-current="page"{% endif %}>{% if sp_parts.size > 1 %}{{ sp.title | remove_first: sp_parts[0] | remove_first: ': ' }}{% else %}{{ sp.title }}{% endif %}</a></li>
+            {% endfor %}
+          </ol>
+        </div>
+      {% else %}
+        {% comment %} Current on the tab and below it (a single tag's page highlights Tags). {% endcomment %}
+        {% assign url_head = page.url | slice: 0, tab.url.size %}
+        <a href="{{ tab.url | relative_url }}"{% if url_head == tab.url %} aria-current="page"{% endif %}>{% include editorial-icon.html fa=tab.icon %}<span class="label">{{ tab.title }}</span></a>
+      {% endif %}
+    {% endfor %}
+  </nav>
+  <div class="sidebar-foot">
+    <button class="mode-toggle" type="button" aria-label="Toggle dark mode">
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>
+    </button>
+    <span class="foot-sep" aria-hidden="true"></span>
+    {% for entry in site.data.contact %}
+      {% assign url = nil %}
+      {% assign blank = true %}
+      {% if entry.noblank %}{% assign blank = false %}{% endif %}
+      {% case entry.type %}
+        {% when 'github' %}
+          {% assign url = 'https://github.com/' | append: site.github.username %}
+          {% assign name = 'GitHub' %}
+        {% when 'twitter' %}
+          {% assign url = 'https://x.com/' | append: site.twitter.username %}
+          {% assign name = 'X' %}
+        {% when 'email' %}
+          {% if site.social.email %}
+            {% comment %} Assembled on click, as Chirpy does, so the address isn't in the page for scrapers. {% endcomment %}
+            {% assign email = site.social.email | split: '@' %}
+            {% capture url %}javascript:void(location.href = 'mailto:' + ['{{ email[0] }}','{{ email[1] }}'].join('@')){% endcapture %}
+            {% assign name = 'Email' %}
+          {% endif %}
+        {% when 'rss' %}
+          {% assign url = '/feed.xml' | relative_url %}
+          {% assign name = 'RSS feed' %}
+        {% else %}
+          {% assign url = entry.url %}
+          {% assign name = entry.type | capitalize %}
+      {% endcase %}
+      {% if url %}
+        <a class="foot-icon" href="{{ url }}" aria-label="{{ name }}" title="{{ name }}"{% if blank %} target="_blank" rel="noopener me"{% endif %}>
+          {% case entry.type %}
+            {% when 'github' %}<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg>
+            {% when 'twitter' %}<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            {% when 'email' %}<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"/></svg>
+            {% when 'rss' %}<svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><circle cx="3" cy="13" r="1.75" fill="currentColor"/><path d="M1.5 7.5a7 7 0 0 1 7 7M1.5 2A12.5 12.5 0 0 1 14 14.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            {% else %}<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3" fill="currentColor"/></svg>
+          {% endcase %}
+        </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</aside>

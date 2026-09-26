@@ -1,0 +1,45 @@
+---
+layout: shell
+---
+{% comment %}
+  Home page (paginated post list) — replaces Chirpy's.
+  Styles: the "home" section of assets/css/editorial.scss.
+{% endcomment %}
+<div class="home">
+  <header class="home-header">
+    <h1>Latest posts</h1>
+    {% if paginator.total_pages > 1 %}
+      <p>Page {{ paginator.page }} of {{ paginator.total_pages }}</p>
+    {% endif %}
+  </header>
+
+  {% for post in paginator.posts %}
+    <article class="card">
+      <a href="{{ post.url | relative_url }}">
+        <div class="card-text">
+          <h2>{{ post.title }}</h2>
+          <p class="card-summary">{% include post-summary.html max_length=170 %}</p>
+          <p class="card-meta">
+            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%b %-d, %Y' }}</time>
+            {% if post.categories.size > 0 %} · {{ post.categories | join: ', ' }}{% endif %}
+          </p>
+        </div>
+        {% if post.image %}
+          <img class="card-thumb" src="{{ post.image.path | default: post.image | relative_url }}" alt=""
+            {% if forloop.index > 2 %}loading="lazy" {% endif %}decoding="async">
+        {% endif %}
+      </a>
+    </article>
+  {% endfor %}
+
+  {% if paginator.total_pages > 1 %}
+    <nav class="home-pager" aria-label="More posts">
+      {% if paginator.previous_page %}
+        <a class="prev" href="{{ paginator.previous_page_path | relative_url }}">← Newer posts</a>
+      {% endif %}
+      {% if paginator.next_page %}
+        <a class="next" href="{{ paginator.next_page_path | relative_url }}">Older posts →</a>
+      {% endif %}
+    </nav>
+  {% endif %}
+</div>
