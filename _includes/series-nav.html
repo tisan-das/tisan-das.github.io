@@ -1,30 +1,5 @@
 {% comment %}
-  Series navigation box.
-  Rendered inside posts that define `series: <name>` in front matter.
-  Lists every post sharing the same series name, highlighting the current one.
-
-  Order: posts that declare `series_part: <n>` are sorted by that number, so a
-  series reads correctly no matter what publish dates its parts carry. Any post
-  without the field falls back to date order, which keeps every other series on
-  this site behaving exactly as before.
+  Retired: posts list their series in the sidebar (_layouts/post.html), with a
+  "Part N of M" kicker and previous/next links. Kept as an empty include
+  because series posts still call it; removing the call would rewrite 65 posts.
 {% endcomment %}
-{% if page.series %}
-{% assign series_keyed = site.posts | where: "series", page.series | where_exp: "p", "p.series_part" | sort: "series_part" %}
-{% assign series_dated = site.posts | where: "series", page.series | where_exp: "p", "p.series_part == nil" | sort: "date" %}
-{% assign series_posts = series_keyed | concat: series_dated %}
-{% assign series_size = series_posts | size %}
-{% if series_size > 1 %}
-<div class="series-nav">
-<div class="series-nav-title"><i class="fas fa-layer-group"></i> Part of the <strong>{{ page.series }}</strong> series ({{ series_size }} parts)</div>
-<ol>
-{% for sp in series_posts -%}
-{% if sp.url == page.url -%}
-<li class="current">{{ sp.title }} <span class="you-are-here">&larr; you are here</span></li>
-{% else -%}
-<li><a href="{{ sp.url | relative_url }}">{{ sp.title }}</a></li>
-{% endif -%}
-{% endfor %}
-</ol>
-</div>
-{% endif %}
-{% endif %}
