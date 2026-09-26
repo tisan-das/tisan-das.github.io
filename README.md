@@ -64,13 +64,23 @@ Intro paragraph (becomes the home-page excerpt).
 - **Math**: set `math: true` in front matter, then `$$...$$` blocks and `$...$` inline (MathJax)
 - **Diagrams**: set `mermaid: true` in front matter and use ```` ```mermaid ```` fences for sequence/flow/state diagrams — they follow dark mode automatically. Use PNGs for pictorial figures
 - **Categories**: pick an existing top-level + subcategory pair where possible (see the Categories tab)
-- **Series**: reuse the exact series name; the nav box builds itself
+- **Series**: reuse the exact series name; the nav box builds itself (editorial-layout posts list the series in the sidebar instead)
 
 ## Local development
 
 ```sh
 bundle install
 bundle exec jekyll serve --livereload
+```
+
+Search on editorial-layout posts is [Pagefind](https://pagefind.app), which indexes
+the built site (CI does this after `jekyll build`). To try it locally, index once
+and then serve; re-run the first two lines when post text changes:
+
+```sh
+bundle exec jekyll build
+npx -y pagefind@1.5.2 --site _site
+bundle exec jekyll serve
 ```
 
 ## Enabling comments (giscus)

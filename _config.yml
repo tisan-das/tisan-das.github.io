@@ -193,6 +193,11 @@ compress_html:
   ignore:
     envs: [development]
 
+# Pagefind writes its index into _site after the build; keep it across
+# `jekyll serve` rebuilds (see README, Local development).
+keep_files:
+  - pagefind
+
 exclude:
   - "*.gem"
   - "*.gemspec"

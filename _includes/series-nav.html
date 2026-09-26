@@ -3,13 +3,14 @@
   Rendered inside posts that define `series: <name>` in front matter.
   Lists every post sharing the same series name, highlighting the current one.
 
-  Ordering lives in series-posts.html.
+  Ordering lives in series-posts.html. The editorial layout lists the series
+  in its sidebar instead, so the box is skipped there.
 {% endcomment %}
-{% if page.series %}
+{% if page.series and page.layout != 'editorial' %}
 {% include series-posts.html %}
 {% assign series_size = series_posts | size %}
 {% if series_size > 1 %}
-<div class="series-nav">
+<div class="series-nav" data-pagefind-ignore>
 <div class="series-nav-title"><i class="fas fa-layer-group"></i> Part of the <strong>{{ page.series }}</strong> series ({{ series_size }} parts)</div>
 <ol>
 {% for sp in series_posts -%}

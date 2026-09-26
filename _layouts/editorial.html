@@ -1,6 +1,7 @@
 {% comment %}
   Editorial post layout — standalone (does not extend Chirpy's default).
-  Opt a post in with `layout: editorial`. Not yet included: comments, search.
+  Opt a post in with `layout: editorial`. Not yet included: comments.
+  Search is Pagefind, indexed after the Jekyll build (see README).
 {% endcomment %}
 {% if page.series %}
   {% include series-posts.html %}
@@ -44,19 +45,45 @@
 <body>
   <aside class="sidebar">
     <a class="brand" href="{{ '/' | relative_url }}">
-      <img src="{{ site.avatar | relative_url }}" alt="" width="44" height="44">
+      <img src="{{ site.avatar | relative_url }}" alt="" width="128" height="128">
       <span>
         <strong>{{ site.title }}</strong>
         <small>{{ site.tagline }}</small>
       </span>
     </a>
+    <button class="search-toggle" type="button" aria-label="Search" aria-keyshortcuts="Control+K Meta+K">
+      <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="label">Search</span>
+      <kbd>Ctrl K</kbd>
+    </button>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
     <nav id="site-nav" class="site-nav">
-      <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>{% include editorial-icon.html fa='home' %}Home</a>
+      <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>{% include editorial-icon.html fa='home' %}<span class="label">Home</span></a>
       {% for tab in site.tabs %}
-        <a href="{{ tab.url | relative_url }}"{% if page.url == tab.url %} aria-current="page"{% endif %}>{% include editorial-icon.html fa=tab.icon %}{{ tab.title }}</a>
+        {% assign in_series = false %}
+        {% if part and tab.url == '/series/' %}{% assign in_series = true %}{% endif %}
+        {% if in_series %}
+          {% comment %} Series is highlighted on a series post; its parts stay collapsed until the reader opens them. {% endcomment %}
+          <div class="nav-group active">
+            <a href="{{ tab.url | relative_url }}">{% include editorial-icon.html fa=tab.icon %}<span class="label">{{ tab.title }}</span></a>
+            <button class="nav-expand" type="button" aria-expanded="false" aria-controls="series-parts" aria-label="Show all parts of {{ page.series }}">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+            </button>
+          </div>
+          <div class="series-parts" id="series-parts" hidden>
+            <p id="series-parts-name">{{ page.series }}</p>
+            <ol aria-labelledby="series-parts-name">
+              {% for sp in series_posts %}
+                {% assign sp_parts = sp.title | split: ': ' %}
+                <li><a href="{{ sp.url | relative_url }}"{% if sp.url == page.url %} aria-current="page"{% endif %}>{% if sp_parts.size > 1 %}{{ sp.title | remove_first: sp_parts[0] | remove_first: ': ' }}{% else %}{{ sp.title }}{% endif %}</a></li>
+              {% endfor %}
+            </ol>
+          </div>
+        {% else %}
+          <a href="{{ tab.url | relative_url }}"{% if page.url == tab.url %} aria-current="page"{% endif %}>{% include editorial-icon.html fa=tab.icon %}<span class="label">{{ tab.title }}</span></a>
+        {% endif %}
       {% endfor %}
     </nav>
     <div class="sidebar-foot">
@@ -71,13 +98,13 @@
 
   <div class="main-col">
   <main>
-    <article class="post">
+    <article class="post" data-pagefind-body>
       <header class="post-header">
         {% if part %}
-          <p class="kicker"><a href="{{ '/series/' | relative_url }}">{{ page.series }}</a> · Part {{ part }} of {{ series_posts.size }}</p>
+          <p class="kicker" data-pagefind-ignore><a href="{{ '/series/' | relative_url }}">{{ page.series }}</a> · Part {{ part }} of {{ series_posts.size }}</p>
         {% endif %}
-        <h1>{{ display_title | default: page.title }}</h1>
-        <p class="meta">
+        <h1 data-pagefind-meta="title:{{ page.title | escape }}">{{ display_title | default: page.title }}</h1>
+        <p class="meta" data-pagefind-ignore>
           {{ site.social.name }} ·
           <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%b %-d, %Y' }}</time> ·
           {{ content | strip_html | number_of_words | divided_by: 180 | plus: 1 }} min read
@@ -91,7 +118,7 @@
       {% endif %}
 
       {% if page.toc != false %}
-        <details class="toc">
+        <details class="toc" data-pagefind-ignore>
           <summary>Contents</summary>
           <ol></ol>
         </details>
@@ -100,7 +127,7 @@
       {{ content }}
 
       {% if prev_post or next_post %}
-        <nav class="series-pager">
+        <nav class="series-pager" data-pagefind-ignore>
           {% if prev_post %}
             <a class="prev" href="{{ prev_post.url | relative_url }}"><span>← {% if part %}Previous part{% else %}Older{% endif %}</span>{{ prev_post.title }}</a>
           {% endif %}
@@ -116,6 +143,8 @@
     <span>© {{ 'now' | date: '%Y' }} {{ site.social.name }}</span>
   </footer>
   </div>
+
+  <pagefind-modal></pagefind-modal>
 
   <script>
     (function () {
@@ -133,6 +162,56 @@
         var open = menu.getAttribute('aria-expanded') !== 'true';
         menu.setAttribute('aria-expanded', open);
         document.querySelector('.sidebar').classList.toggle('open', open);
+      });
+
+      // Series parts: collapsed by default. Once opened, stay open for the rest
+      // of the visit, so moving part to part doesn't snap the list shut.
+      var expand = document.querySelector('.nav-expand');
+      if (expand) {
+        var parts = document.getElementById('series-parts');
+        var setOpen = function (open) {
+          expand.setAttribute('aria-expanded', open);
+          parts.hidden = !open;
+          sessionStorage.setItem('series-parts-open', open ? '1' : '');
+        };
+        if (sessionStorage.getItem('series-parts-open')) setOpen(true);
+        expand.addEventListener('click', function () {
+          setOpen(expand.getAttribute('aria-expanded') !== 'true');
+        });
+      }
+
+      // Pagefind's UI (~40KB gzipped) loads on first approach to the search
+      // button, not with the page; the index itself loads as you type.
+      var search = document.querySelector('.search-toggle');
+      var searchReady;
+      var loadSearch = function () {
+        if (!searchReady) {
+          var css = document.createElement('link');
+          css.rel = 'stylesheet';
+          css.href = '{{ "/pagefind/pagefind-component-ui.css" | relative_url }}';
+          var js = document.createElement('script');
+          js.type = 'module';
+          js.src = '{{ "/pagefind/pagefind-component-ui.js" | relative_url }}';
+          searchReady = Promise.all([
+            new Promise(function (done) { css.onload = done; }),
+            customElements.whenDefined('pagefind-modal')
+          ]);
+          document.head.append(css, js);
+        }
+        return searchReady;
+      };
+      var openSearch = function () {
+        loadSearch().then(function () { document.querySelector('pagefind-modal').open(); });
+      };
+      if (/Mac|iP/.test(navigator.platform)) search.querySelector('kbd').textContent = '⌘K';
+      search.addEventListener('pointerenter', loadSearch, { once: true });
+      search.addEventListener('focus', loadSearch, { once: true });
+      search.addEventListener('click', openSearch);
+      addEventListener('keydown', function (e) {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+          e.preventDefault();
+          openSearch();
+        }
       });
 
       var toc = document.querySelector('.toc');
