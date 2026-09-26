@@ -1,0 +1,111 @@
+{% comment %}
+  End-of-body parts shared by the editorial layouts: the search modal, the
+  update prompt, and the scripts for the sidebar (theme, menu, series list,
+  search) and the offline service worker.
+  The theme toggle fires a `themechange` event on document for layouts that
+  need to follow it (the post layout re-themes giscus).
+{% endcomment %}
+<pagefind-modal></pagefind-modal>
+
+{% if jekyll.environment == 'production' and site.pwa.enabled and site.pwa.cache.enabled %}
+  <div class="update-toast" role="status" hidden>
+    A new version of this site is available.
+    <button type="button">Refresh</button>
+  </div>
+{% endif %}
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    document.querySelector('.mode-toggle').addEventListener('click', function () {
+      var cur = root.getAttribute('data-bs-theme') ||
+        (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var next = cur === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-bs-theme', next);
+      localStorage.setItem('theme', next);
+      document.dispatchEvent(new Event('themechange'));
+    });
+
+    var menu = document.querySelector('.menu-toggle');
+    menu.addEventListener('click', function () {
+      var open = menu.getAttribute('aria-expanded') !== 'true';
+      menu.setAttribute('aria-expanded', open);
+      document.querySelector('.sidebar').classList.toggle('open', open);
+    });
+
+    // Series parts: collapsed by default. Once opened, stay open for the rest
+    // of the visit, so moving part to part doesn't snap the list shut.
+    var expand = document.querySelector('.nav-expand');
+    if (expand) {
+      var parts = document.getElementById('series-parts');
+      var setOpen = function (open) {
+        expand.setAttribute('aria-expanded', open);
+        parts.hidden = !open;
+        sessionStorage.setItem('series-parts-open', open ? '1' : '');
+      };
+      if (sessionStorage.getItem('series-parts-open')) setOpen(true);
+      expand.addEventListener('click', function () {
+        setOpen(expand.getAttribute('aria-expanded') !== 'true');
+      });
+    }
+
+    // Pagefind's UI (~40KB gzipped) loads on first approach to the search
+    // button, not with the page; the index itself loads as you type.
+    var search = document.querySelector('.search-toggle');
+    var searchReady;
+    var loadSearch = function () {
+      if (!searchReady) {
+        var css = document.createElement('link');
+        css.rel = 'stylesheet';
+        css.href = '{{ "/pagefind/pagefind-component-ui.css" | relative_url }}';
+        var js = document.createElement('script');
+        js.type = 'module';
+        js.src = '{{ "/pagefind/pagefind-component-ui.js" | relative_url }}';
+        searchReady = Promise.all([
+          new Promise(function (done) { css.onload = done; }),
+          customElements.whenDefined('pagefind-modal')
+        ]);
+        document.head.append(css, js);
+      }
+      return searchReady;
+    };
+    var openSearch = function () {
+      loadSearch().then(function () { document.querySelector('pagefind-modal').open(); });
+    };
+    if (/Mac|iP/.test(navigator.platform)) search.querySelector('kbd').textContent = '⌘K';
+    search.addEventListener('pointerenter', loadSearch, { once: true });
+    search.addEventListener('focus', loadSearch, { once: true });
+    search.addEventListener('click', openSearch);
+    addEventListener('keydown', function (e) {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        openSearch();
+      }
+    });
+
+    {% if jekyll.environment == 'production' and site.pwa.enabled and site.pwa.cache.enabled %}
+    // Offline cache: Chirpy's service worker (one per site, so every layout
+    // shares it). A new deploy waits until the reader chooses to refresh.
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('{{ "/sw.min.js" | relative_url }}').then(function (reg) {
+        if (!reg) return;
+        var toast = document.querySelector('.update-toast');
+        var offer = function () {
+          if (reg.waiting && navigator.serviceWorker.controller) toast.hidden = false;
+        };
+        offer();
+        reg.addEventListener('updatefound', function () {
+          reg.installing.addEventListener('statechange', offer);
+        });
+        toast.querySelector('button').addEventListener('click', function () {
+          if (reg.waiting) reg.waiting.postMessage('SKIP_WAITING');
+        });
+      }).catch(function () {}); // refused, e.g. in some private-browsing modes
+      var reloaded = false;
+      navigator.serviceWorker.addEventListener('controllerchange', function () {
+        if (!reloaded) { reloaded = true; location.reload(); }
+      });
+    }
+    {% endif %}
+  })();
+</script>

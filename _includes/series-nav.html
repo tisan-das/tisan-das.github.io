@@ -1,26 +1,5 @@
 {% comment %}
-  Series navigation box.
-  Rendered inside posts that define `series: <name>` in front matter.
-  Lists every post sharing the same series name, highlighting the current one.
-
-  Ordering lives in series-posts.html. The editorial layout lists the series
-  in its sidebar instead, so the box is skipped there.
+  Retired: posts list their series in the sidebar (_layouts/post.html), with a
+  "Part N of M" kicker and previous/next links. Kept as an empty include
+  because series posts still call it; removing the call would rewrite 65 posts.
 {% endcomment %}
-{% if page.series and page.layout != 'editorial' %}
-{% include series-posts.html %}
-{% assign series_size = series_posts | size %}
-{% if series_size > 1 %}
-<div class="series-nav" data-pagefind-ignore>
-<div class="series-nav-title"><i class="fas fa-layer-group"></i> Part of the <strong>{{ page.series }}</strong> series ({{ series_size }} parts)</div>
-<ol>
-{% for sp in series_posts -%}
-{% if sp.url == page.url -%}
-<li class="current">{{ sp.title }} <span class="you-are-here">&larr; you are here</span></li>
-{% else -%}
-<li><a href="{{ sp.url | relative_url }}">{{ sp.title }}</a></li>
-{% endif -%}
-{% endfor %}
-</ol>
-</div>
-{% endif %}
-{% endif %}

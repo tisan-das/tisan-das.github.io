@@ -135,6 +135,9 @@ pwa:
   cache:
     enabled: true # The option for PWA offline cache
     deny_paths:
+      # Search is always fetched fresh, so the index matches the deployed site
+      # (Pagefind's entry file names chunks that change with every build).
+      - "/pagefind/"
 
 paginate: 10
 

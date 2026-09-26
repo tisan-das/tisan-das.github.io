@@ -1,0 +1,19 @@
+# Commits that edited post text site-wide without updating the posts.
+# _plugins/posts-lastmod-hook.rb skips them when working out "Updated" dates
+# (front-matter-only commits are skipped automatically). One SHA per line.
+
+335572a  # Phase 2: categories, tags, series navigation
+6a15af0  # Fix NGINX post links to HTTPS (htmlproofer)
+a6f0e33  # Phase 6: dark-mode images, captions, width, series cards
+9ac6021  # Phase 7: Inter typeface, callouts, collapsible solutions
+604e95a  # Convert content images to WebP
+8b8c83a  # Disclaimer tense: 'was drafted' -> 'is drafted'
+c39c8a8  # Phase 3: alt-text pass over all images
+2374f23  # Phase 5: code typography, math & mermaid formatting
+c9c935f  # Remove unused assets and one-off tooling
+f11611f  # Pre-render mermaid diagrams as SVGs
+eb08c16  # Add AI-assistance disclaimer to the Production RAG posts
+4591ef4  # Phase 1: migrate to the Chirpy theme
+6974449  # Convert RAG images to WebP, dark-mode legibility
+ae5ba08  # Phase 0: quick fixes
+377b30c  # Standardize heading levels in RAG part 1

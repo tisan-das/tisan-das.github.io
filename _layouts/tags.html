@@ -1,0 +1,19 @@
+---
+layout: shell
+---
+{% comment %} All tags, alphabetical — replaces Chirpy's. {% endcomment %}
+{% assign tags = '' | split: '' %}
+{% for t in site.tags %}{% assign tags = tags | push: t[0] %}{% endfor %}
+{% assign tags = tags | sort_natural %}
+<article class="post page">
+  <header class="post-header">
+    <h1>{{ page.title }}</h1>
+    <p class="meta">{{ tags.size }} tags</p>
+  </header>
+
+  <ul class="post-tags tag-cloud">
+    {% for t in tags %}
+      <li><a href="{{ t | slugify | url_encode | prepend: '/tags/' | append: '/' | relative_url }}">{{ t }}<span class="count">{{ site.tags[t].size }}</span></a></li>
+    {% endfor %}
+  </ul>
+</article>
