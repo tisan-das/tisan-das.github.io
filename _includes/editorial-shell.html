@@ -7,6 +7,19 @@
 {% endcomment %}
 <pagefind-modal></pagefind-modal>
 
+{% comment %} Opened by the sidebar's Email button (and the one on About); filled in by the script below. {% endcomment %}
+<div class="mail-panel" id="mail-panel" popover>
+  <p class="mail-addr"></p>
+  <div class="mail-actions">
+    <button class="mail-copy" type="button">Copy address</button>
+    <a class="mail-app" href="#">Open mail app</a>
+  </div>
+  <p class="mail-web">Write in
+    <a data-compose="https://mail.google.com/mail/?view=cm&fs=1&to=" href="#" target="_blank" rel="noopener">Gmail</a> ·
+    <a data-compose="https://outlook.live.com/mail/0/deeplink/compose?to=" href="#" target="_blank" rel="noopener">Outlook</a>
+  </p>
+</div>
+
 {% if jekyll.environment == 'production' and site.pwa.enabled and site.pwa.cache.enabled %}
   <div class="update-toast" role="status" hidden>
     A new version of this site is available.
@@ -47,6 +60,63 @@
       expand.addEventListener('click', function () {
         setOpen(expand.getAttribute('aria-expanded') !== 'true');
       });
+    }
+
+    // Email panel: the address is assembled on first open, then the panel is
+    // centred on the button that opened it (the sidebar's, or one in a page
+    // like About), above it when the button is low on screen.
+    var mail = document.querySelector('.mail-toggle');
+    if (mail) {
+      var panel = document.getElementById('mail-panel');
+      var addr = mail.dataset.user + '@' + mail.dataset.domain;
+      var openers = document.querySelectorAll('[popovertarget="mail-panel"]');
+      var from = mail;
+      if (!('popover' in panel)) { // older browsers: just the mail app
+        openers.forEach(function (b) {
+          b.addEventListener('click', function () { location.href = 'mailto:' + addr; });
+        });
+      } else {
+        // click runs before the button toggles the popover
+        openers.forEach(function (b) {
+          b.addEventListener('click', function () { from = b; });
+        });
+        panel.addEventListener('beforetoggle', function (e) {
+          if (e.newState !== 'open') return;
+          if (!panel.querySelector('.mail-addr').textContent) {
+            panel.querySelector('.mail-addr').textContent = addr;
+            panel.querySelector('.mail-app').href = 'mailto:' + addr;
+            panel.querySelectorAll('[data-compose]').forEach(function (a) {
+              a.href = a.dataset.compose + encodeURIComponent(addr);
+              a.addEventListener('click', function () { panel.hidePopover(); });
+            });
+          }
+          var r = from.getBoundingClientRect();
+          var low = r.top > innerHeight / 2;
+          panel.style.top = low ? '' : r.bottom + 8 + 'px';
+          panel.style.bottom = low ? innerHeight - r.top + 8 + 'px' : '';
+          var mid = r.left + r.width / 2;
+          panel.style.left = 'max(0.75rem, min(' + mid + 'px - 8.5rem, 100vw - 17.75rem))'; // 17rem wide
+        });
+        // the laptop rail stays expanded while its panel is open
+        panel.addEventListener('toggle', function (e) {
+          document.querySelector('.sidebar').classList.toggle('keep-open', e.newState === 'open' && from === mail);
+        });
+        addEventListener('resize', function () { panel.hidePopover(); });
+        var copy = panel.querySelector('.mail-copy');
+        copy.addEventListener('click', function () {
+          var done = function (ok) {
+            // no clipboard access (e.g. plain http): select it to copy by hand
+            if (!ok) getSelection().selectAllChildren(panel.querySelector('.mail-addr'));
+            copy.textContent = ok ? 'Copied' : 'Selected';
+            setTimeout(function () { copy.textContent = 'Copy address'; }, 2000);
+          };
+          if (navigator.clipboard) {
+            navigator.clipboard.writeText(addr).then(function () { done(true); }, function () { done(false); });
+          } else {
+            done(false);
+          }
+        });
+      }
     }
 
     // Pagefind's UI (~40KB gzipped) loads on first approach to the search
