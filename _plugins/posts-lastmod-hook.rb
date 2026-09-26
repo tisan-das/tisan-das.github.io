@@ -27,11 +27,12 @@ end
 Jekyll::Hooks.register :posts, :post_init do |post|
 
   path = post.relative_path
-  shas = `git log --format=%H -- "#{ path }"`.split
+  # Argument arrays, not a shell string, so a filename can't inject commands.
+  shas = Open3.capture2('git', 'log', '--format=%H', '--', path)[0].split
   latest = shas[0...-1].find { |sha| counts_as_update?(sha, path) }
 
   if latest
-    lastmod_date = `git log -1 --pretty="%ad" --date=iso #{latest}`
+    lastmod_date, = Open3.capture2('git', 'log', '-1', '--pretty=%ad', '--date=iso', latest)
     post.data['last_modified_at'] = lastmod_date
   end
 
