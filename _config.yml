@@ -138,6 +138,8 @@ pwa:
       # Search is always fetched fresh, so the index matches the deployed site
       # (Pagefind's entry file names chunks that change with every build).
       - "/pagefind/"
+      # The feed changes with every post; a cached copy would show old entries.
+      - "/feed.xml"
 
 paginate: 10
 
