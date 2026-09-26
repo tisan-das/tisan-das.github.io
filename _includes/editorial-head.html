@@ -2,6 +2,13 @@
   <head> contents shared by the editorial layouts (post, home).
 {% endcomment %}
 <meta charset="utf-8">
+{% comment %}
+  Content Security Policy. It only covers what follows it, so it comes first.
+  _plugins/content-security-policy.rb puts the inline scripts' hashes in place
+  of {SCRIPT_HASHES}. Beyond this site: giscus (comments, loaded on click),
+  WebAssembly for Pagefind search, and images from any https host.
+{% endcomment %}
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' {SCRIPT_HASHES} 'wasm-unsafe-eval' https://giscus.app; style-src 'self' 'unsafe-inline' https://giscus.app; img-src 'self' data: https:; frame-src https://giscus.app; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
 <script>
