@@ -1,7 +1,7 @@
 ---
 title: Series
 icon: fas fa-layer-group
-order: 3
+order: 1
 ---
 
 Long-form notes are grouped into series so you can read them in order. Start with a **reading path** below, or jump into any series.
