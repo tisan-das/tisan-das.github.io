@@ -7,7 +7,7 @@ gem "jekyll-theme-chirpy", "~> 7.6"
 # Renders math at build time (_plugins/katex-prerender.rb); needs Node.
 gem "katex", "~> 0.11"
 
-gem "html-proofer", "~> 5.0", group: :test
+gem "html-proofer", "~> 5.2", group: :test
 
 platforms :windows, :jruby do
   gem "tzinfo", ">= 1", "< 3"
