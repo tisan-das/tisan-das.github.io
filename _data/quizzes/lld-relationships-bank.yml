@@ -1,0 +1,2624 @@
+# Generated from the class-relationships question bank. 100 questions;
+# `answer` and `also[].i` index into `choices`, and each choice's `path`
+# walks `steps`. Used by Part 2 of the Low-Level Design series.
+id: relationships
+mode: deck
+storage: lld-relationships-v1
+answer_label: What is the relationship?
+filters:
+- field: kind
+  label: Question type
+  values:
+  - - code
+    - Code
+  - - scenario
+    - Scenario
+  - - schema
+    - Schema
+  - - notation
+    - Notation
+  - - error
+    - Spot the error
+  - - context
+    - Context flip
+  - - refactor
+    - Refactor
+- field: level
+  label: Level
+  values:
+  - - 1
+    - Warm-up
+  - - 2
+    - Core
+  - - 3
+    - Tricky
+steps:
+- id: s1
+  short: Kind of, or implements
+  q: Is A a kind of B, or does A implement B's contract?
+  opts:
+  - - 'no'
+    - 'No'
+  - - extends
+    - Yes, extends a class
+  - - implements
+    - Yes, implements an interface
+- id: s2
+  short: Link stored
+  q: Is the link stored, so it still exists after the method returns?
+  opts:
+  - - 'yes'
+    - 'Yes'
+  - - 'no'
+    - 'No'
+- id: s3
+  short: Link has data
+  q: Does the link itself carry data (quantity, status, dates, role)?
+  opts:
+  - - 'yes'
+    - 'Yes'
+  - - 'no'
+    - 'No'
+- id: s4
+  short: Whole–part
+  q: 'Is it whole–part: is A made of B?'
+  opts:
+  - - 'yes'
+    - 'Yes'
+  - - 'no'
+    - 'No'
+- id: s5
+  short: Outlive or shared
+  q: Can the part outlive the whole, or be shared by another whole?
+  opts:
+  - - 'yes'
+    - 'Yes'
+  - - 'no'
+    - 'No'
+choices:
+- key: dependency
+  label: Dependency
+  hint: uses it, keeps nothing
+  path:
+  - - s1
+    - 'no'
+  - - s2
+    - 'no'
+- key: association
+  label: Association
+  hint: stored link between peers
+  path:
+  - - s1
+    - 'no'
+  - - s2
+    - 'yes'
+  - - s3
+    - 'no'
+  - - s4
+    - 'no'
+- key: association_class
+  label: Association class
+  hint: the link has its own data
+  path:
+  - - s1
+    - 'no'
+  - - s2
+    - 'yes'
+  - - s3
+    - 'yes'
+- key: aggregation
+  label: Aggregation
+  hint: part survives or is shared
+  path:
+  - - s1
+    - 'no'
+  - - s2
+    - 'yes'
+  - - s3
+    - 'no'
+  - - s4
+    - 'yes'
+  - - s5
+    - 'yes'
+- key: composition
+  label: Composition
+  hint: exclusive, dies with the whole
+  path:
+  - - s1
+    - 'no'
+  - - s2
+    - 'yes'
+  - - s3
+    - 'no'
+  - - s4
+    - 'yes'
+  - - s5
+    - 'no'
+- key: inheritance
+  label: Inheritance
+  hint: is a kind of
+  path:
+  - - s1
+    - extends
+- key: realization
+  label: Realization
+  hint: implements a contract
+  path:
+  - - s1
+    - implements
+questions:
+- n: 1
+  title: Chessboard → Square
+  kind: code
+  lang: python
+  domain: Chess
+  level: 1
+  meta:
+  - Code
+  - Python
+  - Chess
+  q: |-
+    A chess engine models its board like this.
+
+    ```python
+    class Chessboard:
+        def __init__(self):
+            self._squares = [[Square(r, c) for c in range(8)]
+                             for r in range(8)]
+
+        def square_at(self, r, c) -> "Square":
+            return self._squares[r][c]
+    ```
+  answer: 4
+  notes:
+  - label: Deciding clue
+    text: The board builds its own squares in `__init__`, keeps them private, and a square like "e4" means nothing without a board.
+  - label: Why
+    text: Nothing outside the board ever creates a Square, the board never accepts squares from a caller, and the squares go when the board goes. `square_at()` lends a square out for reading, which doesn't transfer ownership.
+  - label: Tempting wrong turn
+    text: Aggregation is tempting because `square_at()` exposes the squares. Exposing a part for reading isn't the same as letting it live independently or be shared by another board.
+- n: 2
+  title: Playlist → Song
+  kind: scenario
+  domain: Music streaming
+  level: 1
+  meta:
+  - Scenario
+  - Music streaming
+  q: Songs live in the catalog. A playlist is an ordered collection of songs; a song can appear in thousands of playlists, and deleting a playlist never deletes a song.
+  answer: 3
+  notes:
+  - label: Deciding clue
+    text: A collection whose members exist independently and are shared.
+  - label: Why
+    text: A playlist is meaningfully "made of" songs (whole–part), but the songs outlive it and are shared across playlists. Classic aggregation.
+  - label: Tempting wrong turn
+    text: Composition is tempting because a playlist is nothing but its songs. The test isn't how much of the whole the parts make up, it's whether the parts survive.
+- n: 3
+  title: Employee → Employee (manager)
+  kind: code
+  lang: python
+  domain: HR
+  level: 1
+  meta:
+  - Code
+  - Python
+  - HR
+  q: |-
+    An org chart stores each employee's manager.
+
+    ```python
+    class Employee:
+        def __init__(self, name: str, manager: "Employee | None"):
+            self.name = name
+            self.manager = manager
+    ```
+  answer: 1
+  notes:
+  - label: Deciding clue
+    text: A stored reference to an independent peer; neither is part of the other.
+  - label: Why
+    text: Same class on both ends makes it a reflexive (self) association. The link is held in a field, so it isn't a dependency. A manager isn't made of their reports, and firing a manager doesn't delete anyone, so it isn't whole–part.
+  - label: Tempting wrong turn
+    text: Aggregation is tempting because a manager "has" a team. In English "has" is cheap; ask whether the team is structurally a part of the manager object. It isn't.
+- n: 4
+  title: Document → Comment
+  kind: scenario
+  domain: Google Docs
+  level: 1
+  meta:
+  - Scenario
+  - Google Docs
+  q: Each comment is anchored to a range of text in one document. Deleting the document deletes all of its comments, and there's no way to move a comment to a different document.
+  answer: 4
+  notes:
+  - label: Deciding clue
+    text: Comments die with the document and can't move to another one.
+  - label: Why
+    text: It's whole–part (a document's comment thread is part of the document), the part can't outlive the whole, and it can't be shared. Both lifecycle questions point to composition.
+  - label: Tempting wrong turn
+    text: Association is tempting because comments have their own authors and timestamps. Having attributes doesn't make something independent; its lifetime does.
+- n: 5
+  title: FantasyTeam → Player
+  kind: code
+  lang: python
+  domain: Fantasy sports
+  level: 2
+  meta:
+  - Code
+  - Python
+  - Fantasy sports
+  q: |-
+    In a fantasy league, the same real-world player can be drafted onto many different users' teams.
+
+    ```python
+    class FantasyTeam:
+        def __init__(self, owner: User):
+            self.owner = owner
+            self.roster: list[Player] = []
+
+        def draft(self, player: Player):
+            self.roster.append(player)  # from the league's player pool
+    ```
+  answer: 3
+  also:
+  - i: 1
+    note: The aggregation/association line is blurry for membership collections. Aggregation is preferred because a fantasy team is defined by its roster.
+  notes:
+  - label: Deciding clue
+    text: A roster is a whole made of players, but each Player comes from a shared pool and appears on many teams.
+  - label: Why
+    text: 'Whole–part: a team is its roster. The part is created elsewhere (the league pool), passed in, survives the team being deleted, and is shared across teams. That''s aggregation.'
+  - label: Tempting wrong turn
+    text: Composition is tempting because the team "has" its roster. But deleting a fantasy team obviously doesn't delete the real player.
+- n: 6
+  title: Ride → Driver
+  kind: scenario
+  domain: Ride hailing
+  level: 1
+  meta:
+  - Scenario
+  - Ride hailing
+  q: A Ride records which driver accepted it. Driver accounts exist long before and after any single ride, and one driver completes thousands of rides.
+  answer: 1
+  notes:
+  - label: Deciding clue
+    text: The ride keeps a lasting reference, but a driver is not a part of a ride.
+  - label: Why
+    text: 'Held after the method returns: yes (the ride stores its driver). Whole–part: no. That leaves association.'
+  - label: Tempting wrong turn
+    text: Aggregation is tempting because a ride "has" a driver. A ride isn't assembled from drivers; the driver is a participant, not a component.
+- n: 7
+  title: Server → sync.Mutex
+  kind: code
+  lang: go
+  domain: Networking
+  level: 2
+  meta:
+  - Code
+  - Go
+  - Networking
+  q: |-
+    A TCP server guards its connection map with a mutex.
+
+    ```go
+    type Server struct {
+        mu    sync.Mutex
+        conns map[string]*Conn
+    }
+
+    func (s *Server) add(id string, c *Conn) {
+        s.mu.Lock()
+        defer s.mu.Unlock()
+        s.conns[id] = c
+    }
+    ```
+  answer: 4
+  notes:
+  - label: Deciding clue
+    text: mu is a value field, not a pointer, so the mutex is physically laid out inside the Server's memory.
+  - label: Why
+    text: 'A value field is created with the struct, destroyed with it, and can''t be shared. Copying a Server would copy the mutex, which go vet flags as a bug. That is composition in its purest form: the part is literally inside the whole.'
+  - label: Tempting wrong turn
+    text: 'Dependency is tempting because the mutex is "just used" for locking. But it''s stored as state: the strict test says it is still held after every method returns, so it isn''t a dependency.'
+- n: 8
+  title: Target group → EC2 instance
+  kind: scenario
+  domain: AWS
+  level: 2
+  meta:
+  - Scenario
+  - AWS
+  q: An ALB target group lists the instances that receive traffic. Deleting the target group doesn't terminate any instance, and one instance can be registered in several target groups.
+  answer: 3
+  also:
+  - i: 1
+    note: Defensible if you see the target group as a routing rule that references instances rather than a collection made of them. Most designers read "group" as a whole made of members, hence aggregation.
+  notes:
+  - label: Deciding clue
+    text: A group made of members that exist independently and can belong to several groups.
+  - label: Why
+    text: The target group is defined by its membership (whole–part), yet its members outlive it and are shared. Membership collections like this are the canonical aggregation.
+  - label: Tempting wrong turn
+    text: Composition is tempting because the target group "contains" instances. But terminating the group never terminates the instance.
+- n: 9
+  title: Scheduler → Clock
+  kind: code
+  lang: go
+  domain: Job scheduling
+  level: 1
+  meta:
+  - Code
+  - Go
+  - Job scheduling
+  q: |-
+    A scheduler decides which jobs are due.
+
+    ```go
+    type Scheduler struct {
+        jobs []Job
+    }
+
+    func (s *Scheduler) Due(c Clock) []Job {
+        now := c.Now()
+        var due []Job
+        for _, j := range s.jobs {
+            if !j.NextRun.After(now) {
+                due = append(due, j)
+            }
+        }
+        return due
+    }
+    ```
+  answer: 0
+  notes:
+  - label: Deciding clue
+    text: Clock appears only as a parameter; the struct has no Clock field.
+  - label: Why
+    text: After `Due()` returns, the scheduler holds no reference to the clock. The link exists only for the duration of one call.
+  - label: Tempting wrong turn
+    text: Association is tempting because the scheduler clearly needs a clock to function. Needing something isn't the same as keeping it.
+- n: 10
+  title: Order → OrderLine
+  kind: schema
+  lang: sql
+  domain: E-commerce
+  level: 1
+  meta:
+  - Schema
+  - SQL
+  - E-commerce
+  q: |-
+    What relationship does this schema encode?
+
+    ```sql
+    CREATE TABLE order_lines (
+      order_id  BIGINT NOT NULL
+                REFERENCES orders(id) ON DELETE CASCADE,
+      line_no   INT    NOT NULL,
+      sku       TEXT   NOT NULL,
+      qty       INT    NOT NULL,
+      PRIMARY KEY (order_id, line_no)
+    );
+    ```
+  answer: 4
+  notes:
+  - label: Deciding clue
+    text: The parent's id is part of the child's primary key, the FK is NOT NULL, and deletes cascade.
+  - label: Why
+    text: A line's identity literally includes its order ("order 42, line 3"). NOT NULL rules out orphan lines, and ON DELETE CASCADE means lines die with their order. This is the textbook relational shape of composition.
+  - label: Tempting wrong turn
+    text: Association class is tempting because `order_lines` carries extra columns. But it hangs off one parent, not between two independent entities, so it's a part, not a link.
+- n: 11
+  title: Department → Employee
+  kind: code
+  lang: python
+  domain: HR
+  level: 1
+  meta:
+  - Code
+  - Python
+  - HR
+  q: |-
+    When a department is dissolved, its employees are moved to other departments.
+
+    ```python
+    class Department:
+        def __init__(self, name: str, employees: list[Employee]):
+            self.name = name
+            self.employees = employees
+
+    hr  = Department("HR", [alice, bob])
+    eng = Department("Platform", [carol])
+    ```
+  answer: 3
+  also:
+  - i: 1
+    note: 'Accepted: membership collections sit on the blurry aggregation/association line. Aggregation is preferred because the department is defined by its members.'
+  notes:
+  - label: Deciding clue
+    text: Employees are created outside, passed in, and survive the department.
+  - label: Why
+    text: 'A department is made up of its people (whole–part), but employees outlive it and can move between departments. Passed-in parts that survive the whole: aggregation.'
+  - label: Tempting wrong turn
+    text: Association is tempting, and the line between the two is genuinely blurry. The reason to prefer aggregation here is that the department is defined by its members, not merely acquainted with them.
+- n: 12
+  title: OrderPrinter → Formatter
+  kind: refactor
+  domain: Receipts
+  level: 1
+  meta:
+  - Refactor
+  - Receipts
+  q: OrderPrinter has a field `self.formatter`, but only `print_receipt()` uses it. You refactor to `print_receipt(self, order, formatter)` and delete the field. What is the relationship after the refactor?
+  answer: 0
+  notes:
+  - label: Deciding clue
+    text: The field is gone; the formatter now arrives as a parameter.
+  - label: Why
+    text: Moving a single-use field into a parameter turns an association into a dependency, which means less state, fewer lifecycle questions, and looser coupling. This is a common and healthy refactor.
+  - label: Tempting wrong turn
+    text: Association is the before-state. The question is about after the refactor.
+- n: 13
+  title: Car → Engine
+  kind: code
+  lang: cpp
+  domain: Automotive
+  level: 2
+  meta:
+  - Code
+  - C++
+  - Automotive
+  q: |-
+    A simulation models a car's engine.
+
+    ```cpp
+    class Car {
+        std::unique_ptr<Engine> engine_;
+    public:
+        Car() : engine_(std::make_unique<Engine>()) {}
+        void start() { engine_->ignite(); }
+    };
+    ```
+  answer: 4
+  notes:
+  - label: Deciding clue
+    text: 'std::`unique_ptr` created in the constructor: exactly one owner, freed in Car''s destructor.'
+  - label: Why
+    text: '`unique_ptr` encodes exclusive ownership in the type system. The car makes its own engine, nobody else can hold an owning pointer to it, and it''s destroyed when the car is. Even if the constructor took a `unique_ptr<Engine>` by move, it would still be composition, since ownership transfers and stays exclusive.'
+  - label: Tempting wrong turn
+    text: Dependency is tempting because `start()` merely calls the engine. The call is incidental; the stored `unique_ptr` is what defines the relationship.
+- n: 14
+  title: Order → Address
+  kind: context
+  domain: E-commerce
+  level: 2
+  meta:
+  - Context flip
+  - E-commerce
+  q: The order stores `address_id` pointing at a row in the customer's address book. If the customer edits that address, the order now shows the new address.
+  answer: 1
+  notes:
+  - label: Deciding clue
+    text: The order references an independent, shared record by id.
+  - label: Why
+    text: 'The address book entry exists independently and can be referenced by many orders, so this is a stored link, not ownership. (It''s also a real-world bug: past orders would silently change their delivery address.)'
+  - label: Tempting wrong turn
+    text: Aggregation is tempting because an order "has" an address. The address isn't part of the order here; the order just points at it.
+- n: 15
+  title: Report → ObjectMapper
+  kind: code
+  lang: java
+  domain: Reporting
+  level: 2
+  meta:
+  - Code
+  - Java
+  - Reporting
+  q: |-
+    A report serializes itself to JSON.
+
+    ```java
+    class Report {
+        private final List<Row> rows;
+
+        String toJson() throws JsonProcessingException {
+            return new ObjectMapper().writeValueAsString(rows);
+        }
+    }
+    ```
+  answer: 0
+  notes:
+  - label: Deciding clue
+    text: The ObjectMapper is a temporary created inside one method and dropped when it returns.
+  - label: Why
+    text: Creating an object isn't owning it. Composition needs the created thing to be held as part of the whole's state. Here nothing references the mapper after `toJson()` returns.
+  - label: Tempting wrong turn
+    text: Composition is tempting because Report calls `new ObjectMapper()` itself. "Created inside" is a composition tell only when the result is stored.
+- n: 16
+  title: Server → Channel
+  kind: scenario
+  domain: Discord
+  level: 1
+  meta:
+  - Scenario
+  - Discord
+  q: Channels are created inside a Discord server, can't be moved to another server, and are deleted when the server is deleted.
+  answer: 4
+  notes:
+  - label: Deciding clue
+    text: Created inside, never moves, dies with the server.
+  - label: Why
+    text: Whole–part, the part can't outlive the whole, and it can't be shared. All three composition signals are present.
+  - label: Tempting wrong turn
+    text: Aggregation would apply only if channels could survive the server or be shared with another server.
+- n: 17
+  title: Checkout → PricingStrategy
+  kind: code
+  lang: python
+  domain: Checkout
+  level: 2
+  meta:
+  - Code
+  - Python
+  - Checkout
+  q: |-
+    A checkout receives its pricing strategy through the constructor. The same HourlyPricing instance is shared by every checkout.
+
+    ```python
+    class Checkout:
+        def __init__(self, pricing: PricingStrategy):
+            self.pricing = pricing
+
+        def total(self, cart: Cart) -> Money:
+            return self.pricing.price(cart)
+    ```
+  answer: 1
+  also:
+  - i: 3
+    note: Also accepted. Drawing ◇ signals "pluggable, shareable component", and many diagrams draw strategies that way. The stricter reading is that a pricing policy isn't a structural part of a checkout.
+  notes:
+  - label: Deciding clue
+    text: The strategy is now stored in a field, so the link outlives every method call.
+  - label: Why
+    text: 'Compared with passing the strategy into each call, the link is now stored, which moves it from dependency to association. Is a pricing policy a part of a checkout? Usually no: it''s a collaborator the checkout holds, so plain association is the stricter answer.'
+  - label: Tempting wrong turn
+    text: Composition is tempting because it's set in the constructor. The instance is shared across checkouts, which rules out exclusive ownership.
+- n: 18
+  title: VendingMachine → Coin
+  kind: scenario
+  domain: Vending machine
+  level: 2
+  meta:
+  - Scenario
+  - Vending machine
+  q: '`insert(coin)` checks the coin''s diameter and weight, adds its value to an integer balance, and drops the physical coin into the cash box. The VendingMachine object never stores Coin objects.'
+  answer: 0
+  notes:
+  - label: Deciding clue
+    text: Only the coin's value survives as an int; the Coin object isn't kept.
+  - label: Why
+    text: The machine reads the coin during `insert()` and then forgets it. Keeping a number derived from B isn't keeping B.
+  - label: Tempting wrong turn
+    text: Aggregation is tempting because the physical machine "contains" coins in its cash box. Model the software objects, not the hardware.
+- n: 19
+  title: TicTacToe → Board
+  kind: code
+  lang: ts
+  domain: Tic-tac-toe
+  level: 1
+  meta:
+  - Code
+  - TypeScript
+  - Tic-tac-toe
+  q: |-
+    A game class sets up its board.
+
+    ```typescript
+    class TicTacToe {
+      private readonly board = new Board(3);
+      private current: Player;
+
+      constructor(private readonly players: [Player, Player]) {
+        this.current = players[0];
+      }
+    }
+    ```
+  answer: 4
+  notes:
+  - label: Deciding clue
+    text: Created inside as a private readonly field, never exposed or accepted from outside.
+  - label: Why
+    text: Each game builds its own board, no other game can share it, and it's discarded with the game. Note the contrast with players, which are passed in and outlive the game.
+  - label: Tempting wrong turn
+    text: 'Aggregation is tempting by analogy with the players. Look at who constructs each part: the game builds the board but receives the players.'
+- n: 20
+  title: Car → Engine
+  kind: context
+  domain: Manufacturing
+  level: 2
+  meta:
+  - Context flip
+  - Manufacturing
+  q: At an engine-refurbishing shop, engines are tracked by serial number, pulled out of scrapped cars, rebuilt, and installed in other cars.
+  answer: 3
+  notes:
+  - label: Deciding clue
+    text: The engine is still a part of a car, but it outlives cars and moves between them.
+  - label: Why
+    text: Whole–part remains true while it's installed, but the part has its own identity and lifetime. Swap the domain and the answer flips from composition to aggregation.
+  - label: Tempting wrong turn
+    text: Composition is the answer at an automaker (#34). What changed is only the lifecycle rule, and that's the whole point.
+- n: 21
+  title: Order → uuid module
+  kind: code
+  lang: python
+  domain: Orders
+  level: 2
+  meta:
+  - Code
+  - Python
+  - Orders
+  q: |-
+    An order generates its own id.
+
+    ```python
+    import uuid
+
+    class Order:
+        def __init__(self, items: list[Item]):
+            self.id = str(uuid.uuid4())
+            self.items = items
+    ```
+  answer: 0
+  notes:
+  - label: Deciding clue
+    text: Only the generated string is stored; nothing from the uuid module is kept.
+  - label: Why
+    text: The order calls `uuid4()` once and keeps the result as a plain str. The order never holds the generator itself, so after `__init__` returns there's no link to it.
+  - label: Tempting wrong turn
+    text: Association is tempting because something from the call is stored. Storing a value produced by B is not storing B.
+- n: 22
+  title: Pod → Container
+  kind: scenario
+  domain: Kubernetes
+  level: 2
+  meta:
+  - Scenario
+  - Kubernetes
+  q: Containers are declared in the pod spec, share the pod's network namespace, start with the pod, and are gone when the pod is deleted. You can't move a running container into another pod.
+  answer: 4
+  notes:
+  - label: Deciding clue
+    text: Declared inside the pod, share its namespaces, and die with it.
+  - label: Why
+    text: A container's runtime existence is entirely inside one pod. Whole–part, no independent lifetime, no sharing.
+  - label: Tempting wrong turn
+    text: Aggregation is tempting because the same image can run in many pods. The image is shared; the container instance is not. Don't confuse a template with an instance.
+- n: 23
+  title: Handler → Store
+  kind: code
+  lang: go
+  domain: HTTP API
+  level: 2
+  meta:
+  - Code
+  - Go
+  - HTTP API
+  q: |-
+    An HTTP handler gets its storage through a constructor.
+
+    ```go
+    type Handler struct {
+        store Store
+        log   *slog.Logger
+    }
+
+    func NewHandler(store Store, log *slog.Logger) *Handler {
+        return &Handler{store: store, log: log}
+    }
+
+    func (h *Handler) Get(w http.ResponseWriter, r *http.Request) {
+        v, err := h.store.Get(r.PathValue("key"))
+        // ...
+    }
+    ```
+  answer: 1
+  also:
+  - i: 0
+    note: 'Accepted as a team convention: many diagrams draw injected service collaborators as dashed dependencies to keep only domain relationships solid. Say which convention you''re using.'
+  notes:
+  - label: Deciding clue
+    text: The store is kept in a field after the constructor returns.
+  - label: Why
+    text: 'By the strict test the handler still holds the store after any method returns, so it''s an association. It isn''t whole–part: the store is shared infrastructure the handler talks to.'
+  - label: Tempting wrong turn
+    text: Dependency feels right because "it's just a service". The strict test doesn't care whether B is data or behavior.
+- n: 24
+  title: EntryGate → Vehicle
+  kind: scenario
+  domain: Parking lot
+  level: 1
+  meta:
+  - Scenario
+  - Parking lot
+  q: '`EntryGate.scan(vehicle)` reads the plate, asks the lot for a free spot, prints a ticket and returns it. The gate keeps no record of vehicles.'
+  answer: 0
+  notes:
+  - label: Deciding clue
+    text: The vehicle is only a parameter of `scan()`; the gate stores nothing about it.
+  - label: Why
+    text: The link lasts for a single call. Whatever needs to remember the vehicle (the ticket) is a different class with its own association.
+  - label: Tempting wrong turn
+    text: Association is tempting because gates and vehicles interact constantly. Frequent interaction still isn't stored state.
+- n: 25
+  title: Node → Node (via next)
+  kind: code
+  lang: rust
+  domain: Data structures
+  level: 3
+  meta:
+  - Code
+  - Rust
+  - Data structures
+  q: |-
+    A singly linked list in Rust.
+
+    ```rust
+    struct Node {
+        val: i32,
+        next: Option<Box<Node>>,
+    }
+    ```
+  answer: 4
+  notes:
+  - label: Deciding clue
+    text: '`Box<T>` means unique ownership: dropping a node drops its entire tail.'
+  - label: Why
+    text: Rust makes the ownership explicit. Each node exclusively owns the next one, nothing else can own it, and it's freed when its owner is. Compare with the Python version (#26), where the code can't express ownership at all.
+  - label: Tempting wrong turn
+    text: Association is the answer for the Python version (#26). Here the type system says "owns", not "points to".
+- n: 26
+  title: Directory → File (inode)
+  kind: scenario
+  domain: Linux filesystems
+  level: 3
+  meta:
+  - Scenario
+  - Linux filesystems
+  q: On ext4, a file (an inode) can have several hard links in different directories. Removing one directory entry only frees the file when its link count reaches zero.
+  answer: 3
+  notes:
+  - label: Deciding clue
+    text: The same file can be shared by several directories and outlives any one of them.
+  - label: Why
+    text: 'A directory is a collection of entries (whole–part), but the underlying file is reference-counted and shared. Shared parts that survive the whole: aggregation.'
+  - label: Tempting wrong turn
+    text: Composition is the right answer for a simple LLD file system with no hard links. Real filesystems are more permissive than interview ones.
+- n: 27
+  title: VehicleFactory → Car
+  kind: code
+  lang: python
+  domain: Parking lot
+  level: 2
+  meta:
+  - Code
+  - Python
+  - Parking lot
+  q: |-
+    A factory builds vehicles from a type string.
+
+    ```python
+    class VehicleFactory:
+        def create(self, kind: str) -> Vehicle:
+            if kind == "car":
+                return Car()
+            if kind == "truck":
+                return Truck()
+            raise ValueError(kind)
+    ```
+  answer: 0
+  notes:
+  - label: Deciding clue
+    text: The factory creates a Car and immediately hands it to the caller; it keeps nothing.
+  - label: Why
+    text: 'This is the UML «create» flavor of dependency: the factory knows how to construct Car, but the relationship ends at return. The caller owns the result.'
+  - label: Tempting wrong turn
+    text: Composition is tempting because the factory calls `Car()`. Composition requires the creator to keep and own what it makes.
+- n: 28
+  title: Order → ShippingAddress
+  kind: context
+  domain: E-commerce
+  level: 2
+  meta:
+  - Context flip
+  - E-commerce
+  q: At checkout, the order copies the customer's shipping address into its own ShippingAddress value object. If the customer later edits their address book, existing orders don't change.
+  answer: 4
+  notes:
+  - label: Deciding clue
+    text: The order holds its own private snapshot that lives and dies with it.
+  - label: Why
+    text: The snapshot belongs to exactly one order and is never shared. It disappears with the order. Snapshotting is also the correct business choice, because a shipped order must keep the address it shipped to.
+  - label: Tempting wrong turn
+    text: Association is the answer when the order instead stores a reference to the address-book row (#33). A copy owned by the order is a part, not a link to the address book.
+- n: 29
+  title: Worker → context.Context
+  kind: code
+  lang: go
+  domain: Go concurrency
+  level: 3
+  meta:
+  - Code
+  - Go
+  - Go concurrency
+  q: |-
+    A worker keeps the context it was created with.
+
+    ```go
+    type Worker struct {
+        ctx  context.Context
+        jobs chan Job
+    }
+
+    func NewWorker(ctx context.Context) *Worker {
+        return &Worker{ctx: ctx, jobs: make(chan Job)}
+    }
+    ```
+  answer: 1
+  notes:
+  - label: Deciding clue
+    text: The context is stored in a struct field, so it outlives the constructor call.
+  - label: Why
+    text: 'Stored, not whole–part: association. This is exactly why the context package docs say not to store contexts in structs and to pass ctx as the first parameter instead. They want it to stay a request-scoped dependency, not become a long-lived association.'
+  - label: Tempting wrong turn
+    text: Dependency is what idiomatic Go would give you, but this code stores it, so the code is an association.
+- n: 30
+  title: Tree → Blob
+  kind: scenario
+  domain: Git internals
+  level: 3
+  meta:
+  - Scenario
+  - Git internals
+  q: Git stores file contents as blobs addressed by their hash. Two commits whose trees contain an identical README point at the same blob. When a tree becomes unreachable and git gc collects it, any blob still reachable from other trees is kept.
+  answer: 3
+  notes:
+  - label: Deciding clue
+    text: Content-addressed blobs are shared between trees and outlive any one tree.
+  - label: Why
+    text: 'A tree is made up of its entries (whole–part), but deduplication means blobs are shared and independently live. Shared, surviving parts: aggregation.'
+  - label: Tempting wrong turn
+    text: Composition is tempting because a tree is "just" its files. Dedup is precisely what breaks exclusive ownership.
+- n: 31
+  title: Account → InsufficientFundsException
+  kind: code
+  lang: java
+  domain: Banking
+  level: 1
+  meta:
+  - Code
+  - Java
+  - Banking
+  q: |-
+    A withdrawal can fail.
+
+    ```java
+    class Account {
+        private long balance;
+
+        void withdraw(long amount) {
+            if (amount > balance)
+                throw new InsufficientFundsException(balance, amount);
+            balance -= amount;
+        }
+    }
+    ```
+  answer: 0
+  notes:
+  - label: Deciding clue
+    text: The exception is created and thrown, never stored.
+  - label: Why
+    text: 'Thrown exceptions are a classic dependency: Account''s code is coupled to the exception type, but no Account instance ever holds one.'
+  - label: Tempting wrong turn
+    text: Inheritance is tempting if you're thinking about the exception's own superclass. The question is about Account → exception, and Account doesn't extend it.
+- n: 32
+  title: Car → Engine
+  kind: context
+  domain: Manufacturing
+  level: 2
+  meta:
+  - Context flip
+  - Manufacturing
+  q: In an automaker's build system, an engine is assembled into exactly one car, isn't tracked as a separate asset afterward, and is scrapped with the car.
+  answer: 4
+  notes:
+  - label: Deciding clue
+    text: In this domain the engine has no life outside its car.
+  - label: Why
+    text: 'Same two classes, but the domain rules decide: exclusive, not tracked separately, destroyed with the whole.'
+  - label: Tempting wrong turn
+    text: 'Aggregation is right for a different domain (see the refurbishing-shop version, #35). Never classify from the class names alone.'
+- n: 33
+  title: StockTicker → Subscriber
+  kind: code
+  lang: python
+  domain: Observer pattern
+  level: 3
+  meta:
+  - Code
+  - Python
+  - Observer pattern
+  q: |-
+    A ticker notifies subscribers without keeping them alive.
+
+    ```python
+    import weakref
+
+    class StockTicker:
+        def __init__(self):
+            self._subs: "weakref.WeakSet[Subscriber]" = weakref.WeakSet()
+
+        def subscribe(self, s: Subscriber):
+            self._subs.add(s)
+
+        def publish(self, price: float):
+            for s in self._subs:
+                s.on_price(price)
+    ```
+  answer: 1
+  notes:
+  - label: Deciding clue
+    text: 'Subscribers are stored, but weakly: the ticker knows them without owning them.'
+  - label: Why
+    text: 'A weak reference is the code saying "I want to know you while you exist, but your lifetime isn''t my business." Stored link, not whole–part: association. The subject–observer link in the Observer pattern is an association.'
+  - label: Tempting wrong turn
+    text: Aggregation is tempting because subscribers are kept in a collection. Being in a collection doesn't make them parts of the ticker.
+- n: 34
+  title: Image → Layer
+  kind: scenario
+  domain: Docker
+  level: 2
+  meta:
+  - Scenario
+  - Docker
+  q: Image layers are content-addressed. Ten images built FROM the same base share that base's layers on disk, and docker rmi removes only the layers no other image uses.
+  answer: 3
+  notes:
+  - label: Deciding clue
+    text: Layers are shared across images and survive the removal of any one image.
+  - label: Why
+    text: An image is composed of a stack of layers (whole–part), but those layers are shared and reference-counted. Aggregation.
+  - label: Tempting wrong turn
+    text: Composition would hold only if each image had private layers that vanished with it.
+- n: 35
+  title: Checkout → PricingStrategy
+  kind: code
+  lang: python
+  domain: Checkout
+  level: 1
+  meta:
+  - Code
+  - Python
+  - Checkout
+  q: |-
+    A checkout is handed a pricing strategy on each call.
+
+    ```python
+    class Checkout:
+        def total(self, cart: Cart, pricing: PricingStrategy) -> Money:
+            return pricing.price(cart)
+    ```
+  answer: 0
+  notes:
+  - label: Deciding clue
+    text: The strategy is a parameter of one method and isn't stored.
+  - label: Why
+    text: Each call can pass a different strategy, and the checkout remembers none of them.
+  - label: Tempting wrong turn
+    text: Realization is tempting because a strategy pattern is involved. Realization is the arrow from a concrete strategy to the interface, not from the user of the strategy.
+- n: 36
+  title: Folder → File
+  kind: scenario
+  domain: 'LLD: file system'
+  level: 1
+  meta:
+  - Scenario
+  - 'LLD: file system'
+  q: In your interview design of an in-memory file system, every file has exactly one parent folder, and deleting a folder recursively deletes everything inside it.
+  answer: 4
+  notes:
+  - label: Deciding clue
+    text: Exactly one parent, and recursive delete.
+  - label: Why
+    text: 'These rules make the folder the sole owner: whole–part, no sharing, and the part can''t outlive the whole. This recursive composition is the Composite pattern (Folder contains Files and Folders).'
+  - label: Tempting wrong turn
+    text: Aggregation would apply if you added hard links or let files survive their folder.
+- n: 37
+  title: _Node → _Node (via next)
+  kind: code
+  lang: python
+  domain: Data structures
+  level: 3
+  meta:
+  - Code
+  - Python
+  - Data structures
+  q: |-
+    A singly linked list in Python.
+
+    ```python
+    class _Node:
+        __slots__ = ("value", "next")
+        def __init__(self, value, next=None):
+            self.value = value
+            self.next = next
+
+    class LinkedList:
+        def __init__(self):
+            self._head = None
+
+        def push(self, value):
+            self._head = _Node(value, self._head)
+    ```
+  answer: 1
+  also:
+  - i: 4
+    note: Defensible if you model each node as owning the rest of the chain (that's literally what Rust's Option&lt;`Box<Node>`\> encodes). In a garbage-collected language, the list is the real owner.
+  notes:
+  - label: Deciding clue
+    text: The list owns the nodes; one node merely points at its neighbor.
+  - label: Why
+    text: 'Ownership lives at the LinkedList level: the list creates nodes, keeps them private, and they die with it (LinkedList ◆ \_Node). The next pointer is a stored navigation link between peers, a reflexive association.'
+  - label: Tempting wrong turn
+    text: 'Composition is tempting because the tail goes away with the node. What decides it here is that the design makes the list the owner and nothing states an exclusive-parent rule between nodes (compare #28, whose prompt states one).'
+- n: 38
+  title: Student ↔ Course
+  kind: scenario
+  domain: University
+  level: 1
+  meta:
+  - Scenario
+  - University
+  q: A student takes many courses and a course has many students. For each pairing you must store the semester and the final grade.
+  answer: 2
+  notes:
+  - label: Deciding clue
+    text: The link itself carries data (semester, grade).
+  - label: Why
+    text: 'A grade belongs neither to the student alone nor to the course alone; it belongs to the pairing. When the link has attributes, promote it to a class: Enrollment.'
+  - label: Tempting wrong turn
+    text: Association is right only if you never need data about the pairing itself.
+- n: 39
+  title: BinaryOp → Expr (left/right fields)
+  kind: code
+  lang: python
+  domain: Compilers
+  level: 3
+  meta:
+  - Code
+  - Python
+  - Compilers
+  q: |-
+    An AST node built by a parser. The parser builds every subtree fresh for exactly one parent and never reuses a node in two places; dropping a node drops its whole subtree.
+
+    ```python
+    class BinaryOp(Expr):
+        def __init__(self, op: str, left: Expr, right: Expr):
+            self.op, self.left, self.right = op, left, right
+
+    # inside the parser:
+    #   node = BinaryOp("+", self.parse_term(), self.parse_term())
+    ```
+  answer: 4
+  notes:
+  - label: Deciding clue
+    text: 'Domain rule: each child belongs to exactly one parent and dies with it, even though it''s passed into the constructor.'
+  - label: Why
+    text: '"Passed in vs. created inside" is a heuristic, not the definition. The lifecycle rules decide: exclusive parent, never shared, subtree dies with the node. That''s composition, and it''s the structure behind the Composite pattern.'
+  - label: Tempting wrong turn
+    text: Aggregation is tempting because the children arrive as constructor arguments. Don't let a code tell override explicit lifecycle rules. (Also note BinaryOp → Expr via the base class is inheritance; this question is about the left/right fields.)
+- n: 40
+  title: Branch → Commit
+  kind: scenario
+  domain: Git internals
+  level: 3
+  meta:
+  - Scenario
+  - Git internals
+  q: A branch is a named pointer to one commit, its tip. Deleting the branch doesn't delete the commit, and many branches can point at the same commit.
+  answer: 1
+  notes:
+  - label: Deciding clue
+    text: A branch points at a commit; it isn't made of commits.
+  - label: Why
+    text: 'Stored link: yes (the ref stores a commit hash). Whole–part: no. A branch is a movable label, not a container. So association.'
+  - label: Tempting wrong turn
+    text: Aggregation is tempting if you think of a branch as "containing its history". Structurally it holds one pointer; history is reached by walking commit parents.
+- n: 41
+  title: User ↔ Group
+  kind: schema
+  lang: sql
+  domain: Community app
+  level: 1
+  meta:
+  - Schema
+  - SQL
+  - Community app
+  q: |-
+    What does this table represent?
+
+    ```sql
+    CREATE TABLE memberships (
+      user_id   BIGINT REFERENCES users(id),
+      group_id  BIGINT REFERENCES groups(id),
+      role      TEXT        NOT NULL,   -- 'owner' | 'admin' | 'member'
+      joined_at TIMESTAMPTZ NOT NULL,
+      PRIMARY KEY (user_id, group_id)
+    );
+    ```
+  answer: 2
+  notes:
+  - label: Deciding clue
+    text: A join table with its own columns (role, `joined_at`).
+  - label: Why
+    text: 'A many-to-many join table that carries data is the relational form of an association class: Membership.'
+  - label: Tempting wrong turn
+    text: Association is right for a bare join table with only the two foreign keys.
+- n: 42
+  title: A → B
+  kind: notation
+  domain: UML
+  level: 1
+  meta:
+  - Notation
+  - UML
+  svg: <svg viewBox="0 0 360 112" role="img" aria-label="A class diagram shows a solid line from A to B with a filled diamond at A&#x27;s end."><rect x="14" y="62" width="76" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.4"/><text class="mono" x="52" y="87" text-anchor="middle" style="font-size:15px">A</text><rect x="270" y="62" width="76" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.4"/><text class="mono" x="308" y="87" text-anchor="middle" style="font-size:15px">B</text><polygon points="92,82 106,74 120,82 106,90" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><line x1="120" y1="82" x2="268" y2="82" stroke="currentColor" stroke-width="1.6"/></svg>
+  q: A class diagram shows a solid line from A to B with a filled diamond at A's end.
+  answer: 4
+  notes:
+  - label: Deciding clue
+    text: Filled diamond on the whole's end.
+  - label: Why
+    text: '◆ means composition: A is the whole, B is a part that lives and dies with it. The diamond always sits on the whole side.'
+  - label: Tempting wrong turn
+    text: Aggregation uses the same shape but hollow (◇).
+- n: 43
+  title: Node → Node (via parent field)
+  kind: code
+  lang: python
+  domain: Trees
+  level: 3
+  meta:
+  - Code
+  - Python
+  - Trees
+  q: |-
+    A tree node keeps a pointer back to its parent.
+
+    ```python
+    class Node:
+        def __init__(self, parent: "Node | None" = None):
+            self.parent = parent
+            self.children: list[Node] = []
+
+        def add_child(self) -> "Node":
+            child = Node(parent=self)
+            self.children.append(child)
+            return child
+    ```
+  answer: 1
+  notes:
+  - label: Deciding clue
+    text: 'It''s a back-reference: a child knows its parent but certainly doesn''t own it.'
+  - label: Why
+    text: The children list is composition (the node creates its children and they die with it). The parent field points the other way, and back-pointers never own. A stored link that isn't whole–part from the child's side is an association.
+  - label: Tempting wrong turn
+    text: Composition is tempting because you see composition in the same class. One class can take part in several relationships; judge each field separately.
+- n: 44
+  title: Cart ↔ Product
+  kind: scenario
+  domain: E-commerce
+  level: 1
+  meta:
+  - Scenario
+  - E-commerce
+  q: A cart can hold many products, a product can be in many carts, and for each pairing you must store the quantity and the price at the moment it was added.
+  answer: 2
+  notes:
+  - label: Deciding clue
+    text: Quantity and captured price describe the pairing, not either side.
+  - label: Why
+    text: This is CartItem. The cart then composes its CartItems, and each CartItem associates with one Product.
+  - label: Tempting wrong turn
+    text: Aggregation is tempting because a cart "holds" products. A product can't hold "quantity 3 in Tisan's cart"; something in between has to.
+- n: 45
+  title: Library → Book
+  kind: schema
+  lang: sql
+  domain: Library
+  level: 1
+  meta:
+  - Schema
+  - SQL
+  - Library
+  q: |-
+    What does this schema encode?
+
+    ```sql
+    CREATE TABLE books (
+      id          BIGINT PRIMARY KEY,
+      title       TEXT NOT NULL,
+      library_id  BIGINT NULL
+                  REFERENCES libraries(id) ON DELETE SET NULL
+    );
+    ```
+  answer: 3
+  also:
+  - i: 1
+    note: 'Accepted: the schema alone only proves an optional, non-cascading link (a `manager_id` column looks identical). The whole–part reading comes from the domain: a library is its collection.'
+  notes:
+  - label: Deciding clue
+    text: 'A nullable FK with ON DELETE SET NULL: the book survives its library.'
+  - label: Why
+    text: The book belongs to a library (whole–part in this domain) but keeps living, unshelved, when the library is deleted. SET NULL is consistent with aggregation; CASCADE would signal composition.
+  - label: Tempting wrong turn
+    text: Composition would use NOT NULL with CASCADE.
+- n: 46
+  title: A → B
+  kind: notation
+  domain: UML
+  level: 1
+  meta:
+  - Notation
+  - UML
+  svg: <svg viewBox="0 0 360 112" role="img" aria-label="A class diagram shows a dashed line from A to B with an open arrowhead at B."><rect x="14" y="62" width="76" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.4"/><text class="mono" x="52" y="87" text-anchor="middle" style="font-size:15px">A</text><rect x="270" y="62" width="76" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.4"/><text class="mono" x="308" y="87" text-anchor="middle" style="font-size:15px">B</text><line x1="92" y1="82" x2="266" y2="82" stroke="currentColor" stroke-width="1.6" stroke-dasharray="6 4"/><path d="M254 73 L268 82 L254 91" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+  q: A class diagram shows a dashed line from A to B with an open arrowhead at B.
+  answer: 0
+  notes:
+  - label: Deciding clue
+    text: Dashed line, open arrowhead.
+  - label: Why
+    text: The dashed open arrow means A uses B somewhere in its code (a parameter, local variable, return type or static call) but doesn't keep it.
+  - label: Tempting wrong turn
+    text: Realization is also dashed, but ends in a hollow triangle rather than an open arrowhead.
+- n: 47
+  title: Show ↔ Seat
+  kind: scenario
+  domain: Movie ticketing
+  level: 2
+  meta:
+  - Scenario
+  - Movie ticketing
+  q: A seat (say, A9) physically belongs to a screen. Each show on that screen needs its own status for every seat (available, locked, booked) and its own price.
+  answer: 2
+  notes:
+  - label: Deciding clue
+    text: Status and price belong to (show, seat), not to the seat or the show alone.
+  - label: Why
+    text: 'This is ShowSeat: per-show inventory. Screen ◆ Seat is composition (the physical seat), while ShowSeat is the association class between Show and Seat, and it''s what gets locked during booking.'
+  - label: Tempting wrong turn
+    text: Composition is right for Screen → Seat, which is a different pair.
+- n: 48
+  title: Book ↔ Author
+  kind: schema
+  lang: sql
+  domain: Publishing
+  level: 1
+  meta:
+  - Schema
+  - SQL
+  - Publishing
+  q: |-
+    What does this table represent?
+
+    ```sql
+    CREATE TABLE book_authors (
+      book_id   BIGINT REFERENCES books(id),
+      author_id BIGINT REFERENCES authors(id),
+      PRIMARY KEY (book_id, author_id)
+    );
+    ```
+  answer: 1
+  notes:
+  - label: Deciding clue
+    text: 'A bare join table: two foreign keys and nothing else.'
+  - label: Why
+    text: Many-to-many with no data on the link is a plain association. Neither side is part of the other, and deleting a book doesn't delete its authors.
+  - label: Tempting wrong turn
+    text: Association class needs attributes on the link (author order or a royalty split, say). There are none here.
+- n: 49
+  title: A → B
+  kind: notation
+  domain: UML
+  level: 1
+  meta:
+  - Notation
+  - UML
+  svg: <svg viewBox="0 0 360 112" role="img" aria-label="A class diagram shows a solid line from A to B with a hollow diamond at A&#x27;s end."><rect x="14" y="62" width="76" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.4"/><text class="mono" x="52" y="87" text-anchor="middle" style="font-size:15px">A</text><rect x="270" y="62" width="76" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.4"/><text class="mono" x="308" y="87" text-anchor="middle" style="font-size:15px">B</text><polygon points="92,82 106,74 120,82 106,90" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><line x1="120" y1="82" x2="268" y2="82" stroke="currentColor" stroke-width="1.6"/></svg>
+  q: A class diagram shows a solid line from A to B with a hollow diamond at A's end.
+  answer: 3
+  notes:
+  - label: Deciding clue
+    text: Hollow diamond on the whole's end.
+  - label: Why
+    text: '◇ means aggregation: A is a whole made of B parts, but B can outlive A or be shared.'
+  - label: Tempting wrong turn
+    text: 'Composition is the filled version. A quick way to remember: filled means fully owned.'
+- n: 50
+  title: Admin → User
+  kind: schema
+  lang: sql
+  domain: SaaS accounts
+  level: 2
+  meta:
+  - Schema
+  - SQL
+  - SaaS accounts
+  q: |-
+    What object-model relationship does this table implement?
+
+    ```sql
+    CREATE TABLE users (
+      id          BIGINT PRIMARY KEY,
+      type        TEXT NOT NULL CHECK (type IN ('member', 'admin')),
+      email       TEXT NOT NULL,
+      admin_level INT  NULL   -- only set when type = 'admin'
+    );
+    ```
+  answer: 5
+  notes:
+  - label: Deciding clue
+    text: A type discriminator plus subtype-only columns in one table.
+  - label: Why
+    text: 'This is single-table inheritance: Admin is a kind of User with extra fields. ORMs map exactly this shape to a subclass.'
+  - label: Tempting wrong turn
+    text: Composition or association would need a second table or a foreign key; there's no relationship between two rows here, only between two types.
+- n: 51
+  title: A → B
+  kind: notation
+  domain: UML
+  level: 1
+  meta:
+  - Notation
+  - UML
+  svg: <svg viewBox="0 0 360 112" role="img" aria-label="A class diagram shows a dashed line from A to B ending in a hollow triangle at B."><rect x="14" y="62" width="76" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.4"/><text class="mono" x="52" y="87" text-anchor="middle" style="font-size:15px">A</text><rect x="270" y="62" width="76" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.4"/><text class="mono" x="308" y="87" text-anchor="middle" style="font-size:15px">B</text><line x1="92" y1="82" x2="252" y2="82" stroke="currentColor" stroke-width="1.6" stroke-dasharray="6 4"/><polygon points="252,72 268,82 252,92" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+  q: A class diagram shows a dashed line from A to B ending in a hollow triangle at B.
+  answer: 6
+  notes:
+  - label: Deciding clue
+    text: 'Dashed line, hollow triangle: A implements B''s contract.'
+  - label: Why
+    text: 'Realization: B is an interface (or protocol or trait) and A promises its behavior without inheriting an implementation.'
+  - label: Tempting wrong turn
+    text: Inheritance uses a solid line. Dashed means a contract, solid means a real superclass.
+- n: 52
+  title: Order → Customer
+  kind: schema
+  lang: sql
+  domain: E-commerce
+  level: 2
+  meta:
+  - Schema
+  - SQL
+  - E-commerce
+  q: |-
+    What does this schema encode?
+
+    ```sql
+    CREATE TABLE orders (
+      id           BIGINT PRIMARY KEY,
+      customer_id  BIGINT NOT NULL
+                   REFERENCES customers(id) ON DELETE RESTRICT,
+      placed_at    TIMESTAMPTZ NOT NULL
+    );
+    ```
+  answer: 1
+  notes:
+  - label: Deciding clue
+    text: Every order must reference a customer, but neither is part of the other.
+  - label: Why
+    text: NOT NULL says the link is mandatory; RESTRICT says you can't delete a customer who has orders. A customer isn't a part of an order. Orders are also kept as records rather than dying with the customer. Mandatory doesn't mean owned.
+  - label: Tempting wrong turn
+    text: Composition is tempting because of NOT NULL. Composition is about cascading lifetime, and RESTRICT explicitly refuses to cascade.
+- n: 53
+  title: A → B
+  kind: notation
+  domain: UML
+  level: 1
+  meta:
+  - Notation
+  - UML
+  svg: <svg viewBox="0 0 360 112" role="img" aria-label="A class diagram shows a solid line from A to B ending in a hollow triangle at B."><rect x="14" y="62" width="76" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.4"/><text class="mono" x="52" y="87" text-anchor="middle" style="font-size:15px">A</text><rect x="270" y="62" width="76" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.4"/><text class="mono" x="308" y="87" text-anchor="middle" style="font-size:15px">B</text><line x1="92" y1="82" x2="252" y2="82" stroke="currentColor" stroke-width="1.6"/><polygon points="252,72 268,82 252,92" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+  q: A class diagram shows a solid line from A to B ending in a hollow triangle at B.
+  answer: 5
+  notes:
+  - label: Deciding clue
+    text: Solid line, hollow triangle pointing at the parent.
+  - label: Why
+    text: 'This is generalization: A is a kind of B, and the triangle points at the superclass.'
+  - label: Tempting wrong turn
+    text: Realization is the dashed version of the same arrow.
+- n: 54
+  title: Post → Comment
+  kind: schema
+  lang: sql
+  domain: Blog
+  level: 2
+  meta:
+  - Schema
+  - SQL
+  - Blog
+  q: |-
+    What does this schema encode between posts and comments?
+
+    ```sql
+    CREATE TABLE comments (
+      id        BIGINT PRIMARY KEY,
+      post_id   BIGINT NOT NULL
+                REFERENCES posts(id) ON DELETE CASCADE,
+      author_id BIGINT NOT NULL REFERENCES users(id),
+      body      TEXT   NOT NULL
+    );
+    ```
+  answer: 4
+  notes:
+  - label: Deciding clue
+    text: '`post_id` is NOT NULL with ON DELETE CASCADE.'
+  - label: Why
+    text: 'Every comment belongs to exactly one post and dies with it: whole–part with no independent lifetime.'
+  - label: Tempting wrong turn
+    text: Aggregation would use a nullable `post_id` with SET NULL.
+- n: 55
+  title: A ↔ B, with C attached
+  kind: notation
+  domain: UML
+  level: 2
+  meta:
+  - Notation
+  - UML
+  svg: <svg viewBox="0 0 360 112" role="img" aria-label="A solid line connects A and B. A dashed line runs from a third class box, C, to the middle of that line."><rect x="14" y="62" width="76" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.4"/><text class="mono" x="52" y="87" text-anchor="middle" style="font-size:15px">A</text><rect x="270" y="62" width="76" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.4"/><text class="mono" x="308" y="87" text-anchor="middle" style="font-size:15px">B</text><line x1="92" y1="82" x2="268" y2="82" stroke="currentColor" stroke-width="1.6"/><rect x="142" y="4" width="76" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.4"/><text class="mono" x="180" y="29" text-anchor="middle" style="font-size:15px">C</text><line x1="180" y1="44" x2="180" y2="80" stroke="currentColor" stroke-width="1.4" stroke-dasharray="4 3"/></svg>
+  q: A solid line connects A and B. A dashed line runs from a third class box, C, to the middle of that line.
+  answer: 2
+  notes:
+  - label: Deciding clue
+    text: A class hanging off the middle of an association line.
+  - label: Why
+    text: 'This is UML''s association-class notation: C holds the data that belongs to the A–B link (for example, Enrollment between Student and Course).'
+  - label: Tempting wrong turn
+    text: Dependency is tempting because of the dashed line. Here the dashed line attaches to a relationship, not to a class.
+- n: 56
+  title: Comment → User (author)
+  kind: schema
+  lang: sql
+  domain: Blog
+  level: 2
+  meta:
+  - Schema
+  - SQL
+  - Blog
+  q: |-
+    What is the relationship between a comment and its author in this schema?
+
+    ```sql
+    CREATE TABLE comments (
+      id        BIGINT PRIMARY KEY,
+      post_id   BIGINT NOT NULL
+                REFERENCES posts(id) ON DELETE CASCADE,
+      author_id BIGINT NOT NULL REFERENCES users(id),
+      body      TEXT   NOT NULL
+    );
+    ```
+  answer: 1
+  notes:
+  - label: Deciding clue
+    text: '`author_id` is a mandatory reference with no cascade, and a user is not a part of a comment.'
+  - label: Why
+    text: The comment knows its author persistently, but users exist independently and write many comments. One table can encode composition in one column and association in another.
+  - label: Tempting wrong turn
+    text: Composition is tempting because the `post_id` column in this same table does encode composition (#49). Judge each column separately.
+- n: 57
+  title: Calculator → Number
+  kind: error
+  domain: Calculator
+  level: 1
+  meta:
+  - Spot the error
+  - Calculator
+  q: 'A diagram shows Calculator ◆—— Number, drawn because `add(a: Number, b: Number)` takes Numbers. Calculator has no Number fields. What should it be?'
+  answer: 0
+  notes:
+  - label: Deciding clue
+    text: Number appears only in a method signature.
+  - label: Why
+    text: Parameters are dependencies. Nothing is stored, so there's no association at all, let alone composition.
+  - label: Tempting wrong turn
+    text: 'Composition is the error being tested: a method signature never implies ownership.'
+- n: 58
+  title: Stack → ArrayList
+  kind: code
+  lang: java
+  domain: Data structures
+  level: 2
+  meta:
+  - Code
+  - Java
+  - Data structures
+  q: |-
+    What relationship does this code actually create?
+
+    ```java
+    class Stack<T> extends ArrayList<T> {
+        void push(T x) { add(x); }
+        T pop()        { return remove(size() - 1); }
+    }
+    ```
+  answer: 5
+  notes:
+  - label: Deciding clue
+    text: extends ArrayList.
+  - label: Why
+    text: 'The code says "a Stack is an ArrayList". It''s a classic design smell: Stack now exposes `add(i, x)`, `get(i)` and `remove(i)`, which break stack semantics. The better design is composition, with a private list field (Java''s own Stack extends Vector is the historical example of this mistake).'
+  - label: Tempting wrong turn
+    text: Composition is what it should be, not what it is. Classify the code you're given, then critique it.
+- n: 59
+  title: A ↔ B
+  kind: notation
+  domain: UML
+  level: 1
+  meta:
+  - Notation
+  - UML
+  svg: <svg viewBox="0 0 360 112" role="img" aria-label="A plain solid line connects A and B, labelled 1 near A and 0..* near B. There are no diamonds, triangles or arrowheads."><rect x="14" y="62" width="76" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.4"/><text class="mono" x="52" y="87" text-anchor="middle" style="font-size:15px">A</text><rect x="270" y="62" width="76" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.4"/><text class="mono" x="308" y="87" text-anchor="middle" style="font-size:15px">B</text><line x1="92" y1="82" x2="268" y2="82" stroke="currentColor" stroke-width="1.6"/><text class="mono" x="100" y="74" style="font-size:12px">1</text><text class="mono" x="262" y="74" text-anchor="end" style="font-size:12px">0..*</text></svg>
+  q: A plain solid line connects A and B, labelled 1 near A and 0..\* near B. There are no diamonds, triangles or arrowheads.
+  answer: 1
+  notes:
+  - label: Deciding clue
+    text: A plain solid line with multiplicities.
+  - label: Why
+    text: A plain solid line is an association. Multiplicities only make sense for stored links, which is another way to tell it apart from a dependency.
+  - label: Tempting wrong turn
+    text: Aggregation needs a diamond. Multiplicity alone doesn't imply whole–part.
+- n: 60
+  title: Team → Employee
+  kind: error
+  domain: HR
+  level: 1
+  meta:
+  - Spot the error
+  - HR
+  q: A diagram shows Team ◆—— Employee (composition). In the system, when a team is dissolved its people are reassigned to other teams. What should it be?
+  answer: 3
+  notes:
+  - label: Deciding clue
+    text: The parts survive the whole being dissolved.
+  - label: Why
+    text: Still whole–part (a team is its members), but employees outlive the team, so the diamond should be hollow.
+  - label: Tempting wrong turn
+    text: Association is defensible-sounding, but a team really is defined by its members, which is the whole–part signal.
+- n: 61
+  title: Circle → Shape
+  kind: code
+  lang: python
+  domain: Geometry
+  level: 2
+  meta:
+  - Code
+  - Python
+  - Geometry
+  q: |-
+    A shape hierarchy with an abstract base class.
+
+    ```python
+    from abc import ABC, abstractmethod
+    import math
+
+    class Shape(ABC):
+        @abstractmethod
+        def area(self) -> float: ...
+
+        def describe(self) -> str:
+            return f"{type(self).__name__}, area {self.area():.2f}"
+
+    class Circle(Shape):
+        def __init__(self, r: float):
+            self.r = r
+
+        def area(self) -> float:
+            return math.pi * self.r ** 2
+    ```
+  answer: 5
+  notes:
+  - label: Deciding clue
+    text: Circle subclasses an abstract class and inherits the concrete `describe()` method.
+  - label: Why
+    text: Subclassing an abstract class is generalization (inheritance), not realization, because Circle inherits real behavior, `describe()`. Realization is for pure contracts with nothing to inherit.
+  - label: Tempting wrong turn
+    text: Realization is tempting because of ABC and @abstractmethod. The presence of an inherited implementation settles it.
+- n: 62
+  title: Doctor → Patient
+  kind: error
+  domain: Hospital
+  level: 2
+  meta:
+  - Spot the error
+  - Hospital
+  q: A teammate drew Doctor ◇—— Patient (aggregation), reasoning that "a doctor has patients". Each doctor stores a list of their current patients; patients exist independently and can see several doctors. What should it be?
+  answer: 1
+  notes:
+  - label: Deciding clue
+    text: '"Has" in English isn''t whole–part. A doctor isn''t made of patients.'
+  - label: Why
+    text: The doctor stores the link, so it's at least an association. But a patient isn't structurally a part of a doctor, so it's not aggregation. Don't let everyday words choose your diamond.
+  - label: Tempting wrong turn
+    text: 'Aggregation is the teammate''s mistake: reading possession-language as whole–part.'
+- n: 63
+  title: Circle → Drawable
+  kind: code
+  lang: python
+  domain: Graphics
+  level: 3
+  meta:
+  - Code
+  - Python
+  - Graphics
+  q: |-
+    Note that Circle has no base class.
+
+    ```python
+    from typing import Protocol
+
+    class Drawable(Protocol):
+        def draw(self, canvas: "Canvas") -> None: ...
+
+    class Circle:
+        def __init__(self, x: float, y: float, r: float):
+            self.x, self.y, self.r = x, y, r
+
+        def draw(self, canvas: "Canvas") -> None:
+            canvas.ellipse(self.x, self.y, self.r, self.r)
+
+    def render(items: list[Drawable], canvas: "Canvas"): ...
+    ```
+  answer: 6
+  notes:
+  - label: Deciding clue
+    text: Circle satisfies the Drawable protocol structurally, with no inheritance.
+  - label: Why
+    text: A Protocol is a pure contract, and any class with a matching `draw()` conforms. Conforming to a contract without inheriting anything is realization, even when it's implicit.
+  - label: Tempting wrong turn
+    text: '"No relationship" or dependency is tempting because Circle never mentions Drawable. Implicit conformance is still realization (Go interfaces work the same way).'
+- n: 64
+  title: Invoice → LineItem
+  kind: error
+  domain: Billing
+  level: 1
+  meta:
+  - Spot the error
+  - Billing
+  q: A diagram shows Invoice ◇—— LineItem (aggregation). Line items are created by the invoice, numbered within it, and deleted with it. What should it be?
+  answer: 4
+  notes:
+  - label: Deciding clue
+    text: Created by the whole, identified within it, and deleted with it.
+  - label: Why
+    text: Every lifecycle signal says exclusive ownership. The diamond should be filled.
+  - label: Tempting wrong turn
+    text: 'Aggregation is the mistake: a line item can''t exist without its invoice.'
+- n: 65
+  title: StripeGateway → Card
+  kind: code
+  lang: java
+  domain: Payments
+  level: 1
+  meta:
+  - Code
+  - Java
+  - Payments
+  q: |-
+    What is the relationship between the gateway and the card it charges?
+
+    ```java
+    interface PaymentGateway {
+        Receipt charge(Money amount, Card card);
+    }
+
+    class StripeGateway implements PaymentGateway {
+        public Receipt charge(Money amount, Card card) {
+            String token = card.tokenize();
+            // call Stripe with token...
+            return new Receipt(/* ... */);
+        }
+    }
+    ```
+  answer: 0
+  notes:
+  - label: Deciding clue
+    text: Card appears only as a parameter of `charge()`.
+  - label: Why
+    text: The gateway reads the card for one call and keeps nothing. (StripeGateway → Receipt is also a dependency, because it's created and returned.)
+  - label: Tempting wrong turn
+    text: Association is tempting because payment cards are important domain objects. Importance doesn't make a link persistent.
+- n: 66
+  title: ConsoleLogger → Logger
+  kind: error
+  domain: Logging
+  level: 2
+  meta:
+  - Spot the error
+  - Logging
+  q: A diagram draws ConsoleLogger ——▷ Logger with a solid line and hollow triangle. Logger is a Java interface with no fields and no method bodies. What should it be?
+  answer: 6
+  notes:
+  - label: Deciding clue
+    text: The target is an interface, so the arrow should be dashed.
+  - label: Why
+    text: Implementing an interface is realization (dashed line, hollow triangle). A solid line claims ConsoleLogger inherits an implementation, and there is none to inherit.
+  - label: Tempting wrong turn
+    text: Inheritance is what the diagram currently shows.
+- n: 67
+  title: Parser → input &str
+  kind: code
+  lang: rust
+  domain: Parsing
+  level: 3
+  meta:
+  - Code
+  - Rust
+  - Parsing
+  q: |-
+    A zero-copy parser.
+
+    ```rust
+    struct Parser<'a> {
+        input: &'a str,
+        pos: usize,
+    }
+
+    impl<'a> Parser<'a> {
+        fn new(input: &'a str) -> Self { Parser { input, pos: 0 } }
+    }
+    ```
+  answer: 1
+  notes:
+  - label: Deciding clue
+    text: The parser stores a borrowed reference for its whole life but doesn't own the text.
+  - label: Why
+    text: Stored, so not a dependency. Borrowed, so not owned. The lifetime 'a even forces the parser to die before the input does, which is the opposite of composition, where the part dies with the whole.
+  - label: Tempting wrong turn
+    text: Composition is tempting because it's a struct field. A field holding a borrow is a link, not ownership; Rust spells out the difference.
+- n: 68
+  title: ParkingLot → Vehicle
+  kind: error
+  domain: Parking lot
+  level: 2
+  meta:
+  - Spot the error
+  - Parking lot
+  q: A diagram shows ParkingLot ◆—— Vehicle, "since the lot contains the vehicles parked in it". In the code, ParkingLot only receives vehicles as an argument to `park()` and `unpark()`; occupancy is recorded in `ParkingSpot.current_vehicle`. What should ParkingLot → Vehicle be?
+  answer: 0
+  notes:
+  - label: Deciding clue
+    text: The lot only sees vehicles as method parameters; ParkingSpot is what stores them.
+  - label: Why
+    text: Vehicles exist before and after parking, so composition is wrong on lifecycle alone. In this design the lot doesn't even store them, which makes it a dependency. The association lives on ParkingSpot → Vehicle.
+  - label: Tempting wrong turn
+    text: Association is right for ParkingSpot → Vehicle, not for the lot.
+- n: 69
+  title: FileStore → Store
+  kind: code
+  lang: go
+  domain: Storage
+  level: 2
+  meta:
+  - Code
+  - Go
+  - Storage
+  q: |-
+    A key-value store abstraction in Go.
+
+    ```go
+    type Store interface {
+        Get(key string) ([]byte, error)
+        Put(key string, val []byte) error
+    }
+
+    type FileStore struct{ dir string }
+
+    func (f *FileStore) Get(key string) ([]byte, error)    { /* ... */ }
+    func (f *FileStore) Put(key string, val []byte) error  { /* ... */ }
+    ```
+  answer: 6
+  notes:
+  - label: Deciding clue
+    text: '`*FileStore` has Store''s full method set, so it implements Store implicitly.'
+  - label: Why
+    text: Go has no implements keyword, but satisfying an interface's method set is exactly realization. Diagram it as FileStore - - -▷ Store. (Strictly it is `*FileStore` that satisfies Store, because the methods have pointer receivers; a FileStore value isn't assignable to Store.)
+  - label: Tempting wrong turn
+    text: 'Inheritance is impossible here: Go has no class inheritance.'
+- n: 70
+  title: Elevator → Floor
+  kind: scenario
+  domain: Elevator system
+  level: 2
+  meta:
+  - Scenario
+  - Elevator system
+  q: Each Elevator keeps a reference to the Floor object it's currently at, updated as it moves. Floors belong to the Building.
+  answer: 1
+  notes:
+  - label: Deciding clue
+    text: A stored, changing reference to an object owned by someone else.
+  - label: Why
+    text: The elevator remembers its current floor (stored), but a floor isn't a part of an elevator (Building ◆ Floor is the ownership). A stored link that isn't whole–part is an association.
+  - label: Tempting wrong turn
+    text: Aggregation is tempting because the reference persists. Persistence gets you to association; whole–part is a separate question.
+- n: 71
+  title: Renderer → Config
+  kind: code
+  lang: rust
+  domain: Rendering
+  level: 1
+  meta:
+  - Code
+  - Rust
+  - Rendering
+  q: |-
+    A renderer reads its configuration per call.
+
+    ```rust
+    struct Renderer { width: u32, height: u32 }
+
+    impl Renderer {
+        fn render(&self, scene: &Scene, cfg: &Config) -> Image {
+            // ...
+        }
+    }
+    ```
+  answer: 0
+  notes:
+  - label: Deciding clue
+    text: cfg is borrowed as a parameter, and the borrow ends when render returns.
+  - label: Why
+    text: 'The struct has no Config field. Rust makes it extra clear: the borrow can''t outlive the call.'
+  - label: Tempting wrong turn
+    text: Association is tempting because every render needs a config. It's needed every time but stored never.
+- n: 72
+  title: Building → Floor
+  kind: scenario
+  domain: Elevator system
+  level: 1
+  meta:
+  - Scenario
+  - Elevator system
+  q: Floors are created when the Building is modeled. "Floor 3" has no meaning on its own, and removing the building from the system removes its floors.
+  answer: 4
+  notes:
+  - label: Deciding clue
+    text: Floors are created with the building and have no meaning or life outside it.
+  - label: Why
+    text: Whole–part, created by the whole, and dies with it. This is the composition the elevator's association points into.
+  - label: Tempting wrong turn
+    text: Aggregation would need floors to survive or be shared, and neither is possible.
+- n: 73
+  title: StripeGateway → PaymentGateway
+  kind: code
+  lang: java
+  domain: Payments
+  level: 1
+  meta:
+  - Code
+  - Java
+  - Payments
+  q: |-
+    A payment gateway abstraction.
+
+    ```java
+    interface PaymentGateway {
+        Receipt charge(Money amount, Card card);
+    }
+
+    class StripeGateway implements PaymentGateway {
+        public Receipt charge(Money amount, Card card) {
+            String token = card.tokenize();
+            // call Stripe with token...
+            return new Receipt(/* ... */);
+        }
+    }
+    ```
+  answer: 6
+  notes:
+  - label: Deciding clue
+    text: implements PaymentGateway.
+  - label: Why
+    text: 'StripeGateway fulfils an interface''s contract: realization, drawn with a dashed line and hollow triangle.'
+  - label: Tempting wrong turn
+    text: Inheritance would be extends with a concrete superclass.
+- n: 74
+  title: Dispatcher → HallCall
+  kind: scenario
+  domain: Elevator system
+  level: 2
+  meta:
+  - Scenario
+  - Elevator system
+  q: The Dispatcher receives a `HallCall(floor=7, direction=UP)`, picks the best elevator, appends 7 to that elevator's stop queue (a list of ints), and discards the HallCall object.
+  answer: 0
+  notes:
+  - label: Deciding clue
+    text: The call object is read and discarded; only the integer 7 survives, inside a different object.
+  - label: Why
+    text: Within `dispatch()` the dispatcher uses the HallCall, then holds nothing. Extracting a value and storing it elsewhere doesn't make the original object stored.
+  - label: Tempting wrong turn
+    text: Aggregation is tempting because pending calls feel like a queue the dispatcher owns. The dispatcher doesn't keep the call objects in this design.
+- n: 75
+  title: Fleet → Truck
+  kind: code
+  lang: cpp
+  domain: Logistics
+  level: 2
+  meta:
+  - Code
+  - C++
+  - Logistics
+  q: |-
+    Trucks are transferred between regional fleets.
+
+    ```cpp
+    class Fleet {
+        std::vector<std::shared_ptr<Truck>> trucks_;
+    public:
+        void add(std::shared_ptr<Truck> t) {
+            trucks_.push_back(std::move(t));
+        }
+    };
+    ```
+  answer: 3
+  notes:
+  - label: Deciding clue
+    text: '`shared_ptr` and a passed-in part: shared ownership, so the truck can outlive this fleet.'
+  - label: Why
+    text: A fleet is made up of trucks (whole–part), and `shared_ptr` says no single fleet decides a truck's lifetime. That's aggregation.
+  - label: Tempting wrong turn
+    text: Composition would use `unique_ptr` or value members created inside.
+- n: 76
+  title: Piece → Square
+  kind: scenario
+  domain: Chess
+  level: 2
+  meta:
+  - Scenario
+  - Chess
+  q: Each Piece has a position field pointing at the Square it currently occupies, which changes on every move. Squares are owned by the Board.
+  answer: 1
+  notes:
+  - label: Deciding clue
+    text: A stored link to an object owned by the board.
+  - label: Why
+    text: The piece remembers where it is, but a square isn't part of a piece. Board ◆ Square is the ownership; Piece → Square is a navigational association that changes over time.
+  - label: Tempting wrong turn
+    text: Composition is tempting if you mix it up with Board → Square.
+- n: 77
+  title: Money → Display
+  kind: code
+  lang: rust
+  domain: Money
+  level: 2
+  meta:
+  - Code
+  - Rust
+  - Money
+  q: |-
+    Formatting money for output.
+
+    ```rust
+    use std::fmt;
+
+    struct Money { cents: i64, currency: Currency }
+
+    impl fmt::Display for Money {
+        fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+            write!(f, "{} {:.2}", self.currency, self.cents as f64 / 100.0)
+        }
+    }
+    ```
+  answer: 6
+  notes:
+  - label: Deciding clue
+    text: 'impl Display for Money: implementing a trait.'
+  - label: Why
+    text: A trait is a contract, and implementing it is realization. Rust has no struct inheritance at all.
+  - label: Tempting wrong turn
+    text: Dependency is tempting because Display comes from the standard library. Implementing a contract is a stronger statement than merely using a type.
+- n: 78
+  title: Email → Attachment
+  kind: scenario
+  domain: Email
+  level: 2
+  meta:
+  - Scenario
+  - Email
+  q: An attachment is encoded inside one email's MIME body. Forwarding the email creates a new copy of the attachment, and deleting the email deletes it.
+  answer: 4
+  notes:
+  - label: Deciding clue
+    text: Each email has its own copy, and it dies with the email.
+  - label: Why
+    text: 'Forwarding copies rather than shares, so ownership stays exclusive. Whole–part with no independent lifetime: composition.'
+  - label: Tempting wrong turn
+    text: Aggregation would apply if the attachment were stored once in a shared blob store and referenced by many emails (as some mail servers dedupe). The rules given here say copy, not share.
+- n: 79
+  title: Employee → Department
+  kind: code
+  lang: cpp
+  domain: HR
+  level: 2
+  meta:
+  - Code
+  - C++
+  - HR
+  q: |-
+    Departments are created before employees and outlive them.
+
+    ```cpp
+    class Employee {
+        Department* dept_;   // non-owning
+    public:
+        explicit Employee(Department* d) : dept_(d) {}
+        const Department& department() const { return *dept_; }
+    };
+    ```
+  answer: 1
+  notes:
+  - label: Deciding clue
+    text: A raw, explicitly non-owning pointer to something that isn't a part of the employee.
+  - label: Why
+    text: Stored link, so association. The employee isn't the whole and the department isn't its part (if anything, it's the other way round), so there's no diamond on this end.
+  - label: Tempting wrong turn
+    text: Aggregation is tempting if you read the pair backwards (Department ◇ Employee). Check the direction you're asked about.
+- n: 80
+  title: Album → Photo
+  kind: scenario
+  domain: Photos app
+  level: 1
+  meta:
+  - Scenario
+  - Photos app
+  q: Every photo lives in your library. Albums group photos; one photo can be in several albums, and deleting an album leaves its photos in the library.
+  answer: 3
+  also:
+  - i: 1
+    note: 'Accepted: albums sit on the blurry aggregation/association line. Aggregation is preferred because an album is defined by the photos in it.'
+  notes:
+  - label: Deciding clue
+    text: Albums are collections of photos that live elsewhere and can be shared.
+  - label: Why
+    text: An album is made of photos (whole–part), but those photos outlive it and appear in other albums. Aggregation.
+  - label: Tempting wrong turn
+    text: Composition would hold if deleting an album deleted its photos, which some older apps actually did.
+- n: 81
+  title: SignupValidator → ValidationResult
+  kind: code
+  lang: ts
+  domain: Sign-up flow
+  level: 1
+  meta:
+  - Code
+  - TypeScript
+  - Sign-up flow
+  q: |-
+    A validator returns a fresh result object on every call.
+
+    ```typescript
+    class SignupValidator {
+      validate(form: SignupForm): ValidationResult {
+        const errors: string[] = [];
+        if (!form.email.includes("@")) errors.push("email");
+        if (form.password.length < 12) errors.push("password");
+        return new ValidationResult(errors);
+      }
+    }
+    ```
+  answer: 0
+  notes:
+  - label: Deciding clue
+    text: The result is created and returned; the validator keeps nothing.
+  - label: Why
+    text: A return type that isn't stored is a dependency (and so is the SignupForm parameter). The validator is stateless, so it can't hold an association to anything.
+  - label: Tempting wrong turn
+    text: Composition is tempting because the validator creates the result. Created and handed away is «create» dependency, not ownership.
+- n: 82
+  title: Event → Reminder
+  kind: scenario
+  domain: Calendar
+  level: 1
+  meta:
+  - Scenario
+  - Calendar
+  q: Reminders are configured per event ("10 minutes before"). Deleting the event deletes its reminders, and a reminder can't be attached to a different event.
+  answer: 4
+  notes:
+  - label: Deciding clue
+    text: Configured per event, can't move, and dies with the event.
+  - label: Why
+    text: A reminder only makes sense relative to its event. Whole–part, exclusive, same lifetime.
+  - label: Tempting wrong turn
+    text: Association is tempting because a reminder could be seen as a separate notification object. Its existence is fully tied to one event.
+- n: 83
+  title: Dashboard → Widget
+  kind: code
+  lang: ts
+  domain: Monitoring
+  level: 2
+  meta:
+  - Code
+  - TypeScript
+  - Monitoring
+  q: |-
+    Widgets are reusable across dashboards.
+
+    ```typescript
+    class Dashboard {
+      constructor(public title: string, private widgets: Widget[]) {}
+      render() { return this.widgets.map(w => w.render()); }
+    }
+
+    const cpu  = new CpuWidget();
+    const ops  = new Dashboard("Ops",  [cpu, new LatencyWidget()]);
+    const exec = new Dashboard("Exec", [cpu]);   // same instance
+    ```
+  answer: 3
+  notes:
+  - label: Deciding clue
+    text: The same widget instance sits in two dashboards.
+  - label: Why
+    text: A dashboard is composed of widgets (whole–part), but widgets are created outside and shared. Sharing rules out composition, leaving aggregation.
+  - label: Tempting wrong turn
+    text: Composition is tempting because a dashboard is its widgets visually. The shared cpu instance disproves exclusive ownership.
+- n: 84
+  title: User → User (follows)
+  kind: scenario
+  domain: Social network
+  level: 1
+  meta:
+  - Scenario
+  - Social network
+  q: Users follow other users. A follow stores nothing except who follows whom.
+  answer: 1
+  notes:
+  - label: Deciding clue
+    text: A stored, directed link between peers of the same class, carrying no data.
+  - label: Why
+    text: Reflexive, directed association. If you later add `followed_at` or notification settings, it becomes an association class (Follow).
+  - label: Tempting wrong turn
+    text: Association class needs data on the link, and this follow has none.
+- n: 85
+  title: HealthHandler → http.Request
+  kind: code
+  lang: go
+  domain: HTTP
+  level: 1
+  meta:
+  - Code
+  - Go
+  - HTTP
+  q: |-
+    A health-check endpoint.
+
+    ```go
+    type HealthHandler struct{ started time.Time }
+
+    func (h *HealthHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+        fmt.Fprintf(w, "up %s", time.Since(h.started))
+    }
+    ```
+  answer: 0
+  notes:
+  - label: Deciding clue
+    text: The request exists only as a parameter of ServeHTTP.
+  - label: Why
+    text: Each request is handled and forgotten; the handler has no request field. Request-scoped objects are almost always dependencies of the handler.
+  - label: Tempting wrong turn
+    text: Association is tempting because a handler's entire job is requests. Its job is to process them, not to remember them.
+- n: 86
+  title: Fleet → Aircraft
+  kind: scenario
+  domain: Aviation
+  level: 2
+  meta:
+  - Scenario
+  - Aviation
+  q: 'An airline''s Fleet object lists the aircraft it operates. Aircraft are leased: when a lease ends, the same aircraft, with the same registration, joins another airline''s fleet.'
+  answer: 3
+  notes:
+  - label: Deciding clue
+    text: An aircraft is part of a fleet for a while, then moves to another.
+  - label: Why
+    text: A fleet is made up of aircraft (whole–part), but the aircraft has its own identity and outlives the relationship. Aggregation.
+  - label: Tempting wrong turn
+    text: 'Association is tempting because the aircraft is an independent asset (compare Employee → Laptop). The difference is the whole: a fleet is made of aircraft, while an employee is not made of laptops.'
+- n: 87
+  title: Person → Address
+  kind: code
+  lang: python
+  domain: Profiles
+  level: 2
+  meta:
+  - Code
+  - Python
+  - Profiles
+  q: |-
+    Address is an immutable value. Changing your address means replacing it with a new Address, never sharing one instance between people.
+
+    ```python
+    from dataclasses import dataclass, field
+
+    @dataclass(frozen=True)
+    class Address:
+        line1: str
+        city: str
+        pin: str
+
+    @dataclass
+    class Person:
+        name: str
+        home: Address = field(default_factory=lambda: Address("", "", ""))
+    ```
+  answer: 4
+  notes:
+  - label: Deciding clue
+    text: An immutable value object owned by exactly one person.
+  - label: Why
+    text: 'Value objects are the cleanest composition: no identity of their own, never shared by policy, and gone when their owner is gone.'
+  - label: Tempting wrong turn
+    text: Association is tempting because Address looks like a standalone class. A value object with no identity can't be the far end of a link between peers.
+- n: 88
+  title: User ↔ Company
+  kind: scenario
+  domain: Professional network
+  level: 1
+  meta:
+  - Scenario
+  - Professional network
+  q: A user can work at several companies over a career, and a company has many employees. For each pairing you store a title, a start date and an optional end date.
+  answer: 2
+  notes:
+  - label: Deciding clue
+    text: Title and dates describe the employment, not the user or the company.
+  - label: Why
+    text: 'The data belongs to the pairing, so promote it: Position (or Employment). If the same user can hold two positions at one company over time, each link needs its own identity: in strict UML, mark the association ends {nonunique} or model Position as a full class with two associations.'
+  - label: Tempting wrong turn
+    text: Association loses the title and dates.
+- n: 89
+  title: PaymentService → Logger
+  kind: code
+  lang: python
+  domain: Payments
+  level: 2
+  meta:
+  - Code
+  - Python
+  - Payments
+  q: |-
+    A module-level logger, used inside a class.
+
+    ```python
+    import logging
+
+    log = logging.getLogger(__name__)
+
+    class PaymentService:
+        def refund(self, payment_id: str) -> None:
+            log.info("refunding %s", payment_id)
+            ...
+    ```
+  answer: 0
+  also:
+  - i: 1
+    note: 'Some designers treat a module-level singleton the class always uses as an association. By the strict test it''s a dependency: no PaymentService instance holds the logger.'
+  notes:
+  - label: Deciding clue
+    text: The logger is a module global; no PaymentService instance stores it.
+  - label: Why
+    text: The class's code reaches for a global during `refund()`. No instance keeps a reference, so the strict test says dependency, the same as a static call.
+  - label: Tempting wrong turn
+    text: Association is tempting because the logger is used everywhere and lives forever. Long-lived B doesn't create a link unless A holds it.
+- n: 90
+  title: Employee → Laptop
+  kind: scenario
+  domain: IT asset tracking
+  level: 2
+  meta:
+  - Scenario
+  - IT asset tracking
+  q: IT assigns each laptop to one employee at a time. When someone leaves, their laptop is wiped and reassigned. Laptops are tracked by serial number.
+  answer: 1
+  notes:
+  - label: Deciding clue
+    text: An assignment link to an independently tracked asset that isn't a part of the employee.
+  - label: Why
+    text: The link is stored, so it's not a dependency. An employee isn't made up of laptops, so it's not whole–part. If you later need `assigned_on` and `returned_on` dates, it becomes an association class (Assignment).
+  - label: Tempting wrong turn
+    text: Aggregation is tempting because the employee "has" a laptop. Possession isn't composition of parts.
+- n: 91
+  title: LinkedList → Node
+  kind: code
+  lang: java
+  domain: Data structures
+  level: 2
+  meta:
+  - Code
+  - Java
+  - Data structures
+  q: |-
+    A linked list with a private nested node class.
+
+    ```java
+    public class LinkedList<T> {
+        private Node<T> head;
+        private int size;
+
+        private static class Node<T> {
+            T value;
+            Node<T> next;
+            Node(T v, Node<T> n) { value = v; next = n; }
+        }
+
+        public void addFirst(T v) { head = new Node<>(v, head); size++; }
+    }
+    ```
+  answer: 4
+  notes:
+  - label: Deciding clue
+    text: Node is private, created only by the list, and invisible outside it.
+  - label: Why
+    text: The list is the sole creator and owner of its nodes. They're an implementation detail that dies with the list. (Node → Node via next is a separate association between peers.)
+  - label: Tempting wrong turn
+    text: Association is right for the next pointer, not for the list-to-node relationship.
+- n: 92
+  title: Playlist ↔ Song
+  kind: scenario
+  domain: Music streaming
+  level: 3
+  meta:
+  - Scenario
+  - Music streaming
+  q: The product team now wants every playlist row to show who added the song and when, and to keep a manual position. The same song can appear twice in one playlist.
+  answer: 2
+  notes:
+  - label: Deciding clue
+    text: Added-by, added-at and position belong to each entry, and duplicates need separate identities.
+  - label: Why
+    text: 'A plain playlist-to-song link can''t hold "added by Asha on Monday at position 4", and it can''t tell two copies of the same song apart. Each entry becomes an object: PlaylistEntry, an association class (the playlist composes its entries). Strictly, allowing the same song twice needs {nonunique} ends or PlaylistEntry as a full class, because a default association class allows one link per pair.'
+  - label: Tempting wrong turn
+    text: Aggregation was the answer before the link gained data. Requirements changed, so the model must change.
+- n: 93
+  title: Leaderboard → Comparator
+  kind: code
+  lang: java
+  domain: Gaming
+  level: 1
+  meta:
+  - Code
+  - Java
+  - Gaming
+  q: |-
+    A leaderboard sorts on demand.
+
+    ```java
+    class Leaderboard {
+        private final List<Player> players = new ArrayList<>();
+
+        List<Player> top(int n) {
+            players.sort(Comparator.comparingInt(Player::score).reversed());
+            return players.subList(0, Math.min(n, players.size()));
+        }
+    }
+    ```
+  answer: 0
+  notes:
+  - label: Deciding clue
+    text: The comparator is built and used inside `top()` and never stored.
+  - label: Why
+    text: 'A local, short-lived object used during one method: dependency. Compare with Leaderboard → Player, which is stored in a field.'
+  - label: Tempting wrong turn
+    text: Composition is tempting because the leaderboard creates the comparator. It isn't held as state.
+- n: 94
+  title: Recipe ↔ Ingredient
+  kind: scenario
+  domain: Recipes
+  level: 1
+  meta:
+  - Scenario
+  - Recipes
+  q: Ingredients (flour, butter) are a shared catalog. Each recipe uses many ingredients, and for each one you store a quantity and a unit.
+  answer: 2
+  notes:
+  - label: Deciding clue
+    text: '"250 g" belongs to (this recipe, flour), not to flour itself.'
+  - label: Why
+    text: Quantity and unit describe the pairing, so promote the link to RecipeIngredient.
+  - label: Tempting wrong turn
+    text: Composition is tempting because recipes "contain" ingredients. But flour is a shared catalog item, not owned by any recipe.
+- n: 95
+  title: Logger → Appender
+  kind: code
+  lang: java
+  domain: Logging framework
+  level: 2
+  meta:
+  - Code
+  - Java
+  - Logging framework
+  q: |-
+    Appenders are configured once and attached to several loggers.
+
+    ```java
+    Appender file = new FileAppender("app.log");
+
+    Logger http = Logger.get("http");
+    Logger db   = Logger.get("db");
+
+    http.addAppender(file);
+    db.addAppender(file);   // the same appender, shared
+    ```
+  answer: 1
+  also:
+  - i: 3
+    note: 'Accepted if you read a logger''s configured appender set as its parts. The stricter reading treats appenders like subscribers: outputs the logger sends to, not pieces of it.'
+  notes:
+  - label: Deciding clue
+    text: The logger stores appenders across calls, and one appender instance is shared by two loggers.
+  - label: Why
+    text: 'Stored, so not a dependency. Shared, so not composition. Is an appender a structural part of a logger? It''s closer to a subscriber: an output the logger sends events to. That makes association the strict answer, consistent with Checkout → PricingStrategy (#21) and StockTicker → Subscriber (#25).'
+  - label: Tempting wrong turn
+    text: Dependency is tempting because the logger "just writes to" an appender. It keeps the appender across calls, so the link is stored.
+- n: 96
+  title: Employee ↔ Project
+  kind: scenario
+  domain: Resource planning
+  level: 1
+  meta:
+  - Scenario
+  - Resource planning
+  q: Employees are staffed on several projects at once. Each staffing has a role (lead, reviewer) and a percentage allocation.
+  answer: 2
+  notes:
+  - label: Deciding clue
+    text: Role and allocation exist only for a specific employee on a specific project.
+  - label: Why
+    text: This is Assignment, an association class carrying data that neither endpoint can hold alone.
+  - label: Tempting wrong turn
+    text: Aggregation is tempting because a project "has" staff. The data on each staffing is what forces a class.
+- n: 97
+  title: BillingService → Logger
+  kind: code
+  lang: go
+  domain: Billing
+  level: 3
+  meta:
+  - Code
+  - Go
+  - Billing
+  q: |-
+    Go struct embedding.
+
+    ```go
+    type Logger struct{ prefix string }
+
+    func (l Logger) Info(msg string) { fmt.Println(l.prefix, msg) }
+
+    type BillingService struct {
+        Logger                      // embedded by value
+        rates map[string]float64
+    }
+
+    // svc.Info("charged") works through method promotion
+    ```
+  answer: 4
+  notes:
+  - label: Deciding clue
+    text: Embedding by value places the Logger inside BillingService's memory; promotion is only syntax.
+  - label: Why
+    text: 'An embedded value field is still a field: created with the struct, destroyed with it, never shared. Method promotion lets you call `svc.Info()`, but a BillingService still can''t be passed where a Logger is expected, so there''s no subtyping.'
+  - label: Tempting wrong turn
+    text: Inheritance is the classic misreading of embedding. Go has no inheritance; embedding is composition plus delegation sugar.
+- n: 98
+  title: InsufficientFunds → PaymentError
+  kind: code
+  lang: python
+  domain: Payments
+  level: 1
+  meta:
+  - Code
+  - Python
+  - Payments
+  q: |-
+    An exception hierarchy.
+
+    ```python
+    class PaymentError(Exception):
+        def __init__(self, payment_id: str, msg: str):
+            super().__init__(msg)
+            self.payment_id = payment_id
+
+    class InsufficientFunds(PaymentError):
+        pass
+
+    try:
+        charge(card, amount)
+    except PaymentError as e:      # also catches InsufficientFunds
+        retry_later(e.payment_id)
+    ```
+  answer: 5
+  notes:
+  - label: Deciding clue
+    text: InsufficientFunds subclasses PaymentError and inherits its fields and behavior.
+  - label: Why
+    text: It's a kind of PaymentError, and code that catches the parent catches the child. That substitutability is what inheritance is for.
+  - label: Tempting wrong turn
+    text: Dependency is the relationship between `charge()`'s caller and these exceptions, not between the two exception classes.
+- n: 99
+  title: AdminUser → User
+  kind: code
+  lang: ts
+  domain: Document editor
+  level: 1
+  meta:
+  - Code
+  - TypeScript
+  - Document editor
+  q: |-
+    Admins can edit any document.
+
+    ```typescript
+    class User {
+      constructor(public id: string, public email: string) {}
+      canEdit(doc: Doc): boolean { return doc.ownerId === this.id; }
+    }
+
+    class AdminUser extends User {
+      override canEdit(_doc: Doc): boolean { return true; }
+    }
+    ```
+  answer: 5
+  notes:
+  - label: Deciding clue
+    text: extends User and overrides a method.
+  - label: Why
+    text: An admin is a kind of user that behaves differently in one place. A subclass with an override is textbook generalization.
+  - label: Tempting wrong turn
+    text: Dependency applies to AdminUser → Doc, which is a parameter. Make sure you answer for the pair asked.
+- n: 100
+  title: Truck → Vehicle
+  kind: code
+  lang: python
+  domain: Parking lot
+  level: 1
+  meta:
+  - Code
+  - Python
+  - Parking lot
+  q: |-
+    Vehicle types in a parking-lot design.
+
+    ```python
+    class Vehicle:
+        SIZE = Size.MEDIUM
+        def __init__(self, plate: str):
+            self.plate = plate
+
+    class Truck(Vehicle):
+        SIZE = Size.LARGE
+
+    class Motorcycle(Vehicle):
+        SIZE = Size.SMALL
+    ```
+  answer: 5
+  notes:
+  - label: Deciding clue
+    text: '`Truck(Vehicle)` subclasses Vehicle.'
+  - label: Why
+    text: 'The code expresses "a Truck is a Vehicle". Interview follow-up: when subclasses differ only in a constant, a VehicleType enum field is often simpler. Reach for subclasses when behavior differs.'
+  - label: Tempting wrong turn
+    text: Composition (a type field) is the alternative design, not what this code does.

@@ -1,0 +1,123 @@
+id: field-guide
+storage: lld-field-guide-v2
+questions:
+- q: Before editing a Pod from an informer cache, you call `pod.DeepCopy()`.
+  options:
+  - Flyweight
+  - Prototype
+  - Memento
+  - Singleton
+  answer: 1
+  explain: You clone a configured object and change the copy, so the shared original that other readers of the cache see stays untouched.
+- q: The AWS SDK tries environment variables, then config files, then instance metadata.
+  options:
+  - Strategy
+  - Observer
+  - Decorator
+  - Chain of Responsibility
+  answer: 3
+  explain: Sources in a fixed order; the first one with credentials wins and the rest are never asked.
+- q: '`otelhttp.NewTransport(http.DefaultTransport)`'
+  options:
+  - Decorator
+  - Adapter
+  - Bridge
+  - Proxy
+  answer: 0
+  explain: A `RoundTripper` wrapping a `RoundTripper`, always forwarding and adding tracing spans.
+- q: '`labels.Parse("app=api,tier!=db")` returns a selector you run against objects.'
+  options:
+  - Visitor
+  - Chain of Responsibility
+  - Composite
+  - Interpreter
+  answer: 3
+  explain: A tiny language parsed into a tree that evaluates itself against each object's labels.
+- q: '`terraform plan -out=tfplan`, then `terraform apply tfplan` later.'
+  options:
+  - Strategy
+  - Memento
+  - Builder
+  - Command
+  answer: 3
+  explain: The change set is saved as a value and executed later, exactly as planned.
+- q: Stopping an EC2 instance is legal only while it's running.
+  options:
+  - Chain of Responsibility
+  - Command
+  - Strategy
+  - State
+  answer: 3
+  explain: What a call means depends on the current mode, and the instance moves between modes itself.
+- q: Informers let several controllers react to Pod changes through `AddEventHandler`.
+  options:
+  - Chain of Responsibility
+  - Mediator
+  - Observer
+  - Command
+  answer: 2
+  explain: Every registered handler hears every change, and the informer doesn't know who they are.
+- q: '`io.MultiWriter(file, os.Stdout)` is itself an `io.Writer`.'
+  options:
+  - Observer
+  - Decorator
+  - Composite
+  - Facade
+  answer: 2
+  explain: A writer made of writers. Callers can't tell one from many. A decorator would wrap exactly one.
+- q: '`sql.Open("pgx", dsn)` picks a driver that registered itself by name.'
+  options:
+  - Abstract Factory
+  - Singleton
+  - Factory
+  - Strategy
+  answer: 2
+  explain: 'A registry factory: the name maps to a constructor, and you get back the common interface.'
+- q: '`grpc.NewClient(target, grpc.WithTransportCredentials(creds))`'
+  options:
+  - Decorator
+  - Factory
+  - Prototype
+  - Builder
+  answer: 3
+  explain: 'Functional options: Go''s usual way to assemble an object from named, optional settings.'
+- q: '`prometheus.MustRegister` panics if the same metric is registered twice.'
+  options:
+  - Singleton
+  - Proxy
+  - Factory
+  - Flyweight
+  answer: 0
+  explain: There's one default registry for the whole process, and it already holds that metric.
+- q: Pipeline steps report "build done" to a hub, and the hub decides that tests run next.
+  options:
+  - Observer
+  - Facade
+  - Mediator
+  - Chain of Responsibility
+  answer: 2
+  explain: 'With Observer, each listener decides how to react. Here the hub decides who does what next, and calls flow both ways: components report to it, and it calls them.'
+- q: You copy a config before a risky change, so you can put the same object back if the change goes wrong.
+  options:
+  - Prototype
+  - Command
+  - Flyweight
+  - Memento
+  answer: 3
+  explain: 'The lookalike question: will the copy be used as a new object? No, it restores the original later, so it''s a memento. A prototype''s copy becomes a new object.'
+- q: A metrics library keeps one shared, immutable `Labels` value per distinct label set.
+  options:
+  - Singleton
+  - Flyweight
+  - Prototype
+  - Proxy
+  answer: 1
+  explain: One shared instance per distinct value is Flyweight. Singleton is exactly one instance of a type.
+- q: Your service has exactly one storage backend today. Should you put a factory in front of it?
+  options:
+  - Yes, so the second backend is easy later
+  - Yes, because factories make code testable
+  - Only if the backend is remote
+  - 'Not yet: call its constructor, and add the factory when the second backend arrives'
+  answer: 3
+  explain: Wait for the second case. A pattern with one implementation is indirection without a payoff. Tests can already pass a fake through an interface without a factory.

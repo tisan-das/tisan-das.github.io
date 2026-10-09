@@ -1,0 +1,147 @@
+# Checkpoint for Part 1 of the Low-Level Design series. `answer` is the
+# 0-based index of the right option.
+id: relationships-checkpoint
+storage: lld-relationships-checkpoint-v1
+questions:
+- q: |
+    Class `A` has a field of type `B`. Which facts decide whether that's an association, an aggregation or a composition?
+  options:
+  - The field's type, and whether it's a single reference or a list
+  - What happens to `B` when `A` is deleted, and whether `B` can belong to more than one `A`
+  - Whether the field is public or private
+  - Whether `A` calls methods on `B`
+  answer: 1
+  explain: |
+    The code looks the same in all three cases. Ownership and lifetime separate them: if `B` dies with `A` and has exactly one owner, it's composition; if it's a part that survives or can be shared, aggregation; if the two are peers, association. Visibility and collection types are hints at most.
+
+- q: |
+    You freeze a running program at a moment when no method is executing, and look at the object graph. Which relationships can you still see?
+  options:
+  - Every relationship on the class diagram
+  - Only dependencies
+  - Associations, including aggregations and compositions, but no dependencies
+  - Only compositions
+  answer: 2
+  explain: |
+    This is the snapshot test. A dependency exists only while code runs, through a parameter, a local or a return value, so it disappears with the stack frame. Anything stored in a field is still there. Inheritance and realization aren't links between objects at all; they're relationships between types.
+
+- q: |
+    `ParkingLot.park(vehicle)` finds a spot, creates `Ticket(spot, vehicle)` and returns it. The lot stores nothing about the vehicle; the ticket keeps it in a field. What are `ParkingLot → Vehicle` and `Ticket → Vehicle`?
+  options:
+  - Both are associations
+  - Association, then dependency
+  - Both are dependencies
+  - Dependency, then association
+  answer: 3
+  explain: |
+    Same `Vehicle`, two relationships, decided by who keeps the reference. The lot reaches the car only through a parameter for the length of one call, so that's a dependency. The ticket stores it in a field that outlives the call, so that's an association.
+
+- q: |
+    A class receives a `Clock` as a parameter of one method and never stores it. At which step does the decision tree stop?
+  options:
+  - Step 1, "kind of, or implements?"
+  - Step 2, "is the link stored?", with dependency
+  - Step 4, "is it whole–part?", with association
+  - Step 5, "outlive or shared?", with aggregation
+  answer: 1
+  explain: |
+    The class isn't a kind of `Clock` and doesn't implement it, so step 1 says neither. Step 2 asks whether the link still exists after the method returns. It doesn't, so the answer is dependency, and the questions about data, whole–part and lifetime never come up.
+
+- q: |
+    A student's grade in a course belongs to neither the student nor the course. Where should it live?
+  options:
+  - In a field on `Student`, keyed by course
+  - In a field on `Course`, keyed by student
+  - In a `Grade` class composed by `Course`
+  - In an association class such as `Enrollment`, which links one student to one course
+  answer: 3
+  explain: |
+    Data that belongs to the pairing, not to either side, is the signal for an association class. `Enrollment` carries the grade, and in a database it's a join table with its own columns. A map on either side works, but it hides the link and duplicates it if both sides need it.
+
+- q: |
+    A playlist can contain the same song more than once. Why is a plain UML association class between `Playlist` and `Song` not quite right?
+  options:
+  - A UML association class allows only one link per pair, so a repeated song needs a full class such as `PlaylistEntry`, or ends marked `{nonunique}`
+  - Association classes can't hold an ordering
+  - Songs are composed by albums, so they can't be linked to playlists
+  - Playlists aggregate songs, so no link class is needed
+  answer: 0
+  explain: |
+    Strictly, an association class instance is identified by the pair it links, so the same pair can't appear twice. If repeats are allowed, make the link a class with its own identity, or mark the association ends `{nonunique}`.
+
+- q: |
+    Which schema shape matches composition, such as a `room` row that belongs to a `house`?
+  options:
+  - A join table such as `house_room`, deleting only the join rows
+  - A nullable `room.house_id` with `ON DELETE SET NULL`
+  - A `NOT NULL` foreign key `room.house_id` with `ON DELETE CASCADE`
+  - Nothing in the schema
+  answer: 2
+  explain: |
+    `NOT NULL` says a room can't exist without a house, and `CASCADE` deletes the rooms with it. A nullable foreign key with `SET NULL` is aggregation: the part survives, unattached. A join table is a plain association. A dependency leaves no trace in the schema.
+
+- q: |
+    A `Repo` struct receives a `*sql.DB` pool through its constructor and stores it. Should `Repo.Close()` call `db.Close()`?
+  options:
+  - Yes, because it holds the reference
+  - Only if it's the last `Repo` still using the pool
+  - No. It's an association, and whoever created the pool closes it.
+  - Yes, but only in tests
+  answer: 2
+  explain: |
+    Only close what you composed. The repo didn't create the pool and other code may share it, so closing it would break every other user. The owner, usually `main`, closes it once at shutdown.
+
+- q: |
+    An `Order` guards its state with a mutex. It composes its `LineItem`s and holds a reference to a shared `Customer`. What does taking the order's lock protect?
+  options:
+  - The order and its line items, but not the customer
+  - Everything reachable from the order
+  - The order and the customer, but not the line items
+  - Only the order's own scalar fields
+  answer: 0
+  explain: |
+    A lock on the whole protects only what nobody else can reach. The line items are composed, so every path to them goes through the order and its lock. The customer is shared: other orders, and other code, can reach it without taking this lock, so it needs its own protection.
+
+- q: |
+    In Go, `type Car struct { Engine }` embeds an `Engine` struct by value. What relationship is that?
+  options:
+  - Inheritance: a `Car` is an `Engine`
+  - Realization of the `Engine` type
+  - Composition with method promotion
+  - A dependency, because embedding is resolved at compile time
+  answer: 2
+  explain: |
+    Embedding by value puts a whole `Engine` inside every `Car`, created with it and gone with it, so it's composition. Go promotes the engine's methods so you can call them on the car, but a `Car` is never usable where an `Engine` is expected, so it isn't inheritance.
+
+- q: |
+    In the parking lot model, why is `ParkingLot — PricingStrategy` a plain association rather than a composition?
+  options:
+  - The strategy is injected and can be swapped, and a lot isn't made of its pricing rules
+  - Interfaces can never be composed
+  - The lot only uses pricing inside `exit()`, so it's really a dependency
+  - A pricing strategy is a kind of parking lot
+  answer: 0
+  explain: |
+    The lot stores the strategy, so it's at least an association. The whole–part question fails: pricing rules aren't a part of the lot the way floors are, and the same strategy object could serve several lots. Nothing stops a field of interface type from being composed, if the whole creates and owns it.
+
+- q: |
+    Why do many designers stop arguing about association versus aggregation?
+  options:
+  - UML 2 removed aggregation from the standard
+  - UML defines aggregation loosely, and composition versus everything else is the line that changes the code
+  - Databases can't represent aggregation
+  - Aggregation and composition mean the same thing
+  answer: 1
+  explain: |
+    UML gives aggregation almost no semantics beyond association, and Fowler's *UML Distilled* recommends ignoring it. Composition is different: it decides cascading deletes, who constructs the part, and whether the part can be shared. Pick one, state your lifecycle reasoning, and move on.
+
+- q: |
+    A service hands customers instances from an Auto Scaling group and doesn't detach them, but turns on instance scale-in protection. What can still terminate a customer's live machine?
+  options:
+  - Nothing; scale-in protection covers every termination
+  - Only a manual `terminate-instances` call by the customer
+  - The group replacing the instance after it fails a health check
+  - The group detaching it automatically after an hour
+  answer: 2
+  explain: |
+    Scale-in protection only stops the group choosing the instance during scale-in. An instance that fails its health check is still replaced. While the group composes the instance, the group decides when it dies; detaching moves that ownership, and the duty to terminate and replace it, to the site.
