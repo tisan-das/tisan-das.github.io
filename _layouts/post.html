@@ -49,7 +49,8 @@
               Updated <time datetime="{{ page.last_modified_at | date_to_xmlschema }}">{{ page.last_modified_at | date: '%b %-d, %Y' }}</time> ·
             {% endif %}
           {% endif %}
-          {{ content | strip_html | number_of_words | divided_by: 180 | plus: 1 }} min read
+          {% comment %}`read_time` overrides the estimate, for posts whose quizzes or code inflate the word count.{% endcomment %}
+          {% if page.read_time %}{{ page.read_time }}{% else %}{{ content | strip_html | number_of_words | divided_by: 180 | plus: 1 }} min read{% endif %}
         </p>
       </header>
 

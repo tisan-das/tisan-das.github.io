@@ -1,0 +1,101 @@
+{% comment %}
+  A quiz from _data/quizzes/<id>.yml: {% include quiz.html id="lld-creational" %}
+
+  Without scripts it reads as a numbered list of questions, each with its
+  answer folded away in a <details>. assets/js/quiz.js turns the same markup
+  into clickable options with scoring, saved progress and, by default, one
+  question at a time with filters and a retry pile (`mode: list` shows them
+  all at once).
+
+  Data (markdown is allowed in q, options, explain and notes):
+    id, storage        quiz id, and the localStorage key for saved answers
+    mode               deck (default) or list
+    answer_label       the prompt above the options
+    choices            shared options for every question: key, label, hint,
+                       and path ([step id, option key] pairs through `steps`)
+    steps              optional decision tree; adds "Walk the tree" in deck mode
+    filters            deck filters: field (a question attribute), label, values
+    questions[]        q, answer (index), options (when there are no shared
+                       choices), explain or notes[label, text], also[i, note]
+                       for other accepted answers, and optionally title,
+                       meta, kind, level and an inline svg
+{% endcomment %}
+{% assign quiz = site.data.quizzes[include.id] %}
+{% assign quiz_mode = quiz.mode | default: 'deck' %}
+{% capture quiz_choices %}{% for c in quiz.choices %}{{ c.label }}|{% endfor %}{% endcapture %}
+{% assign quiz_labels = quiz_choices | split: '|' %}
+<section class="quiz" id="quiz-{{ quiz.id }}" data-quiz="{{ quiz.id }}" data-mode="{{ quiz_mode }}" data-storage="{{ quiz.storage | default: quiz.id }}" data-pagefind-ignore>
+{%- if quiz.choices %}
+<div class="quiz-legend">
+<p class="quiz-ask">{{ quiz.answer_label | default: 'Answer with one of:' }}</p>
+<ol class="quiz-choices">
+{%- for c in quiz.choices %}
+<li data-key="{{ c.key }}"{% if c.path %} data-path="{% for p in c.path %}{{ p | join: '=' }}{% unless forloop.last %},{% endunless %}{% endfor %}"{% endif %}><span class="quiz-opt-label">{{ c.label }}</span>{% if c.hint %} <span class="quiz-hint">{{ c.hint }}</span>{% endif %}</li>
+{%- endfor %}
+</ol>
+</div>
+{%- endif %}
+{%- if quiz.steps %}
+<ol class="quiz-steps" hidden>
+{%- for s in quiz.steps %}
+<li data-step="{{ s.id }}" data-short="{{ s.short | escape }}"><span class="quiz-step-q">{{ s.q }}</span>
+<ul>{% for o in s.opts %}<li data-opt="{{ o[0] }}">{{ o[1] }}</li>{% endfor %}</ul></li>
+{%- endfor %}
+</ol>
+{%- endif %}
+{%- if quiz.filters %}
+<div class="quiz-filters" hidden>
+{%- for f in quiz.filters %}
+<label>{{ f.label }} <select data-field="{{ f.field }}"><option value="">All</option>{% for v in f.values %}<option value="{{ v[0] }}">{{ v[1] }}</option>{% endfor %}</select></label>
+{%- endfor %}
+</div>
+{%- endif %}
+<ol class="quiz-items">
+{%- for item in quiz.questions %}
+{%- assign n = item.n | default: forloop.index %}
+<li class="quiz-item" id="quiz-{{ quiz.id }}-{{ n }}" data-n="{{ n }}" data-answer="{{ item.answer }}"{% if item.also %} data-also="{% for a in item.also %}{{ a.i }}{% unless forloop.last %},{% endunless %}{% endfor %}"{% endif %}{% if item.kind %} data-kind="{{ item.kind }}"{% endif %}{% if item.level %} data-level="{{ item.level }}"{% endif %}>
+<div class="quiz-item-head"><span class="quiz-num">{{ n }}</span>{% if item.title %}<span class="quiz-title">{{ item.title }}</span>{% endif %}{% if item.meta %}<span class="quiz-meta">{{ item.meta | join: ' · ' }}</span>{% endif %}{% if item.level %}<span class="quiz-level" title="Level {{ item.level }} of 3" aria-label="Level {{ item.level }} of 3">{% for i in (1..3) %}<i{% if i <= item.level %} class="on"{% endif %}></i>{% endfor %}</span>{% endif %}</div>
+<div class="quiz-prompt">{{ item.q | markdownify }}</div>
+{%- if item.svg %}
+<figure class="quiz-svg">{{ item.svg }}</figure>
+{%- endif %}
+{%- if item.options %}
+<ol class="quiz-options">
+{%- for o in item.options %}
+<li><span class="quiz-opt-label">{{ o | markdownify | remove: '<p>' | remove: '</p>' | strip }}</span></li>
+{%- endfor %}
+</ol>
+{%- endif %}
+<details class="quiz-answer">
+<summary>Show answer</summary>
+<div class="quiz-answer-body">
+{%- if item.options %}{% assign right = item.options[item.answer] | markdownify | remove: '<p>' | remove: '</p>' | strip %}{% else %}{% assign right = quiz_labels[item.answer] %}{% endif %}
+<p class="quiz-key"><span>Answer</span> <strong>{{ right }}</strong></p>
+{%- for a in item.also %}
+<p class="quiz-also"><span>Also accepted</span> <strong>{% if item.options %}{{ item.options[a.i] | markdownify | remove: '<p>' | remove: '</p>' | strip }}{% else %}{{ quiz_labels[a.i] }}{% endif %}.</strong> {{ a.note | markdownify | remove: '<p>' | remove: '</p>' | strip }}</p>
+{%- endfor %}
+{%- if item.notes %}
+<dl class="quiz-notes">
+{%- for note in item.notes %}
+<div><dt>{{ note.label }}</dt><dd>{{ note.text | markdownify | remove: '<p>' | remove: '</p>' | strip }}</dd></div>
+{%- endfor %}
+</dl>
+{%- endif %}
+{%- if item.explain %}
+<div class="quiz-explain">{{ item.explain | markdownify }}</div>
+{%- endif %}
+{%- if quiz.steps and quiz.choices %}
+{%- assign choice = quiz.choices[item.answer] %}
+<p class="quiz-path-label">The path through the tree</p>
+<ol class="quiz-path">
+{%- for p in choice.path %}{% assign step = quiz.steps | where: 'id', p[0] | first %}{% for o in step.opts %}{% if o[0] == p[1] %}<li><span>{{ step.q }}</span> <b>{{ o[1] }}</b></li>{% endif %}{% endfor %}{% endfor %}
+<li class="end">{{ choice.label }}</li>
+</ol>
+{%- endif %}
+</div>
+</details>
+</li>
+{%- endfor %}
+</ol>
+</section>
+{% unless quiz_script %}{% assign quiz_script = true %}<script src="{{ '/assets/js/quiz.js' | relative_url }}" defer></script>{% endunless %}
