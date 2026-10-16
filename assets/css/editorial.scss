@@ -1021,10 +1021,12 @@ html:root {
 
 /* ---- code ---- */
 
+/* No ligatures: in code, == and = (or /\ and =>) must stay visibly distinct. */
 code,
 pre {
   font-family: $jb-mono;
-  font-feature-settings: 'liga' 1, 'calt' 1;
+  font-variant-ligatures: none;
+  font-feature-settings: 'liga' 0, 'calt' 0;
 }
 
 :not(pre) > code {

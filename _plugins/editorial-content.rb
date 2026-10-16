@@ -31,7 +31,8 @@ module EditorialContent
     'rb' => 'Ruby', 'rs' => 'Rust', 'yml' => 'YAML', 'yaml' => 'YAML',
     'json' => 'JSON', 'xml' => 'XML', 'html' => 'HTML', 'css' => 'CSS',
     'sql' => 'SQL', 'http' => 'HTTP', 'toml' => 'TOML', 'dockerfile' => 'Dockerfile',
-    'conf' => 'Config', 'curl' => 'curl', 'text' => 'Text', 'plaintext' => 'Text'
+    'conf' => 'Config', 'curl' => 'curl', 'text' => 'Text', 'plaintext' => 'Text',
+    'tla' => 'TLA+'
   }.freeze
 
   # What a figure paragraph may hold besides nothing: images, line breaks, a caption.
