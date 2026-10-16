@@ -177,11 +177,12 @@ samp {
   font-family: $jb-mono;
 }
 
-/* enable ligatures (-> => != <=) in code */
+/* no ligatures in code: show == and = (-> => != <=) as typed */
 .highlight,
 .highlight pre,
 code {
-  font-feature-settings: 'liga' 1, 'calt' 1;
+  font-variant-ligatures: none;
+  font-feature-settings: 'liga' 0, 'calt' 0;
 }
 
 /* ---- Dark/Light mode images ---- */
