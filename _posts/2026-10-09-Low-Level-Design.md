@@ -2434,6 +2434,9 @@ Everything from Parts 3 to 5, arranged for the moment you have a real problem: f
 ### The map
 {: #the-map}
 
+![The 23 Gang of Four patterns in three types, each tagged with a mnemonic of its initials. Creational (5), how objects are made, ABFPS: Singleton (only one ever), Prototype (copy an existing one), Builder (assemble step by step), Factory Method and Abstract Factory (delegate to a factory). Structural (7), how objects are wired, ABCD + FFP: Adapter and Facade (wrap with a new interface), Decorator and Proxy (wrap with the same interface), Composite (part-whole tree), Bridge (split two hierarchies), Flyweight (share to save memory). Behavioral (11), how objects interact, MICS On TV: Strategy, State and Template Method (swap the algorithm), Command and Chain of Responsibility (package a request), Observer and Mediator (notify and coordinate), Iterator, Visitor and Interpreter (work on a structure), Memento (save and restore)](/images/lld/06-field-guide/00-gof-classification.webp)
+*The green tag under each type spells its patterns' initials; in MICS On TV, M, I, C and S each stand for two. The table below sorts the same 23 by how often you'll actually write them.*
+
 | Bucket | The question | Write often | Use sometimes | Rarely build |
 |---|---|---|---|---|
 | **Creational** · how objects are born | Who gets to call new? | [Singleton](#singleton), [Factory](#factory), [Builder](#builder) | [Factory Method](#factory-method), [Abstract Factory](#abstract-factory), [Prototype](#prototype) | – |
