@@ -1,5 +1,9 @@
 # Version updates for the pinned gems (Gemfile.lock) and workflow actions
 # (commit SHAs). PRs go to develop, so they build there before a release.
+#
+# Security updates ignore target-branch: GitHub always opens those against the
+# repository's DEFAULT branch, which is why develop (not master) is the default.
+# Making master the default again sends security PRs straight to master.
 version: 2
 updates:
   - package-ecosystem: bundler
