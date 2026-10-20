@@ -102,7 +102,7 @@
   </footer>
   </div>
 
-  <dialog class="zoom" aria-label="Enlarged image"><img alt=""></dialog>
+  <dialog class="zoom" aria-label="Enlarged image"></dialog>
 
   {% include editorial-shell.html %}
 
@@ -144,7 +144,7 @@
 
       // Click-to-zoom, for images shown smaller than their real size.
       var zoom = document.querySelector('dialog.zoom');
-      var zoomImg = zoom.querySelector('img');
+      var zoomImg = zoom.appendChild(document.createElement('img')); // made here: an <img> without src is invalid HTML
       var article = document.querySelector('.post');
       var canZoom = function (img) { return img.naturalWidth > img.clientWidth; };
       var markZoom = function (img) { img.classList.toggle('zoomable', canZoom(img)); };
