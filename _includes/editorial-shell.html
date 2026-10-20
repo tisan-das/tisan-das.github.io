@@ -46,20 +46,38 @@
       document.querySelector('.sidebar').classList.toggle('open', open);
     });
 
-    // Series parts: collapsed by default. Once opened, stay open for the rest
-    // of the visit, so moving part to part doesn't snap the list shut.
+    // Series parts: collapsed on every page load; the arrow button and the
+    // post's "Part N of M" link both toggle it.
     var expand = document.querySelector('.nav-expand');
     if (expand) {
       var parts = document.getElementById('series-parts');
+      var partsLink = document.querySelector('.series-parts-link');
       var setOpen = function (open) {
         expand.setAttribute('aria-expanded', open);
+        if (partsLink) partsLink.setAttribute('aria-expanded', open);
         parts.hidden = !open;
-        sessionStorage.setItem('series-parts-open', open ? '1' : '');
       };
-      if (sessionStorage.getItem('series-parts-open')) setOpen(true);
       expand.addEventListener('click', function () {
-        setOpen(expand.getAttribute('aria-expanded') !== 'true');
+        setOpen(parts.hidden);
       });
+
+      // Opening from "Part N of M" also focuses the current part. On phones the
+      // sidebar is behind the menu, so the link goes to the Series page instead.
+      // The laptop rail stays wide until focus leaves it.
+      var sidebar = document.querySelector('.sidebar');
+      if (partsLink) {
+        partsLink.addEventListener('click', function (e) {
+          if (!matchMedia('(min-width: 64rem)').matches) return;
+          e.preventDefault();
+          var open = parts.hidden;
+          setOpen(open);
+          sidebar.classList.toggle('keep-open', open);
+          if (open) parts.querySelector('[aria-current="page"]').focus();
+        });
+        sidebar.addEventListener('focusout', function (e) {
+          if (!sidebar.contains(e.relatedTarget)) sidebar.classList.remove('keep-open');
+        });
+      }
     }
 
     // Email panel: the address is assembled on first open, then the panel is

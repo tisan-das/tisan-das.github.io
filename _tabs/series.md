@@ -72,7 +72,7 @@ Problem sets in C++ (solutions collapsed — open when you want them).
 
 {{ s.description }}
 
-{% assign parts = site.posts | where: "series", s.name | sort: "date" %}
+{% include series-posts.html series=s.name %}{% assign parts = series_posts %}
 {% if parts.size == 0 %}
 _No posts tagged with this series yet._
 {% else %}

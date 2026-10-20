@@ -475,6 +475,11 @@ $rail: 4.25rem;
 }
 
 @media (max-width: 63.99rem) {
+  // anchor jumps land below the sticky top bar (~3.6rem), not under it
+  html {
+    scroll-padding-top: 5rem;
+  }
+
   .sidebar {
     position: sticky;
     inset: 0 0 auto;
@@ -718,6 +723,10 @@ html:root {
 
   a {
     text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
