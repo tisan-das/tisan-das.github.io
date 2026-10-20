@@ -36,7 +36,14 @@
     <article class="post" data-pagefind-body>
       <header class="post-header">
         {% if part %}
-          <p class="kicker" data-pagefind-ignore><a href="{{ '/series/' | relative_url }}">{{ page.series }}</a> · Part {{ part }} of {{ series_posts.size }}</p>
+          {% comment %}
+            Both links go to this series on the Series page. On wider screens the
+            script in editorial-shell.html makes "Part N of M" open the sidebar's
+            list of parts instead. A one-post series shows only its name.
+          {% endcomment %}
+          {% assign series_slug = site.data.series | where: "name", page.series | map: "slug" | first %}
+          {% capture series_url %}{{ '/series/' | relative_url }}{% if series_slug %}#{{ series_slug }}{% endif %}{% endcapture %}
+          <p class="kicker" data-pagefind-ignore><a href="{{ series_url }}">{{ page.series }}</a>{% if series_posts.size > 1 %} · <a class="series-parts-link" href="{{ series_url }}" aria-controls="series-parts">Part {{ part }} of {{ series_posts.size }}</a>{% endif %}</p>
         {% endif %}
         <h1 data-pagefind-meta="title:{{ page.title | escape }}">{{ display_title | default: page.title }}</h1>
         <p class="meta" data-pagefind-ignore>

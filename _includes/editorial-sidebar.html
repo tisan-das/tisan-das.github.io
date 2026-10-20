@@ -26,7 +26,7 @@
     <a href="{{ '/' | relative_url }}"{% if on_home %} aria-current="page"{% endif %}>{% include editorial-icon.html fa='home' %}<span class="label">Home</span></a>
     {% for tab in site.tabs %}
       {% assign in_series = false %}
-      {% if part and tab.url == '/series/' %}{% assign in_series = true %}{% endif %}
+      {% if part and series_posts.size > 1 and tab.url == '/series/' %}{% assign in_series = true %}{% endif %}
       {% if in_series %}
         {% comment %} Series is highlighted on a series post; its parts stay collapsed until the reader opens them. {% endcomment %}
         <div class="nav-group active">

@@ -60,6 +60,24 @@
       expand.addEventListener('click', function () {
         setOpen(expand.getAttribute('aria-expanded') !== 'true');
       });
+
+      // "Part N of M" in a post's header opens this list and focuses the current
+      // part. On phones the sidebar is behind the menu, so the link goes to the
+      // Series page instead. The laptop rail stays wide until focus leaves it.
+      var partsLink = document.querySelector('.series-parts-link');
+      var sidebar = document.querySelector('.sidebar');
+      if (partsLink) {
+        partsLink.addEventListener('click', function (e) {
+          if (!matchMedia('(min-width: 64rem)').matches) return;
+          e.preventDefault();
+          setOpen(true);
+          sidebar.classList.add('keep-open');
+          parts.querySelector('[aria-current="page"]').focus();
+        });
+        sidebar.addEventListener('focusout', function (e) {
+          if (!sidebar.contains(e.relatedTarget)) sidebar.classList.remove('keep-open');
+        });
+      }
     }
 
     // Email panel: the address is assembled on first open, then the panel is
