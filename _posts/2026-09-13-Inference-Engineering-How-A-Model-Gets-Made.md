@@ -19,7 +19,7 @@ This series walks the path from training objectives down to IEEE 754 bit pattern
 
 {% include series-nav.html %}
 
-> **Disclaimer.** This post is drafted with assistance from large language models (Claude Opus 5 and DeepSeek V4.1 Flash) based on conversations exploring LLM training and inference. All content has been reviewed, edited, and verified by a human author.
+> **Disclaimer.** This post is drafted with assistance from large language models (Claude Opus 5 and DeepSeek V4.1 Flash) based on conversations exploring LLM training and inference. All content has been reviewed, edited, and verified.
 {: .prompt-info }
 
 > **Where this started.** The series grew out of chapters 1 and 2 of Philip Kiely's [*Inference Engineering*](https://www.baseten.co/inference-engineering/) (Baseten Books, 2026), which is free to read online. This is not a chapter summary; it is the set of questions those chapters left me with, chased down to first principles.

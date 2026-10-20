@@ -22,7 +22,7 @@ The fix is not a better check. The fix is to stop checking. PostgreSQL can make 
 
 {% include series-nav.html %}
 
-> **Disclaimer.** This post is drafted with assistance from large language models (Claude Opus 5 and DeepSeek V4.1 Flash) based on conversations exploring PostgreSQL concurrency, exclusion constraints and range-type semantics. All content has been reviewed, edited, and verified by a human author against the official PostgreSQL documentation.
+> **Disclaimer.** This post is drafted with assistance from large language models (Claude Opus 5 and DeepSeek V4.1 Flash) based on conversations exploring PostgreSQL concurrency, exclusion constraints and range-type semantics. All content has been reviewed, edited, and verified against the official PostgreSQL documentation.
 {: .prompt-info }
 
 This post walks through the whole thing: why the naive version is broken, how exclusion constraints work internally, the range-type semantics that trip people up, how to model the columns, and when a different mechanism is the right answer.

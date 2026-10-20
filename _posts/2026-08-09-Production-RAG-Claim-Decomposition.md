@@ -14,7 +14,7 @@ That is this post — the first that goes back to deepen a step the build guide 
 
 {% include series-nav.html %}
 
-> **Disclaimer.** This post is drafted with assistance from large language models (Claude Opus 4.8 and DeepSeek V4 Pro) based on conversations exploring production RAG concepts. All content has been reviewed, edited, and verified by a human author.
+> **Disclaimer.** This post is drafted with assistance from large language models (Claude Opus 4.8 and DeepSeek V4 Pro) based on conversations exploring production RAG concepts. All content has been reviewed, edited, and verified.
 {: .prompt-info }
 
 ## There is no canonical decomposition

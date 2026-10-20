@@ -17,7 +17,7 @@ So the thing that seems to be missing is exactly what Part 2 spent its time budg
 
 {% include series-nav.html %}
 
-> **Disclaimer.** This post is drafted with assistance from large language models (Claude Opus 5 and DeepSeek V4.1 Flash) based on conversations exploring LLM training and inference. All content has been reviewed, edited, and verified by a human author.
+> **Disclaimer.** This post is drafted with assistance from large language models (Claude Opus 5 and DeepSeek V4.1 Flash) based on conversations exploring LLM training and inference. All content has been reviewed, edited, and verified.
 {: .prompt-info }
 
 ## An encoder block and a decoder block are made of the same parts
