@@ -16,7 +16,7 @@ Diffusion language models have not displaced autoregressive ones, but they are w
 
 {% include series-nav.html %}
 
-> **Disclaimer.** This post is drafted with assistance from large language models (Claude Opus 5 and DeepSeek V4.1 Flash) based on conversations exploring LLM training and inference. All content has been reviewed, edited, and verified by a human author.
+> **Disclaimer.** This post is drafted with assistance from large language models (Claude Opus 5 and DeepSeek V4.1 Flash) based on conversations exploring LLM training and inference. All content has been reviewed, edited, and verified.
 {: .prompt-info }
 
 > **The short version.**

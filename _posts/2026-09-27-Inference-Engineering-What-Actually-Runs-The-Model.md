@@ -19,7 +19,7 @@ Running the model can be done with a mere 200-line PyTorch script. However, we n
 
 {% include series-nav.html %}
 
-> **Disclaimer.** This post is drafted with assistance from large language models, or LLMs (Claude Opus 5 and DeepSeek V4.1 Flash), based on conversations exploring LLM training and inference. All content has been reviewed, edited, and verified by a human author.
+> **Disclaimer.** This post is drafted with assistance from large language models, or LLMs (Claude Opus 5 and DeepSeek V4.1 Flash), based on conversations exploring LLM training and inference. All content has been reviewed, edited, and verified.
 {: .prompt-info }
 
 ## The stack

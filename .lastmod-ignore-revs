@@ -17,3 +17,4 @@ eb08c16  # Add AI-assistance disclaimer to the Production RAG posts
 6974449  # Convert RAG images to WebP, dark-mode legibility
 ae5ba08  # Phase 0: quick fixes
 377b30c  # Standardize heading levels in RAG part 1
+5ca4118  # Remove human author wording from the LLM disclaimer

@@ -26,7 +26,7 @@ Most of the small examples follow Hillel Wayne's excellent [Learn TLA+](https://
 
 Every complete spec in this post was run through the TLA+ tools (version 1.8.0), and the TLC results quoted here, from state counts to which properties fail, come from those runs.
 
-> **Disclaimer.** This post is drafted with assistance from large language models (Claude Opus 5.5 and DeepSeek V4.1) based on conversations exploring TLA+ and PlusCal. All content has been reviewed, edited, and verified by a human author.
+> **Disclaimer.** This post is drafted with assistance from large language models (Claude Opus 5.5 and DeepSeek V4.1) based on conversations exploring TLA+ and PlusCal. All content has been reviewed, edited, and verified.
 {: .prompt-info }
 
 ## 1. Four names for four things: TLA, TLA+, PlusCal, TLC

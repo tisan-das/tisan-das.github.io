@@ -13,7 +13,7 @@ Low-level design rests on two skills: telling how two classes are related, and r
 
 Each part ends with a quiz. Answers are saved in this browser, so you can revisit after few days and re-run them cold. The Go samples need Go 1.21 or later (1.23 for `iter` and `unique`); the Python samples need 3.10 or later.
 
-> **Disclaimer.** This post is drafted with assistance from large language models (Claude Opus 5.5 and DeepSeek V4.1 Flash) based on conversations exploring low-level design and design patterns. All content has been reviewed, edited, and verified by a human author.
+> **Disclaimer.** This post is drafted with assistance from large language models (Claude Opus 5.5 and DeepSeek V4.1 Flash) based on conversations exploring low-level design and design patterns. All content has been reviewed, edited, and verified.
 {: .prompt-info }
 
 ## Part 1: Association, aggregation or composition?
