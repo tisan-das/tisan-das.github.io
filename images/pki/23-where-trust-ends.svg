@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 580" width="840" height="580" role="img" aria-labelledby="57-where-trust-ends-title 57-where-trust-ends-desc" font-family="Inter, &#x27;Segoe UI&#x27;, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif"><title id="57-where-trust-ends-title">Where every chain of trust behind an mTLS certificate ends</title><desc id="57-where-trust-ends-desc">Keep asking &#x27;why is this trusted?&#x27;. Left: the CA&#x27;s signature is trusted because its root is in the trust store, which a vendor or your admin put there. Right: the name is right because a platform token said so, because the platform launched the pod, because someone with RBAC rights deployed it, because an authenticated admin did. Both end in human decisions.</desc><style>.bg{fill:#FFFFFF;stroke:#E3E1D9}
+.hd{fill:#2C2C2A;font-size:17px;font-weight:600}
+.t{fill:#2C2C2A;font-size:14px}
+.th{fill:#2C2C2A;font-size:15px;font-weight:600}
+.ts{fill:#5F5E5A;font-size:13px}
+.tm{fill:#2C2C2A;font-size:12.5px;font-family:'JetBrains Mono', 'SFMono-Regular', Menlo, Consolas, 'DejaVu Sans Mono', monospace}
+.ln{stroke:#6E6D67;fill:none}
+.lf{stroke:#B4B2A9;fill:none}
+.ct{fill:none;stroke:#6E6D67}
+.plate{fill:#FFFFFF}
+.fl{fill:#6E6D67}
+.k-purple>rect,.k-purple>ellipse,.k-purple>circle,.k-purple>polygon,.k-purple>path{fill:#EEEDFE;stroke:#534AB7}
+.k-purple>.th,.k-purple>.t,.k-purple>.tm{fill:#3C3489}
+.k-purple>.ts{fill:#534AB7}
+.s-purple{stroke:#7F77DD;fill:none}
+.f-purple{fill:#7F77DD}
+.x-purple{fill:#534AB7}
+.b-purple{fill:#AFA9EC;stroke:#534AB7}
+.k-teal>rect,.k-teal>ellipse,.k-teal>circle,.k-teal>polygon,.k-teal>path{fill:#E1F5EE;stroke:#0F6E56}
+.k-teal>.th,.k-teal>.t,.k-teal>.tm{fill:#085041}
+.k-teal>.ts{fill:#0F6E56}
+.s-teal{stroke:#1D9E75;fill:none}
+.f-teal{fill:#1D9E75}
+.x-teal{fill:#0F6E56}
+.b-teal{fill:#5DCAA5;stroke:#0F6E56}
+.k-coral>rect,.k-coral>ellipse,.k-coral>circle,.k-coral>polygon,.k-coral>path{fill:#FAECE7;stroke:#993C1D}
+.k-coral>.th,.k-coral>.t,.k-coral>.tm{fill:#712B13}
+.k-coral>.ts{fill:#993C1D}
+.s-coral{stroke:#D85A30;fill:none}
+.f-coral{fill:#D85A30}
+.x-coral{fill:#993C1D}
+.b-coral{fill:#F0997B;stroke:#993C1D}
+.k-pink>rect,.k-pink>ellipse,.k-pink>circle,.k-pink>polygon,.k-pink>path{fill:#FBEAF0;stroke:#993556}
+.k-pink>.th,.k-pink>.t,.k-pink>.tm{fill:#72243E}
+.k-pink>.ts{fill:#993556}
+.s-pink{stroke:#D4537E;fill:none}
+.f-pink{fill:#D4537E}
+.x-pink{fill:#993556}
+.b-pink{fill:#ED93B1;stroke:#993556}
+.k-gray>rect,.k-gray>ellipse,.k-gray>circle,.k-gray>polygon,.k-gray>path{fill:#F1EFE8;stroke:#5F5E5A}
+.k-gray>.th,.k-gray>.t,.k-gray>.tm{fill:#444441}
+.k-gray>.ts{fill:#5F5E5A}
+.s-gray{stroke:#888780;fill:none}
+.f-gray{fill:#888780}
+.x-gray{fill:#5F5E5A}
+.b-gray{fill:#B4B2A9;stroke:#5F5E5A}
+.k-blue>rect,.k-blue>ellipse,.k-blue>circle,.k-blue>polygon,.k-blue>path{fill:#E6F1FB;stroke:#185FA5}
+.k-blue>.th,.k-blue>.t,.k-blue>.tm{fill:#0C447C}
+.k-blue>.ts{fill:#185FA5}
+.s-blue{stroke:#378ADD;fill:none}
+.f-blue{fill:#378ADD}
+.x-blue{fill:#185FA5}
+.b-blue{fill:#85B7EB;stroke:#185FA5}
+.k-green>rect,.k-green>ellipse,.k-green>circle,.k-green>polygon,.k-green>path{fill:#EAF3DE;stroke:#3B6D11}
+.k-green>.th,.k-green>.t,.k-green>.tm{fill:#27500A}
+.k-green>.ts{fill:#3B6D11}
+.s-green{stroke:#639922;fill:none}
+.f-green{fill:#639922}
+.x-green{fill:#3B6D11}
+.b-green{fill:#97C459;stroke:#3B6D11}
+.k-amber>rect,.k-amber>ellipse,.k-amber>circle,.k-amber>polygon,.k-amber>path{fill:#FAEEDA;stroke:#854F0B}
+.k-amber>.th,.k-amber>.t,.k-amber>.tm{fill:#633806}
+.k-amber>.ts{fill:#854F0B}
+.s-amber{stroke:#BA7517;fill:none}
+.f-amber{fill:#BA7517}
+.x-amber{fill:#854F0B}
+.b-amber{fill:#EF9F27;stroke:#854F0B}
+.k-red>rect,.k-red>ellipse,.k-red>circle,.k-red>polygon,.k-red>path{fill:#FCEBEB;stroke:#A32D2D}
+.k-red>.th,.k-red>.t,.k-red>.tm{fill:#791F1F}
+.k-red>.ts{fill:#A32D2D}
+.s-red{stroke:#E24B4A;fill:none}
+.f-red{fill:#E24B4A}
+.x-red{fill:#A32D2D}
+.b-red{fill:#F09595;stroke:#A32D2D}
+@media (prefers-color-scheme: dark){
+.bg{fill:#1E1E1D;stroke:#3A3A38}
+.hd,.t,.th,.tm{fill:#ECEBE6}
+.ts{fill:#B9B7AE}
+.ln{stroke:#A8A69E}
+.lf{stroke:#5F5E5A}
+.ct{stroke:#A8A69E}
+.plate{fill:#1E1E1D}
+.fl{fill:#A8A69E}
+.b-purple{fill:#534AB7;stroke:#AFA9EC}
+.k-purple>rect,.k-purple>ellipse,.k-purple>circle,.k-purple>polygon,.k-purple>path{fill:#3C3489;stroke:#AFA9EC}
+.k-purple>.th,.k-purple>.t,.k-purple>.tm{fill:#EEEDFE}
+.k-purple>.ts{fill:#CECBF6}
+.s-purple{stroke:#AFA9EC}
+.f-purple{fill:#AFA9EC}
+.x-purple{fill:#CECBF6}
+.b-teal{fill:#0F6E56;stroke:#5DCAA5}
+.k-teal>rect,.k-teal>ellipse,.k-teal>circle,.k-teal>polygon,.k-teal>path{fill:#085041;stroke:#5DCAA5}
+.k-teal>.th,.k-teal>.t,.k-teal>.tm{fill:#E1F5EE}
+.k-teal>.ts{fill:#9FE1CB}
+.s-teal{stroke:#5DCAA5}
+.f-teal{fill:#5DCAA5}
+.x-teal{fill:#9FE1CB}
+.b-coral{fill:#993C1D;stroke:#F0997B}
+.k-coral>rect,.k-coral>ellipse,.k-coral>circle,.k-coral>polygon,.k-coral>path{fill:#712B13;stroke:#F0997B}
+.k-coral>.th,.k-coral>.t,.k-coral>.tm{fill:#FAECE7}
+.k-coral>.ts{fill:#F5C4B3}
+.s-coral{stroke:#F0997B}
+.f-coral{fill:#F0997B}
+.x-coral{fill:#F5C4B3}
+.b-pink{fill:#993556;stroke:#ED93B1}
+.k-pink>rect,.k-pink>ellipse,.k-pink>circle,.k-pink>polygon,.k-pink>path{fill:#72243E;stroke:#ED93B1}
+.k-pink>.th,.k-pink>.t,.k-pink>.tm{fill:#FBEAF0}
+.k-pink>.ts{fill:#F4C0D1}
+.s-pink{stroke:#ED93B1}
+.f-pink{fill:#ED93B1}
+.x-pink{fill:#F4C0D1}
+.b-gray{fill:#5F5E5A;stroke:#B4B2A9}
+.k-gray>rect,.k-gray>ellipse,.k-gray>circle,.k-gray>polygon,.k-gray>path{fill:#444441;stroke:#B4B2A9}
+.k-gray>.th,.k-gray>.t,.k-gray>.tm{fill:#F1EFE8}
+.k-gray>.ts{fill:#D3D1C7}
+.s-gray{stroke:#B4B2A9}
+.f-gray{fill:#B4B2A9}
+.x-gray{fill:#D3D1C7}
+.b-blue{fill:#185FA5;stroke:#85B7EB}
+.k-blue>rect,.k-blue>ellipse,.k-blue>circle,.k-blue>polygon,.k-blue>path{fill:#0C447C;stroke:#85B7EB}
+.k-blue>.th,.k-blue>.t,.k-blue>.tm{fill:#E6F1FB}
+.k-blue>.ts{fill:#B5D4F4}
+.s-blue{stroke:#85B7EB}
+.f-blue{fill:#85B7EB}
+.x-blue{fill:#B5D4F4}
+.b-green{fill:#3B6D11;stroke:#97C459}
+.k-green>rect,.k-green>ellipse,.k-green>circle,.k-green>polygon,.k-green>path{fill:#27500A;stroke:#97C459}
+.k-green>.th,.k-green>.t,.k-green>.tm{fill:#EAF3DE}
+.k-green>.ts{fill:#C0DD97}
+.s-green{stroke:#97C459}
+.f-green{fill:#97C459}
+.x-green{fill:#C0DD97}
+.b-amber{fill:#854F0B;stroke:#EF9F27}
+.k-amber>rect,.k-amber>ellipse,.k-amber>circle,.k-amber>polygon,.k-amber>path{fill:#633806;stroke:#EF9F27}
+.k-amber>.th,.k-amber>.t,.k-amber>.tm{fill:#FAEEDA}
+.k-amber>.ts{fill:#FAC775}
+.s-amber{stroke:#EF9F27}
+.f-amber{fill:#EF9F27}
+.x-amber{fill:#FAC775}
+.b-red{fill:#A32D2D;stroke:#F09595}
+.k-red>rect,.k-red>ellipse,.k-red>circle,.k-red>polygon,.k-red>path{fill:#791F1F;stroke:#F09595}
+.k-red>.th,.k-red>.t,.k-red>.tm{fill:#FCEBEB}
+.k-red>.ts{fill:#F7C1C1}
+.s-red{stroke:#F09595}
+.f-red{fill:#F09595}
+.x-red{fill:#F7C1C1}
+}</style><defs><marker id="m-ln" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse" markerUnits="userSpaceOnUse" style="overflow:visible"><path class="fl" d="M0 0.8 L9.5 5 L0 9.2 Z" transform="scale(1.15) translate(-1.5 -0.65)"/></marker><marker id="m-purple" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse" markerUnits="userSpaceOnUse" style="overflow:visible"><path class="f-purple" d="M0 0.8 L9.5 5 L0 9.2 Z" transform="scale(1.15) translate(-1.5 -0.65)"/></marker><marker id="m-teal" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse" markerUnits="userSpaceOnUse" style="overflow:visible"><path class="f-teal" d="M0 0.8 L9.5 5 L0 9.2 Z" transform="scale(1.15) translate(-1.5 -0.65)"/></marker><marker id="m-coral" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse" markerUnits="userSpaceOnUse" style="overflow:visible"><path class="f-coral" d="M0 0.8 L9.5 5 L0 9.2 Z" transform="scale(1.15) translate(-1.5 -0.65)"/></marker><marker id="m-pink" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse" markerUnits="userSpaceOnUse" style="overflow:visible"><path class="f-pink" d="M0 0.8 L9.5 5 L0 9.2 Z" transform="scale(1.15) translate(-1.5 -0.65)"/></marker><marker id="m-gray" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse" markerUnits="userSpaceOnUse" style="overflow:visible"><path class="f-gray" d="M0 0.8 L9.5 5 L0 9.2 Z" transform="scale(1.15) translate(-1.5 -0.65)"/></marker><marker id="m-blue" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse" markerUnits="userSpaceOnUse" style="overflow:visible"><path class="f-blue" d="M0 0.8 L9.5 5 L0 9.2 Z" transform="scale(1.15) translate(-1.5 -0.65)"/></marker><marker id="m-green" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse" markerUnits="userSpaceOnUse" style="overflow:visible"><path class="f-green" d="M0 0.8 L9.5 5 L0 9.2 Z" transform="scale(1.15) translate(-1.5 -0.65)"/></marker><marker id="m-amber" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse" markerUnits="userSpaceOnUse" style="overflow:visible"><path class="f-amber" d="M0 0.8 L9.5 5 L0 9.2 Z" transform="scale(1.15) translate(-1.5 -0.65)"/></marker><marker id="m-red" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse" markerUnits="userSpaceOnUse" style="overflow:visible"><path class="f-red" d="M0 0.8 L9.5 5 L0 9.2 Z" transform="scale(1.15) translate(-1.5 -0.65)"/></marker></defs><rect class="bg" x="0.5" y="0.5" width="839" height="579" rx="14" stroke-width="1"/><text class="hd" x="24.0" y="30.0" text-anchor="start" dominant-baseline="central">Where every chain of trust behind an mTLS certificate ends</text>
+<text class="th" x="204.0" y="72.0" text-anchor="middle" dominant-baseline="central">Why trust the CA&#x27;s signature?</text>
+<text class="th" x="636.0" y="72.0" text-anchor="middle" dominant-baseline="central">Why is the name right?</text>
+<g class="k-teal"><rect x="24.0" y="92.0" width="360.0" height="56.0" rx="8" stroke-width="1"/><text class="th" x="204.0" y="111.5" text-anchor="middle" dominant-baseline="central">Peer accepts the cert</text><text class="ts" x="204.0" y="130.0" text-anchor="middle" dominant-baseline="central">its signature chains to a root</text></g>
+<g class="k-teal"><rect x="24.0" y="166.0" width="360.0" height="56.0" rx="8" stroke-width="1"/><text class="th" x="204.0" y="185.5" text-anchor="middle" dominant-baseline="central">Root is in the trust store</text><text class="ts" x="204.0" y="204.0" text-anchor="middle" dominant-baseline="central">someone put it there</text></g>
+<path class="ln" d="M 204.0 148.0 L 204.0 166.0" stroke-width="1.4" marker-end="url(#m-ln)" stroke-linejoin="round" stroke-linecap="round"/>
+<g class="k-teal"><rect x="24.0" y="240.0" width="360.0" height="56.0" rx="8" stroke-width="1"/><text class="th" x="204.0" y="259.5" text-anchor="middle" dominant-baseline="central">Installed by a vendor or you</text><text class="ts" x="204.0" y="278.0" text-anchor="middle" dominant-baseline="central">Mozilla, Apple, Microsoft, admin</text></g>
+<path class="ln" d="M 204.0 222.0 L 204.0 240.0" stroke-width="1.4" marker-end="url(#m-ln)" stroke-linejoin="round" stroke-linecap="round"/>
+<path class="ln" d="M 204.0 296.0 L 204.0 482.0" stroke-width="1.4" marker-end="url(#m-ln)" stroke-linejoin="round" stroke-linecap="round"/>
+<g class="k-purple"><rect x="456.0" y="92.0" width="360.0" height="56.0" rx="8" stroke-width="1"/><text class="th" x="636.0" y="111.5" text-anchor="middle" dominant-baseline="central">Cert says orders-api</text><text class="ts" x="636.0" y="130.0" text-anchor="middle" dominant-baseline="central">CA checked the platform token</text></g>
+<g class="k-purple"><rect x="456.0" y="166.0" width="360.0" height="56.0" rx="8" stroke-width="1"/><text class="th" x="636.0" y="185.5" text-anchor="middle" dominant-baseline="central">Token says orders-api</text><text class="ts" x="636.0" y="204.0" text-anchor="middle" dominant-baseline="central">signed by the K8s API server</text></g>
+<path class="ln" d="M 636.0 148.0 L 636.0 166.0" stroke-width="1.4" marker-end="url(#m-ln)" stroke-linejoin="round" stroke-linecap="round"/>
+<g class="k-purple"><rect x="456.0" y="240.0" width="360.0" height="56.0" rx="8" stroke-width="1"/><text class="th" x="636.0" y="259.5" text-anchor="middle" dominant-baseline="central">API server launched the pod</text><text class="ts" x="636.0" y="278.0" text-anchor="middle" dominant-baseline="central">pod spec named that account</text></g>
+<path class="ln" d="M 636.0 222.0 L 636.0 240.0" stroke-width="1.4" marker-end="url(#m-ln)" stroke-linejoin="round" stroke-linecap="round"/>
+<g class="k-purple"><rect x="456.0" y="314.0" width="360.0" height="56.0" rx="8" stroke-width="1"/><text class="th" x="636.0" y="333.5" text-anchor="middle" dominant-baseline="central">The deploy was allowed</text><text class="ts" x="636.0" y="352.0" text-anchor="middle" dominant-baseline="central">RBAC on namespace and account</text></g>
+<path class="ln" d="M 636.0 296.0 L 636.0 314.0" stroke-width="1.4" marker-end="url(#m-ln)" stroke-linejoin="round" stroke-linecap="round"/>
+<g class="k-purple"><rect x="456.0" y="388.0" width="360.0" height="56.0" rx="8" stroke-width="1"/><text class="th" x="636.0" y="407.5" text-anchor="middle" dominant-baseline="central">The admin authenticated</text><text class="ts" x="636.0" y="426.0" text-anchor="middle" dominant-baseline="central">SSO + MFA, enrolled by IT</text></g>
+<path class="ln" d="M 636.0 370.0 L 636.0 388.0" stroke-width="1.4" marker-end="url(#m-ln)" stroke-linejoin="round" stroke-linecap="round"/>
+<path class="ln" d="M 636.0 444.0 L 636.0 482.0" stroke-width="1.4" marker-end="url(#m-ln)" stroke-linejoin="round" stroke-linecap="round"/>
+<g class="k-gray"><rect x="24.0" y="484.0" width="792.0" height="64.0" rx="8" stroke-width="1"/><text class="th" x="420.0" y="507.5" text-anchor="middle" dominant-baseline="central">Out-of-band human decisions and physical control</text><text class="ts" x="420.0" y="526.0" text-anchor="middle" dominant-baseline="central">where every chain of trust ends: an installed root, an IAM grant, an RBAC binding</text></g></svg>
